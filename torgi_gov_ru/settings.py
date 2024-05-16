@@ -455,7 +455,7 @@ FEEDS = {
         'format': 'json',
         'encoding': 'utf8',
         'store_empty': False,
-        'item_classes': [f'{BOT_NAME}.items.TorgiGovRuItem',], # [MyItemClass1, 'myproject.items.MyItemClass2'],
+        # 'item_classes': [f'{BOT_NAME}.items.TorgiGovRuItem',], # [MyItemClass1, 'myproject.items.MyItemClass2'],
         'fields': None,
         'indent': 4,
         'item_export_kwargs': {
@@ -471,14 +471,14 @@ FEEDS = {
         'indent': 8,
         'overwrite': True, 
     },
-    pathlib.Path(f'feed/{BOT_NAME}.items.csv.gz'): {
-        'format': 'csv',
-        'fields': ['date', 'p_object'],
-        # 'item_filter': 'myproject.filters.MyCustomFilter2',
-        # 'postprocessing': [MyPlugin1, 'scrapy.extensions.postprocessing.GzipPlugin'],
-        'gzip_compresslevel': 5,
-        'overwrite': True, 
-    },
+    # pathlib.Path(f'feed/{BOT_NAME}.items.csv.gz'): {
+    #     'format': 'csv',
+    #     # 'fields': ['date', 'p_object'],
+    #     # 'item_filter': 'myproject.filters.MyCustomFilter2',
+    #     # 'postprocessing': [MyPlugin1, 'scrapy.extensions.postprocessing.GzipPlugin'],
+    #     # 'gzip_compresslevel': 5,
+    #     'overwrite': True, 
+    # },
     # 'stdout': None,
 }
 
@@ -493,10 +493,10 @@ FEEDS = {
 # logger = logging.getLogger("mycustomlogger")
 # logger = logging.getLogger(__name__)
 
-LOG_FILE = f"{BOT_NAME}-%(time)s.log"
+LOG_FILE = f"logs/{BOT_NAME}.log"
 # False, the file will be overwritten (discarding the 
 # output from previous runs, if any)
-# LOG_FILE_APPEND = True
+LOG_FILE_APPEND = False
 # LOG_ENABLED is True, log messages will be displayed 
 # on the standard error
 LOG_ENABLED = True

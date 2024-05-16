@@ -1,0 +1,2435 @@
+{
+    "api_version": {
+        "version": "3.1",
+        "uinfo2_url": "https://torgi.gov.ru/new/api/system-content/SYSTEM_SETTINGS/CT_SY_0003",
+        "path": "response_json",
+        "key": "stringValue"
+    },
+    "groups": {
+        "form": {
+            "parrent": "",
+            "sort_order": 0
+        },
+        "Категории": {
+            "parrent": "form",
+            "sort_order": 1
+        },
+        "Параметры лота": {
+            "parrent": "form",
+            "sort_order": 2
+        },
+        "Извещение": {
+            "parrent": "form",
+            "sort_order": 3
+        },
+        "Организатор торгов": {
+            "parrent": "form",
+            "sort_order": 4
+        },
+        "Правообладатель": {
+            "parrent": "form",
+            "sort_order": 5
+        },
+        "Жалобы": {
+            "parrent": "form",
+            "sort_order": 6
+        }
+    },
+    "request_url_base": "https://torgi.gov.ru/new/api/public/lotcards/search",
+    "form": {
+        "Версии": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [
+                "true"
+            ],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 0
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "byFirstVersion",
+            "required": true,
+            "selected_values": []
+        },
+        "Грани": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [
+                "true"
+            ],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 1
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "withFacets",
+            "required": true,
+            "selected_values": []
+        },
+        "Размер": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "колличество результатов",
+            "default": [
+                "10"
+            ],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 4
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "size",
+            "required": true,
+            "selected_values": []
+        },
+        "Сортировка": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [
+                "firstVersionPublicationDate",
+                "desc"
+            ],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 5
+            },
+            "info2_url": "",
+            "multi_value": true,
+            "name": "sort",
+            "required": true,
+            "selected_values": []
+        },
+        "Страница": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "Номер страницы в поисковом запросе, начинается с 0. Для первоначального запроса указывать не требуется",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 6
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "page",
+            "required": false,
+            "selected_values": []
+        },
+        "Поисковый запрос": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 10
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "text",
+            "required": false,
+            "selected_values": []
+        },
+        "Нормативный правовой акт": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "hintText",
+                "values": {
+                    "hint1_1113PP": {
+                        "name": "Постановление Правительства РФ от 28.08.2019 № 1113",
+                        "parent": null
+                    },
+                    "hint2_RLU_2": {
+                        "name": "Постановление Правительства РФ от 24.12.2008 № 986",
+                        "parent": null
+                    },
+                    "hint1_230PP": {
+                        "name": "Постановление Правительства РФ от 14.04.2007 № 230",
+                        "parent": null
+                    },
+                    "hint1_209FZ": {
+                        "name": "Федеральный закон от 24.07.2009 № 209-ФЗ",
+                        "parent": null
+                    },
+                    "hint1_ZK": {
+                        "name": "Земельный кодекс РФ",
+                        "parent": null
+                    },
+                    "hint1_938PP": {
+                        "name": "Постановление Правительства РФ от 21.10.2013 № 938",
+                        "parent": null
+                    },
+                    "hint1_1041PP": {
+                        "name": "Постановление Правительства РФ от 30.09.2015 № 1041",
+                        "parent": null
+                    },
+                    "hint1_ZKPT": {
+                        "name": "Гражданский кодекс РФ, Земельный кодекс РФ ",
+                        "parent": null
+                    },
+                    "hint1_200FZ": {
+                        "name": "Лесной кодекс РФ",
+                        "parent": null
+                    },
+                    "hint2_178FZ_EA_3": {
+                        "name": "Постановление Правительства РФ от 16.09.2020 № 1461",
+                        "parent": null
+                    },
+                    "hint2_178FZ_EA_2": {
+                        "name": "Постановление Правительства РФ от 24.06.1998 № 623",
+                        "parent": null
+                    },
+                    "hint2_ZK_EA": {
+                        "name": "Федеральный закон от 24.07.2008 № 161-ФЗ",
+                        "parent": null
+                    },
+                    "hint1_224FZ": {
+                        "name": "Федеральный закон от 13.07.2015 № 224-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_229FZ_EA_2": {
+                        "name": "Федеральный закон от 16.07.1998 № 102-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_178FZ_PP_2": {
+                        "name": "Федеральный закон от 24.07.2008 № 161-ФЗ",
+                        "parent": null
+                    },
+                    "hint1_450PP": {
+                        "name": "Постановление Правительства РФ от 15.05.2014 № 450",
+                        "parent": null
+                    },
+                    "hint1_178FZ_26": {
+                        "name": "Федеральный закон от 21.12.2001 № 178-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_229FZ_PA_1": {
+                        "name": "Федеральный закон от 02.10.2007 № 229-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_229FZ_PA_2": {
+                        "name": "Федеральный закон от 16.07.1998 № 102-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_178FZ_PP_1": {
+                        "name": "Постановление Правительства РФ от 16.09.2020 № 1461",
+                        "parent": null
+                    },
+                    "hint1_2499PP": {
+                        "name": "Постановление Правительства РФ от 28.12.2021 № 2499",
+                        "parent": null
+                    },
+                    "hint1_38FZ": {
+                        "name": "Федеральный закон от 13.03.2006 № 38-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_178FZ_EA_4": {
+                        "name": "Федеральный закон от 24.07.2008 № 161-ФЗ",
+                        "parent": null
+                    },
+                    "hint1_701PP": {
+                        "name": "Постановление Правительства РФ от 04.05.2021 № 701",
+                        "parent": null
+                    },
+                    "hint1_233PP": {
+                        "name": "Постановление Правительства РФ от 26.03.2001 № 233, Приказ Минфина России от 06.11.2019 № 175н",
+                        "parent": null
+                    },
+                    "hint1_602PP": {
+                        "name": "Постановление Правительства РФ от 12.08.2008 № 602",
+                        "parent": null
+                    },
+                    "hint1_115FZ": {
+                        "name": "Федеральный закон от 21.07.2005 № 115-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_178FZ_EA_1": {
+                        "name": "Лесной кодекс РФ",
+                        "parent": null
+                    },
+                    "hint2_178FZ_EK_1": {
+                        "name": "Постановление Правительства РФ от 24.06.1998 № 623",
+                        "parent": null
+                    },
+                    "hint2_178FZ_BOC_1": {
+                        "name": "Федеральный закон от 24.07.2008 № 161-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_OTHER_BCU": {
+                        "name": "Постановление Правительства Москвы от 10.08.2020 № 1228-ПП ",
+                        "parent": null
+                    },
+                    "hint2_178FZ_EK_2": {
+                        "name": "Федеральный закон от 24.07.2008 № 161-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_OTHER_PPU": {
+                        "name": "Постановление Правительства Москвы от 10.08.2020 № 1228-ПП ",
+                        "parent": null
+                    },
+                    "hint1_1299PP": {
+                        "name": "Постановление Правительства РФ от 03.12.2014 № 1299",
+                        "parent": null
+                    },
+                    "hint2_ZHKH_PK_2": {
+                        "name": "Постановление Правительства РФ от 05.09.2016 № 881",
+                        "parent": null
+                    },
+                    "hint2_229FZ_EA_1": {
+                        "name": "Федеральный закон от 02.10.2007 № 229-ФЗ",
+                        "parent": null
+                    },
+                    "hint1_178FZ": {
+                        "name": "Федеральный закон от 21.12.2001 № 178-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_ZHKH_PK_1": {
+                        "name": "Постановление Правительства РФ от 06.02.2006 № 75",
+                        "parent": null
+                    },
+                    "hint2_RLU_1": {
+                        "name": "Постановление Правительства РФ от 14.04.2008 № 264",
+                        "parent": null
+                    },
+                    "hint2_OTHER_PA": {
+                        "name": "Постановление Правительства Москвы от 10.08.2020 № 1228-ПП ",
+                        "parent": null
+                    },
+                    "hint1_480PP": {
+                        "name": "Постановление Правительства РФ от 24.05.2014 № 480",
+                        "parent": null
+                    },
+                    "hint1_67FAS": {
+                        "name": "Приказ Федеральной антимонопольной службы от 10.02.2010 № 67",
+                        "parent": null
+                    },
+                    "hint1_23PM": {
+                        "name": "Приказ Министерства транспорта РФ от 01.02.2022 № 23",
+                        "parent": null
+                    },
+                    "hint2_RLU_3": {
+                        "name": "Постановление Правительства РФ от 30.12.2008 № 1078",
+                        "parent": null
+                    },
+                    "hint1_230PP_1": {
+                        "name": "Постановление Правительства РФ от 22.12.2022 № 2378",
+                        "parent": null
+                    },
+                    "hint1_67FAS_147FAS": {
+                        "name": "Приказ ФАС России от 21.03.2023 г. № 147/23",
+                        "parent": null
+                    },
+                    "hint1_RLU": {
+                        "name": "Федеральный закон от 20.12.2004 N 166-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_ZK_EA_1": {
+                        "name": "Федеральный закон от 24.07.2008 № 161-ФЗ",
+                        "parent": null
+                    },
+                    "hint2_ZK_PA": {
+                        "name": "Федеральный закон от 24.07.2008 № 161-ФЗ",
+                        "parent": null
+                    },
+                    "hint1_480PP_EA": {
+                        "name": "Постановление Правительства РФ от 24.05.2014 N 480",
+                        "parent": null
+                    },
+                    "hint1_602PP_OIP": {
+                        "name": "Постановление Правительства РФ от 07.08.2023 №1286",
+                        "parent": null
+                    },
+                    "hint1_recreation_EA": {
+                        "name": "Постановление Правительства РФ от 11.12.2023 № 2112",
+                        "parent": null
+                    },
+                    "hint1_recreation_EK": {
+                        "name": "Постановление Правительства РФ от 11.12.2023 № 2112",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 12
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/RELATIONSHIP_BIDD_HINTEXT",
+            "multi_value": true,
+            "name": "npaCodes",
+            "required": false,
+            "selected_values": []
+        },
+        "Вид торгов": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "name",
+                "values": {
+                    "ZK": {
+                        "name": "Аренда и продажа земельных участков",
+                        "parent": null
+                    },
+                    "178FZ": {
+                        "name": "Продажа (приватизация) государственного и муниципального имущества",
+                        "parent": null
+                    },
+                    "67FAS": {
+                        "name": "Аренда, безвозмездное пользование, доверительное управление имуществом, иные договоры, предусматривающие переход прав в отношении государственного или муниципального имущества, продажа имущества ФГУП",
+                        "parent": null
+                    },
+                    "1041PP": {
+                        "name": "Реализация имущества, обращенного в собственность государства",
+                        "parent": null
+                    },
+                    "2499PP": {
+                        "name": "Продажа права пользования участком недр",
+                        "parent": null
+                    },
+                    "229FZ": {
+                        "name": "Реализация имущества должников",
+                        "parent": null
+                    },
+                    "178FZ_26": {
+                        "name": "Продажа акций по результатам доверительного управления",
+                        "parent": null
+                    },
+                    "701PP": {
+                        "name": "Комплексное развитие территорий",
+                        "parent": null
+                    },
+                    "ZHKH": {
+                        "name": "ЖКХ",
+                        "parent": null
+                    },
+                    "115FZ": {
+                        "name": "На право заключения концессионного соглашения",
+                        "parent": null
+                    },
+                    "1113PP": {
+                        "name": "Закрепление и предоставление доли квоты добычи крабов в инвестиционных целях",
+                        "parent": null
+                    },
+                    "1299PP": {
+                        "name": "Продажа объектов незавершенного строительства",
+                        "parent": null
+                    },
+                    "602PP": {
+                        "name": "Закрепление долей квот добычи водных биоресурсов и/или право пользования водными биоресурсами",
+                        "parent": null
+                    },
+                    "ZKPT": {
+                        "name": "Публичные торги по продаже земельных участков",
+                        "parent": null
+                    },
+                    "233PP": {
+                        "name": "Купля-продажа природных алмазов специальных размеров",
+                        "parent": null
+                    },
+                    "450PP": {
+                        "name": "Право пользования рыбоводным участком",
+                        "parent": null
+                    },
+                    "RLU": {
+                        "name": "Право пользования рыболовным участком",
+                        "parent": null
+                    },
+                    "23PM": {
+                        "name": "Право заключения предварительного договора поставки донного грунта",
+                        "parent": null
+                    },
+                    "224FZ": {
+                        "name": "Соглашение о государственно-частном партнерстве, соглашение о муниципально-частном партнерстве",
+                        "parent": null
+                    },
+                    "230PP": {
+                        "name": "Водопользование",
+                        "parent": null
+                    },
+                    "938PP": {
+                        "name": "Продажа объектов электроэнергетики",
+                        "parent": null
+                    },
+                    "480PP": {
+                        "name": "Лицензии на оказание услуг связи",
+                        "parent": null
+                    },
+                    "200FZ": {
+                        "name": "Аренда лесных участков и продажа лесных насаждений",
+                        "parent": null
+                    },
+                    "209FZ": {
+                        "name": "Охотхозяйственные соглашения",
+                        "parent": null
+                    },
+                    "38FZ": {
+                        "name": "Размещение рекламных конструкций",
+                        "parent": null
+                    },
+                    "OTHER": {
+                        "name": "Иной вид торгов",
+                        "parent": null
+                    },
+                    "APGU": {
+                        "name": "Аренда имущества компаний с государственным участием",
+                        "parent": null
+                    },
+                    "KGU": {
+                        "name": "Продажа непрофильных активов компаний с государственным участием",
+                        "parent": null
+                    },
+                    "67FAS_147FAS": {
+                        "name": "Аренда, безвозмездное пользование, доверительное управление имуществом, иные договоры, предусматривающие переход прав в отношении государственного или муниципального имущества, продажа имущества ФГУП",
+                        "parent": null
+                    },
+                    "recreation": {
+                        "name": "На право заключения соглашения об осуществлении рекреационной деятельности в национальном парке",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 13
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/BIDD_TYPE",
+            "multi_value": true,
+            "name": "biddType",
+            "required": false,
+            "selected_values": []
+        },
+        "Вид сделки": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "name",
+                "values": {
+                    "freeUse": {
+                        "name": "Безвозмездное пользование",
+                        "parent": null
+                    },
+                    "other": {
+                        "name": "Иное",
+                        "parent": null
+                    },
+                    "rent": {
+                        "name": "Аренда",
+                        "parent": null
+                    },
+                    "sale": {
+                        "name": "Продажа",
+                        "parent": null
+                    },
+                    "trustManagement": {
+                        "name": "Доверительное управление",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 14
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/TYPE_TRANSACTION?actual=true",
+            "multi_value": true,
+            "name": "typeTransaction",
+            "required": false,
+            "selected_values": []
+        },
+        "Форма проведения торгов": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "biddForm`code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "biddForm`name",
+                "values": {
+                    "null": {
+                        "name": null,
+                        "parent": null
+                    },
+                    "PK": {
+                        "name": "Конкурс",
+                        "parent": null
+                    },
+                    "EA": {
+                        "name": "Электронный аукцион",
+                        "parent": null
+                    },
+                    "BC": {
+                        "name": "Электронный аукцион за долю",
+                        "parent": null
+                    },
+                    "PP": {
+                        "name": "Публичное предложение",
+                        "parent": null
+                    },
+                    "PA": {
+                        "name": "Аукцион",
+                        "parent": null
+                    },
+                    "EK": {
+                        "name": "Электронный конкурс",
+                        "parent": null
+                    },
+                    "BOC": {
+                        "name": "Продажа без объявления цены",
+                        "parent": null
+                    },
+                    "BCU": {
+                        "name": "Продажа без объявления цены  (цессия)",
+                        "parent": null
+                    },
+                    "PPU": {
+                        "name": "Публичное предложение (цессия)",
+                        "parent": null
+                    },
+                    "OIP": {
+                        "name": " Отбор инвестиционных проектов",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 15
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/RELATIONSHIP_BIDD_HINTEXT",
+            "multi_value": true,
+            "name": "biddForm",
+            "required": false,
+            "selected_values": []
+        },
+        "Субъект местонахождения имущества": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "baseAttrValue`name",
+                "values": {
+                    "1": {
+                        "name": "Республика Адыгея",
+                        "parent": null
+                    },
+                    "85": {
+                        "name": "Ямало-Ненецкий автономный округ",
+                        "parent": null
+                    },
+                    "2": {
+                        "name": "Республика Алтай",
+                        "parent": null
+                    },
+                    "84": {
+                        "name": "Чукотский автономный округ",
+                        "parent": null
+                    },
+                    "3": {
+                        "name": "Республика Башкортостан",
+                        "parent": null
+                    },
+                    "83": {
+                        "name": "Ханты-Мансийский автономный округ",
+                        "parent": null
+                    },
+                    "4": {
+                        "name": "Республика Бурятия",
+                        "parent": null
+                    },
+                    "5": {
+                        "name": "Республика Дагестан",
+                        "parent": null
+                    },
+                    "6": {
+                        "name": "Республика Ингушетия",
+                        "parent": null
+                    },
+                    "7": {
+                        "name": "Кабардино-Балкарская Республика",
+                        "parent": null
+                    },
+                    "8": {
+                        "name": "Республика Калмыкия",
+                        "parent": null
+                    },
+                    "9": {
+                        "name": "Карачаево-Черкесская Республика",
+                        "parent": null
+                    },
+                    "82": {
+                        "name": "Ненецкий автономный округ",
+                        "parent": null
+                    },
+                    "10": {
+                        "name": "Республика Карелия",
+                        "parent": null
+                    },
+                    "81": {
+                        "name": "Еврейская автономная область",
+                        "parent": null
+                    },
+                    "11": {
+                        "name": "Республика Коми",
+                        "parent": null
+                    },
+                    "12": {
+                        "name": "Республика Крым",
+                        "parent": null
+                    },
+                    "80": {
+                        "name": "г. Севастополь",
+                        "parent": null
+                    },
+                    "13": {
+                        "name": "Республика Марий Эл",
+                        "parent": null
+                    },
+                    "14": {
+                        "name": "Республика Мордовия",
+                        "parent": null
+                    },
+                    "79": {
+                        "name": "г. Санкт-Петербург",
+                        "parent": null
+                    },
+                    "15": {
+                        "name": "Республика Саха (Якутия)",
+                        "parent": null
+                    },
+                    "16": {
+                        "name": "Республика Северная Осетия-Алания",
+                        "parent": null
+                    },
+                    "17": {
+                        "name": "Республика Татарстан",
+                        "parent": null
+                    },
+                    "78": {
+                        "name": "г. Москва",
+                        "parent": null
+                    },
+                    "18": {
+                        "name": "Республика Тыва",
+                        "parent": null
+                    },
+                    "19": {
+                        "name": "Удмуртская Республика",
+                        "parent": null
+                    },
+                    "77": {
+                        "name": "Ярославская область",
+                        "parent": null
+                    },
+                    "20": {
+                        "name": "Республика Хакасия",
+                        "parent": null
+                    },
+                    "76": {
+                        "name": "Челябинская область",
+                        "parent": null
+                    },
+                    "21": {
+                        "name": "Чеченская Республика",
+                        "parent": null
+                    },
+                    "75": {
+                        "name": "Ульяновская область",
+                        "parent": null
+                    },
+                    "22": {
+                        "name": "Чувашская Республика",
+                        "parent": null
+                    },
+                    "74": {
+                        "name": "Тюменская область",
+                        "parent": null
+                    },
+                    "23": {
+                        "name": "Алтайский край",
+                        "parent": null
+                    },
+                    "73": {
+                        "name": "Тульская область",
+                        "parent": null
+                    },
+                    "24": {
+                        "name": "Забайкальский край",
+                        "parent": null
+                    },
+                    "72": {
+                        "name": "Томская область",
+                        "parent": null
+                    },
+                    "25": {
+                        "name": "Камчатский край",
+                        "parent": null
+                    },
+                    "26": {
+                        "name": "Краснодарский край",
+                        "parent": null
+                    },
+                    "71": {
+                        "name": "Тверская область",
+                        "parent": null
+                    },
+                    "27": {
+                        "name": "Красноярский край",
+                        "parent": null
+                    },
+                    "70": {
+                        "name": "Тамбовская область",
+                        "parent": null
+                    },
+                    "28": {
+                        "name": "Пермский край",
+                        "parent": null
+                    },
+                    "29": {
+                        "name": "Приморский край",
+                        "parent": null
+                    },
+                    "69": {
+                        "name": "Смоленская область",
+                        "parent": null
+                    },
+                    "68": {
+                        "name": "Свердловская область",
+                        "parent": null
+                    },
+                    "67": {
+                        "name": "Сахалинская область",
+                        "parent": null
+                    },
+                    "30": {
+                        "name": "Ставропольский край",
+                        "parent": null
+                    },
+                    "66": {
+                        "name": "Саратовская область",
+                        "parent": null
+                    },
+                    "65": {
+                        "name": "Самарская область",
+                        "parent": null
+                    },
+                    "64": {
+                        "name": "Рязанская область",
+                        "parent": null
+                    },
+                    "63": {
+                        "name": "Ростовская область",
+                        "parent": null
+                    },
+                    "62": {
+                        "name": "Псковская область",
+                        "parent": null
+                    },
+                    "61": {
+                        "name": "Пензенская область",
+                        "parent": null
+                    },
+                    "60": {
+                        "name": "Орловская область",
+                        "parent": null
+                    },
+                    "59": {
+                        "name": "Оренбургская область",
+                        "parent": null
+                    },
+                    "58": {
+                        "name": "Омская область",
+                        "parent": null
+                    },
+                    "57": {
+                        "name": "Новосибирская область",
+                        "parent": null
+                    },
+                    "56": {
+                        "name": "Новгородская область",
+                        "parent": null
+                    },
+                    "55": {
+                        "name": "Нижегородская область",
+                        "parent": null
+                    },
+                    "54": {
+                        "name": "Мурманская область",
+                        "parent": null
+                    },
+                    "53": {
+                        "name": "Московская область",
+                        "parent": null
+                    },
+                    "52": {
+                        "name": "Магаданская область",
+                        "parent": null
+                    },
+                    "51": {
+                        "name": "Липецкая область",
+                        "parent": null
+                    },
+                    "50": {
+                        "name": "Ленинградская область",
+                        "parent": null
+                    },
+                    "49": {
+                        "name": "Курская область",
+                        "parent": null
+                    },
+                    "48": {
+                        "name": "Курганская область",
+                        "parent": null
+                    },
+                    "47": {
+                        "name": "Костромская область",
+                        "parent": null
+                    },
+                    "46": {
+                        "name": "Кировская область",
+                        "parent": null
+                    },
+                    "45": {
+                        "name": "Кемеровская область",
+                        "parent": null
+                    },
+                    "44": {
+                        "name": "Калужская область",
+                        "parent": null
+                    },
+                    "43": {
+                        "name": "Калининградская область",
+                        "parent": null
+                    },
+                    "42": {
+                        "name": "Иркутская область",
+                        "parent": null
+                    },
+                    "41": {
+                        "name": "Ивановская область",
+                        "parent": null
+                    },
+                    "40": {
+                        "name": "Воронежская область",
+                        "parent": null
+                    },
+                    "39": {
+                        "name": "Вологодская область",
+                        "parent": null
+                    },
+                    "38": {
+                        "name": "Волгоградская область",
+                        "parent": null
+                    },
+                    "37": {
+                        "name": "Владимирская область",
+                        "parent": null
+                    },
+                    "36": {
+                        "name": "Брянская область",
+                        "parent": null
+                    },
+                    "35": {
+                        "name": "Белгородская область",
+                        "parent": null
+                    },
+                    "34": {
+                        "name": "Астраханская область",
+                        "parent": null
+                    },
+                    "33": {
+                        "name": "Архангельская область",
+                        "parent": null
+                    },
+                    "32": {
+                        "name": "Амурская область",
+                        "parent": null
+                    },
+                    "31": {
+                        "name": "Хабаровский край",
+                        "parent": null
+                    },
+                    "107": {
+                        "name": "Херсонская область",
+                        "parent": null
+                    },
+                    "108": {
+                        "name": "Запорожская область",
+                        "parent": null
+                    },
+                    "105": {
+                        "name": "Луганская народная Республика",
+                        "parent": null
+                    },
+                    "106": {
+                        "name": "Донецкая Народная Республика",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "для автоматического обналения через form_field_v3() разархивироать в get_relationship_v3() dict_list = dict_list[0]['mappingTable']",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 16
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/DYNAMIC_ATTR_SEARCH_OPTION",
+            "multi_value": false,
+            "name": "dynSubjRF",
+            "required": false,
+            "selected_values": []
+        },
+        "Местонахождение имущества": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "для указная нужно указывать guid",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 17
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "fiasGUID",
+            "required": false,
+            "selected_values": []
+        },
+        "Категория": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "response_json",
+                "parent_value": "parentCode",
+                "value_path": "response_json",
+                "value_value": "name",
+                "values": {
+                    "33": {
+                        "name": "Бульдозеры",
+                        "parent": "15"
+                    },
+                    "207": {
+                        "name": "Единый недвижимый комплекс",
+                        "parent": "7"
+                    },
+                    "600": {
+                        "name": "Права требования",
+                        "parent": "6"
+                    },
+                    "610": {
+                        "name": "Право размещения нестационарного объекта",
+                        "parent": "6"
+                    },
+                    "613000": {
+                        "name": "Управляющая компания",
+                        "parent": "613"
+                    },
+                    "701": {
+                        "name": "Комплексное развитие территорий",
+                        "parent": "23"
+                    },
+                    "2804": {
+                        "name": "Земли водного фонда",
+                        "parent": "2"
+                    },
+                    "2": {
+                        "name": "Земельные участки",
+                        "parent": null
+                    },
+                    "301": {
+                        "name": "Земли населенных пунктов",
+                        "parent": "2"
+                    },
+                    "19": {
+                        "name": "Объект теплоснабжения",
+                        "parent": "7"
+                    },
+                    "36": {
+                        "name": "Погрузчики",
+                        "parent": "15"
+                    },
+                    "13": {
+                        "name": "Прочее",
+                        "parent": null
+                    },
+                    "24": {
+                        "name": "Машиноместо",
+                        "parent": "7"
+                    },
+                    "21": {
+                        "name": "Экскаватор",
+                        "parent": "15"
+                    },
+                    "5": {
+                        "name": "Акции и Доли",
+                        "parent": null
+                    },
+                    "23": {
+                        "name": "Строительство и развитие территорий",
+                        "parent": null
+                    },
+                    "100001": {
+                        "name": "Легковые автомобили",
+                        "parent": "100"
+                    },
+                    "32": {
+                        "name": "Автокраны",
+                        "parent": "15"
+                    },
+                    "39": {
+                        "name": "Техника для лесозаготовки",
+                        "parent": "15"
+                    },
+                    "2004": {
+                        "name": "Земли особо охраняемых территорий и объектов",
+                        "parent": "2"
+                    },
+                    "801": {
+                        "name": "Объекты концессионного соглашения",
+                        "parent": "17"
+                    },
+                    "901": {
+                        "name": "Отбор регионального оператора по обращению с ТКО",
+                        "parent": "900"
+                    },
+                    "10": {
+                        "name": "Гаражи и машиноместа ",
+                        "parent": "7"
+                    },
+                    "208": {
+                        "name": "Иной объект недвижимости",
+                        "parent": "7"
+                    },
+                    "614": {
+                        "name": "Право на размещение рекламных конструкций",
+                        "parent": "6"
+                    },
+                    "617": {
+                        "name": "Закрепление долей квот и (или) пользование водными биоресурсами",
+                        "parent": "6"
+                    },
+                    "400": {
+                        "name": "Оборудование",
+                        "parent": "13"
+                    },
+                    "408": {
+                        "name": "Природные алмазы специальных размеров",
+                        "parent": "13"
+                    },
+                    "104": {
+                        "name": "Запчасти",
+                        "parent": "22"
+                    },
+                    "103": {
+                        "name": "Воздушный транспорт",
+                        "parent": "22"
+                    },
+                    "500": {
+                        "name": "Ценные бумаги",
+                        "parent": "5"
+                    },
+                    "609": {
+                        "name": "Пользование участками недр",
+                        "parent": "6"
+                    },
+                    "605000": {
+                        "name": "Промышленное рыболовство",
+                        "parent": "605"
+                    },
+                    "38": {
+                        "name": "Строительная техника",
+                        "parent": "15"
+                    },
+                    "40": {
+                        "name": "Тягачи",
+                        "parent": "15"
+                    },
+                    "106": {
+                        "name": "Годные остатки",
+                        "parent": "22"
+                    },
+                    "800": {
+                        "name": "Объекты ГЧП и МЧП",
+                        "parent": "17"
+                    },
+                    "602": {
+                        "name": "Водопользование",
+                        "parent": "6"
+                    },
+                    "606": {
+                        "name": "Продажа права на заключение договора о закреплении долей квот",
+                        "parent": "6"
+                    },
+                    "405": {
+                        "name": "Древесина",
+                        "parent": "13"
+                    },
+                    "401": {
+                        "name": "Электронная и бытовая техника ",
+                        "parent": "13"
+                    },
+                    "7": {
+                        "name": "Недвижимость",
+                        "parent": null
+                    },
+                    "35": {
+                        "name": "Коммунальная техника",
+                        "parent": "15"
+                    },
+                    "900": {
+                        "name": "ЖКХ",
+                        "parent": null
+                    },
+                    "605": {
+                        "name": "Пользование рыболовным участком",
+                        "parent": "6"
+                    },
+                    "402": {
+                        "name": "Драгкамни и металлы, ювелирные изделия",
+                        "parent": "13"
+                    },
+                    "31": {
+                        "name": "Автобусы",
+                        "parent": "100"
+                    },
+                    "14": {
+                        "name": "Автомобили",
+                        "parent": "22"
+                    },
+                    "25": {
+                        "name": "Квартиры",
+                        "parent": "7"
+                    },
+                    "406": {
+                        "name": "Иное и годные остатки (кроме автомобильных)",
+                        "parent": "13"
+                    },
+                    "611": {
+                        "name": "Право осуществления торговой деятельности",
+                        "parent": "6"
+                    },
+                    "30": {
+                        "name": "Сельхозтехника",
+                        "parent": "15"
+                    },
+                    "16": {
+                        "name": "Водный транспорт",
+                        "parent": "22"
+                    },
+                    "18": {
+                        "name": "Запчасти и аксессуары",
+                        "parent": "22"
+                    },
+                    "307": {
+                        "name": "Земельные участки (не образованы)",
+                        "parent": "2"
+                    },
+                    "47": {
+                        "name": "Сооружения",
+                        "parent": "7"
+                    },
+                    "607": {
+                        "name": "Продажа права на заключение договора пользования водными биологическими ресурсами",
+                        "parent": "6"
+                    },
+                    "605001": {
+                        "name": "Традиционное рыболовство коренных малочисленных народов",
+                        "parent": "605"
+                    },
+                    "502": {
+                        "name": "Акции АО, передаваемые в доверительное управление",
+                        "parent": "5"
+                    },
+                    "304": {
+                        "name": "Земли лесного фонда",
+                        "parent": "2"
+                    },
+                    "8": {
+                        "name": "Здания",
+                        "parent": "7"
+                    },
+                    "4": {
+                        "name": "Земли сельскохозяйственного назначения",
+                        "parent": "2"
+                    },
+                    "46": {
+                        "name": "Доля ООО",
+                        "parent": "5"
+                    },
+                    "613": {
+                        "name": "ЖКХ",
+                        "parent": "6"
+                    },
+                    "101": {
+                        "name": "Спецтехника",
+                        "parent": "22"
+                    },
+                    "20": {
+                        "name": "Объект водоснабжения и (или) водоотведения",
+                        "parent": "7"
+                    },
+                    "34": {
+                        "name": "Грузовики",
+                        "parent": "15"
+                    },
+                    "17": {
+                        "name": "Государственно-частное партнерство (ГЧП/МЧП/Концессия)",
+                        "parent": null
+                    },
+                    "202": {
+                        "name": "Имущественные комплексы",
+                        "parent": "7"
+                    },
+                    "615": {
+                        "name": "Квоты добычи (вылова) крабов в инвестиционных целях",
+                        "parent": "6"
+                    },
+                    "22": {
+                        "name": "Транспорт",
+                        "parent": null
+                    },
+                    "409": {
+                        "name": "Донный грунт",
+                        "parent": "13"
+                    },
+                    "700": {
+                        "name": "Комплексное обустройство природных территорий",
+                        "parent": "23"
+                    },
+                    "45": {
+                        "name": "Акции АО",
+                        "parent": "5"
+                    },
+                    "302": {
+                        "name": "Земли специального назначения",
+                        "parent": "2"
+                    },
+                    "110": {
+                        "name": "Иной транспорт",
+                        "parent": "22"
+                    },
+                    "206": {
+                        "name": "Объекты незавершенного строительства",
+                        "parent": "7"
+                    },
+                    "210": {
+                        "name": "Объект электроэнергетики",
+                        "parent": "7"
+                    },
+                    "604": {
+                        "name": "Пользование рыбоводным участком",
+                        "parent": "6"
+                    },
+                    "613001": {
+                        "name": "Оператор",
+                        "parent": "613"
+                    },
+                    "605002": {
+                        "name": "Организация любительского рыболовства",
+                        "parent": "605"
+                    },
+                    "403": {
+                        "name": "Мебель и предметы интерьера",
+                        "parent": "13"
+                    },
+                    "404": {
+                        "name": "Стройматериалы",
+                        "parent": "13"
+                    },
+                    "15": {
+                        "name": "Грузовики и спецтехника",
+                        "parent": "22"
+                    },
+                    "601": {
+                        "name": "Права по инвестиционным договорам",
+                        "parent": "6"
+                    },
+                    "603": {
+                        "name": "Охотхозяйственные соглашения",
+                        "parent": "6"
+                    },
+                    "100": {
+                        "name": "Автомобили и мототехника",
+                        "parent": "22"
+                    },
+                    "37": {
+                        "name": "Прицепы",
+                        "parent": "15"
+                    },
+                    "12": {
+                        "name": "Инструменты",
+                        "parent": "13"
+                    },
+                    "3": {
+                        "name": "Земельные участки (категория не установлена)",
+                        "parent": "2"
+                    },
+                    "6": {
+                        "name": "Права пользования и лицензии",
+                        "parent": null
+                    },
+                    "902": {
+                        "name": "Управление многоквартирными домами",
+                        "parent": "900"
+                    },
+                    "9": {
+                        "name": "Жилые помещения",
+                        "parent": "7"
+                    },
+                    "11": {
+                        "name": "Нежилые помещения",
+                        "parent": "7"
+                    },
+                    "612": {
+                        "name": "Право на размещение некапитального объекта",
+                        "parent": "6"
+                    },
+                    "616": {
+                        "name": "Лицензии на оказание услуг связи",
+                        "parent": "6"
+                    },
+                    "100000": {
+                        "name": "Мототехника",
+                        "parent": "100"
+                    },
+                    "100002": {
+                        "name": "Грузовые автомобили",
+                        "parent": "100"
+                    },
+                    "2301": {
+                        "name": "Проектирование и строительство объекта",
+                        "parent": "23"
+                    },
+                    "618": {
+                        "name": "Осуществление рекреационной деятельности в национальном парке",
+                        "parent": "6"
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 18
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/CATEGORIES?actual=false",
+            "multi_value": true,
+            "name": "catCode",
+            "required": false,
+            "selected_values": []
+        },
+        "Статус лота": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "SUCCEED": {
+                        "name": "Состоялся",
+                        "parent": null
+                    },
+                    "PUBLISHED": {
+                        "name": "Опубликован",
+                        "parent": null
+                    },
+                    "APPLICATIONS_SUBMISSION": {
+                        "name": "Приём заявок",
+                        "parent": null
+                    },
+                    "DETERMINING_WINNER": {
+                        "name": "Определение победителя",
+                        "parent": null
+                    },
+                    "FAILED": {
+                        "name": "Не состоялся",
+                        "parent": null
+                    },
+                    "CANCELED": {
+                        "name": "Отменёт",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Параметры лота",
+                "parent": "form",
+                "sort_order": 0
+            },
+            "info2_url": "",
+            "multi_value": true,
+            "name": "lotStatus",
+            "required": false,
+            "selected_values": []
+        },
+        "Отображение торгов с аннулированными результатами": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "true": {
+                        "name": "Торги с арулированными резултатами",
+                        "parent": null
+                    },
+                    "false": {
+                        "name": "Без учёта торгов с арулированными резултатами",
+                        "parent": null
+                    },
+                    "": {
+                        "name": "Все",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Параметры лота",
+                "parent": "form",
+                "sort_order": 1
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "isAnnulled",
+            "required": false,
+            "selected_values": []
+        },
+        "Валюта": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "643": {
+                        "name": "Рубль",
+                        "parent": null
+                    },
+                    "": {
+                        "name": "Все",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Параметры лота",
+                "parent": "form",
+                "sort_order": 2
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "currCode",
+            "required": false,
+            "selected_values": []
+        },
+        "Начальная цена от": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Параметры лота",
+                "parent": "form",
+                "sort_order": 4
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "priceMinFrom",
+            "required": false,
+            "selected_values": []
+        },
+        "Начальная цена до": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Параметры лота",
+                "parent": "form",
+                "sort_order": 5
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "priceMinTo",
+            "required": false,
+            "selected_values": []
+        },
+        "Итоговая цена от": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Параметры лота",
+                "parent": "form",
+                "sort_order": 6
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "priceFinFrom",
+            "required": false,
+            "selected_values": []
+        },
+        "Итоговая цена до": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Параметры лота",
+                "parent": "form",
+                "sort_order": 7
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "priceFinTo",
+            "required": false,
+            "selected_values": []
+        },
+        "Форма собственности": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "name",
+                "values": {
+                    "12": {
+                        "name": "Федеральная собственность",
+                        "parent": null
+                    },
+                    "13": {
+                        "name": "Собственность субъектов РФ",
+                        "parent": null
+                    },
+                    "14": {
+                        "name": "Муниципальная собственность",
+                        "parent": null
+                    },
+                    "99": {
+                        "name": "Иная собственность",
+                        "parent": null
+                    },
+                    "97": {
+                        "name": "Государственная собственность (неразграниченная)",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Параметры лота",
+                "parent": "form",
+                "sort_order": 7
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/OWNERSHIP_FORM",
+            "multi_value": true,
+            "name": "ownForm",
+            "required": false,
+            "selected_values": []
+        },
+        "Торги среди МСП": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "true": {
+                        "name": "Да",
+                        "parent": null
+                    },
+                    "": {
+                        "name": "Нет",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Параметры лота",
+                "parent": "form",
+                "sort_order": 8
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "isMsp",
+            "required": false,
+            "selected_values": []
+        },
+        "Номер извещения": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "не обязательное заначение, если не указывается в запрос не идёт",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 0
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "noticeNumber",
+            "required": false,
+            "selected_values": []
+        },
+        "Статус извещения": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "CANCELED": {
+                        "name": "Отменено",
+                        "parent": null
+                    },
+                    "COMPLETED": {
+                        "name": "Завершено",
+                        "parent": null
+                    },
+                    "DETERMINING_WINNER": {
+                        "name": "Определение победителя",
+                        "parent": null
+                    },
+                    "APPLICATIONS_SUBMISSION": {
+                        "name": "Приём заявок",
+                        "parent": null
+                    },
+                    "PUBLISHED": {
+                        "name": "Опубликовано",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 1
+            },
+            "info2_url": "",
+            "multi_value": true,
+            "name": "noticeStatus",
+            "required": false,
+            "selected_values": []
+        },
+        "Дата окончания срока подачи заявок от": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "дата в формате 2024-05-08",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 2
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "biddEndFrom",
+            "required": false,
+            "selected_values": []
+        },
+        "Дата окончания срока подачи заявок до": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "дата в формате 2024-05-08",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 3
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "biddEndTo",
+            "required": false,
+            "selected_values": []
+        },
+        "Дата публикации от": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "дата в формате 2024-05-08",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 4
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "pubFrom",
+            "required": false,
+            "selected_values": []
+        },
+        "Дата публикации до": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "дата в формате 2024-05-08",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 5
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "pubTo",
+            "required": false,
+            "selected_values": []
+        },
+        "Дата проведения торгов от": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "дата в формате 2024-05-08",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 6
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "aucStartFrom",
+            "required": false,
+            "selected_values": []
+        },
+        "Дата проведения торгов до": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "дата в формате 2024-05-08",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 7
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "aucStartTo",
+            "required": false,
+            "selected_values": []
+        },
+        "Электронная площадка": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "shortName",
+                "values": {
+                    "ETP_AVK": {
+                        "name": "АГЗ РТ",
+                        "parent": null
+                    },
+                    "ETP_EETP": {
+                        "name": "АО «ЕЭТП»",
+                        "parent": null
+                    },
+                    "ETP_RAD": {
+                        "name": "АО «РАД»",
+                        "parent": null
+                    },
+                    "ETP_MMVB": {
+                        "name": "ЭТП «Фабрикант» ",
+                        "parent": null
+                    },
+                    "ETP_SBAST": {
+                        "name": "АО «Сбербанк-АСТ» ",
+                        "parent": null
+                    },
+                    "ETP_TEKTORG": {
+                        "name": "ЭТП ТЭК-Торг ",
+                        "parent": null
+                    },
+                    "ETP_RTS": {
+                        "name": "РТС-тендер ",
+                        "parent": null
+                    },
+                    "ETP_GPB": {
+                        "name": "ЭТП Газпромбанк ",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 8
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/ELECTRONIC_PLATFORM",
+            "multi_value": true,
+            "name": "etpCode",
+            "required": false,
+            "selected_values": []
+        },
+        "Наличие приостановленных торгов": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "false": {
+                        "name": "Торги не приостановлены",
+                        "parent": null
+                    },
+                    "true": {
+                        "name": "Торги приостановлены",
+                        "parent": null
+                    },
+                    "": {
+                        "name": "Все",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "либо true либо не как, не обязательный",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 9
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "isStopped",
+            "required": false,
+            "selected_values": []
+        },
+        "Наименование орг": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Организатор торгов",
+                "parent": "form",
+                "sort_order": 0
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "orgName",
+            "required": false,
+            "selected_values": []
+        },
+        "ИНН орг": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Организатор торгов",
+                "parent": "form",
+                "sort_order": 1
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "orgInn",
+            "required": false,
+            "selected_values": []
+        },
+        "КПП орг": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Организатор торгов",
+                "parent": "form",
+                "sort_order": 2
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "orgKpp",
+            "required": false,
+            "selected_values": []
+        },
+        "ОГРН (ОГРНИП) орг": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Организатор торгов",
+                "parent": "form",
+                "sort_order": 3
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "orgOgrn",
+            "required": false,
+            "selected_values": []
+        },
+        "Наименование прав": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Правообладатель",
+                "parent": "form",
+                "sort_order": 0
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "rHName",
+            "required": false,
+            "selected_values": []
+        },
+        "ИНН прав": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Правообладатель",
+                "parent": "form",
+                "sort_order": 1
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "rHInn",
+            "required": false,
+            "selected_values": []
+        },
+        "КПП прав": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Правообладатель",
+                "parent": "form",
+                "sort_order": 2
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "rHKpp",
+            "required": false,
+            "selected_values": []
+        },
+        "ОГРН прав": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Правообладатель",
+                "parent": "form",
+                "sort_order": 3
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "rHOgrn",
+            "required": false,
+            "selected_values": []
+        },
+        "Правообладатель включен в перечень компаний с гос. участием": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "true": {
+                        "name": "Да",
+                        "parent": null
+                    },
+                    "": {
+                        "name": "Нет",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Правообладатель",
+                "parent": "form",
+                "sort_order": 3
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "rHGovPrt",
+            "required": false,
+            "selected_values": []
+        },
+        "Наличие жалоб": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "true": {
+                        "name": "Есть жалобы",
+                        "parent": null
+                    },
+                    "false": {
+                        "name": "Нет жалоб",
+                        "parent": null
+                    },
+                    "": {
+                        "name": "Все",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Жалобы",
+                "parent": "form",
+                "sort_order": 0
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "hasAppeals",
+            "required": false,
+            "selected_values": []
+        },
+        "Наличие решений": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "true": {
+                        "name": "Есть решения",
+                        "parent": null
+                    },
+                    "false": {
+                        "name": "Нет решений",
+                        "parent": null
+                    },
+                    "": {
+                        "name": "Все",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Жалобы",
+                "parent": "form",
+                "sort_order": 1
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "hasSolutions",
+            "required": false,
+            "selected_values": []
+        },
+        "Наличие предписаний": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "true": {
+                        "name": "Есть предписания",
+                        "parent": null
+                    },
+                    "false": {
+                        "name": "Нет предписаний",
+                        "parent": null
+                    },
+                    "": {
+                        "name": "Все лоты",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Жалобы",
+                "parent": "form",
+                "sort_order": 2
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "hasPrescriptions",
+            "required": false,
+            "selected_values": []
+        },
+        "Орган контроля": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {}
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Жалобы",
+                "parent": "form",
+                "sort_order": 3
+            },
+            "info2_url": "",
+            "multi_value": false,
+            "name": "amoOrgCode",
+            "required": false,
+            "selected_values": []
+        }
+    }
+}
