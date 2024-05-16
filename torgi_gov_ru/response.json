@@ -1,0 +1,2042 @@
+{
+    "content": [
+        {
+            "id": "23000051770000000058_26",
+            "noticeNumber": "23000051770000000058",
+            "lotNumber": 26,
+            "lotStatus": "APPLICATIONS_SUBMISSION",
+            "biddType": {
+                "code": "229FZ",
+                "name": "Реализация имущества должников"
+            },
+            "biddForm": {
+                "code": "PA",
+                "name": "Аукцион"
+            },
+            "lotName": "Земельный участок площадью 1000 кв.м. кад. № 90:12:170601:352, и жилой дом площадью 198 кв.м. кад № 90:12:170601:2668, расположенные по адресу: Симферопольский район, с. Строгановка, ул. Шамиль Алядин, 25 (арест)",
+            "lotDescription": "Земельный участок площадью 1000 кв.м. кад. № 90:12:170601:352, и жилой дом площадью 198 кв.м. кад № 90:12:170601:2668, расположенные по адресу: Симферопольский район, с. Строгановка, ул. Шамиль Алядин, 25 (арест)",
+            "priceMin": 8473735.0,
+            "biddEndTime": "2024-05-27T12:00:00.000+00:00",
+            "lotImages": [
+                "662a851b0ab0a90aae821ef3",
+                "662a851ce67dfd49a4212d5d",
+                "662a851c0ab0a90aae821ef9",
+                "662a851b0ab0a90aae821ef2"
+            ],
+            "characteristics": [
+                {
+                    "name": "Вид жилого помещения спец. Фонда",
+                    "code": "typeLivingQuartersSpecFund",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": 198.0,
+                    "name": "Общая площадь",
+                    "code": "totalAreaRealty",
+                    "unit": {
+                        "code": "081",
+                        "name": "Квадратный метр общей площади",
+                        "symbol": "м^2 общ. пл"
+                    },
+                    "type": "Decimal"
+                },
+                {
+                    "name": "Общие сведения об ограничениях и обременениях ",
+                    "code": "restrictionsEncumbrances",
+                    "type": "Text(500)"
+                },
+                {
+                    "characteristicValue": "дом",
+                    "name": "Вид жилого помещения",
+                    "code": "typeLivingQuarters",
+                    "type": "Text(100)"
+                },
+                {
+                    "name": "Кадастровая стоимость ",
+                    "code": "cadastralValue",
+                    "type": "Money"
+                },
+                {
+                    "characteristicValue": "2",
+                    "name": "Расположение в пределах объекта недвижимости (этажа, части этажа, нескольких этажей)",
+                    "code": "locationObjectRealty",
+                    "type": "Text(100)"
+                },
+                {
+                    "name": "Год ввода в эксплуатацию",
+                    "code": "yearCommissioning",
+                    "type": "Text(20)"
+                },
+                {
+                    "name": "Размер доли (Доля в праве (доля в жилом помещении))",
+                    "code": "shareSizeRealty",
+                    "unit": {
+                        "code": "744",
+                        "name": "Процент",
+                        "symbol": "%"
+                    },
+                    "type": "Money"
+                },
+                {
+                    "characteristicValue": "90:12:170601:2668",
+                    "name": "Кадастровый номер",
+                    "code": "cadastralNumberRealty",
+                    "type": "Text(20)"
+                },
+                {
+                    "name": "Вид ограничений и обременений",
+                    "code": "typeRestrictionsEncumbrances",
+                    "type": "Text(100)"
+                },
+                {
+                    "name": "Кадастровый номер объекта недвижимости (здания, сооружения), в пределах которого расположено помещение",
+                    "code": "cadastralNumberObjectRealty",
+                    "type": "Text(20)"
+                }
+            ],
+            "currencyCode": "643",
+            "subjectRFCode": "91",
+            "category": {
+                "code": "9",
+                "name": "Жилые помещения"
+            },
+            "createDate": "2024-04-25T14:35:46.505+00:00",
+            "timeZoneName": "МСК+1",
+            "timezoneOffset": "240",
+            "hasAppeals": false,
+            "isStopped": false,
+            "attributes": [
+                {
+                    "code": "DA_basis_BA(229)",
+                    "fullName": "Основание реализации имущества",
+                    "value": "Поручение на реализацию арестованного имущества № 30/01/24 (91-003744), акт п/п на торги, постановление о снижении цены на 15%.\n",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 1
+                },
+                {
+                    "code": "DA_owner_BA(229)",
+                    "fullName": "Собственник имущества",
+                    "value": "Вовк А.К",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2
+                },
+                {
+                    "code": "DA_familiarization_BA(229)",
+                    "fullName": "Порядок ознакомления с имуществом",
+                    "value": "Согласно условиям извещения \n",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 3
+                },
+                {
+                    "code": "DA_encumbrance_BA(229)",
+                    "fullName": "Обременения реализуемого имущества",
+                    "value": "На имуществе имеются запреты на регистрационные действия, наложенные уполномоченными органами \n",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 4
+                },
+                {
+                    "code": "DA_conditionContract_BA(229)",
+                    "fullName": "Условия договора, заключаемого по результатам торгов",
+                    "value": "Договор купли-продажи заключается в соответствии с действующим законодательством РФ. \n",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 5
+                },
+                {
+                    "code": "DA_contractSignPeriod_BA(229)",
+                    "fullName": "Срок заключения договора",
+                    "value": "Договор купли-продажи заключается в соответствии с действующим законодательством РФ. \n",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 6
+                },
+                {
+                    "code": "DA_biddingPayment_BA(229)",
+                    "fullName": "Порядок и сроки уплаты покупной цены по итогам проведения торгов",
+                    "value": "Победитель торгов в течение 5 рабочих дней должен оплатить стоимость приобретаемого имущества. \n",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 7
+                },
+                {
+                    "code": "DA_FeatureObject_BA(229)",
+                    "fullName": "Особенности объекта торгов",
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 8
+                },
+                {
+                    "code": "DA_depositTimeAndRules_BA(229)",
+                    "fullName": "Срок и порядок внесения задатка",
+                    "value": "Задаток должен поступить не позднее даты и времени окончания приема заявок \n",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 1
+                }
+            ],
+            "noticeAttributes": [
+                {
+                    "code": "DA_npaForProcedure_BA(229)",
+                    "fullName": "Нормативный правовой акт, на основании которого проходят торги",
+                    "value": {
+                        "code": "229FZ",
+                        "name": "229-ФЗ"
+                    },
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "N250",
+                        "name": "1.2 Извещение_основные_сведения",
+                        "displayGroupType": "NOTICE"
+                    },
+                    "sortOrder": 1
+                }
+            ],
+            "isAnnulled": false,
+            "noticeFirstVersionPublicationDate": "2024-04-25T16:47:59.316Z",
+            "lotVat": {
+                "code": "notAssessedVAT",
+                "name": "НДС не облагается"
+            },
+            "npaHintCode": "hint2_229FZ_PA_1",
+            "typeTransaction": "sale"
+        },
+        {
+            "id": "23000051770000000068_3",
+            "noticeNumber": "23000051770000000068",
+            "lotNumber": 3,
+            "lotStatus": "APPLICATIONS_SUBMISSION",
+            "biddType": {
+                "code": "229FZ",
+                "name": "Реализация имущества должников"
+            },
+            "biddForm": {
+                "code": "PA",
+                "name": "Аукцион"
+            },
+            "lotName": "жилой дом, общей площадью 60,0 кв.м. кадастровый номер 90:12:050201:116, и земельный участок, площадью 1000 кв.м, кадастровый номер 90:12:050201:74, категории земель - земли населенных пунктов вид разрешенного использования - для индивидуального жилищного строительства, по адресу: РК, Симферопольский р-н, с. Верхнекурганное, ул. Виноградная д.2, на земельном участке расположены 2 нежилых недостроенных объекта (залог)",
+            "lotDescription": "жилой дом, общей площадью 60,0 кв.м. кадастровый номер 90:12:050201:116, и земельный участок, площадью 1000 кв.м, кадастровый номер 90:12:050201:74, категории земель - земли населенных пунктов вид разрешенного использования - для индивидуального жилищного строительства, по адресу: РК, Симферопольский р-н, с. Верхнекурганное, ул. Виноградная д.2, на земельном участке расположены 2 нежилых недостроенных объекта (залог)",
+            "priceMin": 1400000.0,
+            "biddEndTime": "2024-05-27T12:00:00.000+00:00",
+            "lotImages": [
+                "663bb1a71c3df31d69b7cfbc",
+                "663bb1a71c3df31d69b7cfc6",
+                "663bb1a71c3df31d69b7cfc1",
+                "663bb1a7e67dfd49a429f525",
+                "663bb1a71c3df31d69b7cfcb",
+                "663bb1a70ab0a90aae8a8744",
+                "663bb1a729344516bde5a535",
+                "663bb1a70ab0a90aae8a8749"
+            ],
+            "characteristics": [
+                {
+                    "name": "Вид жилого помещения спец. Фонда",
+                    "code": "typeLivingQuartersSpecFund",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": 60.0,
+                    "name": "Общая площадь",
+                    "code": "totalAreaRealty",
+                    "unit": {
+                        "code": "081",
+                        "name": "Квадратный метр общей площади",
+                        "symbol": "м^2 общ. пл"
+                    },
+                    "type": "Decimal"
+                },
+                {
+                    "name": "Общие сведения об ограничениях и обременениях ",
+                    "code": "restrictionsEncumbrances",
+                    "type": "Text(500)"
+                },
+                {
+                    "characteristicValue": "дом",
+                    "name": "Вид жилого помещения",
+                    "code": "typeLivingQuarters",
+                    "type": "Text(100)"
+                },
+                {
+                    "name": "Кадастровая стоимость ",
+                    "code": "cadastralValue",
+                    "type": "Money"
+                },
+                {
+                    "characteristicValue": "1 этаж",
+                    "name": "Расположение в пределах объекта недвижимости (этажа, части этажа, нескольких этажей)",
+                    "code": "locationObjectRealty",
+                    "type": "Text(100)"
+                },
+                {
+                    "name": "Год ввода в эксплуатацию",
+                    "code": "yearCommissioning",
+                    "type": "Text(20)"
+                },
+                {
+                    "characteristicValue": 100.0,
+                    "name": "Размер доли (Доля в праве (доля в жилом помещении))",
+                    "code": "shareSizeRealty",
+                    "unit": {
+                        "code": "744",
+                        "name": "Процент",
+                        "symbol": "%"
+                    },
+                    "type": "Money"
+                },
+                {
+                    "characteristicValue": "90:12:050201:116",
+                    "name": "Кадастровый номер",
+                    "code": "cadastralNumberRealty",
+                    "type": "Text(20)"
+                },
+                {
+                    "name": "Вид ограничений и обременений",
+                    "code": "typeRestrictionsEncumbrances",
+                    "type": "Text(100)"
+                },
+                {
+                    "name": "Кадастровый номер объекта недвижимости (здания, сооружения), в пределах которого расположено помещение",
+                    "code": "cadastralNumberObjectRealty",
+                    "type": "Text(20)"
+                }
+            ],
+            "currencyCode": "643",
+            "subjectRFCode": "91",
+            "category": {
+                "code": "9",
+                "name": "Жилые помещения"
+            },
+            "createDate": "2024-05-08T16:50:25.184+00:00",
+            "timeZoneName": "МСК+1",
+            "timezoneOffset": "240",
+            "hasAppeals": false,
+            "isStopped": false,
+            "attributes": [
+                {
+                    "code": "DA_basis_BA(229)",
+                    "fullName": "Основание реализации имущества",
+                    "value": "Поручение на реализацию арестованного имущества № 87/01/24 (91-004095), акт п/п на торги",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 1
+                },
+                {
+                    "code": "DA_owner_BA(229)",
+                    "fullName": "Собственник имущества",
+                    "value": "Малиневский С.В.",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2
+                },
+                {
+                    "code": "DA_familiarization_BA(229)",
+                    "fullName": "Порядок ознакомления с имуществом",
+                    "value": "Согласно условиям извещения \n",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 3
+                },
+                {
+                    "code": "DA_encumbrance_BA(229)",
+                    "fullName": "Обременения реализуемого имущества",
+                    "value": "На имуществе имеются запреты на регистрационные действия, наложенные уполномоченными органами, залог \n",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 4
+                },
+                {
+                    "code": "DA_conditionContract_BA(229)",
+                    "fullName": "Условия договора, заключаемого по результатам торгов",
+                    "value": "Договор купли-продажи заключается в соответствии с действующим законодательством РФ. \n",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 5
+                },
+                {
+                    "code": "DA_contractSignPeriod_BA(229)",
+                    "fullName": "Срок заключения договора",
+                    "value": "Договор купли-продажи заключается в соответствии с действующим законодательством РФ. \n",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 6
+                },
+                {
+                    "code": "DA_biddingPayment_BA(229)",
+                    "fullName": "Порядок и сроки уплаты покупной цены по итогам проведения торгов",
+                    "value": "Победитель торгов в течение 5 рабочих дней должен оплатить стоимость приобретаемого имущества. \n",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL250",
+                        "name": "5.3 Лот_основная_информация",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 7
+                },
+                {
+                    "code": "DA_depositTimeAndRules_BA(229)",
+                    "fullName": "Срок и порядок внесения задатка",
+                    "value": "Задаток должен поступить не позднее даты и времени окончания приема заявок \n",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 1
+                }
+            ],
+            "noticeAttributes": [
+                {
+                    "code": "DA_npaForProcedure_BA(229)",
+                    "fullName": "Нормативный правовой акт, на основании которого проходят торги",
+                    "value": {
+                        "code": "102FZ",
+                        "name": "102-ФЗ"
+                    },
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "N250",
+                        "name": "1.2 Извещение_основные_сведения",
+                        "displayGroupType": "NOTICE"
+                    },
+                    "sortOrder": 1
+                }
+            ],
+            "isAnnulled": false,
+            "noticeFirstVersionPublicationDate": "2024-05-08T17:11:25.545Z",
+            "lotVat": {
+                "code": "notAssessedVAT",
+                "name": "НДС не облагается"
+            },
+            "npaHintCode": "hint2_229FZ_PA_2",
+            "typeTransaction": "sale"
+        },
+        {
+            "id": "22000169980000000004_2",
+            "noticeNumber": "22000169980000000004",
+            "lotNumber": 2,
+            "lotStatus": "DETERMINING_WINNER",
+            "biddType": {
+                "code": "ZHKH",
+                "name": "ЖКХ"
+            },
+            "biddForm": {
+                "code": "PK",
+                "name": "Конкурс"
+            },
+            "lotName": "Многоквартирный дом",
+            "lotDescription": "Многоквартирный жилой дом № 9",
+            "priceMin": 0.0,
+            "biddEndTime": "2024-04-11T08:00:00.000+00:00",
+            "lotImages": [
+                "65e96330cb924e7d40b8b763"
+            ],
+            "characteristics": [],
+            "subjectRFCode": "91",
+            "category": {
+                "code": "902",
+                "name": "Управление многоквартирными домами"
+            },
+            "createDate": "2024-03-07T06:57:46.864+00:00",
+            "timeZoneName": "МСК",
+            "timezoneOffset": "180",
+            "hasAppeals": false,
+            "isStopped": false,
+            "attributes": [
+                {
+                    "code": "DA_Lot.deposit_PK(MKD)",
+                    "fullName": "Размер обеспечения заявки",
+                    "value": 4851.84,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2025
+                },
+                {
+                    "code": "DA_Lot.basis_PK(MKD)",
+                    "fullName": "Основание проведения конкурса и нормативные правовые акты, на основании которых проводится конкурс",
+                    "value": "Постановление администрации Жемчужинского сельского поселения Нижнегорского района Республики Крым от 6 марта 2024 года № 19-П",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2050
+                },
+                {
+                    "code": "DA_Lot.objectCharacteristic_PK(MKD)",
+                    "fullName": "Характеристика объекта конкурса",
+                    "value": "4-х этажный многоквартирный жилой дом, 1984 года постройки, количество квартир - 48,общая площадь 2553,6 кв.м.",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2075
+                },
+                {
+                    "code": "DA_Lot.nameServices_PK(MKD)",
+                    "fullName": "Наименование работ и услуг по содержанию и ремонту объекта конкурса",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания, содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2125
+                },
+                {
+                    "code": "DA_Lot.amountFee_PK(MKD)",
+                    "fullName": "Размер платы за содержание и ремонт жилого помещения",
+                    "value": 19.0,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2150
+                },
+                {
+                    "code": "DA_Lot.listServices_PK(MKD)",
+                    "fullName": "Перечень коммунальных услуг, предоставляемых управляющей организацией",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания, содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2175
+                },
+                {
+                    "code": "DA_Lot.officialSite_PK(MKD)",
+                    "fullName": "Адрес официального сайта, на котором размещена конкурсная документация",
+                    "value": "torgi.gov.ru",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2200
+                },
+                {
+                    "code": "DA_Lot.submissionDocumentation_PK(MKD)",
+                    "fullName": "Место и порядок предоставления конкурсной документации, \nразмер, порядок и сроки внесения платы, за предоставление конкурсной документации",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2225
+                },
+                {
+                    "code": "DA_Lot.contractPeriod_PK(MKD)",
+                    "fullName": "Срок действия договора",
+                    "value": "3 года",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2250
+                }
+            ],
+            "noticeAttributes": [
+                {
+                    "code": "DA_typeCompetitive_PK(ZHKH)",
+                    "fullName": "Вид конкурса",
+                    "value": {
+                        "code": "MKD",
+                        "name": "Конкурсный отбор управляющей организации для управления многоквартирным домом"
+                    },
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "N250",
+                        "name": "1.2 Извещение_основные_сведения",
+                        "displayGroupType": "NOTICE"
+                    },
+                    "sortOrder": 100
+                }
+            ],
+            "isAnnulled": false,
+            "noticeFirstVersionPublicationDate": "2024-03-07T06:59:27.889Z",
+            "npaHintCode": "hint2_ZHKH_PK_1"
+        },
+        {
+            "id": "22000169980000000003_1",
+            "noticeNumber": "22000169980000000003",
+            "lotNumber": 1,
+            "lotStatus": "DETERMINING_WINNER",
+            "biddType": {
+                "code": "ZHKH",
+                "name": "ЖКХ"
+            },
+            "biddForm": {
+                "code": "PK",
+                "name": "Конкурс"
+            },
+            "lotName": "Многоквартирный дом",
+            "lotDescription": "Многоквартирный жилой дом № 7",
+            "priceMin": 0.0,
+            "biddEndTime": "2023-12-12T08:00:00.000+00:00",
+            "lotImages": [
+                "654dc2c1cfc47c35e9a4a59a"
+            ],
+            "characteristics": [],
+            "subjectRFCode": "91",
+            "category": {
+                "code": "902",
+                "name": "Управление многоквартирными домами"
+            },
+            "createDate": "2023-11-10T06:01:26.150+00:00",
+            "timeZoneName": "МСК",
+            "timezoneOffset": "180",
+            "hasAppeals": false,
+            "isStopped": false,
+            "attributes": [
+                {
+                    "code": "DA_Lot.deposit_PK(MKD)",
+                    "fullName": "Размер обеспечения заявки",
+                    "value": 4851.84,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2025
+                },
+                {
+                    "code": "DA_Lot.basis_PK(MKD)",
+                    "fullName": "Основание проведения конкурса и нормативные правовые акты, на основании которых проводится конкурс",
+                    "value": "Постановление администрации Жемчужинского сельского поселения Нижнегорского района Республики Крым от 09.11.2023 № 119-П",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2050
+                },
+                {
+                    "code": "DA_Lot.objectCharacteristic_PK(MKD)",
+                    "fullName": "Характеристика объекта конкурса",
+                    "value": "4-х этажный многоквартирный жилой дом, 1982 года постройки, количество квартир 48, общая площадь 2553,6 кв.м.",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2075
+                },
+                {
+                    "code": "DA_Lot.nameServices_PK(MKD)",
+                    "fullName": "Наименование работ и услуг по содержанию и ремонту объекта конкурса",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2125
+                },
+                {
+                    "code": "DA_Lot.amountFee_PK(MKD)",
+                    "fullName": "Размер платы за содержание и ремонт жилого помещения",
+                    "value": 19.0,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2150
+                },
+                {
+                    "code": "DA_Lot.listServices_PK(MKD)",
+                    "fullName": "Перечень коммунальных услуг, предоставляемых управляющей организацией",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2175
+                },
+                {
+                    "code": "DA_Lot.officialSite_PK(MKD)",
+                    "fullName": "Адрес официального сайта, на котором размещена конкурсная документация",
+                    "value": "torgi.gov.ru",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2200
+                },
+                {
+                    "code": "DA_Lot.contractPeriod_PK(MKD)",
+                    "fullName": "Срок действия договора",
+                    "value": "3 года",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2250
+                }
+            ],
+            "noticeAttributes": [
+                {
+                    "code": "DA_typeCompetitive_PK(ZHKH)",
+                    "fullName": "Вид конкурса",
+                    "value": {
+                        "code": "MKD",
+                        "name": "Конкурсный отбор управляющей организации для управления многоквартирным домом"
+                    },
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "N250",
+                        "name": "1.2 Извещение_основные_сведения",
+                        "displayGroupType": "NOTICE"
+                    },
+                    "sortOrder": 100
+                }
+            ],
+            "isAnnulled": false,
+            "noticeFirstVersionPublicationDate": "2023-11-10T06:02:47.417Z",
+            "npaHintCode": "hint2_ZHKH_PK_1",
+            "typeTransaction": "other"
+        },
+        {
+            "id": "22000169980000000003_2",
+            "noticeNumber": "22000169980000000003",
+            "lotNumber": 2,
+            "lotStatus": "DETERMINING_WINNER",
+            "biddType": {
+                "code": "ZHKH",
+                "name": "ЖКХ"
+            },
+            "biddForm": {
+                "code": "PK",
+                "name": "Конкурс"
+            },
+            "lotName": "Многоквартирный дом",
+            "lotDescription": "Многоквартирный жилой дом № 9",
+            "priceMin": 0.0,
+            "biddEndTime": "2023-12-12T08:00:00.000+00:00",
+            "lotImages": [
+                "654dc523b53a5328b24e7082"
+            ],
+            "characteristics": [],
+            "subjectRFCode": "91",
+            "category": {
+                "code": "902",
+                "name": "Управление многоквартирными домами"
+            },
+            "createDate": "2023-11-10T06:01:26.150+00:00",
+            "timeZoneName": "МСК",
+            "timezoneOffset": "180",
+            "hasAppeals": false,
+            "isStopped": false,
+            "attributes": [
+                {
+                    "code": "DA_Lot.deposit_PK(MKD)",
+                    "fullName": "Размер обеспечения заявки",
+                    "value": 4851.84,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2025
+                },
+                {
+                    "code": "DA_Lot.basis_PK(MKD)",
+                    "fullName": "Основание проведения конкурса и нормативные правовые акты, на основании которых проводится конкурс",
+                    "value": "Постановление администрации Жемчужинского сельского поселения Нижнегорского района Республики Крым  от 09.11.2023 № 119-П",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2050
+                },
+                {
+                    "code": "DA_Lot.objectCharacteristic_PK(MKD)",
+                    "fullName": "Характеристика объекта конкурса",
+                    "value": "4-х этажный многоквартирный жилой дом 1984 года постройки, количество квартир 48, общая площадь 2553,6 кв.м.",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2075
+                },
+                {
+                    "code": "DA_Lot.nameServices_PK(MKD)",
+                    "fullName": "Наименование работ и услуг по содержанию и ремонту объекта конкурса",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2125
+                },
+                {
+                    "code": "DA_Lot.amountFee_PK(MKD)",
+                    "fullName": "Размер платы за содержание и ремонт жилого помещения",
+                    "value": 19.0,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2150
+                },
+                {
+                    "code": "DA_Lot.listServices_PK(MKD)",
+                    "fullName": "Перечень коммунальных услуг, предоставляемых управляющей организацией",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2175
+                },
+                {
+                    "code": "DA_Lot.officialSite_PK(MKD)",
+                    "fullName": "Адрес официального сайта, на котором размещена конкурсная документация",
+                    "value": "torgi.gov.ru",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2200
+                },
+                {
+                    "code": "DA_Lot.submissionDocumentation_PK(MKD)",
+                    "fullName": "Место и порядок предоставления конкурсной документации, \nразмер, порядок и сроки внесения платы, за предоставление конкурсной документации",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2225
+                },
+                {
+                    "code": "DA_Lot.contractPeriod_PK(MKD)",
+                    "fullName": "Срок действия договора",
+                    "value": "3 года",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2250
+                }
+            ],
+            "noticeAttributes": [
+                {
+                    "code": "DA_typeCompetitive_PK(ZHKH)",
+                    "fullName": "Вид конкурса",
+                    "value": {
+                        "code": "MKD",
+                        "name": "Конкурсный отбор управляющей организации для управления многоквартирным домом"
+                    },
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "N250",
+                        "name": "1.2 Извещение_основные_сведения",
+                        "displayGroupType": "NOTICE"
+                    },
+                    "sortOrder": 100
+                }
+            ],
+            "isAnnulled": false,
+            "noticeFirstVersionPublicationDate": "2023-11-10T06:02:47.417Z",
+            "npaHintCode": "hint2_ZHKH_PK_1",
+            "typeTransaction": "other"
+        },
+        {
+            "id": "22000169980000000004_1",
+            "noticeNumber": "22000169980000000004",
+            "lotNumber": 1,
+            "lotStatus": "DETERMINING_WINNER",
+            "biddType": {
+                "code": "ZHKH",
+                "name": "ЖКХ"
+            },
+            "biddForm": {
+                "code": "PK",
+                "name": "Конкурс"
+            },
+            "lotName": "Многоквартирный дом",
+            "lotDescription": "Многоквартирный жилой дом № 7",
+            "priceMin": 0.0,
+            "biddEndTime": "2024-04-11T08:00:00.000+00:00",
+            "lotImages": [
+                "65e962ec212f2758961a3ee8"
+            ],
+            "characteristics": [],
+            "subjectRFCode": "91",
+            "category": {
+                "code": "902",
+                "name": "Управление многоквартирными домами"
+            },
+            "createDate": "2024-03-07T06:57:46.864+00:00",
+            "timeZoneName": "МСК",
+            "timezoneOffset": "180",
+            "hasAppeals": false,
+            "isStopped": false,
+            "attributes": [
+                {
+                    "code": "DA_Lot.deposit_PK(MKD)",
+                    "fullName": "Размер обеспечения заявки",
+                    "value": 4851.84,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2025
+                },
+                {
+                    "code": "DA_Lot.basis_PK(MKD)",
+                    "fullName": "Основание проведения конкурса и нормативные правовые акты, на основании которых проводится конкурс",
+                    "value": "Постановление администрации Жемчужинского сельского поселения Нижнегорского района Республики Крым от 6 марта 2024 года № 19-П",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2050
+                },
+                {
+                    "code": "DA_Lot.objectCharacteristic_PK(MKD)",
+                    "fullName": "Характеристика объекта конкурса",
+                    "value": "4-х этажный многоквартирный жилой дом, 1982 года постройки, количество квартир - 48,общая площадь 2553,6 кв.м.",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2075
+                },
+                {
+                    "code": "DA_Lot.nameServices_PK(MKD)",
+                    "fullName": "Наименование работ и услуг по содержанию и ремонту объекта конкурса",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания, содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2125
+                },
+                {
+                    "code": "DA_Lot.amountFee_PK(MKD)",
+                    "fullName": "Размер платы за содержание и ремонт жилого помещения",
+                    "value": 19.0,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2150
+                },
+                {
+                    "code": "DA_Lot.listServices_PK(MKD)",
+                    "fullName": "Перечень коммунальных услуг, предоставляемых управляющей организацией",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания, содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2175
+                },
+                {
+                    "code": "DA_Lot.officialSite_PK(MKD)",
+                    "fullName": "Адрес официального сайта, на котором размещена конкурсная документация",
+                    "value": "torgi.gov.ru",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2200
+                },
+                {
+                    "code": "DA_Lot.contractPeriod_PK(MKD)",
+                    "fullName": "Срок действия договора",
+                    "value": "3 года",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2250
+                }
+            ],
+            "noticeAttributes": [
+                {
+                    "code": "DA_typeCompetitive_PK(ZHKH)",
+                    "fullName": "Вид конкурса",
+                    "value": {
+                        "code": "MKD",
+                        "name": "Конкурсный отбор управляющей организации для управления многоквартирным домом"
+                    },
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "N250",
+                        "name": "1.2 Извещение_основные_сведения",
+                        "displayGroupType": "NOTICE"
+                    },
+                    "sortOrder": 100
+                }
+            ],
+            "isAnnulled": false,
+            "noticeFirstVersionPublicationDate": "2024-03-07T06:59:27.889Z",
+            "npaHintCode": "hint2_ZHKH_PK_1"
+        },
+        {
+            "id": "22000169980000000002_1",
+            "noticeNumber": "22000169980000000002",
+            "lotNumber": 1,
+            "lotStatus": "DETERMINING_WINNER",
+            "biddType": {
+                "code": "ZHKH",
+                "name": "ЖКХ"
+            },
+            "biddForm": {
+                "code": "PK",
+                "name": "Конкурс"
+            },
+            "lotName": "Лот № 1 многоквартирный  дом",
+            "lotDescription": "Многоквартирный жилой дом № 7",
+            "priceMin": 0.0,
+            "biddEndTime": "2023-08-14T08:00:00.000+00:00",
+            "lotImages": [
+                "64abb407d24d2339ec8663ec"
+            ],
+            "characteristics": [],
+            "subjectRFCode": "91",
+            "category": {
+                "code": "902",
+                "name": "Управление многоквартирными домами"
+            },
+            "createDate": "2023-07-10T07:53:41.466+00:00",
+            "timeZoneName": "МСК",
+            "timezoneOffset": "180",
+            "hasAppeals": false,
+            "isStopped": false,
+            "attributes": [
+                {
+                    "code": "DA_Lot.deposit_PK(MKD)",
+                    "fullName": "Размер обеспечения заявки",
+                    "value": 4851.84,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2025
+                },
+                {
+                    "code": "DA_Lot.basis_PK(MKD)",
+                    "fullName": "Основание проведения конкурса и нормативные правовые акты, на основании которых проводится конкурс",
+                    "value": "Постановление администрации Жемчужинского сельского поселения Нижнегорского района Республики Крым от 10.07.2023 № 76-П",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2050
+                },
+                {
+                    "code": "DA_Lot.objectCharacteristic_PK(MKD)",
+                    "fullName": "Характеристика объекта конкурса",
+                    "value": "4 этажный многоквартирный дом, 1982 года постройки, количество квартир 48, общая площадь 2553,6 кв.м.",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2075
+                },
+                {
+                    "code": "DA_Lot.nameServices_PK(MKD)",
+                    "fullName": "Наименование работ и услуг по содержанию и ремонту объекта конкурса",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания, содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2125
+                },
+                {
+                    "code": "DA_Lot.amountFee_PK(MKD)",
+                    "fullName": "Размер платы за содержание и ремонт жилого помещения",
+                    "value": 19.0,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2150
+                },
+                {
+                    "code": "DA_Lot.listServices_PK(MKD)",
+                    "fullName": "Перечень коммунальных услуг, предоставляемых управляющей организацией",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания, содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2175
+                },
+                {
+                    "code": "DA_Lot.officialSite_PK(MKD)",
+                    "fullName": "Адрес официального сайта, на котором размещена конкурсная документация",
+                    "value": "torgi.gov.ru",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2200
+                },
+                {
+                    "code": "DA_Lot.submissionDocumentation_PK(MKD)",
+                    "fullName": "Место и порядок предоставления конкурсной документации, \nразмер, порядок и сроки внесения платы, за предоставление конкурсной документации",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2225
+                },
+                {
+                    "code": "DA_Lot.contractPeriod_PK(MKD)",
+                    "fullName": "Срок действия договора",
+                    "value": "3 года",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2250
+                }
+            ],
+            "noticeAttributes": [
+                {
+                    "code": "DA_typeCompetitive_PK(ZHKH)",
+                    "fullName": "Вид конкурса",
+                    "value": {
+                        "code": "MKD",
+                        "name": "Конкурсный отбор управляющей организации для управления многоквартирным домом"
+                    },
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "N250",
+                        "name": "1.2 Извещение_основные_сведения",
+                        "displayGroupType": "NOTICE"
+                    },
+                    "sortOrder": 100
+                }
+            ],
+            "isAnnulled": false,
+            "noticeFirstVersionPublicationDate": "2023-07-10T08:29:01.806Z",
+            "npaHintCode": "hint2_ZHKH_PK_1",
+            "typeTransaction": "other"
+        },
+        {
+            "id": "22000169980000000002_2",
+            "noticeNumber": "22000169980000000002",
+            "lotNumber": 2,
+            "lotStatus": "DETERMINING_WINNER",
+            "biddType": {
+                "code": "ZHKH",
+                "name": "ЖКХ"
+            },
+            "biddForm": {
+                "code": "PK",
+                "name": "Конкурс"
+            },
+            "lotName": "Лот № 2 многоквартирный дом",
+            "lotDescription": "Многоквартирный жилой дом № 9",
+            "priceMin": 0.0,
+            "biddEndTime": "2023-08-14T08:00:00.000+00:00",
+            "lotImages": [
+                "64abb5e4d24d2339ec866500"
+            ],
+            "characteristics": [],
+            "subjectRFCode": "91",
+            "category": {
+                "code": "902",
+                "name": "Управление многоквартирными домами"
+            },
+            "createDate": "2023-07-10T07:53:41.466+00:00",
+            "timeZoneName": "МСК",
+            "timezoneOffset": "180",
+            "hasAppeals": false,
+            "isStopped": false,
+            "attributes": [
+                {
+                    "code": "DA_Lot.deposit_PK(MKD)",
+                    "fullName": "Размер обеспечения заявки",
+                    "value": 4851.84,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2025
+                },
+                {
+                    "code": "DA_Lot.basis_PK(MKD)",
+                    "fullName": "Основание проведения конкурса и нормативные правовые акты, на основании которых проводится конкурс",
+                    "value": "Постановление администрации Жемчужинского сельского поселения Нижнегорского района Республики Крым от 10.07.2023 № 76-П",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2050
+                },
+                {
+                    "code": "DA_Lot.objectCharacteristic_PK(MKD)",
+                    "fullName": "Характеристика объекта конкурса",
+                    "value": "4 этажный многоквартирный жилой дом, 1984 года постройки, количество квартир 48, общая площадь 2553,6 кв. м.",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2075
+                },
+                {
+                    "code": "DA_Lot.nameServices_PK(MKD)",
+                    "fullName": "Наименование работ и услуг по содержанию и ремонту объекта конкурса",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания, содержание придомовой территории ",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2125
+                },
+                {
+                    "code": "DA_Lot.amountFee_PK(MKD)",
+                    "fullName": "Размер платы за содержание и ремонт жилого помещения",
+                    "value": 19.0,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2150
+                },
+                {
+                    "code": "DA_Lot.listServices_PK(MKD)",
+                    "fullName": "Перечень коммунальных услуг, предоставляемых управляющей организацией",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания, содержание придомовой территории ",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2175
+                },
+                {
+                    "code": "DA_Lot.officialSite_PK(MKD)",
+                    "fullName": "Адрес официального сайта, на котором размещена конкурсная документация",
+                    "value": "torgi.gov.ru",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2200
+                },
+                {
+                    "code": "DA_Lot.submissionDocumentation_PK(MKD)",
+                    "fullName": "Место и порядок предоставления конкурсной документации, \nразмер, порядок и сроки внесения платы, за предоставление конкурсной документации",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2225
+                },
+                {
+                    "code": "DA_Lot.contractPeriod_PK(MKD)",
+                    "fullName": "Срок действия договора",
+                    "value": "3 года",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2250
+                }
+            ],
+            "noticeAttributes": [
+                {
+                    "code": "DA_typeCompetitive_PK(ZHKH)",
+                    "fullName": "Вид конкурса",
+                    "value": {
+                        "code": "MKD",
+                        "name": "Конкурсный отбор управляющей организации для управления многоквартирным домом"
+                    },
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "N250",
+                        "name": "1.2 Извещение_основные_сведения",
+                        "displayGroupType": "NOTICE"
+                    },
+                    "sortOrder": 100
+                }
+            ],
+            "isAnnulled": false,
+            "noticeFirstVersionPublicationDate": "2023-07-10T08:29:01.806Z",
+            "npaHintCode": "hint2_ZHKH_PK_1",
+            "typeTransaction": "other"
+        },
+        {
+            "id": "22000169980000000001_1",
+            "noticeNumber": "22000169980000000001",
+            "lotNumber": 1,
+            "lotStatus": "DETERMINING_WINNER",
+            "biddType": {
+                "code": "ZHKH",
+                "name": "ЖКХ"
+            },
+            "biddForm": {
+                "code": "PK",
+                "name": "Конкурс"
+            },
+            "lotName": "лот № 1 многоквартирный дом по адресу:с. Жемчужина, ул. 40 лет Победы, д. 7",
+            "lotDescription": "лот № 1 многоквартирный дом по адресу:с. Жемчужина, ул. 40 лет Победы, д. 7",
+            "priceMin": 0.0,
+            "biddEndTime": "2022-11-24T08:00:00.000+00:00",
+            "lotImages": [
+                "634fde78d5ffcc49f41659e5"
+            ],
+            "characteristics": [
+                {
+                    "characteristicValue": 2553.6,
+                    "name": "Общая площадь",
+                    "code": "totalAreaRealty",
+                    "unit": {
+                        "code": "081",
+                        "name": "Квадратный метр общей площади",
+                        "symbol": "м^2 общ. пл"
+                    },
+                    "type": "Decimal"
+                },
+                {
+                    "characteristicValue": "Блоки",
+                    "name": "Материалы наружных стен здания ",
+                    "code": "buildingWallMaterials",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": "4",
+                    "name": "Количество этажей ",
+                    "code": "numberFloors",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": "1",
+                    "name": "Количество подземных этажей ",
+                    "code": "numberUndergroundFloors",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": "Многоквартирный жилой дом",
+                    "name": "Назначение здания ",
+                    "code": "purposeBuilding",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": "Нет",
+                    "name": "Общие сведения об ограничениях и обременениях ",
+                    "code": "restrictionsEncumbrances",
+                    "type": "Text(500)"
+                },
+                {
+                    "characteristicValue": "Нет",
+                    "name": "Вид ограничений и обременений",
+                    "code": "typeRestrictionsEncumbrances",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": 0.0,
+                    "name": "Кадастровая стоимость ",
+                    "code": "cadastralValue",
+                    "type": "Money"
+                },
+                {
+                    "characteristicValue": "90:08:060101:1878",
+                    "name": "Кадастровый номер",
+                    "code": "cadastralNumberRealty",
+                    "type": "Text(20)"
+                },
+                {
+                    "characteristicValue": "1982",
+                    "name": "Год ввода в эксплуатацию",
+                    "code": "yearCommissioning",
+                    "type": "Text(20)"
+                }
+            ],
+            "subjectRFCode": "91",
+            "category": {
+                "code": "8",
+                "name": "Здания"
+            },
+            "createDate": "2022-10-19T11:18:57.108+00:00",
+            "timeZoneName": "МСК",
+            "timezoneOffset": "180",
+            "hasAppeals": false,
+            "isStopped": false,
+            "attributes": [
+                {
+                    "code": "DA_Lot.deposit_PK(MKD)",
+                    "fullName": "Размер обеспечения заявки",
+                    "value": 4851.84,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2025
+                },
+                {
+                    "code": "DA_Lot.basis_PK(MKD)",
+                    "fullName": "Основание проведения конкурса и нормативные правовые акты, на основании которых проводится конкурс",
+                    "value": "Жилищный Кодекс РФ, Постановление Правительства Российской Федерации от 6 февраля 2006 года № 75 «О порядке проведения органами местного самоуправления открытого конкурса по отбору управляющей организации для управления многоквартирным домом».\nПостановление администрации Жемчужинского сельского поселения Нижнегорского района Республики Крым от 19 октября 2022 года № 148 – П «Об организации проведения повторного открытого конкурса по отбору управляющей организации для управления многоквартирными ",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2050
+                },
+                {
+                    "code": "DA_Lot.objectCharacteristic_PK(MKD)",
+                    "fullName": "Характеристика объекта конкурса",
+                    "value": "4 этажный многоквартирный дом, 1982 года постройки, количество квартир 48, общая площадь 2553,6 кв.м.",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2075
+                },
+                {
+                    "code": "DA_Lot.estateAddress_PK(MKD)",
+                    "fullName": "Местонахождение имущества",
+                    "value": "297154, Республика Крым, Нижнегорский район, с. Жемчужина, ул. 40 лет Победы, д. 7",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2100
+                },
+                {
+                    "code": "DA_Lot.nameServices_PK(MKD)",
+                    "fullName": "Наименование работ и услуг по содержанию и ремонту объекта конкурса",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания, содержание придомовой территории.",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2125
+                },
+                {
+                    "code": "DA_Lot.amountFee_PK(MKD)",
+                    "fullName": "Размер платы за содержание и ремонт жилого помещения",
+                    "value": 19.0,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2150
+                },
+                {
+                    "code": "DA_Lot.listServices_PK(MKD)",
+                    "fullName": "Перечень коммунальных услуг, предоставляемых управляющей организацией",
+                    "value": "Содержание общего имущества дома, текущий ремонт конструктивных элементов зданий, обслуживание систем водоснабжения и водоотведения, содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2175
+                },
+                {
+                    "code": "DA_Lot.officialSite_PK(MKD)",
+                    "fullName": "Адрес официального сайта, на котором размещена конкурсная документация",
+                    "value": "torgi.gov.ru",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2200
+                },
+                {
+                    "code": "DA_Lot.submissionDocumentation_PK(MKD)",
+                    "fullName": "Место и порядок предоставления конкурсной документации, \nразмер, порядок и сроки внесения платы, за предоставление конкурсной документации",
+                    "value": "Согласно конкурсной документации",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2225
+                },
+                {
+                    "code": "DA_Lot.contractPeriod_PK(MKD)",
+                    "fullName": "Срок действия договора",
+                    "value": "3 года",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2250
+                }
+            ],
+            "noticeAttributes": [
+                {
+                    "code": "DA_typeCompetitive_PK(ZHKH)",
+                    "fullName": "Вид конкурса",
+                    "value": {
+                        "code": "MKD",
+                        "name": "Конкурсный отбор управляющей организации для управления многоквартирным домом"
+                    },
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "N250",
+                        "name": "1.2 Извещение_основные_сведения",
+                        "displayGroupType": "NOTICE"
+                    },
+                    "sortOrder": 100
+                }
+            ],
+            "isAnnulled": false,
+            "noticeFirstVersionPublicationDate": "2022-10-19T11:58:39.884Z",
+            "npaHintCode": "hint2_ZHKH_PK_1",
+            "typeTransaction": "other"
+        },
+        {
+            "id": "22000169980000000001_2",
+            "noticeNumber": "22000169980000000001",
+            "lotNumber": 2,
+            "lotStatus": "DETERMINING_WINNER",
+            "biddType": {
+                "code": "ZHKH",
+                "name": "ЖКХ"
+            },
+            "biddForm": {
+                "code": "PK",
+                "name": "Конкурс"
+            },
+            "lotName": "лот № 2 многоквартирный дом по адресу:с. Жемчужина, ул. 40 лет Победы, д.9",
+            "lotDescription": "лот № 2 многоквартирный дом по адресу:с. Жемчужина, ул. 40 лет Победы, д. 9",
+            "priceMin": 0.0,
+            "biddEndTime": "2022-11-24T08:00:00.000+00:00",
+            "lotImages": [
+                "634fe30003929e40d5ca881a"
+            ],
+            "characteristics": [
+                {
+                    "characteristicValue": 2553.6,
+                    "name": "Общая площадь",
+                    "code": "totalAreaRealty",
+                    "unit": {
+                        "code": "081",
+                        "name": "Квадратный метр общей площади",
+                        "symbol": "м^2 общ. пл"
+                    },
+                    "type": "Decimal"
+                },
+                {
+                    "characteristicValue": "Блоки",
+                    "name": "Материалы наружных стен здания ",
+                    "code": "buildingWallMaterials",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": "4",
+                    "name": "Количество этажей ",
+                    "code": "numberFloors",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": "1",
+                    "name": "Количество подземных этажей ",
+                    "code": "numberUndergroundFloors",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": "Многоквартирный жилой дом",
+                    "name": "Назначение здания ",
+                    "code": "purposeBuilding",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": "Нет",
+                    "name": "Общие сведения об ограничениях и обременениях ",
+                    "code": "restrictionsEncumbrances",
+                    "type": "Text(500)"
+                },
+                {
+                    "characteristicValue": "Нет",
+                    "name": "Вид ограничений и обременений",
+                    "code": "typeRestrictionsEncumbrances",
+                    "type": "Text(100)"
+                },
+                {
+                    "characteristicValue": 0.0,
+                    "name": "Кадастровая стоимость ",
+                    "code": "cadastralValue",
+                    "type": "Money"
+                },
+                {
+                    "characteristicValue": "90:08:060101:1877",
+                    "name": "Кадастровый номер",
+                    "code": "cadastralNumberRealty",
+                    "type": "Text(20)"
+                },
+                {
+                    "characteristicValue": "1984",
+                    "name": "Год ввода в эксплуатацию",
+                    "code": "yearCommissioning",
+                    "type": "Text(20)"
+                }
+            ],
+            "subjectRFCode": "91",
+            "category": {
+                "code": "8",
+                "name": "Здания"
+            },
+            "createDate": "2022-10-19T11:18:57.108+00:00",
+            "timeZoneName": "МСК",
+            "timezoneOffset": "180",
+            "hasAppeals": false,
+            "isStopped": false,
+            "attributes": [
+                {
+                    "code": "DA_Lot.deposit_PK(MKD)",
+                    "fullName": "Размер обеспечения заявки",
+                    "value": 4851.84,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2025
+                },
+                {
+                    "code": "DA_Lot.basis_PK(MKD)",
+                    "fullName": "Основание проведения конкурса и нормативные правовые акты, на основании которых проводится конкурс",
+                    "value": "Жилищный Кодекс РФ, Постановление Правительства Российской Федерации от 6 февраля 2006 года № 75 «О порядке проведения органами местного самоуправления открытого конкурса по отбору управляющей организации для управления многоквартирным домом».\nПостановление администрации Жемчужинского сельского поселения Нижнегорского района Республики Крым от 19 октября 2022 года № 148 – П «Об организации проведения повторного открытого конкурса по отбору управляющей организации для управления многоквартирными ",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2050
+                },
+                {
+                    "code": "DA_Lot.objectCharacteristic_PK(MKD)",
+                    "fullName": "Характеристика объекта конкурса",
+                    "value": "4 этажный многоквартирный дом, 1982 года постройки, количество квартир 48, общая площадь 2553,6 кв.м.ре",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL255",
+                        "name": "5.4.2 Лот_информация_о_задатке_дин",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2075
+                },
+                {
+                    "code": "DA_Lot.estateAddress_PK(MKD)",
+                    "fullName": "Местонахождение имущества",
+                    "value": "297154, Республика Крым, Нижнегорский район, с. Жемчужина, ул. 40 лет Победы, д.9",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2100
+                },
+                {
+                    "code": "DA_Lot.nameServices_PK(MKD)",
+                    "fullName": "Наименование работ и услуг по содержанию и ремонту объекта конкурса",
+                    "value": "Обслуживание систем водоснабжения и водоотведения, текущий ремонт конструктивных элементов здания, содержание придомовой территории.",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2125
+                },
+                {
+                    "code": "DA_Lot.amountFee_PK(MKD)",
+                    "fullName": "Размер платы за содержание и ремонт жилого помещения",
+                    "value": 19.0,
+                    "attributeType": "Money",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2150
+                },
+                {
+                    "code": "DA_Lot.listServices_PK(MKD)",
+                    "fullName": "Перечень коммунальных услуг, предоставляемых управляющей организацией",
+                    "value": "Содержание общего имущества дома, текущий ремонт конструктивных элементов зданий, обслуживание систем водоснабжения и водоотведения, содержание придомовой территории",
+                    "attributeType": "Text(1000)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2175
+                },
+                {
+                    "code": "DA_Lot.officialSite_PK(MKD)",
+                    "fullName": "Адрес официального сайта, на котором размещена конкурсная документация",
+                    "value": "torgi.gov.ru",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2200
+                },
+                {
+                    "code": "DA_Lot.submissionDocumentation_PK(MKD)",
+                    "fullName": "Место и порядок предоставления конкурсной документации, \nразмер, порядок и сроки внесения платы, за предоставление конкурсной документации",
+                    "attributeType": "Text(500)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2225
+                },
+                {
+                    "code": "DA_Lot.contractPeriod_PK(MKD)",
+                    "fullName": "Срок действия договора",
+                    "value": "3",
+                    "attributeType": "Text(100)",
+                    "group": {
+                        "code": "NL260",
+                        "name": "5.5 Лот_особенности",
+                        "displayGroupType": "LOT"
+                    },
+                    "sortOrder": 2250
+                }
+            ],
+            "noticeAttributes": [
+                {
+                    "code": "DA_typeCompetitive_PK(ZHKH)",
+                    "fullName": "Вид конкурса",
+                    "value": {
+                        "code": "MKD",
+                        "name": "Конкурсный отбор управляющей организации для управления многоквартирным домом"
+                    },
+                    "attributeType": "Select",
+                    "group": {
+                        "code": "N250",
+                        "name": "1.2 Извещение_основные_сведения",
+                        "displayGroupType": "NOTICE"
+                    },
+                    "sortOrder": 100
+                }
+            ],
+            "isAnnulled": false,
+            "noticeFirstVersionPublicationDate": "2022-10-19T11:58:39.884Z",
+            "npaHintCode": "hint2_ZHKH_PK_1",
+            "typeTransaction": "other"
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "unsorted": true,
+            "sorted": false,
+            "empty": true
+        },
+        "pageNumber": 0,
+        "pageSize": 10,
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "categoryFacet": [
+        {
+            "_id": "301",
+            "count": 95
+        },
+        {
+            "_id": "11",
+            "count": 69
+        },
+        {
+            "_id": "8",
+            "count": 31
+        },
+        {
+            "_id": "202",
+            "count": 23
+        },
+        {
+            "_id": "406",
+            "count": 18
+        },
+        {
+            "_id": "100001",
+            "count": 16
+        },
+        {
+            "_id": "610",
+            "count": 15
+        },
+        {
+            "_id": "614",
+            "count": 15
+        },
+        {
+            "_id": "902",
+            "count": 15
+        },
+        {
+            "_id": "605000",
+            "count": 7
+        },
+        {
+            "_id": "208",
+            "count": 6
+        },
+        {
+            "_id": "9",
+            "count": 6
+        },
+        {
+            "_id": "101",
+            "count": 5
+        },
+        {
+            "_id": "304",
+            "count": 5
+        },
+        {
+            "_id": "4",
+            "count": 5
+        },
+        {
+            "_id": "602",
+            "count": 4
+        },
+        {
+            "_id": "100002",
+            "count": 3
+        },
+        {
+            "_id": "10",
+            "count": 1
+        },
+        {
+            "_id": "100000",
+            "count": 1
+        },
+        {
+            "_id": "206",
+            "count": 1
+        },
+        {
+            "_id": "207",
+            "count": 1
+        },
+        {
+            "_id": "400",
+            "count": 1
+        },
+        {
+            "_id": "46",
+            "count": 1
+        },
+        {
+            "_id": "47",
+            "count": 1
+        },
+        {
+            "_id": "603",
+            "count": 1
+        },
+        {
+            "_id": "609",
+            "count": 1
+        },
+        {
+            "_id": "801",
+            "count": 1
+        }
+    ],
+    "totalPages": 35,
+    "totalElements": 348,
+    "last": false,
+    "numberOfElements": 10,
+    "first": true,
+    "size": 10,
+    "number": 0,
+    "sort": {
+        "unsorted": true,
+        "sorted": false,
+        "empty": true
+    },
+    "empty": false
+}
