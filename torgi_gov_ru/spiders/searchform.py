@@ -15,7 +15,7 @@ class SearchformSpider(scrapy.Spider):
     # "scheme" + "host" + "filename" from search_form.v3.json
     request_url_base_str: str
     # dict: key - "namme", value - "default" from search_form.v3 "form" item  
-    request_query_dict: dict
+    request_query_dict: dict[str, str]
     
     # start_urls = ["https://torgi.gov.ru/new/api/public/lotcards/search?dynSubjRF=12&lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&text=Жилой дом&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc"]
 
@@ -27,7 +27,7 @@ class SearchformSpider(scrapy.Spider):
 
         request_url_base_str, request_query_dict = util.get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(self.search_form_json_file) 
         self.request_url_base_str: str = request_url_base_str
-        self.request_query_dict: dict = request_query_dict
+        self.request_query_dict: dict[str, str] = request_query_dict
         update_query_dict, update_self_dict = util.unpack_dict(pattern_dict=request_query_dict, unpacked_dict=kwargs)
         self.request_query_dict.update(update_query_dict)
 
@@ -41,9 +41,11 @@ class SearchformSpider(scrapy.Spider):
     #     yield Request(self.request_url, self.parse)
     
     def parse(self, response: TextResponse):
-        content: list = response.json()['content'] 
-        for item in content:
-            yield item
+        yield from response.json()['content']        
+        # json()['content']
+        # content: list = response.json()['content'] 
+        # for item in content:
+        #     yield item
         # yield 
         # with open('response.json', 'w', encoding='utf-8') as f:
         #     f.write(json.dumps(response.json(), ensure_ascii=False, indent=4))

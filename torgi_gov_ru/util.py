@@ -1,5 +1,7 @@
+
+from turtle import st
 from playwright.sync_api import sync_playwright, Browser, Page, Request, Response
-from typing import Mapping, Tuple, List, Sequence, Union, Any
+from typing import Mapping, Tuple, List, Sequence, Union, Any, Callable
 from urllib import parse
 from lxml import html
 from contextlib import contextmanager
@@ -89,7 +91,7 @@ url_parts = ('scheme', 'netloc', 'path', 'params', 'query', 'fragment')
 linc = 'https://zakupki.gov.ru/epz/order/extendedsearch/results.html?searchString=%D1%83%D0%B7%D0%B5%D0%BB+%D1%83%D1%87%D1%91%D1%82%D0%B0&morphology=on&search-filter=%D0%94%D0%B0%D1%82%D0%B5+%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F&pageNumber=1&sortDirection=false&recordsPerPage=_10&showLotsInfoHidden=false&sortBy=UPDATE_DATE&fz44=on&fz223=on&af=on&ca=on&pc=on&pa=on&currencyIdGeneral=-1'
 
 @contextmanager
-def pretty_print(fun_name: callable):
+def pretty_print(fun_name: Callable):
     print(f'----------{fun_name.__name__}----------')
     yield
     print('-------------------------------')
@@ -233,10 +235,10 @@ def cookies_file_name_frome_link(link: str) -> str:
 
 
 
-def decompress_brotli_from_file_to_file(fname_from: str, fname_to):
-    with open(fname_from, 'rb') as fr:
-        with open(fname_to, 'wb') as fw:
-            fw.write(brotli.decompress(fr.read()))
+# def decompress_brotli_from_file_to_file(fname_from: str, fname_to):
+#     with open(fname_from, 'rb') as fr:
+#         with open(fname_to, 'wb') as fw:
+#             fw.write(brotli.decompress(fr.read()))
 
 def test_quoting():
     search_link = 'https://zakupki.gov.ru/epz/order/extendedsearch/results.html?searchString={searchString}&morphology=on&search-filter=%D0%94%D0%B0%D1%82%D0%B5+%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F&pageNumber={pageNumber}&sortDirection=false&recordsPerPage=_10&showLotsInfoHidden=false&sortBy=UPDATE_DATE&fz44=on&fz223=on&af=on&ca=on&pc=on&pa=on&currencyIdGeneral=-1'
@@ -324,22 +326,22 @@ def get_request_json_response_dicts_list(linc: str, browser: str = 'firefox') ->
     return result
 
 
-def _get_request_json_response_dicts_dict_calback(result: dict):
-    # result_dict = result
-    def request_json_response_dicts_dict_calback(request: Request):
-        response: Response = request.response()
-        if response.header_value('content-type') == 'application/json':
-            result_dict = {}
-            request_url = request.url
-            result_dict['request_url'] = request_url
-            result_dict['request_headers'] = request.all_headers()
-            result_dict['response_headers'] = response.all_headers()
-            result_dict['response_json'] = response.json()
-            # req_url = request.url
-            # resp_json = request.response().json()
-            result[request_url] = result_dict
-        # pass
-    return request_json_response_dicts_dict_calback
+# def _get_request_json_response_dicts_dict_calback(result: dict):
+#     # result_dict = result
+#     def request_json_response_dicts_dict_calback(request: Request):
+#         response: Response = request.response()
+#         if response.header_value('content-type') == 'application/json':
+#             result_dict = {}
+#             request_url = request.url
+#             result_dict['request_url'] = request_url
+#             result_dict['request_headers'] = request.all_headers()
+#             result_dict['response_headers'] = response.all_headers()
+#             result_dict['response_json'] = response.json()
+#             # req_url = request.url
+#             # resp_json = request.response().json()
+#             result[request_url] = result_dict
+#         # pass
+#     return request_json_response_dicts_dict_calback
 
 def get_request_json_response_dicts_dict(linc: str, browser: str = 'firefox') -> Mapping[str, Mapping]:
     result: dict = {}
@@ -1103,7 +1105,7 @@ def sort_form_v3_for_group_and_sort_order():
     write_dict_or_list_to_json_file('search_form.v3.json', target_file_dictv3)    
 
 
-def get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(search_form_json_file: str) -> Tuple[str, Mapping[str, str]]:
+def get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(search_form_json_file: str) -> Tuple[str, dict[str, str]]:
     """получает search_form.v3.json, возвращает: 
     1. base_url for request - "scheme" + "host" + "filename" 
     2. query_dict - key - "namme", value - "default" from search_form.v3 "form" item
@@ -1116,7 +1118,8 @@ def get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(sea
     """
     
     search_form_v3_dict: dict = load_dict_from_json_file(search_form_json_file)
-    base_url: str = search_form_v3_dict['scheme'] + search_form_v3_dict['host'] + search_form_v3_dict['filename']
+    
+    base_url: str = f"{search_form_v3_dict['scheme']}://{search_form_v3_dict['host']}{search_form_v3_dict['filename']}"
     query_dict = get_query_dict_from_search_form_v3_dict(search_form_v3_dict)
     return base_url, query_dict
 
@@ -1137,7 +1140,7 @@ def get_query_dict_from_search_form_v3_dict(search_form_v3_dict: dict) -> dict:
     return query_dict
         
         
-def unpack_dict(pattern_dict: dict, unpacked_dict: dict) -> True[Mapping[str, str], Mapping[str, str]]:
+def unpack_dict(pattern_dict: dict, unpacked_dict: dict) -> Tuple[Mapping[str, str], Mapping[str, str]]:
     """ принимает два dict: "pattern" и "unpacked"
     возвращает два dict созданных на основании "unpacked":
     1. с ключами которые есть в pattern_dict
@@ -1160,7 +1163,10 @@ def unpack_dict(pattern_dict: dict, unpacked_dict: dict) -> True[Mapping[str, st
 
     return key_in_dict, key_out_dict
         
-
+def get_query_url(request_url_base_str: str, request_query_dict: dict[str, str]) -> str:
+    request_query_str = parse.urlencode(request_query_dict)
+    query_url = f'{request_url_base_str}?{request_query_str}'
+    return query_url
 
 
 
@@ -1216,3 +1222,9 @@ if __name__ == '__main__':
     # target_file_dictv3['form'] = rez_dict
     # write_dict_or_list_to_json_file('search_form.v3.json', target_file_dictv3)    
     # form_field_v3('search_form.v3.json', 'Электронная площадка', 'request_info2.json')    
+    req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('torgi_gov_ru/spiders/search_form.v3.json')
+    print_dict(query_dikt)
+    # query_url = get_query_url(req_url_str, query_dikt)
+    params = {'name': 'Rajeev Singh', 'phone': ['+919999999999', '+628888888888']}
+    request_query_str = parse.urlencode(params, encoding='utf-8', doseq=True)
+    print(request_query_str)

@@ -51,7 +51,7 @@
             },
             "comment": "",
             "default": [
-                "true"
+                true
             ],
             "group": {
                 "name": "form",
@@ -76,7 +76,7 @@
             },
             "comment": "",
             "default": [
-                "true"
+                true
             ],
             "group": {
                 "name": "form",
@@ -101,7 +101,7 @@
             },
             "comment": "колличество результатов",
             "default": [
-                "10"
+                10
             ],
             "group": {
                 "name": "form",

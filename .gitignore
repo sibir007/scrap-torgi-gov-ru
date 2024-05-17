@@ -1,4 +1,7 @@
 sandbox/
+torgi_gov_ru/feed/*
+torgi_gov_ru/logs/*
+.vscode/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
