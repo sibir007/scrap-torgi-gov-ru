@@ -1101,7 +1101,70 @@ def sort_form_v3_for_group_and_sort_order():
     
     target_file_dictv3['form'] = rez_dict
     write_dict_or_list_to_json_file('search_form.v3.json', target_file_dictv3)    
+
+
+def get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(search_form_json_file: str) -> Tuple[str, Mapping[str, str]]:
+    """получает search_form.v3.json, возвращает: 
+    1. base_url for request - "scheme" + "host" + "filename" 
+    2. query_dict - key - "namme", value - "default" from search_form.v3 "form" item
+
+    Args:
+        search_form_json_file (str): search_form.v3.json
+
+    Returns:
+        Tuple[str, Mapping[str, str]]: (base_url, query_dict) 
+    """
     
+    search_form_v3_dict: dict = load_dict_from_json_file(search_form_json_file)
+    base_url: str = search_form_v3_dict['scheme'] + search_form_v3_dict['host'] + search_form_v3_dict['filename']
+    query_dict = get_query_dict_from_search_form_v3_dict(search_form_v3_dict)
+    return base_url, query_dict
+
+def get_query_dict_from_search_form_v3_dict(search_form_v3_dict: dict) -> dict:
+    """получает search_form_v3_dict и возвращает:
+    query_dict: key - "namme", value - "default" from search_form.v3 "form" item
+    
+
+    Args:
+        search_form_v3_dict (dict): dict from  search_form.v3.json file
+
+    Returns:
+        dict: key - "namme", value - "default" from search_form.v3 "form" item
+    """
+    form_dict: dict = search_form_v3_dict['form']
+    query_dict = {item['name']: item['default'] for item in form_dict.values()}
+
+    return query_dict
+        
+        
+def unpack_dict(pattern_dict: dict, unpacked_dict: dict) -> True[Mapping[str, str], Mapping[str, str]]:
+    """ принимает два dict: "pattern" и "unpacked"
+    возвращает два dict созданных на основании "unpacked":
+    1. с ключами которые есть в pattern_dict
+    2. с ключами которых нет в pattern_dict
+
+    Args:
+        pattern_dict (dict): шаблонный dict, на основании которого происходит разделение unpack_dict
+        unpacked_dict (dict): разделяемый dict
+
+    Returns:
+        True[Mapping[str, str], Mapping[str, str]]: (dict с ключами которые есть в pattern_dict, dict с ключами которых нет в pattern_dict)
+    """
+    key_in_dict: dict = {}
+    key_out_dict: dict = {}
+    for key in unpacked_dict.keys():
+        if key in pattern_dict:
+            key_in_dict[key] = pattern_dict[key]
+        else:
+            key_out_dict[key] = unpacked_dict[key]
+
+    return key_in_dict, key_out_dict
+        
+
+
+
+
+
 if __name__ == '__main__':
     # res = get_request_json_response_dicts_dict(NEW_PYBLIC_LOTS_REG_LINK)
     # write_dict_or_list_to_json_file('win.06.05.24.request_info2.json', res)
@@ -1152,4 +1215,4 @@ if __name__ == '__main__':
        
     # target_file_dictv3['form'] = rez_dict
     # write_dict_or_list_to_json_file('search_form.v3.json', target_file_dictv3)    
-    form_field_v3('search_form.v3.json', 'Электронная площадка', 'request_info2.json')    
+    # form_field_v3('search_form.v3.json', 'Электронная площадка', 'request_info2.json')    

@@ -9,9 +9,12 @@ from torgi_gov_ru import util
 
 class SearchformSpider(scrapy.Spider):
     name = "searchform"
-    search_form_json_file = 'search_form.v3.json'
     allowed_domains = ["torgi.gov.ru"]
+    search_form_json_file = 'search_form.v3.json'
+    # base url for request https://torgi.gov.ru/new/api/public/lotcards/search? 
+    # "scheme" + "host" + "filename" from search_form.v3.json
     request_url_base_str: str
+    # dict: key - "namme", value - "default" from search_form.v3 "form" item  
     request_query_dict: dict
     
     # start_urls = ["https://torgi.gov.ru/new/api/public/lotcards/search?dynSubjRF=12&lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&text=Жилой дом&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc"]
@@ -21,16 +24,21 @@ class SearchformSpider(scrapy.Spider):
             self.name = name
         elif not getattr(self, "name", None):
             raise ValueError(f"{type(self).__name__} must have a name")
-        # self.__dict__.update(kwargs)
-        request_url_base_str, request_query_dict = util.get_request_url_base_str_and_request_query_dict_from_v3_s_form_file(self.search_form_json_file) 
+
+        request_url_base_str, request_query_dict = util.get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(self.search_form_json_file) 
         self.request_url_base_str: str = request_url_base_str
         self.request_query_dict: dict = request_query_dict
-        self.request_query_dict.update(kwargs)
+        update_query_dict, update_self_dict = util.unpack_dict(pattern_dict=request_query_dict, unpacked_dict=kwargs)
+        self.request_query_dict.update(update_query_dict)
+
+        self.__dict__.update(update_self_dict)
         if not hasattr(self, "start_urls"):
             self.start_urls: List[str] = []
+        statr_url = util.get_query_url(self.request_url_base_str, self.request_query_dict)
+        self.start_urls.append(statr_url)
     
-    def start_requests(self):
-        yield Request(self.request_url, self.parse)
+    # def start_requests(self):
+    #     yield Request(self.request_url, self.parse)
     
     def parse(self, response: TextResponse):
         content: list = response.json()['content'] 
