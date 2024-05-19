@@ -1,8 +1,8 @@
 
-from turtle import st
 from playwright.sync_api import sync_playwright, Browser, Page, Request, Response
-from typing import Mapping, Tuple, List, Sequence, Union, Any, Callable
-from urllib import parse
+from typing import Dict, NoReturn, Tuple, List, List, Union, Any, Callable
+import typing
+from urllib import parse, request
 from lxml import html
 from contextlib import contextmanager
 import pickle
@@ -19,6 +19,11 @@ from datetime import datetime
 now = datetime.datetime.now()  # Get the current datetime object
 formatted_date = now.strftime("%d.%m.%y_%H-%M-%S")
 """
+
+def get_curent_date_time() -> str:
+    now = datetime.now()  # Get the current datetime object
+    formatted_date = now.strftime("%d.%m.%y_%H-%M-%S")
+    return formatted_date
 
 VZLJOT_PROXY = {
   'http': 'http://SibiryakovDO:vzlsoFia1302@proxy:3128',
@@ -77,15 +82,115 @@ TORGI_GOV_SEARSH_DICT = {
 		}
 	}
 }
+TORGI_GOV_SEARSH_DICT2 = {
+    "GET": {
+        "scheme": "https",
+        "host": "torgi.gov.ru",
+        "filename": "/new/api/public/lotcards/search",
+        "query": {
+            "dynSubjRF": "12",
+            "lotStatus": "PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER",
+            "text": "жилой дом",
+            "byFirstVersion": "true",
+            "withFacets": "true",
+            "size": "10",
+            "sort": "firstVersionPublicationDate,desc"
+        },
+        "remote": {
+            "Address": "95.167.245.141:443"
+        }
+    }
+}
 
-
-
+TORGI_GOV_QUERY2 = {
+            "lotStatus": "PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER",
+            "text": "жилой дом",
+            "size": "10",
+        }
+TORGI_GOV_QUERY2_STR = """-a lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER -a text="жилой дом" -a size=10"""
 VZLJOT_PROXY = {
   'http': 'http://SibiryakovDO:vzlsOfia1302@proxy:3128',
   'https': 'http://SibiryakovDO:vzlsOfia1302@proxy:3128',
 }
+TORGI_GOV_QUERY3_STR = '-a lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER  -a size=10 -a some_extra_key=some_extra_value -a text="Жилой дом" -a dynSubjRF=12,80 -a catCode=7'
 
+NEW_API_PUBLIC_NOTICES_NOTICENUMBE = {
+	"GET": {
+		"scheme": "https",
+		"host": "torgi.gov.ru",
+		"filename": "/new/api/public/notices/noticeNumber/23000051770000000058",
+		"remote": {
+			"Address": "95.167.245.141:443"
+		}
+	},
+ "Response Headers (406 B)": {
+		"headers": [
+			{
+				"name": "Cache-Control",
+				"value": "no-cache, no-store, max-age=0, must-revalidate"
+			},
+			{
+				"name": "Connection",
+				"value": "keep-alive"
+			},
+			{
+				"name": "Content-Type",
+				"value": "application/json"
+			},
+			{
+				"name": "Date",
+				"value": "Sun, 19 May 2024 10:19:56 GMT"
+			},
+			{
+				"name": "Expires",
+				"value": "0"
+			},
+			{
+				"name": "Pragma",
+				"value": "no-cache"
+			},
+			{
+				"name": "Server",
+				"value": "nginx"
+			},
+			{
+				"name": "Strict-Transport-Security",
+				"value": "max-age=31536000 ; includeSubDomains"
+			},
+			{
+				"name": "Transfer-Encoding",
+				"value": "chunked"
+			},
+			{
+				"name": "X-Content-Type-Options",
+				"value": "nosniff"
+			},
+			{
+				"name": "X-Frame-Options",
+				"value": "SAMEORIGIN"
+			},
+			{
+				"name": "X-XSS-Protection",
+				"value": "1; mode=block"
+			}
+		]
+	
+}
+}
 
+HTTP/1.1 200 
+Server: nginx
+Date: Sun, 19 May 2024 10:19:56 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: SAMEORIGIN
 
 url_parts = ('scheme', 'netloc', 'path', 'params', 'query', 'fragment')
 linc = 'https://zakupki.gov.ru/epz/order/extendedsearch/results.html?searchString=%D1%83%D0%B7%D0%B5%D0%BB+%D1%83%D1%87%D1%91%D1%82%D0%B0&morphology=on&search-filter=%D0%94%D0%B0%D1%82%D0%B5+%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F&pageNumber=1&sortDirection=false&recordsPerPage=_10&showLotsInfoHidden=false&sortBy=UPDATE_DATE&fz44=on&fz223=on&af=on&ca=on&pc=on&pa=on&currencyIdGeneral=-1'
@@ -181,6 +286,7 @@ def load_dict_from_json_file(fname: str) -> dict:
     Returns:
         dict: header dict
     """
+    print(f'in load_dict_from_json_file(fname: str) os.getcwd(): {os.getcwd()}')
     with open(fname, 'rt', encoding='utf-8') as f:
         data = f.read()
         hdict = json.loads(data)
@@ -197,7 +303,7 @@ def write_header_dect_to_file(hdict: dict, fname: str = 'test'):
         pickle.dump(hdict, f)
 
 
-def write_dict_or_list_to_json_file(fname: str, obj: Union[List, Mapping]):
+def write_dict_or_list_to_json_file(fname: str, obj: Union[List, Dict]):
     """load to json file header dict
 
     Args:
@@ -271,24 +377,26 @@ def test_quoting():
                     # # КОНЕЦ----------------------- Работа с query --------------------------------
 
 
-def get_request_response_headers(link: str, browser: str = 'firefox') -> Tuple[Mapping[str, str], Mapping[str, str]]:
+def get_request_response_headers(link: str, browser: str = 'firefox') -> Tuple[Dict[str, str], Dict[str, str]]:
     """accept link return tuple response request headers dicts
 
     Args:
         link (str): link
         browser (str): browser type 
     Returns:
-        Tuple[Mapping[str, str], Mapping[str, str]]: tuple reqvest response headers dict
+        Tuple[Dict[str, str], Dict[str, str]]: tuple reqvest response headers dict
     """
-    resp_headers: Mapping[str, str]
-    req_headers: Mapping[str, str]
+    resp_headers: Dict[str, str]
+    req_headers: Dict[str, str]
     # cookies: 
     with sync_playwright() as p:
         # p.chromium.launch(headless=False, slow_mo=50)
         browser_impl: Browser = getattr(p, browser).launch(headless=False, slow_mo=50)
         page: Page = browser_impl.new_page()
         
-        response: Response = page.goto(link)
+        response: Union[Response, None]= page.goto(link)
+        if not response:
+            raise RuntimeError('page.goto(link) return None value')
         resp_headers = response.all_headers()
         req_headers = response.request.all_headers()
         browser_impl.close()
@@ -299,10 +407,12 @@ def get_request_response_headers(link: str, browser: str = 'firefox') -> Tuple[M
 # for d in get_request_response_headers(NEW_PYBLIC_LOTS_REG_LINK):
 #      print_dict(d)
 # # print()
-def _get_request_json_response_dicts_dict_calback(result: list):
+def _get_request_json_response_dicts_dict_calback(result: list) -> Callable[["Request"], "None"]:
     # result_list = result
-    def request_json_response_dicts_list_calback(request: Request):
-        response: Response = request.response()
+    def request_json_response_dicts_list_calback(request):
+        response: Union[Response, None] = request.response()
+        if not response:
+            raise RuntimeError('request.response() return None')
         if response.header_value('content-type') == 'application/json':
             result_dict = {}
             result_dict['request_url'] = request.url
@@ -315,7 +425,7 @@ def _get_request_json_response_dicts_dict_calback(result: list):
         # pass
     return request_json_response_dicts_list_calback
         
-def get_request_json_response_dicts_list(linc: str, browser: str = 'firefox') -> Sequence[Mapping]:
+def get_request_json_response_dicts_list(linc: str, browser: str = 'firefox') -> List[Dict]:
     result: list = []
     with sync_playwright() as p:
         browser_impl: Browser = getattr(p, browser).launch(headless=False, slow_mo=50)
@@ -325,33 +435,18 @@ def get_request_json_response_dicts_list(linc: str, browser: str = 'firefox') ->
         browser_impl.close()
     return result
 
-
-# def _get_request_json_response_dicts_dict_calback(result: dict):
-#     # result_dict = result
-#     def request_json_response_dicts_dict_calback(request: Request):
-#         response: Response = request.response()
-#         if response.header_value('content-type') == 'application/json':
-#             result_dict = {}
-#             request_url = request.url
-#             result_dict['request_url'] = request_url
-#             result_dict['request_headers'] = request.all_headers()
-#             result_dict['response_headers'] = response.all_headers()
-#             result_dict['response_json'] = response.json()
-#             # req_url = request.url
-#             # resp_json = request.response().json()
-#             result[request_url] = result_dict
-#         # pass
-#     return request_json_response_dicts_dict_calback
-
-def get_request_json_response_dicts_dict(linc: str, browser: str = 'firefox') -> Mapping[str, Mapping]:
-    result: dict = {}
-    with sync_playwright() as p:
-        browser_impl: Browser = getattr(p, browser).launch(headless=False, slow_mo=50)
-        page: Page = browser_impl.new_page()
-        page.on('requestfinished', _get_request_json_response_dicts_dict_calback(result))
-        page.goto(linc)
-        browser_impl.close()
-    return result
+# def get_request_json_response_dicts_dict(linc: str, browser: str = 'firefox') -> Dict[str, Dict]:
+    
+    
+    
+#     result: dict = {}
+#     with sync_playwright() as p:
+#         browser_impl: Browser = getattr(p, browser).launch(headless=False, slow_mo=50)
+#         page: Page = browser_impl.new_page()
+#         page.on("requestfinished", _get_request_json_response_dicts_dict_calback(result))
+#         page.goto(linc)
+#         browser_impl.close()
+#     return result
 
 
 
@@ -368,7 +463,7 @@ def _get_ownership_form_list__check_version(request_info2_data: dict, fun_versio
     """
     return True
 
-def get_ownership(fname: str, return_value: str = 'list') -> Union[List[str], Mapping[str, str]]:
+def get_ownership(fname: str, return_value: str = 'list') -> Union[List[str], Dict[str, str]]:
     """accept request_info2.json file format and type return value, 
     return list ownership code or dict ownership_code:ownership_name 
 
@@ -376,7 +471,7 @@ def get_ownership(fname: str, return_value: str = 'list') -> Union[List[str], Ma
         fname (str): json file format request_info2.json
         return_value (str) 'list' or 'dict', defaul 'list': return value list [ownership_code] or dict {ownership_code:ownership_name}
     Returns:
-        Union[List[str], Mapping[str, str]]: list [ownership_code] or dict {ownership_code:ownership_name}
+        Union[List[str], Dict[str, str]]: list [ownership_code] or dict {ownership_code:ownership_name}
     """
     #version torgi.gov.ru for check
     # version_api = '3.1'
@@ -399,7 +494,7 @@ def get_ownership(fname: str, return_value: str = 'list') -> Union[List[str], Ma
                             return_value=return_value)
 
 
-def get_relationship(fname: str, url: str, code: str, value: str, return_value: str = 'list') -> Union[List[str], Mapping[str, str]]:
+def get_relationship(fname: str, url: str, code: str, value: str, return_value: str = 'list') -> Union[List[str], Dict[str, str]]:
     """accept request_info2.json file format, url, code str, value str and type return value, 
     return list relationship code or dict relationship_code:relationship_name 
     url['response_json'] obgect must be form [{code: some_code_value, value:some_value_value, ...}, {}, {}]
@@ -411,7 +506,7 @@ def get_relationship(fname: str, url: str, code: str, value: str, return_value: 
         value (str): value str
         return_value (str) 'list' or 'dict', defaul 'list': return value list [some_code_value, ...] or dict {some_code_value:some_value_value, ...}
     Returns:
-        Union[List[str], Mapping[str, str]]: list [some_code_value, some_code_value, ...] or dict {some_code_value:some_value_value, some_code_value:some_value_value, ...}
+        Union[List[str], Dict[str, str]]: list [some_code_value, some_code_value, ...] or dict {some_code_value:some_value_value, some_code_value:some_value_value, ...}
     """
     #version torgi.gov.ru for check
     version_api = '3.1'
@@ -426,22 +521,24 @@ def get_relationship(fname: str, url: str, code: str, value: str, return_value: 
         
         
         
-        relationship_dict_list: list[dict] = data_dict[url]['response_json']
+        relationship_dict_list: List[dict] = data_dict[url]['response_json']
         if return_value == 'dict':
-            relationship_result: dict[str, str] = {relationship_dict[code]: relationship_dict[value] for relationship_dict in relationship_dict_list}
+            return {relationship_dict[code]: relationship_dict[value] for relationship_dict in relationship_dict_list}
+            # relationship_result: Dict[str, str] = {relationship_dict[code]: relationship_dict[value] for relationship_dict in relationship_dict_list}
         else:
-            relationship_result: list[str] = [relationship_dict[code] for relationship_dict in relationship_dict_list]
-    return relationship_result
+            return [relationship_dict[code] for relationship_dict in relationship_dict_list]
+            # relationship_result: List[str] = [relationship_dict[code] for relationship_dict in relationship_dict_list]
+    # return relationship_result
 
 def get_dict_values(d: dict, path: str) -> List[Any]:
-    return dl.get(d, path, sep='`')
+    return typing.cast(List[Any], dl.get(d, path, sep='`'))
 
 def get_relationship_v2(info2_fname: str, 
                         code_path: str, 
                         code_key: str, 
                         value_path: str, 
                         value_key: str,
-                        ) -> Mapping[str, str]:
+                        ) -> Dict[str, str]:
     """accept request_info2.json file format, code_path, code_key, value_path, value_key
     and type return value, return dict {code:value, ...} 
 
@@ -452,7 +549,7 @@ def get_relationship_v2(info2_fname: str,
         value_path (str): path to value dict, forma: a`b`c
         value_key (str):  value key
     Returns:
-        Mapping[str, str]: dict {some_code_value:some_value_value, some_code_value:some_value_value, ...}
+        Dict[str, str]: dict {some_code_value:some_value_value, some_code_value:some_value_value, ...}
     """
     #version torgi.gov.ru for check
     version_api = '3.1'
@@ -484,7 +581,7 @@ def get_relationship_v3(info2_fname: str,
                         code_key: str,
                         value_key: str, 
                         parent_key: str
-                        ) -> Mapping[str, Mapping[str, str]]:
+                        ) -> Dict[str, Dict[str, str]]:
     """accept request_info2.json file format, code_path, code_key, value_path, value_key
     and type return value, return dict {code:value, ...} 
 
@@ -495,7 +592,7 @@ def get_relationship_v3(info2_fname: str,
         value_path (str): path to value dict, forma: a`b`c
         value_key (str):  value key
     Returns:
-        Mapping[str, str]: dict {some_code_value:some_value_value, some_code_value:some_value_value, ...}
+        Dict[str, str]: dict {some_code_value:some_value_value, some_code_value:some_value_value, ...}
     """
     #version torgi.gov.ru for check
     version_api = '3.1'
@@ -510,7 +607,7 @@ def get_relationship_v3(info2_fname: str,
     
     
     
-    dict_list: list[dict] = dl.get(data_dict, path, sep='`')
+    dict_list: List[dict] = typing.cast(List[dict], dl.get(data_dict, path, sep='`')) 
     # # for Субъект местонахождения имущества only"
     "--------------разкоментировать для Субъект местонахождения имущества--------------------"
     # dict_list = dict_list[0]['mappingTable']
@@ -565,7 +662,7 @@ def write_value_to_dict_in_json_file(fname: str, target_dict_paths: List[str], k
         loaded_dict: dict = json.loads(f.read())
         target_dict: dict = loaded_dict
         
-        # target: Union[List, Mapping]
+        # target: Union[List, Dict]
         for path in target_dict_paths:
             if not path in target_dict.keys():
                 target_dict[path] = {}
@@ -685,11 +782,11 @@ def form_field_v2(searsh_form_file: str, form_field_name: str, info2_file_name:s
     aviavailable_values_hint_path = dl.get(form_dict, f'form`{form_field_name}`available_values_hint`path', sep='`')
     full_a_v_path = f'{url_key}`{aviavailable_values_path}'
     full_a_v_h_path = f'{url_key}`{aviavailable_values_hint_path}'
-    aviavailable_values_key = dl.get(form_dict, f'form`{form_field_name}`available_values`key', sep='`')
-    aviavailable_values_hint_key = dl.get(form_dict, f'form`{form_field_name}`available_values_hint`key', sep='`')
+    aviavailable_values_key = typing.cast(str, dl.get(form_dict, f'form`{form_field_name}`available_values`key', sep='`')) 
+    aviavailable_values_hint_key = typing.cast(str, dl.get(form_dict, f'form`{form_field_name}`available_values_hint`key', sep='`'))
 
 
-    res: Mapping[str, str] = get_relationship_v2(info2_file_name, 
+    res: Dict[str, str] = get_relationship_v2(info2_file_name, 
                                   code_path=full_a_v_path, 
                                   code_key=aviavailable_values_key,
                                   value_path=full_a_v_h_path, 
@@ -718,18 +815,18 @@ def form_field_v3(searsh_form_v3_file: str, form_field_name: str, info2_file_nam
     url_key = dl.get(form_dict, f'form`{form_field_name}`info2_url', sep='`')
     aviavailable_values_key_path = dl.get(form_dict, f'form`{form_field_name}`available_values`key_path', sep='`')
     full_a_v_k_path = f'{url_key}`{aviavailable_values_key_path}'
-    aviavailable_values_key_value = dl.get(form_dict, f'form`{form_field_name}`available_values`key_value', sep='`')
+    aviavailable_values_key_value = typing.cast(str, dl.get(form_dict, f'form`{form_field_name}`available_values`key_value', sep='`'))
 
     # aviavailable_values_value_path = dl.get(form_dict, f'form`{form_field_name}`available_values`value_path', sep='`')
     # full_a_v_v_path = f'{url_key}`{aviavailable_values_value_path}'
-    aviavailable_values_value_value = dl.get(form_dict, f'form`{form_field_name}`available_values`value_value', sep='`')
+    aviavailable_values_value_value = typing.cast(str, dl.get(form_dict, f'form`{form_field_name}`available_values`value_value', sep='`')) 
 
     # aviavailable_values_parent_path = dl.get(form_dict, f'form`{form_field_name}`available_values`parent_path', sep='`')
     # full_a_v_p_path = f'{url_key}`{aviavailable_values_value_path}'
-    aviavailable_values_parent_value = dl.get(form_dict, f'form`{form_field_name}`available_values`parent_value', sep='`')
+    aviavailable_values_parent_value = typing.cast(str, dl.get(form_dict, f'form`{form_field_name}`available_values`parent_value', sep='`'))
 
 
-    res: Mapping[str, Mapping[str, str]] = get_relationship_v3(info2_file_name, 
+    res: Dict[str, Dict[str, str]] = get_relationship_v3(info2_file_name, 
                                   path=full_a_v_k_path, 
                                   code_key=aviavailable_values_key_value,
                                   value_key=aviavailable_values_value_value,
@@ -1105,7 +1202,7 @@ def sort_form_v3_for_group_and_sort_order():
     write_dict_or_list_to_json_file('search_form.v3.json', target_file_dictv3)    
 
 
-def get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(search_form_json_file: str) -> Tuple[str, dict[str, str]]:
+def get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(search_form_json_file: str) -> Tuple[str, Dict[str, List[str]]]:
     """получает search_form.v3.json, возвращает: 
     1. base_url for request - "scheme" + "host" + "filename" 
     2. query_dict - key - "namme", value - "default" from search_form.v3 "form" item
@@ -1114,7 +1211,7 @@ def get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(sea
         search_form_json_file (str): search_form.v3.json
 
     Returns:
-        Tuple[str, Mapping[str, str]]: (base_url, query_dict) 
+        Tuple[str, Dict[str, str]]: (base_url, query_dict) 
     """
     
     search_form_v3_dict: dict = load_dict_from_json_file(search_form_json_file)
@@ -1135,12 +1232,12 @@ def get_query_dict_from_search_form_v3_dict(search_form_v3_dict: dict) -> dict:
         dict: key - "namme", value - "default" from search_form.v3 "form" item
     """
     form_dict: dict = search_form_v3_dict['form']
-    query_dict = {item['name']: item['default'] for item in form_dict.values()}
+    query_dict = {item['name']: [] for item in form_dict.values()}
 
     return query_dict
         
         
-def unpack_dict(pattern_dict: dict, unpacked_dict: dict) -> Tuple[Mapping[str, str], Mapping[str, str]]:
+def unpack_dict(pattern_dict: dict, unpacked_dict: dict) -> Tuple[Dict[str, str], Dict[str, str]]:
     """ принимает два dict: "pattern" и "unpacked"
     возвращает два dict созданных на основании "unpacked":
     1. с ключами которые есть в pattern_dict
@@ -1151,80 +1248,94 @@ def unpack_dict(pattern_dict: dict, unpacked_dict: dict) -> Tuple[Mapping[str, s
         unpacked_dict (dict): разделяемый dict
 
     Returns:
-        True[Mapping[str, str], Mapping[str, str]]: (dict с ключами которые есть в pattern_dict, dict с ключами которых нет в pattern_dict)
+        True[Dict[str, str], Dict[str, str]]: (dict с ключами которые есть в pattern_dict, dict с ключами которых нет в pattern_dict)
     """
     key_in_dict: dict = {}
     key_out_dict: dict = {}
     for key in unpacked_dict.keys():
         if key in pattern_dict:
-            key_in_dict[key] = pattern_dict[key]
+            key_in_dict[key] = unpacked_dict[key]
         else:
             key_out_dict[key] = unpacked_dict[key]
 
     return key_in_dict, key_out_dict
         
-def get_query_url(request_url_base_str: str, request_query_dict: dict[str, str]) -> str:
-    request_query_str = parse.urlencode(request_query_dict)
+def get_query_url(request_url_base_str: str, request_query_dict: Dict[str, List[str]], empty_value: bool = False) -> str:
+    """получает "<scheme>://<netloc>/<path>"_str и request_query_dict, возвращает
+    "<scheme>://<netloc>/<path>?<query>". Если empty_value=False - то в query не
+    включаются ключи с пустыми заначениями ([])
+
+    Args:
+        request_url_base_str (str): "<scheme>://<netloc>/<path>"
+        request_query_dict (dict): {'name1': ["value1"], 'name2': [], 'name3': ["value1", "value4", ...]}
+        empty_value (bool): Если empty_value=False - то в query не включаются ключи с пустыми заначениями ([])
+    Returns:
+        str: "<scheme>://<netloc>/<path>?<query>"
+    """
+    request_query_str = get_quey_str_from_v_3_dict(request_query_dict, empty_value=empty_value)
     query_url = f'{request_url_base_str}?{request_query_str}'
     return query_url
 
+def get_quey_str_from_v_3_dict(query_dict: Dict[str, List[str]], empty_value: bool = False) -> str:
+    """получает query_dict возвращает query строку. Если empty_value=True
+    то в строку уключаются ключи с пустыми занчениями т.е. [], в противном случае
+    в строке только не путые занчения
+
+    Args:
+        query_dict (dict): query_dict
+        empty_value (bool, optional): Влючать или нет пустые значения. Defaults to True.
+
+    Returns:
+        str: query string
+    """
+    query_str_list = []
+    for k,v in query_dict.items():
+        if v:
+            query_str_list.append(f"{k}={','.join(v)}")
+        elif empty_value:
+            query_str_list.append(f"{k}={','.join(v)}")
+    query_str = '&'.join(query_str_list)        
+    return query_str
+
+
+def update_request_query_dict(request_query_dict: Dict[str, List[str]], update_query_dict: Dict[str, List[str]]) -> Dict[str, List[str]]:
+    """Обновляет request_query_dict значениями из update_query_dict"""
+    # test = []
+    # test.extend
+    for k in update_query_dict.keys():
+        if request_query_dict.get(k, None) != None: 
+            request_query_dict[k].extend(update_query_dict[k])
+    return request_query_dict
+
+def wrap_update_query_dict(update_query_dict:  Dict[str, str]) -> Dict[str, List[str]]:
+    """оборачивает value str в list, если value мультивелю
+    т.е. в виде 'a,b,c' то split значение оп ','"""
+
+    wraped_update_query_dict = {}
+    for k, v in update_query_dict.items():
+        print(f'in wrap_update_query_dict(), v: {v}')
+        wraped_update_query_dict[k] = v.split(',')
+
+    return wraped_update_query_dict
+# TODO: делать функцию
+def fill_required_query_dict_keys_default_values_if_they_not_set(updated_request_query_dict: Dict[str, List[str]], search_forv_v3_file: str) -> Dict[str, List[str]]:
+    """получает updated_request_query_dict и в случае если ключи с тебованием
+    "required": "true" в """  
+    search_form_file_dict: Dict[str, Any] = load_dict_from_json_file(search_forv_v3_file)
+    search_form_fields_dict: Dict[str, Dict] = search_form_file_dict['form']
+    for v in search_form_fields_dict.values():
+        if v['required'] == 'true':
+            field_name = v['name'] 
+            if not updated_request_query_dict[field_name]:
+                updated_request_query_dict[field_name].extend(v['default'])
+    return updated_request_query_dict
 
 
 
 if __name__ == '__main__':
-    # res = get_request_json_response_dicts_dict(NEW_PYBLIC_LOTS_REG_LINK)
-    # write_dict_or_list_to_json_file('win.06.05.24.request_info2.json', res)
-    # form_field('search_form.json', 'Вид сделки', 'request_info2.json')
-    # form_field_v2('search_form.v2.json', 'Электронная площадка', 'request_info2.json')
-    # check_form_v2_fields_structure('search_form.v2 copy.json')
-    # print(type(TEST_DICT1['available_values']))
-    # print(FORM_V2_FORM_FIELD_STRUCT['available_values']['type'])
+    pass
+    # req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('spiders/search_form.v3 copy.json')
+    # url_str = get_query_url(req_url_str, query_dikt, False) 
+    # print(url_str)
     
-    # print_dict(test1)
-    # check_form_v2_fields_structure('search_form.v2.json')
-    # print_to_file_os_enveron_var('os-env-11-05.json')
-    # os.environ.get("XDG_CONFIG_HOME") or Path("~/.config").expanduser()
-    # print(str(Path("~/.config").expanduser()))
-    # print(str(os.environ.get("XDG_CONFIG_HOME")))
-    # test_dict = {}
-    # check_dict_structure(test_dict, FORM_V3_FORM_FIELD_STRUCT)
-    # print_dict(test_dict)
-    # target_file_dict = load_dict_from_json_file('search_form.v3.json')
-    # target_dict: dict = target_file_dict['form']
-    # for k, v in target_dict.items():
-    #     check_dict_structure(v, FORM_V3_FORM_FIELD_STRUCT, k)
-    # write_dict_or_list_to_json_file('search_form.v3.json', target_file_dict)    
-    # target_file_dictv2 = load_dict_from_json_file('search_form.v2.json')['form']
-    # target_file_dictv3: dict = load_dict_from_json_file('search_form.v3.json')['form']
-    # for k,v in target_file_dictv2.items():
-    #     target_file_dictv3[k]['name'] = v['name']
-    # write_dict_or_list_to_json_file('search_form.v3.json', target_file_dictv3)    
-    # create_a_backup('search_form.v3.json')
-    # target_file_dictv3: dict = load_dict_from_json_file('search_form.v3.json')
-    # target_groups = target_file_dictv3['groups']
-    # target_form = target_file_dictv3['form']
-    # for _, v in target_form.items():
-    #     if not v['available_values']['parent_path']:
-    #         v['available_values']['parent_path'] = 'undefined'
-    #         v['available_values']['parent_value'] = 'undefined'
-    # write_dict_or_list_to_json_file('search_form.v3.json', target_file_dictv3)    
-
     
-    # temp_list = []
-    # for k, v in target_form.items():
-    #     t = target_groups[target_form[k]['group']['name']]['sort_order'], target_form[k]['group']['sort_order'], k
-    #     temp_list.append(t)
-    # sorted_list = sorted(temp_list)
-    # rez_dict = {}   
-    # for _, _, k in sorted_list
-    #     rez_dict[k] = target_form[k]
-       
-    # target_file_dictv3['form'] = rez_dict
-    # write_dict_or_list_to_json_file('search_form.v3.json', target_file_dictv3)    
-    # form_field_v3('search_form.v3.json', 'Электронная площадка', 'request_info2.json')    
-    req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('torgi_gov_ru/spiders/search_form.v3.json')
-    print_dict(query_dikt)
-    # query_url = get_query_url(req_url_str, query_dikt)
-    params = {'name': 'Rajeev Singh', 'phone': ['+919999999999', '+628888888888']}
-    request_query_str = parse.urlencode(params, encoding='utf-8', doseq=True)
-    print(request_query_str)

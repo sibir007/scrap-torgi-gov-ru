@@ -5,7 +5,7 @@ setup(
     version='0.0.1',
     install_requires=[
         'Scrapy>=2.11.2',
-        'playwright>=1.43.0',
+        'playwright>=1.44.0',
         'pydlib>=0.3.2',
     ],
     packages=find_packages(

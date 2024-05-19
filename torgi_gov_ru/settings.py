@@ -1,4 +1,6 @@
 import pathlib
+
+from torgi_gov_ru import util
 # Scrapy settings for torgi_gov_ru project
 #
 # For simplicity, this file contains only settings considered important or
@@ -22,7 +24,7 @@ CONCURRENT_REQUESTS = 16
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 DOWNLOAD_DELAY = 5
-RANDOMIZE_DOWNLOAD_DELAY = True
+# RANDOMIZE_DOWNLOAD_DELAY = True
 # The download delay setting will honor only one of:
 CONCURRENT_REQUESTS_PER_DOMAIN = 1
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -451,7 +453,7 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 # "%(spider_name)s.jsonl"
 
 FEEDS = {
-    'feed/%(name)s-%(time)s.items.json': {
+    f'feed/{util.get_curent_date_time()}.items.json': {
         'format': 'json',
         'encoding': 'utf8',
         'store_empty': False,
@@ -463,14 +465,14 @@ FEEDS = {
         },
         'overwrite': True, 
     },
-    f'feed/{BOT_NAME}.items.xml': {
-        'format': 'xml',
-        # 'fields': ['reg_num', 'reg_num_href'],
-        # 'item_filter': MyCustomFilter1,
-        'encoding': 'utf8',
-        'indent': 8,
-        'overwrite': True, 
-    },
+    # f'feed/{BOT_NAME}.items.xml': {
+    #     'format': 'xml',
+    #     # 'fields': ['reg_num', 'reg_num_href'],
+    #     # 'item_filter': MyCustomFilter1,
+    #     'encoding': 'utf8',
+    #     'indent': 8,
+    #     'overwrite': True, 
+    # },
     # pathlib.Path(f'feed/{BOT_NAME}.items.csv.gz'): {
     #     'format': 'csv',
     #     # 'fields': ['date', 'p_object'],
@@ -493,10 +495,10 @@ FEEDS = {
 # logger = logging.getLogger("mycustomlogger")
 # logger = logging.getLogger(__name__)
 
-LOG_FILE = f"logs/{BOT_NAME}.log"
+LOG_FILE = f"logs/{BOT_NAME}_{util.get_curent_date_time()}.log"
 # False, the file will be overwritten (discarding the 
 # output from previous runs, if any)
-LOG_FILE_APPEND = False
+LOG_FILE_APPEND = True
 # LOG_ENABLED is True, log messages will be displayed 
 # on the standard error
 LOG_ENABLED = True
