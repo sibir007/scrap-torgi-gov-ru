@@ -64,9 +64,10 @@ class SearchformSpider(scrapy.Spider):
         statr_url = util.get_query_url(self.request_url_base_str, self.request_query_dict)
         self.logger.debug(f'statr_url: {statr_url}')
         self.start_urls.append(statr_url)
+        self.notices_url = util.get_notices_url_from_search_form_v3_file(self.search_form_json_file)
     
-    # def start_requests(self):
-    #     yield Request(self.request_url, self.parse)
+    def start_requests(self):
+        yield Request(f'{self.notices_url}/23000051770000000058', self.get_response_request_heades_and_response_data)
     
     def parse(self, response: TextResponse) -> Generator:
         resp_str: str = response.text
