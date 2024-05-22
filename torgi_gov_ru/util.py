@@ -1,6 +1,7 @@
 
+# from types import Generator
 from playwright.sync_api import sync_playwright, Browser, Page, Request, Response
-from typing import Dict, NoReturn, Tuple, List, List, Union, Any, Callable
+from typing import Dict, Generator, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 import typing
 from urllib import parse, request
 from lxml import html
@@ -14,6 +15,12 @@ import lxml
 import shutil
 import pydlib as dl
 from datetime import datetime
+import logging
+from collections import defaultdict
+
+
+
+logger = logging.getLogger(__name__)
 
 """data time example
 now = datetime.datetime.now()  # Get the current datetime object
@@ -279,7 +286,7 @@ def load_header_dict(fname: str) -> dict:
         hdict = pickle.load(f)
     return hdict
 
-def load_dict_from_json_file(fname: str) -> dict:
+def load_dict_or_list_from_json_file(fname: str) -> Union[Dict, List]:
     """load from json file header dict
 
     Args:
@@ -288,7 +295,7 @@ def load_dict_from_json_file(fname: str) -> dict:
     Returns:
         dict: header dict
     """
-    print(f'in load_dict_from_json_file(fname: str) os.getcwd(): {os.getcwd()}')
+    logger.debug(f'in load_dict_from_json_file(fname: str) os.getcwd(): {os.getcwd()}')
     with open(fname, 'rt', encoding='utf-8') as f:
         data = f.read()
         hdict = json.loads(data)
@@ -560,7 +567,7 @@ def get_relationship_v2(info2_fname: str,
     #     data_json = f.read()
     #     # try
     #     data_dict = json.loads(data_json)
-    data_dict: dict = load_dict_from_json_file(info2_fname)    
+    data_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(info2_fname))     
     # TODO: обработать вызов
     _get_ownership_form_list__check_version(data_dict, version_api)
     
@@ -603,7 +610,7 @@ def get_relationship_v3(info2_fname: str,
     #     data_json = f.read()
     #     # try
     #     data_dict = json.loads(data_json)
-    data_dict: dict = load_dict_from_json_file(info2_fname)    
+    data_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(info2_fname))     
     # TODO: обработать вызов
     _get_ownership_form_list__check_version(data_dict, version_api)
     
@@ -696,14 +703,14 @@ def write_value_to_dict_in_json_file_v2(fname: str, path: str, value: Any):
         d_flat[keys] = value
         return unflatten(d_flat)
     
-    loaded_dict: dict = load_dict_from_json_file(fname)
+    loaded_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(fname))
     loaded_dict = dl_update(loaded_dict, path, value, sep='`')
     # json_str = json.dumps(loaded_dict, indent=4, ensure_ascii=False)
     write_dict_or_list_to_json_file(fname, loaded_dict)
 
 
 def read_data_from_json_file(fname: str, path: str) -> Any:
-    data_from_json_file = load_dict_from_json_file(fname)
+    data_from_json_file: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(fname))
     value = get_dict_values(data_from_json_file, path)
     return value    
 # "request_url": "https://torgi.gov.ru/new/nsi/v1/RELATIONSHIP_BIDD_HINTEXT",
@@ -778,7 +785,7 @@ def form_field_v2(searsh_form_file: str, form_field_name: str, info2_file_name:s
     shutil.copy(searsh_form_file, 'copy.'+searsh_form_file)
     # with open(searsh_form_file, encoding='utf-8') as form_file:
     #     form_dict: dict = json.loads(form_file.read())
-    form_dict: dict = load_dict_from_json_file(searsh_form_file)
+    form_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(searsh_form_file))
     url_key = dl.get(form_dict, f'form`{form_field_name}`info2_url', sep='`')
     aviavailable_values_path = dl.get(form_dict, f'form`{form_field_name}`available_values`path', sep='`')
     aviavailable_values_hint_path = dl.get(form_dict, f'form`{form_field_name}`available_values_hint`path', sep='`')
@@ -813,7 +820,7 @@ def form_field_v3(searsh_form_v3_file: str, form_field_name: str, info2_file_nam
     # shutil.copy(searsh_form_v3_file, 'copy.'+searsh_form_v3_file)
     # with open(searsh_form_file, encoding='utf-8') as form_file:
     #     form_dict: dict = json.loads(form_file.read())
-    form_dict: dict = load_dict_from_json_file(searsh_form_v3_file)
+    form_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(searsh_form_v3_file))
     url_key = dl.get(form_dict, f'form`{form_field_name}`info2_url', sep='`')
     aviavailable_values_key_path = dl.get(form_dict, f'form`{form_field_name}`available_values`key_path', sep='`')
     full_a_v_k_path = f'{url_key}`{aviavailable_values_key_path}'
@@ -842,7 +849,7 @@ def form_field_v3(searsh_form_v3_file: str, form_field_name: str, info2_file_nam
     
 def form_field_v2_субьект_местонаходения():
     path = f'https://torgi.gov.ru/new/nsi/v1/DYNAMIC_ATTR_SEARCH_OPTION'
-    file_dict = load_dict_from_json_file('request_info2.json')
+    file_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file('request_info2.json'))
     t_dict = file_dict[path]['response_json'][0]
     path2 = 'mappingTable`code'
     path3 = 'mappingTable`baseAttrValue`name'
@@ -887,7 +894,7 @@ def check_dict_structure(target_dict: dict, struct: dict, target_dict_name: str 
     def _make_descendants(field: dict, descendants: dict, field_name: str):
         for key in descendants.keys():
             field[key] = descendants[key]['default']()
-            print(f'add descendants field:{field_name}.{key} type {type(field[key])}')
+            logger.debug(f'add descendants field:{field_name}.{key} type {type(field[key])}')
             if (chaild_descendants := descendants[key].get('descendants', None)):
                 _make_descendants(field[key], chaild_descendants, f'{field_name}.{key}')
     
@@ -895,11 +902,11 @@ def check_dict_structure(target_dict: dict, struct: dict, target_dict_name: str 
     def _existen_dict_key_process(dict_name: str, target_dict: dict, key: str, struct: dict):
         if not type(target_dict[key]) == struct['type']:
             if target_dict[key]:
-                print(f'field:{dict_name}.{key} contain not compatible type {type(target_dict[key])}, should be {struct["type"]}')
+                logger.debug(f'field:{dict_name}.{key} contain not compatible type {type(target_dict[key])}, should be {struct["type"]}')
                 return
             else: 
                 target_dict[key] = struct['default']()
-                print(f'field:{dict_name}.{key} change type to {struct["type"]}')
+                logger.debug(f'field:{dict_name}.{key} change type to {struct["type"]}')
                 if (descendants := struct.get('descendants', None)) :
                     # print(f'key: {key}')
                     _make_descendants(target_dict[key], descendants, f'{dict_name}.{key}')
@@ -926,15 +933,15 @@ def check_dict_structure(target_dict: dict, struct: dict, target_dict_name: str 
             keys_diff_list = list(keys_diff)
             remaining_keys = []
             deleted_keys_count = 0
-            print(f'dict:{target_dict_name} contain {count} redundan fields {keys_diff_list}')
+            logger.debug(f'dict:{target_dict_name} contain {count} redundan fields {keys_diff_list}')
             for key in keys_diff_list:
                 if not target_dict[key]:
                     del target_dict[key]
                     deleted_keys_count += 1
                 else:
                     remaining_keys.append(key)
-            print(f'remuved redundan fields count {deleted_keys_count}')
-            print(f'remaining redundan fields {remaining_keys}')
+            logger.debug(f'remuved redundan fields count {deleted_keys_count}')
+            logger.debug(f'remaining redundan fields {remaining_keys}')
             
     
     check_for_redundancy(target_dict, struct, target_dict_name) 
@@ -1109,7 +1116,7 @@ def check_form_v2_fields_structure(form_v2_fname: str):
     если поле не пустое пишет предупреждение в stdout"""
     # global FORM_V2_FORM_FIELD_STRUCT
     create_a_backup(form_v2_fname)
-    target_dict: dict = load_dict_from_json_file(form_v2_fname)
+    target_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(form_v2_fname))
     form_dict: dict = target_dict['form']
     for field_name, field in form_dict.items():
         check_dict_structure(field, FORM_V2_FORM_FIELD_STRUCT, field_name)
@@ -1162,7 +1169,7 @@ def sort_dict_recursiv(target_dict:dict) -> dict:
     return new_dict
       
 def form_v2_to_v3():
-    target_file_dict = load_dict_from_json_file('search_form.v3.json')
+    target_file_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file('search_form.v3.json'))
     target_dict: dict = target_file_dict['form']
     for k, v in target_dict.items():
         new_item = {}
@@ -1188,7 +1195,7 @@ def form_v2_to_v3():
     
 def sort_form_v3_for_group_and_sort_order():
     create_a_backup('search_form.v3.json')
-    target_file_dictv3: dict = load_dict_from_json_file('search_form.v3.json')
+    target_file_dictv3: Dict = typing.cast(Dict, load_dict_or_list_from_json_file('search_form.v3.json'))
     target_groups = target_file_dictv3['groups']
     target_form = target_file_dictv3['form']
     temp_list = []
@@ -1216,7 +1223,7 @@ def get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(sea
         Tuple[str, Dict[str, str]]: (base_url, query_dict) 
     """
     
-    search_form_v3_dict: dict = load_dict_from_json_file(search_form_json_file)
+    search_form_v3_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(search_form_json_file))
     
     base_url: str = get_base_url_from_search_form_v3_dict(search_form_v3_dict)
     query_dict = get_query_dict_from_search_form_v3_dict(search_form_v3_dict)
@@ -1226,13 +1233,13 @@ def get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(sea
 def get_base_url_from_search_form_v3_file(search_form_v3_file: str) -> str:
     """принимает search_form_v3_file - возвращает base_url str"""
 
-    search_form_v3_dict: dict = load_dict_from_json_file(search_form_v3_file)
+    search_form_v3_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(search_form_v3_file))
     return get_base_url_from_search_form_v3_dict(search_form_v3_dict)
 
 def get_notices_url_from_search_form_v3_file(search_form_v3_file: str) -> str:
     """принимает search_form_v3_file - возвращает notices_url str"""
 
-    search_form_v3_dict: dict = load_dict_from_json_file(search_form_v3_file)
+    search_form_v3_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(search_form_v3_file))
     return get_notices_url_from_search_form_v3_dict(search_form_v3_dict)
 
 
@@ -1345,7 +1352,7 @@ def wrap_update_query_dict(update_query_dict:  Dict[str, str]) -> Dict[str, List
 
     wraped_update_query_dict = {}
     for k, v in update_query_dict.items():
-        print(f'in wrap_update_query_dict(), v: {v}')
+        logger.debug(f'in wrap_update_query_dict(), v: {v}')
         wraped_update_query_dict[k] = v.split(',')
 
     return wraped_update_query_dict
@@ -1353,7 +1360,7 @@ def wrap_update_query_dict(update_query_dict:  Dict[str, str]) -> Dict[str, List
 def fill_required_query_dict_keys_default_values_if_they_not_set(updated_request_query_dict: Dict[str, List[str]], search_forv_v3_file: str) -> Dict[str, List[str]]:
     """получает updated_request_query_dict и в случае если ключи с тебованием
     "required": "true" в """  
-    search_form_file_dict: Dict[str, Any] = load_dict_from_json_file(search_forv_v3_file)
+    search_form_file_dict: Dict[str, Any] = typing.cast(Dict, load_dict_or_list_from_json_file(search_forv_v3_file))
     search_form_fields_dict: Dict[str, Dict] = search_form_file_dict['form']
     for v in search_form_fields_dict.values():
         if v['required'] == 'true':
@@ -1365,7 +1372,7 @@ def fill_required_query_dict_keys_default_values_if_they_not_set(updated_request
 def get_base_filename_headers_from_search_form_v3_file(search_form_v3_json_file:str) -> Dict[str, str]:
     """принимает search_form_v3_json_file - отдаёт base_filename_headers request headers dict"""
 
-    search_form_v3_json_dict = load_dict_from_json_file(search_form_v3_json_file)
+    search_form_v3_json_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(search_form_v3_json_file))
     return get_base_filename_headers_from_search_form_v3_dict(search_form_v3_json_dict)
 
 def get_base_filename_headers_from_search_form_v3_dict(search_form_v3_dict: Dict[str,Any]) -> Dict[str, str]:
@@ -1376,7 +1383,7 @@ def get_base_filename_headers_from_search_form_v3_dict(search_form_v3_dict: Dict
 def get_notices_filename_headers_from_search_form_v3_file(search_form_v3_json_file:str) -> Dict[str, str]:
     """принимает search_form_v3_json_file - отдаёт notices_filename_headers request headers dict"""
 
-    search_form_v3_json_dict = load_dict_from_json_file(search_form_v3_json_file)
+    search_form_v3_json_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(search_form_v3_json_file))
     return get_notices_filename_headers_from_search_form_v3_dict(search_form_v3_json_dict)
 
 def get_notices_filename_headers_from_search_form_v3_dict(search_form_v3_dict: Dict[str,Any]) -> Dict[str, str]:
@@ -1385,16 +1392,131 @@ def get_notices_filename_headers_from_search_form_v3_dict(search_form_v3_dict: D
     return search_form_v3_dict['notices_filename']['request_headers_for_send']
 
 
+def get_feed_items_v1_keys_maping_from_feed_items_v1_file(feed_items_v1_file: str) -> Dict[str, List[Tuple[Tuple[str, str],Tuple[str, str]]]]:
+    """принимает feeed_items_v1.json файл - возвращает словарь в котором
+    ключи str(tuple), tuple из ключей "response_data" dict a value список 
+    из Tuple ((biddForm, value_biddForm), (biddType, value_biddType))
+    """
+    feed_items_v1_list: List = typing.cast(List, load_dict_or_list_from_json_file(feed_items_v1_file))
+    
+    return get_feed_items_v1_keys_maping_from_feed_items_v1_list(feed_items_v1_list)
 
+def _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list: List[Dict[str, Any]]) -> Generator[Dict[str, Any], Any, Any]:
+# def _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list: List[Dict[str, Any]]) -> Generator:
+    """принимает feed_items_v1_list - возращает генератор feed_item['response_data'] dict"""
+
+    return typing.cast(Generator[Dict[str, Any], Any, Any], (feed_item['response_data'] for feed_item in feed_items_v1_list))
+
+def get_feed_items_v1_keys_maping_from_feed_items_v1_list(feed_items_v1_list: List[Dict]) -> Dict[str, List[Tuple[Tuple[str, str],Tuple[str, str]]]]:
+    """принимает feeed_items_v1.json dict - возвращает словарь в котором
+    ключи str(tuple), tuple из ключей "response_data" dict a value список 
+    из Tuple ((biddForm, value_biddForm), (biddType, value_biddType))
+    """
+    response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
+    # response_data_gen: Generator[Dict, None, None] = typing.cast(Generator[Dict, None, None], (feed_item['response_data'] for feed_item in feed_items_v1_list))
+    
+    res_dict = defaultdict(list)
+    for response_data in response_data_gen:
+        keys_tuple = str(tuple(resp_key for resp_key in sorted(response_data.keys())))
+        value = (
+            ('biddForm', response_data['biddForm']['name']),
+            ('biddType', response_data['biddType']['name'])
+            )
+        res_dict[keys_tuple].append(value)
+    return res_dict
+
+def get_feed_items_v1_union_keys_set_from_feed_items_v1_file(feed_items_v1_file: str) -> Set[str]:
+    """принимает feeed_items_v1.json файл - возвращает union set 
+    из ключей "response_data" dict 
+    """
+    feed_items_v1_list: List = typing.cast(List, load_dict_or_list_from_json_file(feed_items_v1_file))
+    
+    return get_feed_items_v1_union_keys_set_from_feed_items_v1_list(feed_items_v1_list)
+
+def get_feed_items_v1_union_keys_set_from_feed_items_v1_list(feed_items_v1_list: List[Dict]) -> Set[str]:
+    """принимает feeed_items_v1.json dict - - возвращает union set 
+    из ключей "response_data" dict 
+    """
+    # response_data_gen = (feed_item['response_data'] for feed_item in feed_items_v1_list)
+    response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
+    # response_data_gen: Generator[Dict, None, None] = typing.cast(Generator[Dict, None, None], (feed_item['response_data'] for feed_item in feed_items_v1_list))
+    
+    res_set = set()
+    for response_data in response_data_gen:
+        keys_set = set(resp_key for resp_key in response_data.keys())
+        res_set |= keys_set
+    return res_set
+
+def get_feed_items_v1_intersection_keys_set_from_feed_items_v1_file(feed_items_v1_file: str) -> Set[str]:
+    """принимает feeed_items_v1.json файл - возвращает intersection set 
+    из ключей "response_data" dict
+    """
+    feed_items_v1_list: List = typing.cast(List, load_dict_or_list_from_json_file(feed_items_v1_file))
+    
+    return get_feed_items_v1_intersection_keys_set_from_feed_items_v1_list(feed_items_v1_list)
+
+def get_feed_items_v1_intersection_keys_set_from_feed_items_v1_list(feed_items_v1_list: List[Dict]) -> Set[str]:
+    """принимает feeed_items_v1.json dict - - возвращает intersection set 
+    из ключей "response_data" dict
+    """
+    # response_data_gen = (feed_item['response_data'] for feed_item in feed_items_v1_list)
+    response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
+    # response_data_gen: Generator[Dict, None, None] = typing.cast(Generator[Dict, None, None], (feed_item['response_data'] for feed_item in feed_items_v1_list))
+    
+    res_set = set()
+    for response_data in response_data_gen:
+        if not res_set:
+            res_set = set(resp_key for resp_key in response_data.keys())
+            continue
+        keys_set = set(resp_key for resp_key in response_data.keys())
+        res_set &= keys_set
+    return res_set
+
+def collect_feed_items_v1_data_keys_type_from_feed_items_v1_file(feed_items_v1_file: str) -> Dict[str, List[str]]:
+    """принимает feed_items_v1_file - вычисляет union keys set из ключей"""
+
+    feed_items_v1_list: List = typing.cast(List, load_dict_or_list_from_json_file(feed_items_v1_file))
+    return collect_feed_items_v1_data_keys_type_from_feed_items_v1_list(feed_items_v1_list)
+
+def collect_feed_items_v1_data_keys_type_from_feed_items_v1_list(feed_items_v1_list: List[Dict[str, Any]]) -> Dict[str, List[str]]:
+    """принимает feed_items_v1_list - вычисляет union keys set из ключей"""
+
+    response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
+    union_keys_set = get_feed_items_v1_union_keys_set_from_feed_items_v1_list(feed_items_v1_list)
+    res_dict: Dict[str, Set[str]] = defaultdict(set)
+    for data_dict in response_data_gen:
+        for key in union_keys_set:
+            if key in data_dict:
+                res_dict[key].add(str(type(data_dict[key])))
+                
+    res_dict_l: Dict[str, List[str]] = {k:list(v) for k,v in res_dict.items()}
+    return res_dict_l
 if __name__ == '__main__':
-    pass
+    # pass
     # req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('spiders/search_form.v3 copy.json')
     # url_str = get_query_url(req_url_str, query_dikt, False) 
     # print(url_str)
     
-    res_hed_dict =parse_raw_headers_to_dict('notice_resp_head.txt')
-    write_dict_or_list_to_json_file('notice_resp_head.json', res_hed_dict)
-    req_hed_dict =parse_raw_headers_to_dict('notice_req_head.txt')
-    write_dict_or_list_to_json_file('notice_req_head.json', req_hed_dict)
+    # res_hed_dict =parse_raw_headers_to_dict('notice_resp_head.txt')
+    # write_dict_or_list_to_json_file('notice_resp_head.json', res_hed_dict)
+    # req_hed_dict =parse_raw_headers_to_dict('notice_req_head.txt')
+    # write_dict_or_list_to_json_file('notice_req_head.json', req_hed_dict)
+
+    # res_dict: Dict[str, List] = get_feed_items_v1_keys_maping_from_feed_items_v1_file('feed/feed_items.v1.json')
     
+    # res_dict2 = {str(k):v for k,v in res_dict.items()}
+    # key = ('one', 'two', 'fre')
+    # res_dict = {str(key): 'some_value'}
     
+    # write_dict_or_list_to_json_file('feed/feed_items.v1.set.json', res_dict2)
+    # union_set: Set[str] = get_feed_items_v1_union_keys_set_from_feed_items_v1_file('feed/feed_items.v1.json')
+    # union_set_sorted_list = sorted(list(union_set))
+    # write_dict_or_list_to_json_file('feed/feed_items.v1_union_set.json', union_set_sorted_list)
+
+    # inters_set: Set[str] = get_feed_items_v1_intersection_keys_set_from_feed_items_v1_file('feed/feed_items.v1.json')
+    # inters_set_sorted_list = sorted(list(inters_set))
+    # write_dict_or_list_to_json_file('feed/feed_items.v1_inters_set.json', inters_set_sorted_list)
+
+    collected_keys = collect_feed_items_v1_data_keys_type_from_feed_items_v1_file('feed/feed_items.v1.json')
+    write_dict_or_list_to_json_file('feed/feed_items.v1_collected_keys.json', collected_keys)
+
