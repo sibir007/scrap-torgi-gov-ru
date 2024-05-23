@@ -7,6 +7,7 @@ import json
 from typing import Optional, Any, List, Dict, Generator
 from urllib import parse
 from torgi_gov_ru import util 
+import items
 
 
 class SearchformSpider(scrapy.Spider):
@@ -67,9 +68,10 @@ class SearchformSpider(scrapy.Spider):
         self.notices_url = util.get_notices_url_from_search_form_v3_file(self.search_form_json_file)
         self.base_filename_headers = util.get_base_filename_headers_from_search_form_v3_file(self.search_form_json_file)
         self.notices_filename_headers = util.get_notices_filename_headers_from_search_form_v3_file(self.search_form_json_file)
+        self.notices_cache = {}
     
     # def start_requests(self):
-    #     yield Request(f'{self.notices_url}/23000051770000000058', self.get_response_request_heades_and_response_data, headers=self.base_filename_headers)
+    #     yield Request('https://torgi.gov.ru/new/api/public/lotcards/search?lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc', self.parse_single_response, headers=self.base_filename_headers)
     
     def parse(self, response: TextResponse) -> Generator:
         resp_str: str = response.text
@@ -77,34 +79,67 @@ class SearchformSpider(scrapy.Spider):
         self.total_pages = resp_dict['totalPages']
         self.total_elements = resp_dict['totalElements']
         
-        yield from self.parse_page(response)        
+        yield from self.parse_lotcards_page(response)        
         for page_num in range(1, self.total_pages -1):
             self.request_query_dict['page'] = [str(page_num)]
             query_url = util.get_query_url(self.request_url_base_str, self.request_query_dict)
-            yield Request(query_url, callback=self.parse_page, headers=self.base_filename_headers)
+            yield Request(query_url, callback=self.parse_lotcards_page, headers=self.base_filename_headers)
         # yield resp_dict
         
         
+    def parse_single_response(self, response: TextResponse) -> Generator:
+        """пишет в файл content одного запроса"""
+        resp_str: str = response.text
+        resp_dict: Dict = json.loads(resp_str)
+        yield resp_dict
+
         
         
-        
-    def parse_page(self, response: TextResponse) -> Generator:
+                
+    def parse_lotcards_page(self, response: TextResponse) -> Generator:
         resp_str: str = response.text
         resp_dict: Dict = json.loads(resp_str)
         resp_dict_content: List[Dict[str, Any]] = resp_dict['content']
         for v in resp_dict_content:
             noticeNumber = v['noticeNumber']
+            lotNumber = v['lotNumber']
+            if (raw_notace_item:=self.notices_cache.get(noticeNumber, None)):
+                yield from self.parse_lot(raw_notace_item, lotNumber)                        
             query_url = f'{self.notices_url}/{noticeNumber}'
             headers = self.notices_filename_headers
             headers['Referer'] = f"https://torgi.gov.ru/new/public/notices/view/{noticeNumber}"
-            yield Request(query_url, self.get_response_request_heades_and_response_data_to_feed_items_v1, headers=headers)
+
+            yield Request(query_url, 
+                          self.parse_notice, 
+                          headers=headers, 
+                          cb_kwargs={'lotNumber': lotNumber})
             # item = {
             #     'noticeNumber': v['noticeNumber'],
             #     'lotNumber': v['lotNumber'],
             # }
             # yield item        # pass
 
-
+    
+    def parse_notice(self, response: TextResponse, lotNumber: str):
+        notice_str: str = response.text
+        notice_dict: Dict = json.loads(notice_str)
+        noticeNumber: str = notice_dict['noticeNumber']
+        raw_notice_item = self.get_raw_notice_item(notice_dict)
+        # raw_notice_item = items.NoticeItem(notice_dict)
+        self.notices_cache[noticeNumber] = raw_notice_item
+        yield from self.load_notaces_attachments(notice_dict)
+        yield from self.parse_lot(raw_notice_item, lotNumber)
+        
+    def get_raw_notice_item(notice_dict: Dict):
+        return {}
+        
+        
+    def parse_lot(raw_notice_item: items.NoticeItem, lotNumber:str) -> Generator:
+        yield
+    
+    def load_notaces_attachments(notice_dict: Dict) -> Generator:
+        
+        yield
     
     def get_response_request_heades_and_response_data_to_feed_items_v1(self, response: TextResponse) -> Generator:
         req: Request = typing.cast(Request, response.request)

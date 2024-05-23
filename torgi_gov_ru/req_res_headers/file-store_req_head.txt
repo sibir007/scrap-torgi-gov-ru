@@ -1,0 +1,14 @@
+Host: torgi.gov.ru
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate, br, zstd
+Connection: keep-alive
+Referer: https://torgi.gov.ru/new/public/notices/view/23000051770000000058
+Cookie: _ym_uid=1714712391600672954; _ym_d=1714712391; session-cookie=17d2090e38d67980b9e6c5d904983c47a0417115580bf5fd1706b2893594246fc866bead63497b0372e6c4236114f2b6
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Priority: u=1

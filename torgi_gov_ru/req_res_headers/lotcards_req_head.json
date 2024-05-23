@@ -1,0 +1,16 @@
+{
+    "Host": "torgi.gov.ru",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "organizationId": "null",
+    "branchId": "null",
+    "traceparent": "00-c05faf19c7237a53d48eabda7c3affde-3f06008ca6ecd06e-01",
+    "Connection": "keep-alive",
+    "Referer": "https://torgi.gov.ru/new/public/lots/reg",
+    "Cookie": "_ym_uid=1714712391600672954; _ym_d=1714712391; session-cookie=17d2090e38d67980b9e6c5d904983c47a0417115580bf5fd1706b2893594246fc866bead63497b0372e6c4236114f2b6; SESSION=ZWNhZmNjYzEtZjliZS00MDE1LTk5YTItYTc4N2I5NjJmOWZl",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-origin"
+}

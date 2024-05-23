@@ -1,0 +1,14 @@
+{
+    "Server": "nginx",
+    "Date": "Thu, 23 May 2024 12:58:59 GMT",
+    "Content-Type": "image/jpeg",
+    "Transfer-Encoding": "chunked",
+    "Connection": "keep-alive",
+    "Cache-Control": "public, max-age=86400, must-revalidate, no-transform",
+    "Content-Disposition": "attachment; filename*=UTF-8''12.01-33.jpg",
+    "X-Content-Type-Options": "nosniff",
+    "X-XSS-Protection": "1; mode=block",
+    "Strict-Transport-Security": "max-age=31536000 ; includeSubDomains",
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-Cache-Status": "MISS"
+}

@@ -238,7 +238,7 @@ def print_parsed_url(url: str):
 
 
 
-def parse_raw_headers_to_dict(file: str) -> dict:
+def parse_raw_headers_from_file_to_dict(file: str) -> dict:
     header_dict = {}
     with open(file, 'rt') as f:
         for line in f:
@@ -269,7 +269,7 @@ def get_netloc(linc: str) -> str:
         
         
 def write_headers_frome_file_to_file_as_dict(hfile: str, fname: str = 'test'):
-    hdict = parse_raw_headers_to_dict(hfile)
+    hdict = parse_raw_headers_from_file_to_dict(hfile)
     write_header_dect_to_file(hdict=hdict, fname=fname)
    
    
@@ -1559,6 +1559,27 @@ if __name__ == '__main__':
     # inters_set_sorted_list = sorted(list(inters_set))
     # write_dict_or_list_to_json_file('feed/feed_items.v1_inters_set.json', inters_set_sorted_list)
 
-    collected_keys = collect_feed_items_v1_data_keys_type_from_feed_items_v1_file('feed/feed_items.v1.json')
-    write_dict_or_list_to_json_file('feed/feed_items.v1_collected_keys.json', collected_keys)
+    # collected_keys = collect_feed_items_v1_data_keys_type_from_feed_items_v1_file('feed/feed_items.v1.json')
+    # write_dict_or_list_to_json_file('feed/feed_items.v1_collected_keys.json', collected_keys)
+    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/file-store_req_head.txt')
+    write_dict_or_list_to_json_file('req_res_headers/file-store_req_head.json', hed_dict)
+    
+    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/file-store_res_head.txt')
+    write_dict_or_list_to_json_file('req_res_headers/file-store_res_head.json', hed_dict)
+    
+    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/lotcards_req_head.txt')
+    write_dict_or_list_to_json_file('req_res_headers/lotcards_req_head.json', hed_dict)
+
+    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/lotcards_res_head.txt')
+    write_dict_or_list_to_json_file('req_res_headers/lotcards_res_head.json', hed_dict)
+
+    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/notice_req_head.txt')
+    write_dict_or_list_to_json_file('req_res_headers/notice_req_head.json', hed_dict)
+
+    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/notice_res_head.txt')
+    write_dict_or_list_to_json_file('req_res_headers/notice_res_head.json', hed_dict)
+
+
+
+
 
