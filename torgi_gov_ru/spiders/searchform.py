@@ -124,20 +124,20 @@ class SearchformSpider(scrapy.Spider):
         notice_str: str = response.text
         notice_dict: Dict = json.loads(notice_str)
         noticeNumber: str = notice_dict['noticeNumber']
-        raw_notice_item = self.get_raw_notice_item(notice_dict)
+        raw_notice_item: Dict = self.get_raw_notice_item(notice_dict)
         # raw_notice_item = items.NoticeItem(notice_dict)
         self.notices_cache[noticeNumber] = raw_notice_item
         yield from self.load_notaces_attachments(notice_dict)
         yield from self.parse_lot(raw_notice_item, lotNumber)
         
-    def get_raw_notice_item(notice_dict: Dict):
+    def get_raw_notice_item(self, notice_dict: Dict):
         return {}
         
         
-    def parse_lot(raw_notice_item: items.NoticeItem, lotNumber:str) -> Generator:
+    def parse_lot(self, raw_notice_item: Dict, lotNumber:str) -> Generator:
         yield
     
-    def load_notaces_attachments(notice_dict: Dict) -> Generator:
+    def load_notaces_attachments(self, notice_dict: Dict) -> Generator:
         
         yield
     
