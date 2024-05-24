@@ -1457,24 +1457,36 @@ def coroutine(fun: Callable) -> Callable:
         return gen
     return wrapper
 
-@coroutine
 def get_data_generator_from_dict_iterable(target_iterable: Iterable[Dict], path: List[str] = []) -> Generator:
     """принимает Iterable структуру и путь List - возращает генератор элементов соответствующих путю"""
+
+    if not isinstance(target_iterable, Iterable):
+        return
+    # print(path)
     path_len = len(path)
     for item in target_iterable:
-        if
+        if isinstance(item, list):
+            yield from get_data_generator_from_dict_iterable(target_item, path)
         if not path_len:
-            
             yield item
             continue
+        if not isinstance(item, dict):
+            continue
         target_item: Dict = item
-        for i in range(0, path_len-1):
+        for i in range(0, path_len):
+            # print(i)
             target_item = typing.cast(Dict, target_item.get(path[i], None))
-            if not target_item:
+            
+            if not target_item :
                 break
-            if isinstance(target_item, Iterable):
-                yield from get_data_generator_from_dict_iterable(target_item, path[i:path_len-1])
-        yield target_item
+            if isinstance(target_item, list):
+                yield from get_data_generator_from_dict_iterable(target_item, path[i+1:path_len])
+                break
+            if not isinstance(target_item, dict) and i != path_len-1:
+                break
+            if i == path_len-1:
+                yield target_item
+                
     # return (item for item in target_iterable)
 
 
@@ -1516,6 +1528,20 @@ def get_feed_items_v1_union_keys_set_from_feed_items_v1_list(feed_items_v1_list:
     res_set = set()
     for response_data in response_data_gen:
         keys_set = set(resp_key for resp_key in response_data.keys())
+        res_set |= keys_set
+    return res_set
+
+def get_feed_items_v1_union_keys_set_from_dict_iterable(dict_iterable: Iterable[Dict]) -> Set[str]:
+    """принимает feeed_items_v1.json dict - - возвращает union set 
+    из ключей "response_data" dict 
+    """
+    # response_data_gen = (feed_item['response_data'] for feed_item in feed_items_v1_list)
+    # response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
+    # response_data_gen: Generator[Dict, None, None] = typing.cast(Generator[Dict, None, None], (feed_item['response_data'] for feed_item in feed_items_v1_list))
+    
+    res_set = set()
+    for target_dict in dict_iterable:
+        keys_set = set(resp_key for resp_key in target_dict.keys())
         res_set |= keys_set
     return res_set
 
@@ -1600,56 +1626,78 @@ def typing_feed_items_v1_format(feed_items_v1_list: List) -> Dict:
                 res_dict[key].add({'type': value_type.__name__})
 
 # def _fill_dict_item()            
-            
+# def _get_mapping_type_dict(item_generator: Generator) -> Any:
+#     res_dict_list: Dict[str, List[Dict]] = {}
+#     for t_dict in response_data_generator:
+#         # print('t_dict')
+#         for k, v in t_dict.items():
+#             # print(f'in for 1: {k}')
+#             if not k in res_dict_list:
+#                 # print(f'in for 2: {k}')
+#                 # print('in for 2')
+#                 res_dict_list[k] = []
+#             v_dict = {'type': type(v).__name__}
+#             if not v_dict in res_dict_list[k]:
+#                 res_dict_list[k].append(v_dict)
+#                 # print('in append')
+#     return res_dict_list    
+                
+def _get_mapping_type_dict(item_generator: Generator) -> Any:
+    
+    res_dict_list: Dict[str, Dict] = {}
+    for t_dict in item_generator:
+        if not isinstance(t_dict, dict):
+            continue
+        
+        for k, v in t_dict.items():
+            # print(f'in for 1: {k}')
+            if not k in res_dict_list:
+                # print(f'in for 2: {k}')
+                # print('in for 2')
+                res_dict_list[k] = {
+                    'visible': 'true',
+                    'feed': 'true',
+                    'feed_human_readable_name': 'true',
+                    'human_readable_name': '',
+                    'types': [],
+                    } 
+            v_dict = {'type': type(v).__name__}
+            if not v_dict in res_dict_list[k]['types']:
+                res_dict_list[k]['types'].append(v_dict)
+        
+    return res_dict_list
+                # print('in append')
+    # print(res_dict_list)
 
+def fun(mapping_type_dict: Dict, path: List[str], feed_items_v1_list: List):
+       for k, v in mapping_type_dict.items():
+        for item in v['types']:
+            if not item['type'] == 'dict':
+                if not item['type'] == 'list':
+                    continue
+            # if item['type'] == 'dict' or 'list':
+            c_path = path.copy()
+            c_path.append(k)
+            # print(f'in main{c_path}')
+            item_gen = get_data_generator_from_dict_iterable(feed_items_v1_list, path=c_path)
+            # for item in item_gen:
+            #     res_collected_list.append(item)
+            res_mapping_type_dict = _get_mapping_type_dict(item_gen)
+            fun(res_mapping_type_dict, c_path, feed_items_v1_list)
+            item['fields'] = res_mapping_type_dict
 
 if __name__ == '__main__':
-    # pass
-    # req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('spiders/search_form.v3 copy.json')
-    # url_str = get_query_url(req_url_str, query_dikt, False) 
-    # print(url_str)
+   
     
-    # res_hed_dict =parse_raw_headers_to_dict('notice_resp_head.txt')
-    # write_dict_or_list_to_json_file('notice_resp_head.json', res_hed_dict)
-    # req_hed_dict =parse_raw_headers_to_dict('notice_req_head.txt')
-    # write_dict_or_list_to_json_file('notice_req_head.json', req_hed_dict)
+    feed_items_v1_list = load_dict_or_list_from_json_file('feed/feed_items.v1.json')
+    # feed_item_v3_list = load_dict_or_list_from_json_file('')
+    path = ['response_data']
+    response_data_generator = get_data_generator_from_dict_iterable(feed_items_v1_list, path)
 
-    # res_dict: Dict[str, List] = get_feed_items_v1_keys_maping_from_feed_items_v1_file('feed/feed_items.v1.json')
+    mapping_type_dict = _get_mapping_type_dict(response_data_generator)
     
-    # res_dict2 = {str(k):v for k,v in res_dict.items()}
-    # key = ('one', 'two', 'fre')
-    # res_dict = {str(key): 'some_value'}
-    
-    # write_dict_or_list_to_json_file('feed/feed_items.v1.set.json', res_dict2)
-    # union_set: Set[str] = get_feed_items_v1_union_keys_set_from_feed_items_v1_file('feed/feed_items.v1.json')
-    # union_set_sorted_list = sorted(list(union_set))
-    # write_dict_or_list_to_json_file('feed/feed_items.v1_union_set.json', union_set_sorted_list)
+    res_collected_list = []
+    fun(mapping_type_dict, path, feed_items_v1_list)
 
-    diff_set = get_feed_items_v1_difference_keys_set_from_feed_items_v1_file('feed/feed_items.v1.json')
-    # inters_set_sorted_list = sorted(list(inters_set))
-    write_dict_or_list_to_json_file('feed/feed_items.v1_diff_set.json', list(diff_set))
-
-    # collected_keys = collect_feed_items_v1_data_keys_type_from_feed_items_v1_file('feed/feed_items.v1.json')
-    # write_dict_or_list_to_json_file('feed/feed_items.v1_collected_keys.json', collected_keys)
-    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/file-store_req_head.txt')
-    # write_dict_or_list_to_json_file('req_res_headers/file-store_req_head.json', hed_dict)
-    
-    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/file-store_res_head.txt')
-    # write_dict_or_list_to_json_file('req_res_headers/file-store_res_head.json', hed_dict)
-    
-    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/lotcards_req_head.txt')
-    # write_dict_or_list_to_json_file('req_res_headers/lotcards_req_head.json', hed_dict)
-
-    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/lotcards_res_head.txt')
-    # write_dict_or_list_to_json_file('req_res_headers/lotcards_res_head.json', hed_dict)
-
-    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/notice_req_head.txt')
-    # write_dict_or_list_to_json_file('req_res_headers/notice_req_head.json', hed_dict)
-
-    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/notice_res_head.txt')
-    # write_dict_or_list_to_json_file('req_res_headers/notice_res_head.json', hed_dict)
-    # print(str.__name__)
-
-
-
-
+    write_dict_or_list_to_json_file('temp5.json', mapping_type_dict)
+   
