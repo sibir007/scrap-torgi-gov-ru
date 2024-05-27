@@ -77,8 +77,6 @@ class SearchformSpider(scrapy.Spider):
         self.total_pages = resp_dict['totalPages']
         self.total_elements = resp_dict['totalElements']
         
-        
-        
         yield from self.parse_page(response)        
         for page_num in range(1, self.total_pages -1):
             self.request_query_dict['page'] = [str(page_num)]
@@ -99,17 +97,16 @@ class SearchformSpider(scrapy.Spider):
             query_url = f'{self.notices_url}/{noticeNumber}'
             headers = self.notices_filename_headers
             headers['Referer'] = f"https://torgi.gov.ru/new/public/notices/view/{noticeNumber}"
-            yield Request(query_url, self.get_response_request_heades_and_response_data, headers=headers)
+            yield Request(query_url, self.get_response_request_heades_and_response_data_to_feed_items_v1, headers=headers)
             # item = {
             #     'noticeNumber': v['noticeNumber'],
             #     'lotNumber': v['lotNumber'],
             # }
             # yield item        # pass
 
-    def parse_notice(self, response: TextResponse) -> Generator:
-        pass
+
     
-    def get_response_request_heades_and_response_data(self, response: TextResponse) -> Generator:
+    def get_response_request_heades_and_response_data_to_feed_items_v1(self, response: TextResponse) -> Generator:
         req: Request = typing.cast(Request, response.request)
         req_headers: Dict[str, str] = {k:v for k,v in req.headers.to_unicode_dict().items()}
         res_heades: Dict[str, str] = {k:v for k,v in response.headers.to_unicode_dict().items()}
