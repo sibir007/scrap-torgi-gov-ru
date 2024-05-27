@@ -1099,6 +1099,48 @@ FORM_V3_FORM_FIELD_STRUCT = {
                 },
             }
 
+FORM_V3_FEED_FIELD_STRUCT = {
+            "group": {
+                'type': dict, 
+                "default": lambda : dict(),
+                'descendants': {
+                    "name": {
+                        'type': str, 
+                        "default": lambda : "form"
+                        },
+                    "parent": {
+                        'type': str, 
+                        "default": lambda : ""
+                        },
+                    "sort_order": {
+                        'type': int,
+                        'defoult': lambda : 0
+                        }
+                    },
+                },
+            "name": {
+                'type': str, 
+                "default": lambda : ""
+                },
+            "required": {
+                'type': bool, 
+                "default": lambda : True
+                },
+            "value": {
+                'type': Union[str, dict, list],
+                'default': ""
+            },
+            "default": {
+                'type': list, 
+                "default": lambda : list(), 
+            },
+            "comment": {
+                'type': str, 
+                "default": lambda : ""
+                },
+            }
+
+
 
 def create_a_backup(fname: str):
     """принимает file name - создаёт резурвную копию"""

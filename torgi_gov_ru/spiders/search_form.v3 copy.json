@@ -2524,5 +2524,477 @@
             "required": false,
             "selected_values": []
         }
+    },
+    "feed": {
+        "sours": {
+            "model": "feed_items.v1",
+            "path": ["response_data"]
+        },
+        "groups":{
+            "feed": {
+                "parrent": "",
+                "sort_order": 0
+            },
+            "Основные сведения об извещении":{
+                "parrent": "feed",
+                "sort_order": 1
+            },
+            "Атрибуты извещения":{
+                "parrent": "feed",
+                "sort_order": 2
+            },
+            "Организатор торгов":{
+                "parrent": "feed",
+                "sort_order": 3
+            },
+            "Сведения о правообладателе/инициаторе торгов":{
+                "parrent": "feed",
+                "sort_order": 4
+            },
+            "Информация о лотах":{
+                "parrent": "feed",
+                "sort_order": 5
+            },
+            "Документы извещения":{
+                "parrent": "feed",
+                "sort_order": 6
+            }
+
+
+        },
+        "fields": {
+            "Версия": {
+                "type": "simple",
+                "visible_name": "Версия",
+                "group": {
+                    "name": "feed",
+                    "parent": "",
+                    "sort_order": 0
+                },
+                "value": ["version"],
+                "key": {
+                    "path": [],
+                    "name": "version"
+                },
+                "comment": ""
+            },
+            "Дата публикации": {
+                "type": "simple",
+                "visible_name": "Дата публикации",
+                "group": {
+                    "name": "feed",
+                    "parent": "",
+                    "sort_order": 1
+                },
+                "value": ["publishDate"],
+                "key": {
+                    "path": [],
+                    "name": "publishDate"
+                },
+                "comment": ""
+            },
+            "Дата изменения": {
+                "type": "simple",
+                "visible_name": "Дата изменения",
+                "group": {
+                    "name": "feed",
+                    "parent": "",
+                    "sort_order": 2
+                },
+                "value": ["updateDate"],
+                "key": {
+                    "path": [],
+                    "name": "updateDate"
+                },
+                "comment": ""
+            },
+            "Вид торгов": {
+                "type": "simple",
+                "visible_name": "Вид торгов",
+                "group": {
+                    "name": "Основные сведения об извещении",
+                    "parent": "",
+                    "sort_order": 0
+                },
+                "value": ["biddType", "name"],
+                "key": {
+                    "path": ["biddType"],
+                    "name": "name"
+                },
+                "comment": ""
+            },
+            "Форма проведения": {
+                "type": "simple",
+                "visible_name": "Форма проведения",
+                "group": {
+                    "name": "Основные сведения об извещении",
+                    "parent": "",
+                    "sort_order": 2
+                },
+                "value": ["biddForm", "name"],
+                "key": {
+                    "path": ["biddType"],
+                    "name": "name"
+                },
+                "comment": ""
+            },
+            "Наименование процедуры": {
+                "type": "simple",
+                "visible_name": "Наименование процедуры",
+                "group": {
+                    "name": "Основные сведения об извещении",
+                    "parent": "",
+                    "sort_order": 3
+                },
+                "value": ["procedureName"],                
+                "comment": ""
+            },
+            "Атрибуты извещения": {
+                "type": "attributes",
+                "visible_name": "Атрибуты извещения",
+                "group": {
+                    "name": "Атрибуты извещения",
+                    "parent": "",
+                    "sort_order": 0
+                },
+                "values": {
+                    "type": "list",
+                    "path": ["attributes"],
+                    "values": {
+                        "attribute_group": {
+                            "name_path": ["group", "name"]
+                        },
+                        "attribute_type": ["attributeType"],
+                        "attribute_name_path": ["fullName"],
+                        "attribute_value_path`": ["value", "name"],
+                        "sort_order_path": ["sortOrder"]
+                    }
+                },                 
+                "comment": "если attributeType=Select то attribute_value=[\"value\"][\"name\"], в противном случае attribute_value=[\"value\"]"
+            },
+            "Код организации_орг": {
+                "type": "simple",
+                "visible_name": "Код организации",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 0
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "code"]
+                },                 
+                "comment": ""
+            },
+            "Полное наименование_орг": {
+                "type": "simple",
+                "visible_name": "Полное наименование",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 1
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "name"]
+                },                 
+                "comment": ""
+            },
+            "Сокращенное наименование_орг": {
+                "type": "simple",
+                "visible_name": "Сокращенное наименование",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 2
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "shortName"]
+                },                 
+                "comment": ""
+            },
+            "ИНН_орг": {
+                "type": "simple",
+                "visible_name": "ИНН",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 3
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "inn"]
+                },                 
+                "comment": ""
+            },
+            "КПП_орг": {
+                "type": "simple",
+                "visible_name": "КПП",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 4
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "kpp"]
+                },                 
+                "comment": ""
+            },
+                "type": "simple",
+                "ОГРН_орг": {
+                "visible_name": "ОГРН",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 5
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "ogrn"]
+                },                 
+                "comment": ""
+            },
+            "Юридический адрес_орг": {
+                "type": "simple",
+                "visible_name": "Юридический адрес",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 6
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "legalAddress"]
+                },                 
+                "comment": ""
+            },
+            "Фактический/почтовый адрес_орг": {
+                "type": "simple",
+                "visible_name": "Фактический/почтовый адрес",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 7
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "actualAddress"]
+                },                 
+                "comment": ""
+            },
+            "Контактное лицо_орг": {
+                "type": "simple",
+                "visible_name": "Контактное лицо",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 8
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "contPerson"]
+                },                 
+                "comment": ""
+            },
+            "Телефон_орг": {
+                "type": "simple",
+                "visible_name": "Телефон",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 9
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "tel"]
+                },                 
+                "comment": ""
+            },
+            "Адрес электронной почты_орг": {
+                "type": "simple",
+                "visible_name": "Адрес электронной почты",
+                "group": {
+                    "name": "Организатор торгов",
+                    "parent": "",
+                    "sort_order": 10
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["bidderOrg", "email"]
+                },                 
+                "comment": ""
+            },
+            "--------------------------------":"-------------------------",
+            "Код организации_пр": {
+                "type": "simple",
+                "visible_name": "Код организации",
+                "group": {
+                    "name": "Сведения о правообладателе/инициаторе торгов",
+                    "parent": "",
+                    "sort_order": 0
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["rightHolderOrg", "code"]
+                },                 
+                "comment": ""
+            },
+            "ОКФС_пр": {
+                "type": "simple",
+                "visible_name": "ОКФС",
+                "group": {
+                    "name": "Сведения о правообладателе/инициаторе торгов",
+                    "parent": "",
+                    "sort_order": 1
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["rightHolderOrg", "okfsCode"]
+                },                 
+                "comment": ""
+            },
+            "Публично-правовое образование_пр": {
+                "type": "simple",
+                "visible_name": "Публично-правовое образование",
+                "group": {
+                    "name": "Сведения о правообладателе/инициаторе торгов",
+                    "parent": "",
+                    "sort_order": 2
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["rightHolderOrg", "publicFormation"]
+                },                 
+                "comment": ""
+            },
+            "Полное наименование_пр": {
+                "type": "simple",
+                "visible_name": "Полное наименование",
+                "group": {
+                    "name": "Сведения о правообладателе/инициаторе торгов",
+                    "parent": "",
+                    "sort_order": 3
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["rightHolderOrg", "name"]
+                },                 
+                "comment": ""
+            },
+            "Сокращённое наименование_пр": {
+                "type": "simple",
+                "visible_name": "Сокращённое наименование",
+                "group": {
+                    "name": "Сведения о правообладателе/инициаторе торгов",
+                    "parent": "",
+                    "sort_order": 4
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["rightHolderOrg", "shortNam"]
+                },                 
+                "comment": ""
+            },
+                "type": "simple",
+            "ИНН_пр": {
+                "type": "simple",
+                "visible_name": "ИНН",
+                "group": {
+                    "name": "Сведения о правообладателе/инициаторе торгов",
+                    "parent": "",
+                    "sort_order": 5
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["rightHolderOrg", "inn"]
+                },                 
+                "comment": ""
+            },
+            "КПП_пр": {
+                "type": "simple",
+                "visible_name": "КПП",
+                "group": {
+                    "name": "Сведения о правообладателе/инициаторе торгов",
+                    "parent": "",
+                    "sort_order": 6
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["rightHolderOrg", "kpp"]
+                },                 
+                "comment": ""
+            },
+            "ОГРН_пр": {
+                "type": "simple",
+                "visible_name": "ОГРН",
+                "group": {
+                    "name": "Сведения о правообладателе/инициаторе торгов",
+                    "parent": "",
+                    "sort_order": 7
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["rightHolderOrg", "ogrn"]
+                },                 
+                "comment": ""
+            },
+            "Юридический адрес_пр": {
+                "type": "simple",
+                "visible_name": "Юридический адрес",
+                "group": {
+                    "name": "Сведения о правообладателе/инициаторе торгов",
+                    "parent": "",
+                    "sort_order": 8
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["rightHolderOrg", "legalAddress"]
+                },                 
+                "comment": ""
+            },
+            "Фактический/почтовый адрес_орг_пр": {
+                "type": "simple",
+                "visible_name": "Фактический/почтовый адрес",
+                "group": {
+                    "name": "Сведения о правообладателе/инициаторе торгов",
+                    "parent": "",
+                    "sort_order": 9
+                },
+                "value": {
+                    "type": "str",
+                    "path": ["rightHolderOrg", "actualAddress"]
+                },                 
+                "comment": ""
+            },
+            "Вложения": {
+                "type": "attachments",
+                "visible_name": "",
+                "group": {
+                    "name": "Вложения",
+                    "parent": "",
+                    "sort_order": 0
+                },
+                "value": {
+                    "type": "list",
+                    "path": ["attributes"],
+                    "values": {
+                        "attribute_group": {
+                            "name_path": ["group", "name"]
+                        },
+                        "attribute_type": ["attributeType"],
+                        "attribute_name_path": ["fullName"],
+                        "attribute_value_path`": ["value", "name"],
+                        "sort_order_path": ["sortOrder"]
+                    }
+                },                 
+                "comment": "если attributeType=Select то attribute_value=[\"value\"][\"name\"], в противном случае attribute_value=[\"value\"]"
+            
+            }
+
+            
+
+        }
     }
 }
