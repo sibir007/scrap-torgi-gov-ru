@@ -1362,6 +1362,28 @@ def fill_required_query_dict_keys_default_values_if_they_not_set(updated_request
                 updated_request_query_dict[field_name].extend(v['default'])
     return updated_request_query_dict
 
+def get_base_filename_headers_from_search_form_v3_file(search_form_v3_json_file:str) -> Dict[str, str]:
+    """принимает search_form_v3_json_file - отдаёт base_filename_headers request headers dict"""
+
+    search_form_v3_json_dict = load_dict_from_json_file(search_form_v3_json_file)
+    return get_base_filename_headers_from_search_form_v3_dict(search_form_v3_json_dict)
+
+def get_base_filename_headers_from_search_form_v3_dict(search_form_v3_dict: Dict[str,Any]) -> Dict[str, str]:
+    """принимает search_form_v3_dict - отдаёт base_filename_headers request headers dict"""
+
+    return search_form_v3_dict['base_filename']['request_headers_for_send']
+
+def get_notices_filename_headers_from_search_form_v3_file(search_form_v3_json_file:str) -> Dict[str, str]:
+    """принимает search_form_v3_json_file - отдаёт notices_filename_headers request headers dict"""
+
+    search_form_v3_json_dict = load_dict_from_json_file(search_form_v3_json_file)
+    return get_notices_filename_headers_from_search_form_v3_dict(search_form_v3_json_dict)
+
+def get_notices_filename_headers_from_search_form_v3_dict(search_form_v3_dict: Dict[str,Any]) -> Dict[str, str]:
+    """принимает search_form_v3_dict - отдаёт notices_filename_headers request headers dict"""
+    
+    return search_form_v3_dict['notices_filename']['request_headers_for_send']
+
 
 
 if __name__ == '__main__':
@@ -1374,3 +1396,5 @@ if __name__ == '__main__':
     write_dict_or_list_to_json_file('notice_resp_head.json', res_hed_dict)
     req_hed_dict =parse_raw_headers_to_dict('notice_req_head.txt')
     write_dict_or_list_to_json_file('notice_req_head.json', req_hed_dict)
+    
+    

@@ -65,9 +65,11 @@ class SearchformSpider(scrapy.Spider):
         self.logger.debug(f'statr_url: {statr_url}')
         self.start_urls.append(statr_url)
         self.notices_url = util.get_notices_url_from_search_form_v3_file(self.search_form_json_file)
+        self.base_filename_headers = util.get_base_filename_headers_from_search_form_v3_file(self.search_form_json_file)
+        self.notices_filename_headers = util.get_notices_filename_headers_from_search_form_v3_file(self.search_form_json_file)
     
-    def start_requests(self):
-        yield Request(f'{self.notices_url}/23000051770000000058', self.get_response_request_heades_and_response_data)
+    # def start_requests(self):
+    #     yield Request(f'{self.notices_url}/23000051770000000058', self.get_response_request_heades_and_response_data, headers=self.base_filename_headers)
     
     def parse(self, response: TextResponse) -> Generator:
         resp_str: str = response.text
@@ -81,7 +83,7 @@ class SearchformSpider(scrapy.Spider):
         for page_num in range(1, self.total_pages -1):
             self.request_query_dict['page'] = [str(page_num)]
             query_url = util.get_query_url(self.request_url_base_str, self.request_query_dict)
-            yield Request(query_url, callback=self.parse_page)
+            yield Request(query_url, callback=self.parse_page, headers=self.base_filename_headers)
         # yield resp_dict
         
         
@@ -91,14 +93,22 @@ class SearchformSpider(scrapy.Spider):
     def parse_page(self, response: TextResponse) -> Generator:
         resp_str: str = response.text
         resp_dict: Dict = json.loads(resp_str)
-        resp_dect_content: List[Dict[str, Any]] = resp_dict['content']
-        for v in resp_dect_content:
-            item = {
-                'noticeNumber': v['noticeNumber'],
-                'lotNumber': v['lotNumber'],
-            }
-            yield item        # pass
+        resp_dict_content: List[Dict[str, Any]] = resp_dict['content']
+        for v in resp_dict_content:
+            noticeNumber = v['noticeNumber']
+            query_url = f'{self.notices_url}/{noticeNumber}'
+            headers = self.notices_filename_headers
+            headers['Referer'] = f"https://torgi.gov.ru/new/public/notices/view/{noticeNumber}"
+            yield Request(query_url, self.get_response_request_heades_and_response_data, headers=headers)
+            # item = {
+            #     'noticeNumber': v['noticeNumber'],
+            #     'lotNumber': v['lotNumber'],
+            # }
+            # yield item        # pass
 
+    def parse_notice(self, response: TextResponse) -> Generator:
+        pass
+    
     def get_response_request_heades_and_response_data(self, response: TextResponse) -> Generator:
         req: Request = typing.cast(Request, response.request)
         req_headers: Dict[str, str] = {k:v for k,v in req.headers.to_unicode_dict().items()}
