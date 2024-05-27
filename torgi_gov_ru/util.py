@@ -1,8 +1,4 @@
 
-# from types import Generator
-from ast import mod
-from pyexpat import model
-from turtle import mode
 from playwright.sync_api import sync_playwright, Browser, Page, Request, Response
 from typing import Iterable, Dict, Generator, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 import typing
@@ -1814,38 +1810,9 @@ def parsing_raw_data_relative_to_data_model(feed_model: Dict, raw_data: Dict)-> 
     
 
 if __name__ == '__main__':
-    search_form = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
-    model = search_form['feed']
+    pass
+    # req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('spiders/search_form.v3 copy.json')
+    # url_str = get_query_url(req_url_str, query_dikt, False) 
+    # print(url_str)
     
-    resp_list: List = load_dict_or_list_from_json_file('feed/27.05.24_09-01-35.items.json')
-    feed_items_list = []
-    for resp in resp_list:
-        for lot_card in resp['content']:
-            # data = data['content']
-            feed_item = parsing_raw_data_relative_to_data_model(model, lot_card)
-            feed_items_list.append(feed_item)
-    write_dict_or_list_to_json_file('feed/parsed_feed_item.json', feed_items_list)
-    # def tr_fun(el:Dict, path: List[str]):
-
-    #     new_type_dict = {v['type']:v for v in el['types']}
-    #     # for type_item in el['types']
-    #     # del type_item['type']
-    #     el['types'] = new_type_dict
-        
-    
-    # mode = load_dict_or_list_from_json_file('feed/feed_items_model_copy.json')
-    # feed_model_traversing(mode, tr_fun, [])
-    # write_dict_or_list_to_json_file('feed/feed_items_v_2.json', mode)
-    # data_model = get_feed_model_from_feed_items_file('feed/feed_items_v0.json', ['response_data', 'content'])
-    # write_dict_or_list_to_json_file('feed/feed_items_model_v_2_2.json', data_model)
-    
-    # def fun_trav(model_el: Dict, path: List[str]):
-    #     if model_el.get('value', None):
-    #             del model_el['value']
-
-    
-    # model: Dict = load_dict_or_list_from_json_file('temp7.json')
-    # feed_model_traversing(model, fun_trav)
-    # # traversingfor k, v in model.items():
-    # write_dict_or_list_to_json_file('temp8.json', model)
     
