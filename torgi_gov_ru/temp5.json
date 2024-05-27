@@ -1,0 +1,3423 @@
+{
+    "id": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "version": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "int"
+            }
+        ]
+    },
+    "createDate": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "updateDate": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "noticeNumber": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "noticeStatus": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "publishDate": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "timezoneOffset": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "timezoneOffsetAbberviation": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "biddForm": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "dict",
+                "fields": {
+                    "code": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "procedureName": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "biddEndTime": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "biddType": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "dict",
+                "fields": {
+                    "code": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "biddStartTime": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "biddReviewDate": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "bidderOrg": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "dict",
+                "fields": {
+                    "code": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "inn": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "kpp": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "ogrn": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "legalAddress": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "actualAddress": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "shortName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "tel": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "email": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "contPerson": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "okfsCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "publicFormation": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "etpCode": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "lots": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "list",
+                "fields": {
+                    "createDate": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "id": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "lotNumber": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "int"
+                            }
+                        ]
+                    },
+                    "noticeNumber": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "lotStatus": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "lotName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "priceMin": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "float"
+                            },
+                            {
+                                "type": "int"
+                            }
+                        ]
+                    },
+                    "etpUrl": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "etpCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "biddFormCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "biddTypeCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "lotDescription": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "deposit": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "float"
+                            },
+                            {
+                                "type": "int"
+                            }
+                        ]
+                    },
+                    "previousBiddInfo": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "previousProcedures": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {
+                                    "noticeNumber": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "lotNumber": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "int"
+                                            }
+                                        ]
+                                    },
+                                    "publishDate": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "lotStatus": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "subjectRFCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "estateAddress": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "currencyCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "imageIds": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {}
+                            }
+                        ]
+                    },
+                    "attachments": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {
+                                    "fileId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "signatureId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "fileName": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "fileSize": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "int"
+                                            }
+                                        ]
+                                    },
+                                    "uploadDate": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "hash": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "attachmentTypeCode": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "attachmentTypeName": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "inactive": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "bool"
+                                            }
+                                        ]
+                                    },
+                                    "checkResult": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "inactiveDate": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "priceStep": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "float"
+                            },
+                            {
+                                "type": "int"
+                            }
+                        ]
+                    },
+                    "characteristics": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {
+                                    "characteristicValue": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            },
+                                            {
+                                                "type": "float"
+                                            },
+                                            {
+                                                "type": "list",
+                                                "fields": {
+                                                    "value": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "selectNsi": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "code": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "actual": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "bool"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "id": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "createDate": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "updateDate": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "pimId": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "pimUpdateDateTime": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "int"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "dict",
+                                                "fields": {
+                                                    "value": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "selectNsi": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "code": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "actual": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "bool"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "id": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "createDate": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "updateDate": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "pimId": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "pimUpdateDateTime": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "int"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "int"
+                                            }
+                                        ]
+                                    },
+                                    "name": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "code": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "type": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "unit": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "dict",
+                                                "fields": {
+                                                    "code": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "symbol": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "id": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "category": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "dict",
+                                "fields": {
+                                    "code": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "name": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "ownershipForm": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "dict",
+                                "fields": {
+                                    "code": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "name": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "isCompound": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "bool"
+                            }
+                        ]
+                    },
+                    "attributes": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {
+                                    "code": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "fullName": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "value": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "dict",
+                                                "fields": {
+                                                    "code": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "str"
+                                            },
+                                            {
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "type": "int"
+                                            },
+                                            {
+                                                "type": "float"
+                                            },
+                                            {
+                                                "type": "list",
+                                                "fields": {
+                                                    "code": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "attributeType": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "group": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "dict",
+                                                "fields": {
+                                                    "code": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "displayGroupType": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "sortOrder": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "int"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "hasAppeals": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "bool"
+                            }
+                        ]
+                    },
+                    "isStopped": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "bool"
+                            }
+                        ]
+                    },
+                    "isAnnulled": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "bool"
+                            }
+                        ]
+                    },
+                    "lotVat": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "dict",
+                                "fields": {
+                                    "code": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "name": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "depositElectronicPlatform": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "bool"
+                            }
+                        ]
+                    },
+                    "depositRecipientName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "depositRecipientINN": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "depositRecipientKPP": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "depositBankName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "depositBIK": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "depositPayAccount": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "depositCorAccount": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "depositPurposePayment": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "egrkns": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {
+                                    "id": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "number": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "name": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "egrnInfoRequestList": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {
+                                    "requestId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "status": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "hasRestrictions": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "bool"
+                                            }
+                                        ]
+                                    },
+                                    "cadastralOrderNumber": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "int"
+                                            }
+                                        ]
+                                    },
+                                    "objects": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "list",
+                                                "fields": {
+                                                    "code": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "objectTypeCode": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "cadastralNumber": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "depositTreasuryAccount": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "privatizationReason": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "cutoffPrice": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "float"
+                            }
+                        ]
+                    },
+                    "priceDecreaseStep": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "float"
+                            }
+                        ]
+                    },
+                    "lotToPlanLink": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "dict",
+                                "fields": {
+                                    "planName": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "objectNumber": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "objectName": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "planObjectId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "suspensions": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {
+                                    "createDate": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "publishDate": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "lotNumber": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "int"
+                                            }
+                                        ]
+                                    },
+                                    "attachments": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "list",
+                                                "fields": {
+                                                    "fileId": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "signatureId": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "fileName": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "fileSize": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "int"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "uploadDate": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "hash": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "attachmentTypeCode": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "attachmentTypeName": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "inactive": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "bool"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "checkResult": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "versionId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "signedData": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "dict",
+                                                "fields": {
+                                                    "fileId": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "signatureId": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "fileName": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "fileSize": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "int"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "uploadDate": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "hash": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "inactive": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "bool"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "stopReason": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "dict",
+                                                "fields": {
+                                                    "name": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "code": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "decisionDate": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "additionalInfo": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "decisionNumber": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "priceFin": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "float"
+                            }
+                        ]
+                    },
+                    "renewals": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {
+                                    "createDate": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "publishDate": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "additionalInfo": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "lotNumber": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "int"
+                                            }
+                                        ]
+                                    },
+                                    "attachments": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "list",
+                                                "fields": {
+                                                    "fileId": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "signatureId": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "fileName": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "fileSize": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "int"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "uploadDate": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "hash": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "attachmentTypeCode": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "attachmentTypeName": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "inactive": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "bool"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "checkResult": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "versionId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "signedData": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "dict",
+                                                "fields": {
+                                                    "fileId": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "signatureId": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "fileName": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "fileSize": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "int"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "uploadDate": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "hash": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "str"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "inactive": {
+                                                        "visible": "true",
+                                                        "feed": "true",
+                                                        "feed_human_readable_name": "true",
+                                                        "human_readable_name": "",
+                                                        "types": [
+                                                            {
+                                                                "type": "bool"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "biddOrgRightHolder": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "bool"
+            }
+        ]
+    },
+    "rightHolderOrg": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "dict",
+                "fields": {
+                    "code": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "name": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "inn": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "kpp": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "ogrn": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "legalAddress": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "actualAddress": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "shortName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "okfsCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "publicFormation": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "attachments": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "list",
+                "fields": {
+                    "fileId": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "signatureId": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "fileName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "fileSize": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "int"
+                            }
+                        ]
+                    },
+                    "uploadDate": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "hash": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "attachmentTypeCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "attachmentTypeName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "inactive": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "bool"
+                            }
+                        ]
+                    },
+                    "checkResult": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "inactiveDate": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "auctionStartDate": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "actual": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "bool"
+            }
+        ]
+    },
+    "signedData": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "dict",
+                "fields": {
+                    "fileId": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "signatureId": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "fileName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "fileSize": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "int"
+                            }
+                        ]
+                    },
+                    "uploadDate": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "hash": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "attributes": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "list",
+                "fields": {
+                    "code": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "fullName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "value": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            },
+                            {
+                                "type": "bool"
+                            },
+                            {
+                                "type": "dict",
+                                "fields": {
+                                    "code": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "name": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "attributeType": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "group": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "dict",
+                                "fields": {
+                                    "code": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "name": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "displayGroupType": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "sortOrder": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "int"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "hasAppeals": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "bool"
+            }
+        ]
+    },
+    "versionId": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "rootId": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "firstVersionPublicationDate": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "isAnnulled": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "bool"
+            }
+        ]
+    },
+    "npaHintCode": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "biddRules": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    },
+    "cancellations": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "list",
+                "fields": {
+                    "publishDate": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "decisionDate": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "cancellationReason": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "dict",
+                                "fields": {
+                                    "code": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "name": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "addInfo": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "attachments": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {
+                                    "docId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "typeCode": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "typeName": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "cancellationAttachments": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "list",
+                                "fields": {
+                                    "fileId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "signatureId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "fileName": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "fileSize": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "int"
+                                            }
+                                        ]
+                                    },
+                                    "uploadDate": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "hash": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "attachmentTypeCode": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "attachmentTypeName": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "inactive": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "bool"
+                                            }
+                                        ]
+                                    },
+                                    "checkResult": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "lotNumber": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "int"
+                            }
+                        ]
+                    },
+                    "versionId": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "str"
+                            }
+                        ]
+                    },
+                    "signedData": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "types": [
+                            {
+                                "type": "dict",
+                                "fields": {
+                                    "fileId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "signatureId": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "fileName": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "fileSize": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "int"
+                                            }
+                                        ]
+                                    },
+                                    "uploadDate": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "hash": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "str"
+                                            }
+                                        ]
+                                    },
+                                    "inactive": {
+                                        "visible": "true",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "types": [
+                                            {
+                                                "type": "bool"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "changeReason": {
+        "visible": "true",
+        "feed": "true",
+        "feed_human_readable_name": "true",
+        "human_readable_name": "",
+        "types": [
+            {
+                "type": "str"
+            }
+        ]
+    }
+}
