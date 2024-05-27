@@ -1,4 +1,5 @@
 import os
+import re
 import typing
 from urllib import request
 import scrapy
@@ -13,7 +14,7 @@ import items
 class SearchformSpider(scrapy.Spider):
     name = "searchform"
     allowed_domains = ["torgi.gov.ru"]
-    search_form_json_file = 'spiders/search_form.v3 copy.json'
+    search_form_json_file = 'spiders/search_form.v3.json'
     # base url for request https://torgi.gov.ru/new/api/public/lotcards/search? 
     # "scheme" + "host" + "filename" from search_form.v3.json
     # request_url_base_str: str
@@ -24,20 +25,18 @@ class SearchformSpider(scrapy.Spider):
 
     def __init__(self, name: Optional[str] = None, **kwargs: Any):
         self.logger.debug(f'kwargs: {kwargs:}')
-        # self.logger.debug(f'in __init__{os.getcwd() }')
         if name is not None:
             self.name = name
         elif not getattr(self, "name", None):
             raise ValueError(f"{type(self).__name__} must have a name")
-        self.logger.debug(os.getcwd())    
         
-        request_url_base_str, request_query_dict = util.get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(self.search_form_json_file) 
-        
-        self.logger.debug('util.get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(self.search_form_json_file) called')
-        self.logger.debug(f'request_url_base_str: {request_url_base_str}')
+        self.search_form_dict: Dict = typing.cast(Dict, util.load_dict_or_list_from_json_file(self.search_form_json_file))
+        self.feed_model: Dict = self.search_form_dict['feed']
+        request_query_dict: Dict = util.get_query_dict_from_search_form_v3_dict(self.search_form_dict)
         self.logger.debug(f'request_query_dict: {request_query_dict}')
         
-        self.request_url_base_str: str = request_url_base_str
+        self.request_url_base_str: str =  f"{self.search_form_dict['scheme']}://{self.search_form_dict['host']}{self.search_form_dict['base_filename']['filename']}"
+        self.logger.debug(f'request_url_base_str: {self.request_url_base_str}')
         update_query_dict, update_self_dict = util.unpack_dict(pattern_dict=request_query_dict, unpacked_dict=kwargs)
         
         self.logger.debug(f'update_query_dict: {update_query_dict}')
@@ -55,23 +54,20 @@ class SearchformSpider(scrapy.Spider):
         self.logger.debug(f'updated_request_query_dict_whit_defaul_value: {updated_request_query_dict_whit_defaul_value}')
         
         self.request_query_dict: Dict[str, List[str]] = updated_request_query_dict_whit_defaul_value
-        # self.logger.debug(f'updated_request_query_dict: {updated_request_query_dict}')
-        
-        # self.request_query_dict.update(wraped_update_query_dict)
 
         self.__dict__.update(update_self_dict)
         if not hasattr(self, "start_urls"):
             self.start_urls: List[str] = []
-        statr_url = util.get_query_url(self.request_url_base_str, self.request_query_dict)
-        self.logger.debug(f'statr_url: {statr_url}')
-        self.start_urls.append(statr_url)
-        self.notices_url = util.get_notices_url_from_search_form_v3_file(self.search_form_json_file)
-        self.base_filename_headers = util.get_base_filename_headers_from_search_form_v3_file(self.search_form_json_file)
-        self.notices_filename_headers = util.get_notices_filename_headers_from_search_form_v3_file(self.search_form_json_file)
-        self.notices_cache = {}
+        self.start_url = util.get_query_url(self.request_url_base_str, self.request_query_dict)
+        self.logger.debug(f'statr_url: {self.start_url}')
+        # self.notices_url = util.get_notices_url_from_search_form_v3_file(self.search_form_json_file)
+        self.base_filename_headers = self.search_form_dict['base_filename']['request_headers_for_send']
+        # self.notices_filename_headers = util.get_notices_filename_headers_from_search_form_v3_file(self.search_form_json_file)
+        # self.notices_cache = {}
     
-    # def start_requests(self):
-    #     yield Request('https://torgi.gov.ru/new/api/public/lotcards/search?lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc', self.parse_single_response, headers=self.base_filename_headers)
+    def start_requests(self):
+        yield Request(self.start_url, self.parse, headers=self.base_filename_headers)
+        # yield Request('https://torgi.gov.ru/new/api/public/lotcards/search?lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc', self.parse_single_response, headers=self.base_filename_headers)
     
     def parse(self, response: TextResponse) -> Generator:
         resp_str: str = response.text
@@ -101,45 +97,50 @@ class SearchformSpider(scrapy.Spider):
         resp_dict: Dict = json.loads(resp_str)
         resp_dict_content: List[Dict[str, Any]] = resp_dict['content']
         for v in resp_dict_content:
-            noticeNumber = v['noticeNumber']
-            lotNumber = v['lotNumber']
-            if (raw_notace_item:=self.notices_cache.get(noticeNumber, None)):
-                yield from self.parse_lot(raw_notace_item, lotNumber)                        
-            query_url = f'{self.notices_url}/{noticeNumber}'
-            headers = self.notices_filename_headers
-            headers['Referer'] = f"https://torgi.gov.ru/new/public/notices/view/{noticeNumber}"
+            yield self.parsing_raw_data_relative_to_data_model(self.feed_model, v)
+    
+    
+    def parsing_raw_data_relative_to_data_model(self, feed_model: Dict, lot_card: dict) -> Any:
 
-            yield Request(query_url, 
-                          self.parse_notice, 
-                          headers=headers, 
-                          cb_kwargs={'lotNumber': lotNumber})
-            # item = {
+        for k, v in feed_model.items():
+            if v['feed'] == 'true':
+                key = v['human_readable_name'] if v['feed_human_readable_name'] == 'true' else 
+                if type(lot_card[k]) == 'dict':
+                    value = self.parsing_raw_data_relative_to_data_model(v['dict']['fields'], lot_card[k])
+                    if len(value.keys()) == 1:
+                        value
+                value = lot_card[k] if (not type(lot_card[k]) == 'dict') 
+        return {}
+            
+            
+            
+                       # item = {
             #     'noticeNumber': v['noticeNumber'],
             #     'lotNumber': v['lotNumber'],
             # }
             # yield item        # pass
 
     
-    def parse_notice(self, response: TextResponse, lotNumber: str):
-        notice_str: str = response.text
-        notice_dict: Dict = json.loads(notice_str)
-        noticeNumber: str = notice_dict['noticeNumber']
-        raw_notice_item: Dict = self.get_raw_notice_item(notice_dict)
-        # raw_notice_item = items.NoticeItem(notice_dict)
-        self.notices_cache[noticeNumber] = raw_notice_item
-        yield from self.load_notaces_attachments(notice_dict)
-        yield from self.parse_lot(raw_notice_item, lotNumber)
+    # def parse_notice(self, response: TextResponse, lotNumber: str):
+    #     notice_str: str = response.text
+    #     notice_dict: Dict = json.loads(notice_str)
+    #     noticeNumber: str = notice_dict['noticeNumber']
+    #     raw_notice_item: Dict = self.get_raw_notice_item(notice_dict)
+    #     # raw_notice_item = items.NoticeItem(notice_dict)
+    #     self.notices_cache[noticeNumber] = raw_notice_item
+    #     yield from self.load_notaces_attachments(notice_dict)
+    #     yield from self.parse_lot(raw_notice_item, lotNumber)
         
-    def get_raw_notice_item(self, notice_dict: Dict):
-        return {}
+    # def get_raw_notice_item(self, notice_dict: Dict):
+    #     return {}
         
         
-    def parse_lot(self, raw_notice_item: Dict, lotNumber:str) -> Generator:
-        yield
+    # def parse_lot(self, raw_notice_item: Dict, lotNumber:str) -> Generator:
+    #     yield
     
-    def load_notaces_attachments(self, notice_dict: Dict) -> Generator:
+    # def load_notaces_attachments(self, notice_dict: Dict) -> Generator:
         
-        yield
+    #     yield
     
     def get_response_request_heades_and_response_data_to_feed_items_v1(self, response: TextResponse) -> Generator:
         req: Request = typing.cast(Request, response.request)
