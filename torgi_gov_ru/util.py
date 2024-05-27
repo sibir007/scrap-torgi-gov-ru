@@ -102,6 +102,8 @@ TORGI_GOV_SEARSH_DICT2 = {
     }
 }
 
+TORGI_GOV_NOTICES_URL = 'https://torgi.gov.ru/new/api/public/notices/noticeNumber/23000051770000000058'
+
 TORGI_GOV_QUERY2 = {
             "lotStatus": "PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER",
             "text": "жилой дом",
@@ -178,19 +180,19 @@ NEW_API_PUBLIC_NOTICES_NOTICENUMBE = {
 }
 }
 
-HTTP/1.1 200 
-Server: nginx
-Date: Sun, 19 May 2024 10:19:56 GMT
-Content-Type: application/json
-Transfer-Encoding: chunked
-Connection: keep-alive
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-Strict-Transport-Security: max-age=31536000 ; includeSubDomains
-X-Frame-Options: SAMEORIGIN
+# HTTP/1.1 200 
+# Server: nginx
+# Date: Sun, 19 May 2024 10:19:56 GMT
+# Content-Type: application/json
+# Transfer-Encoding: chunked
+# Connection: keep-alive
+# X-Content-Type-Options: nosniff
+# X-XSS-Protection: 1; mode=block
+# Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+# Pragma: no-cache
+# Expires: 0
+# Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+# X-Frame-Options: SAMEORIGIN
 
 url_parts = ('scheme', 'netloc', 'path', 'params', 'query', 'fragment')
 linc = 'https://zakupki.gov.ru/epz/order/extendedsearch/results.html?searchString=%D1%83%D0%B7%D0%B5%D0%BB+%D1%83%D1%87%D1%91%D1%82%D0%B0&morphology=on&search-filter=%D0%94%D0%B0%D1%82%D0%B5+%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F&pageNumber=1&sortDirection=false&recordsPerPage=_10&showLotsInfoHidden=false&sortBy=UPDATE_DATE&fz44=on&fz223=on&af=on&ca=on&pc=on&pa=on&currencyIdGeneral=-1'
@@ -1216,9 +1218,39 @@ def get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file(sea
     
     search_form_v3_dict: dict = load_dict_from_json_file(search_form_json_file)
     
-    base_url: str = f"{search_form_v3_dict['scheme']}://{search_form_v3_dict['host']}{search_form_v3_dict['filename']}"
+    base_url: str = get_base_url_from_search_form_v3_dict(search_form_v3_dict)
     query_dict = get_query_dict_from_search_form_v3_dict(search_form_v3_dict)
     return base_url, query_dict
+
+
+def get_base_url_from_search_form_v3_file(search_form_v3_file: str) -> str:
+    """принимает search_form_v3_file - возвращает base_url str"""
+
+    search_form_v3_dict: dict = load_dict_from_json_file(search_form_v3_file)
+    return get_base_url_from_search_form_v3_dict(search_form_v3_dict)
+
+def get_notices_url_from_search_form_v3_file(search_form_v3_file: str) -> str:
+    """принимает search_form_v3_file - возвращает notices_url str"""
+
+    search_form_v3_dict: dict = load_dict_from_json_file(search_form_v3_file)
+    return get_notices_url_from_search_form_v3_dict(search_form_v3_dict)
+
+
+
+def get_base_url_from_search_form_v3_dict(search_form_v3_dict: Dict) -> str:
+    """принимает search_form_v3_dict - возвращает base_url str"""
+
+    return f"{search_form_v3_dict['scheme']}://{search_form_v3_dict['host']}{search_form_v3_dict['base_filename']['filename']}"
+
+def get_notices_url_from_search_form_v3_dict(search_form_v3_dict: Dict) -> str:
+    """принимает search_form_v3_dict - возвращает notices_url str"""
+
+    return f"{search_form_v3_dict['scheme']}://{search_form_v3_dict['host']}{search_form_v3_dict['notices_filename']['filename']}"
+
+
+
+
+
 
 def get_query_dict_from_search_form_v3_dict(search_form_v3_dict: dict) -> dict:
     """получает search_form_v3_dict и возвращает:
@@ -1338,4 +1370,7 @@ if __name__ == '__main__':
     # url_str = get_query_url(req_url_str, query_dikt, False) 
     # print(url_str)
     
-    
+    res_hed_dict =parse_raw_headers_to_dict('notice_resp_head.txt')
+    write_dict_or_list_to_json_file('notice_resp_head.json', res_hed_dict)
+    req_hed_dict =parse_raw_headers_to_dict('notice_req_head.txt')
+    write_dict_or_list_to_json_file('notice_req_head.json', req_hed_dict)

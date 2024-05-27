@@ -1,0 +1,15 @@
+Host: torgi.gov.ru
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0
+Accept: application/json, text/plain, */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+organizationId: null
+branchId: null
+traceparent: 00-1d76a704ce1c083a95a4b0140e62f592-2480b75e351e81e8-01
+DNT: 1
+Connection: keep-alive
+Referer: https://torgi.gov.ru/new/public/lots/reg
+Cookie: _ym_uid=1714457743802051877; _ym_d=1714457743; session-cookie=17d0d9d9ee1839d9a59d42d9b4b53d111447ec1704118be44b17b122967d28168b50ade3a836a61a94556eb08c0b4ef3
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
