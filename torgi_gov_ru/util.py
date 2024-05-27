@@ -1,7 +1,7 @@
 
 # from types import Generator
 from playwright.sync_api import sync_playwright, Browser, Page, Request, Response
-from typing import Dict, Generator, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
+from typing import Iterable, Dict, Generator, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 import typing
 from urllib import parse, request
 from lxml import html
@@ -1449,6 +1449,36 @@ def _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list: Lis
 
     return typing.cast(Generator[Dict[str, Any], Any, Any], (feed_item['response_data'] for feed_item in feed_items_v1_list))
 
+
+def coroutine(fun: Callable) -> Callable:
+    def wrapper(*args, **kwargs) -> Generator:
+        gen = fun(args, kwargs)
+        next(gen)
+        return gen
+    return wrapper
+
+@coroutine
+def get_data_generator_from_dict_iterable(target_iterable: Iterable[Dict], path: List[str] = []) -> Generator:
+    """принимает Iterable структуру и путь List - возращает генератор элементов соответствующих путю"""
+    path_len = len(path)
+    for item in target_iterable:
+        if
+        if not path_len:
+            
+            yield item
+            continue
+        target_item: Dict = item
+        for i in range(0, path_len-1):
+            target_item = typing.cast(Dict, target_item.get(path[i], None))
+            if not target_item:
+                break
+            if isinstance(target_item, Iterable):
+                yield from get_data_generator_from_dict_iterable(target_item, path[i:path_len-1])
+        yield target_item
+    # return (item for item in target_iterable)
+
+
+
 def get_feed_items_v1_keys_maping_from_feed_items_v1_list(feed_items_v1_list: List[Dict]) -> Dict[str, List[Tuple[Tuple[str, str],Tuple[str, str]]]]:
     """принимает feeed_items_v1.json dict - возвращает словарь в котором
     ключи str(tuple), tuple из ключей "response_data" dict a value список 
@@ -1513,6 +1543,26 @@ def get_feed_items_v1_intersection_keys_set_from_feed_items_v1_list(feed_items_v
         keys_set = set(resp_key for resp_key in response_data.keys())
         res_set &= keys_set
     return res_set
+def get_feed_items_v1_difference_keys_set_from_feed_items_v1_file(feed_items_v1_file: str) -> Set[str]:
+    """принимает feeed_items_v1.json файл - возвращает intersection set 
+    из ключей "response_data" dict
+    """
+    feed_items_v1_list: List = typing.cast(List, load_dict_or_list_from_json_file(feed_items_v1_file))
+    
+    return get_feed_items_v1_difference_keys_set_from_feed_items_v1_list(feed_items_v1_list)
+
+def get_feed_items_v1_difference_keys_set_from_feed_items_v1_list(feed_items_v1_list: List[Dict]) -> Set[str]:
+    """принимает feeed_items_v1.json dict - - возвращает intersection set 
+    из ключей "response_data" dict
+    """
+    # response_data_gen = (feed_item['response_data'] for feed_item in feed_items_v1_list)
+    # response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
+    # response_data_gen: Generator[Dict, None, None] = typing.cast(Generator[Dict, None, None], (feed_item['response_data'] for feed_item in feed_items_v1_list))
+    
+    union_set = get_feed_items_v1_union_keys_set_from_feed_items_v1_list(feed_items_v1_list)
+    intersep_set = get_feed_items_v1_intersection_keys_set_from_feed_items_v1_list(feed_items_v1_list)
+    res_set = union_set - intersep_set
+    return res_set
 
 def collect_feed_items_v1_data_keys_type_from_feed_items_v1_file(feed_items_v1_file: str) -> Dict[str, List[str]]:
     """принимает feed_items_v1_file - вычисляет union keys set из ключей"""
@@ -1533,6 +1583,26 @@ def collect_feed_items_v1_data_keys_type_from_feed_items_v1_list(feed_items_v1_l
                 
     res_dict_l: Dict[str, List[str]] = {k:list(v) for k,v in res_dict.items()}
     return res_dict_l
+
+def typing_feed_items_v1_format(feed_items_v1_list: List) -> Dict:
+    """принимает feed_items_v1_format list, возвращает dict описывающий
+    типы полей feed_items_v1_format"""
+    res_dict = {}
+    response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
+    # union_keys_set = get_feed_items_v1_union_keys_set_from_feed_items_v1_list(feed_items_v1_list)
+    for item in response_data_gen:
+        for key, value in item.items():
+            if not key in res_dict:
+                res_dict[key] = []
+            value_type: type = type(value)
+            if not value_type in res_dict[key]:
+                
+                res_dict[key].add({'type': value_type.__name__})
+
+# def _fill_dict_item()            
+            
+
+
 if __name__ == '__main__':
     # pass
     # req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('spiders/search_form.v3 copy.json')
@@ -1555,30 +1625,30 @@ if __name__ == '__main__':
     # union_set_sorted_list = sorted(list(union_set))
     # write_dict_or_list_to_json_file('feed/feed_items.v1_union_set.json', union_set_sorted_list)
 
-    # inters_set: Set[str] = get_feed_items_v1_intersection_keys_set_from_feed_items_v1_file('feed/feed_items.v1.json')
+    diff_set = get_feed_items_v1_difference_keys_set_from_feed_items_v1_file('feed/feed_items.v1.json')
     # inters_set_sorted_list = sorted(list(inters_set))
-    # write_dict_or_list_to_json_file('feed/feed_items.v1_inters_set.json', inters_set_sorted_list)
+    write_dict_or_list_to_json_file('feed/feed_items.v1_diff_set.json', list(diff_set))
 
     # collected_keys = collect_feed_items_v1_data_keys_type_from_feed_items_v1_file('feed/feed_items.v1.json')
     # write_dict_or_list_to_json_file('feed/feed_items.v1_collected_keys.json', collected_keys)
-    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/file-store_req_head.txt')
-    write_dict_or_list_to_json_file('req_res_headers/file-store_req_head.json', hed_dict)
+    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/file-store_req_head.txt')
+    # write_dict_or_list_to_json_file('req_res_headers/file-store_req_head.json', hed_dict)
     
-    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/file-store_res_head.txt')
-    write_dict_or_list_to_json_file('req_res_headers/file-store_res_head.json', hed_dict)
+    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/file-store_res_head.txt')
+    # write_dict_or_list_to_json_file('req_res_headers/file-store_res_head.json', hed_dict)
     
-    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/lotcards_req_head.txt')
-    write_dict_or_list_to_json_file('req_res_headers/lotcards_req_head.json', hed_dict)
+    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/lotcards_req_head.txt')
+    # write_dict_or_list_to_json_file('req_res_headers/lotcards_req_head.json', hed_dict)
 
-    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/lotcards_res_head.txt')
-    write_dict_or_list_to_json_file('req_res_headers/lotcards_res_head.json', hed_dict)
+    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/lotcards_res_head.txt')
+    # write_dict_or_list_to_json_file('req_res_headers/lotcards_res_head.json', hed_dict)
 
-    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/notice_req_head.txt')
-    write_dict_or_list_to_json_file('req_res_headers/notice_req_head.json', hed_dict)
+    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/notice_req_head.txt')
+    # write_dict_or_list_to_json_file('req_res_headers/notice_req_head.json', hed_dict)
 
-    hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/notice_res_head.txt')
-    write_dict_or_list_to_json_file('req_res_headers/notice_res_head.json', hed_dict)
-
+    # hed_dict = parse_raw_headers_from_file_to_dict('req_res_headers/notice_res_head.txt')
+    # write_dict_or_list_to_json_file('req_res_headers/notice_res_head.json', hed_dict)
+    # print(str.__name__)
 
 
 
