@@ -1708,7 +1708,65 @@ def get_feed_model_from_feed_items_list(data_list: List[Dict], init_path: List[s
    
     return initial_mapping_type_dict
 
-        
+
+
+def get_feed_model_from_feed_items_list2(data_list: List[Dict], init_path: List[str] = []) -> Dict:
+    """принимае дата структуру List[Dict], возвращает модель этой структуры"""
+
+    def get_mapping_type_dict(item_generator: Generator) -> Any:
+    
+        res_dict_list: Dict[str, Dict] = {}
+        for t_dict in item_generator:
+            if not isinstance(t_dict, dict):
+                continue
+            
+            for k, v in t_dict.items():
+                # print(f'in for 1: {k}')
+                if not k in res_dict_list:
+                    # print(f'in for 2: {k}')
+                    # print('in for 2')
+                    res_dict_list[k] = {
+                        'visible': 'true',
+                        'feed': 'true',
+                        'feed_human_readable_name': 'true',
+                        'human_readable_name': '',
+                        'types': {},
+                        } 
+                v_dict = {'type': type(v).__name__}
+                if not type(v).__name__ in res_dict_list[k]['types']:
+                    res_dict_list[k]['types'][type(v).__name__] = v_dict
+            
+        return res_dict_list
+                    # print('in append')
+        # print(res_dict_list)
+
+    def collect_heed_items_v1_hierarchy(mapping_type_dict: Dict, path: List[str], feed_items_v1_list: List):
+        for k, v in mapping_type_dict.items():
+            for k_t, v in v['types'].items():
+                if not k_t == 'dict':
+                    if not k_t == 'list':
+                        continue
+                # if item['type'] == 'dict' or 'list':
+                c_path = path.copy()
+                c_path.append(k)
+                # print(f'in main{c_path}')
+                item_gen = get_data_generator_from_dict_iterable(feed_items_v1_list, path=c_path)
+                # for item in item_gen:
+                #     res_collected_list.append(item)
+                res_mapping_type_dict = get_mapping_type_dict(item_gen)
+                collect_heed_items_v1_hierarchy(res_mapping_type_dict, c_path, feed_items_v1_list)
+                v['fields'] = res_mapping_type_dict
+
+    response_data_generator = get_data_generator_from_dict_iterable(data_list, init_path)
+
+    initial_mapping_type_dict = get_mapping_type_dict(response_data_generator)
+    
+    collect_heed_items_v1_hierarchy(initial_mapping_type_dict, init_path, data_list)
+
+   
+    return initial_mapping_type_dict
+
+                
 
 def feed_model_traversing(model: Dict, travers_fun: Callable,  init_path: List[str] = []):
     """принимает feed_model dict, и travers_fun коорая применяется к каждому 
