@@ -17,6 +17,8 @@ from datetime import datetime
 import logging
 from collections import defaultdict
 
+from importlib import simple
+
 
 
 logger = logging.getLogger(__name__)
@@ -1460,7 +1462,7 @@ def get_data_generator_from_dict_iterable(target_iterable: Iterable[Dict], path:
     """принимает Iterable структуру и путь List - возращает генератор элементов соответствующих путю"""
 
     if not isinstance(target_iterable, Iterable):
-        return
+        return 
     # print(path)
     path_len = len(path)
     for item in target_iterable:
@@ -1476,7 +1478,7 @@ def get_data_generator_from_dict_iterable(target_iterable: Iterable[Dict], path:
             # print(i)
             target_item = typing.cast(Dict, target_item.get(path[i], None))
             
-            if not target_item :
+            if target_item == None:
                 break
             if isinstance(target_item, list):
                 yield from get_data_generator_from_dict_iterable(target_item, path[i+1:path_len])
@@ -1530,20 +1532,6 @@ def get_union_keys_set_from_feed_items_list(feed_items_list: List[Dict], path: L
         res_set |= keys_set
     return res_set
 
-# def get_feed_items_v1_union_keys_set_from_dict_iterable(dict_iterable: Iterable[Dict]) -> Set[str]:
-#     """принимает feeed_items_v1.json dict - - возвращает union set 
-#     из ключей "response_data" dict 
-#     """
-#     # response_data_gen = (feed_item['response_data'] for feed_item in feed_items_v1_list)
-#     # response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
-#     # response_data_gen: Generator[Dict, None, None] = typing.cast(Generator[Dict, None, None], (feed_item['response_data'] for feed_item in feed_items_v1_list))
-    
-#     res_set = set()
-#     for target_dict in dict_iterable:
-#         keys_set = set(resp_key for resp_key in target_dict.keys())
-#         res_set |= keys_set
-#     return res_set
-
 def get_intersection_keys_from_feed_items_file(feed_items_file: str, path: List[str]) -> Set[str]:
     """принимает feeed_items.json файл - и путь до некого dict или List[dict] 
     - возвращает intersection set из ключей указанного dict
@@ -1589,25 +1577,25 @@ def get_difference_keys_from_feed_items_list(feed_items_v1_list: List[Dict], pat
     res_set = union_set - intersep_set
     return res_set
 
-def collect_feed_items_v1_data_keys_type_from_feed_items_v1_file(feed_items_v1_file: str) -> Dict[str, List[str]]:
-    """принимает feed_items_v1_file - вычисляет union keys set из ключей"""
+# def collect_feed_items_v1_data_keys_type_from_feed_items_v1_file(feed_items_v1_file: str) -> Dict[str, List[str]]:
+#     """принимает feed_items_v1_file - вычисляет union keys set из ключей"""
 
-    feed_items_v1_list: List = typing.cast(List, load_dict_or_list_from_json_file(feed_items_v1_file))
-    return collect_feed_items_v1_data_keys_type_from_feed_items_v1_list(feed_items_v1_list)
+#     feed_items_v1_list: List = typing.cast(List, load_dict_or_list_from_json_file(feed_items_v1_file))
+#     return collect_feed_items_v1_data_keys_type_from_feed_items_v1_list(feed_items_v1_list)
 
-def collect_feed_items_v1_data_keys_type_from_feed_items_v1_list(feed_items_v1_list: List[Dict[str, Any]]) -> Dict[str, List[str]]:
-    """принимает feed_items_v1_list - вычисляет union keys set из ключей"""
+# def collect_feed_items_v1_data_keys_type_from_feed_items_v1_list(feed_items_v1_list: List[Dict[str, Any]]) -> Dict[str, List[str]]:
+#     """принимает feed_items_v1_list - вычисляет union keys set из ключей"""
 
-    response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
-    union_keys_set = get_union_keys_set_from_feed_items_list(feed_items_v1_list)
-    res_dict: Dict[str, Set[str]] = defaultdict(set)
-    for data_dict in response_data_gen:
-        for key in union_keys_set:
-            if key in data_dict:
-                res_dict[key].add(str(type(data_dict[key])))
+#     response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
+#     union_keys_set = get_union_keys_set_from_feed_items_list(feed_items_v1_list)
+#     res_dict: Dict[str, Set[str]] = defaultdict(set)
+#     for data_dict in response_data_gen:
+#         for key in union_keys_set:
+#             if key in data_dict:
+#                 res_dict[key].add(str(type(data_dict[key])))
                 
-    res_dict_l: Dict[str, List[str]] = {k:list(v) for k,v in res_dict.items()}
-    return res_dict_l
+#     res_dict_l: Dict[str, List[str]] = {k:list(v) for k,v in res_dict.items()}
+#     return res_dict_l
 
 # def typing_feed_items_v1_format(feed_items_v1_list: List) -> Dict:
 #     """принимает feed_items_v1_format list, возвращает dict описывающий
@@ -1642,17 +1630,17 @@ def collect_feed_items_v1_data_keys_type_from_feed_items_v1_list(feed_items_v1_l
 #     return res_dict_list    
                 
 
-def get_feed_model_from_feed_items_file(feed_items_file: str, path: List[str]) -> Dict:
+def get_feed_model_v1_from_feed_items_file(feed_items_file: str, path: List[str]) -> Dict:
     """принимает feed_items_file и path до target elements list, возвращает feed_model dict"""
 
     feed_items_v1_list = typing.cast(List[Dict], load_dict_or_list_from_json_file(feed_items_file))
-    return get_feed_model_from_feed_items_list(feed_items_v1_list, path)
+    return get_feed_model_v1_from_feed_items_list(feed_items_v1_list, path)
     # feed_items_v1_list = load_dict_or_list_from_json_file('feed/feed_items.v1.json')
     # feed_item_v3_list = load_dict_or_list_from_json_file('')
     # path = ['response_data']
     
 
-def get_feed_model_from_feed_items_list(data_list: List[Dict], init_path: List[str] = []) -> Dict:
+def get_feed_model_v1_from_feed_items_list(data_list: List[Dict], init_path: List[str] = []) -> Dict:
     """принимае дата структуру List[Dict], возвращает модель этой структуры"""
 
     def get_mapping_type_dict(item_generator: Generator) -> Any:
@@ -1680,7 +1668,9 @@ def get_feed_model_from_feed_items_list(data_list: List[Dict], init_path: List[s
             
         return res_dict_list
                     # print('in append')
+ 
         # print(res_dict_list)
+
 
     def collect_heed_items_v1_hierarchy(mapping_type_dict: Dict, path: List[str], feed_items_v1_list: List):
         for k, v in mapping_type_dict.items():
@@ -1707,6 +1697,135 @@ def get_feed_model_from_feed_items_list(data_list: List[Dict], init_path: List[s
 
    
     return initial_mapping_type_dict
+
+
+def get_feed_model_v2_from_feed_items_file(feed_items_file: str, path: List[str]) -> Dict:
+    """принимает feed_items_file и path до target elements list, возвращает feed_model dict"""
+
+    feed_items_v1_list = typing.cast(List[Dict], load_dict_or_list_from_json_file(feed_items_file))
+    return get_feed_model_v2_from_feed_items_list(feed_items_v1_list, path)
+    # feed_items_v1_list = load_dict_or_list_from_json_file('feed/feed_items.v1.json')
+    # feed_item_v3_list = load_dict_or_list_from_json_file('')
+    # path = ['response_data']
+    
+
+def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[str] = []) -> Dict:
+    """принимае дата структуру List[Dict], возвращает модель этой структуры"""
+
+
+    def get_simple_type(field_type: str) -> Dict:
+        # simple_type = {
+        #             'visible': 'true',
+        #             'feed': 'true',
+        #             'feed_human_readable_name': 'true',
+        #             'human_readable_name': '',
+        #             'types': {'type': field_type},
+        #             }
+        return {'type': field_type}
+    
+    
+    def get_list_type(item_iterable: Iterable, list_type: Dict = {'type': 'list', 'types': {}}) -> Any:
+        
+        for item in item_iterable:
+            target_type = type(item).__name__
+            if isinstance(item, dict):
+                if (dict_type:=(types:=list_type['types']).get('dict', None)) == None:
+                    types['dict'] = get_dict_type(item)
+                    continue 
+                types['dict'] = get_dict_type(item, dict_type)
+                continue
+            if isinstance(item, list):
+                if (chaild_list_type:=(types:=list_type['types']).get('list', None)) == None:
+                    types['list'] = get_list_type(item) 
+                    continue
+                types['list'] = get_list_type(item, chaild_list_type)
+                continue
+            if list_type['types'].get(target_type, None) == None:
+                list_type['list']['types'][target_type] = get_simple_type(target_type)
+                
+            
+            
+        return list_type    
+            
+
+
+    def get_dict_type(
+        dict_item: Dict, 
+        dict_type: Dict =  {'type':'dict','fields': {}}
+        ) -> Dict:
+        
+        
+        def _get_dict_type_field(field_type: str, 
+                                 field,
+                                 field_dict: Dict = {
+                                    "visible": "true",
+                                    "feed": "true",
+                                    "feed_human_readable_name": "true",
+                                    "human_readable_name": "",
+                                    'path': [],
+                                    "types": {}
+                                }, 
+                                 path: List[str] = []):
+            
+            
+            if field_type == 'dict':
+                f_type = get_dict_type(field)
+            elif field_type == 'list':
+                f_type = get_list_type(field)
+            else:
+                f_type = get_simple_type(field_type)                    
+            field_dict['types'][field_type] = f_type
+            return field_dict
+                
+        for k, v in dict_item.items():
+            item_field_type = type(v).__name__
+            if (field:=(fiedls:=dict_type['fields']).get(k, None)) != None:
+                if type_field_type:=field['types'].get(item_field_type, None):
+                    if type_field_type == 'dict':
+                        pass
+                    if type_field_type == 'list':
+                        pass
+            else:
+                
+                fiedls[k] = _get_dict_type_field(item_field_type, v)
+                
+                continue
+            if type_field_type:=field['types'].get(item_field_type, None):
+                if type_field_type['type']
+            
+            
+            
+            if  field['types'].get(item_field_type, None) == None:
+                fiedls[k] = _get_dict_type_field(item_field_type, v, field)
+                
+        return dict_type
+
+
+    # def collect_heed_items_v1_hierarchy(mapping_type_dict: Dict, path: List[str], feed_items_v1_list: List):
+    #     for k, v in mapping_type_dict.items():
+    #         for k_t, v in v['types'].items():
+    #             if not k_t == 'dict':
+    #                 if not k_t == 'list':
+    #                     continue
+    #             # if item['type'] == 'dict' or 'list':
+    #             c_path = path.copy()
+    #             c_path.append(k)
+    #             # print(f'in main{c_path}')
+    #             item_gen = get_data_generator_from_dict_iterable(feed_items_v1_list, path=c_path)
+    #             # for item in item_gen:
+    #             #     res_collected_list.append(item)
+    #             res_mapping_type_dict = get_dict_type(item_gen)
+    #             collect_heed_items_v1_hierarchy(res_mapping_type_dict, c_path, feed_items_v1_list)
+    #             v['fields'] = res_mapping_type_dict
+
+    response_data_generator: List = typing.cast(List, get_data_generator_from_dict_iterable(data, path))
+
+    res_model = get_list_type(response_data_generator)
+    
+    # collect_heed_items_v1_hierarchy(initial_mapping_type_dict, init_path, data_list)
+
+   
+    return res_model
 
         
 
