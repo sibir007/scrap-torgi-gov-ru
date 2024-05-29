@@ -1,4 +1,5 @@
 
+from tkinter.messagebox import NO
 from playwright.sync_api import sync_playwright, Browser, Page, Request, Response
 from typing import Iterable, Dict, Generator, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 import typing
@@ -17,7 +18,7 @@ from datetime import datetime
 import logging
 from collections import defaultdict
 
-from importlib import simple
+# from importlib import simple
 
 
 
@@ -1723,25 +1724,77 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
         #             }
         return {'type': field_type}
     
-    
-    def get_list_type(item_iterable: Iterable, list_type: Dict = {'type': 'list', 'types': {}}) -> Any:
+    def get_dict_type_field_type(dict_value):
+        v_type_name = type(dict_value).__name__
+        if v_type_name == 'dict':
+            return 
+        if v_type_name == 'list':
+            return
+        return
         
+    
+    
+    
+    
+    def get_dict_type(item, res_dict_type: Dict = {'type': 'dict', 'field': {}}):
+        
+                for k, v in item.items():
+                    res_dict_type['fields'][k] = get_dict_type_field_type(v)
+                    
+                    v_type = type(v).__name__
+                    if v_type == 'dict':
+                        res_dict_type['field'][k] = {
+                                    "visible": "false",
+                                    "feed": "false",
+                                    "feed_human_readable_name": "true",
+                                    "human_readable_name": "",
+                                    "types": {
+                                        "dict": {} 
+                                        }
+                                    }
+        # return res_dict_type
+    
+    def get_list_type(item_iterable: Iterable) -> Any:
+        res_list_type = {'type': 'list', 'types': {}}
         for item in item_iterable:
-            target_type = type(item).__name__
-            if isinstance(item, dict):
+            if (target_type:=type(item).__name__) == 'dict':
+                res_list_type['types'][dict] = get_dict_type(item)
+                
+                
+                
+                
+                res_dict_type = {'type': 'dict', 'field': {}}
+                #  get_dict_type(item) 
+                for k, v in item.items():
+                    v_type = type(v).__name__
+                    if v_type == 'dict':
+                        res_dict_type['field'][k] = {
+                                    "visible": "false",
+                                    "feed": "false",
+                                    "feed_human_readable_name": "true",
+                                    "human_readable_name": "",
+                                    "types": {
+                                        "dict": {} 
+                                        }
+                                    }    
+                res_list_type['types'][dict] = res_dict_type
+                    
+                
+                
+                
                 if (dict_type:=(types:=list_type['types']).get('dict', None)) == None:
                     types['dict'] = get_dict_type(item)
                     continue 
                 types['dict'] = get_dict_type(item, dict_type)
                 continue
-            if isinstance(item, list):
+            if target_type == 'list':
                 if (chaild_list_type:=(types:=list_type['types']).get('list', None)) == None:
                     types['list'] = get_list_type(item) 
                     continue
                 types['list'] = get_list_type(item, chaild_list_type)
                 continue
             if list_type['types'].get(target_type, None) == None:
-                list_type['list']['types'][target_type] = get_simple_type(target_type)
+                list_type['types'][target_type] = get_simple_type(target_type)
                 
             
             
@@ -1755,9 +1808,8 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
         ) -> Dict:
         
         
-        def _get_dict_type_field(field_type: str, 
-                                 field,
-                                 field_dict: Dict = {
+        def get_dict_type_field_value(dict_item_value,
+                                 dict_type_field_value: Dict = {
                                     "visible": "true",
                                     "feed": "true",
                                     "feed_human_readable_name": "true",
@@ -1767,37 +1819,43 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
                                 }, 
                                  path: List[str] = []):
             
-            
-            if field_type == 'dict':
-                f_type = get_dict_type(field)
-            elif field_type == 'list':
-                f_type = get_list_type(field)
+            dict_item_value_type_name = type(dict_item_value).__name__
+            if dict_type_field_value['types'].get(dict_item_value_type_name, None):
+                
+            if dict_item_value_type_name == 'dict':
+                if dict_type_field_value['types'],
+                
+                f_type = get_dict_type(dict_item_value)
+            elif dict_item_value_type_name == 'list':
+                f_type = get_list_type(dict_item_value)
             else:
-                f_type = get_simple_type(field_type)                    
-            field_dict['types'][field_type] = f_type
-            return field_dict
+                f_type = get_simple_type(dict_item_value_type_name)                    
+            dict_type_field_value['types'][dict_item_value_type_name] = f_type
+            return dict_type_field_value
                 
-        for k, v in dict_item.items():
-            item_field_type = type(v).__name__
-            if (field:=(fiedls:=dict_type['fields']).get(k, None)) != None:
-                if type_field_type:=field['types'].get(item_field_type, None):
-                    if type_field_type == 'dict':
+        for dict_item_key, dict_item_value in dict_item.items():
+            dict_item_value_type = type(dict_item_value).__name__
+            if (dict_type_field_value:=dict_type['fields'].get(dict_item_key, None)) != None:
+                if dict_type_field_value_type:=dict_type_field_value['types'].get(dict_item_value_type, None):
+                    if dict_type_field_value_type['type'] == 'dict':
+                        get_dict_type(dict_item_value,)
+                        continue
+                    if dict_type_field_value_type['type'] == 'list':
                         pass
-                    if type_field_type == 'list':
-                        pass
-            else:
-                
-                fiedls[k] = _get_dict_type_field(item_field_type, v)
-                
-                continue
-            if type_field_type:=field['types'].get(item_field_type, None):
-                if type_field_type['type']
+                        continue
+                        
+            dict_type['fields'][dict_item_key] = get_dict_type_field_value(dict_item_value)
+                    
+                    
             
-            
-            
-            if  field['types'].get(item_field_type, None) == None:
-                fiedls[k] = _get_dict_type_field(item_field_type, v, field)
-                
+            if (field:=(fiedls:=dict_type['fields']).get(dict_item_key, None)) != None:
+                if field_type:=field['types'].get(dict_item_value_type, None):
+                    if field_type['type'] == 'dict':
+                        get_dict_type(dict_item_value, field_type)
+                    if field_type['type'] == 'list':
+                        get_list_type(dict_item_value, field_type)
+            else:                
+                fiedls[dict_item_key] = get_dict_type_field_value(dict_item_value_type, dict_item_value)
         return dict_type
 
 
@@ -1934,4 +1992,5 @@ if __name__ == '__main__':
     # url_str = get_query_url(req_url_str, query_dikt, False) 
     # print(url_str)
     
-    
+    list_dict = get_feed_model_v1_from_feed_items_file('feed/feed_items_v0.json',['response_data', 'content'])
+    write_dict_or_list_to_json_file('feed/feed_items_modelv1.json', list_dict)
