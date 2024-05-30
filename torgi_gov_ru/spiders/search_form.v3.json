@@ -187,7 +187,7 @@
             },
             "comment": "",
             "default": [
-                "true"
+                true
             ],
             "group": {
                 "name": "form",
@@ -197,7 +197,7 @@
             "info2_url": "",
             "multi_value": false,
             "name": "byFirstVersion",
-            "required": "true",
+            "required": true,
             "selected_values": []
         },
         "Грани": {
@@ -212,7 +212,7 @@
             },
             "comment": "",
             "default": [
-                "true"
+                true
             ],
             "group": {
                 "name": "form",
@@ -222,7 +222,7 @@
             "info2_url": "",
             "multi_value": false,
             "name": "withFacets",
-            "required": "true",
+            "required": true,
             "selected_values": []
         },
         "Размер": {
@@ -247,7 +247,7 @@
             "info2_url": "",
             "multi_value": false,
             "name": "size",
-            "required": "true",
+            "required": true,
             "selected_values": []
         },
         "Сортировка": {
@@ -271,9 +271,9 @@
                 "sort_order": 5
             },
             "info2_url": "",
-            "multi_value": "true",
+            "multi_value": true,
             "name": "sort",
-            "required": "true",
+            "required": true,
             "selected_values": []
         },
         "Страница": {
@@ -553,7 +553,7 @@
                 "sort_order": 12
             },
             "info2_url": "https://torgi.gov.ru/new/nsi/v1/RELATIONSHIP_BIDD_HINTEXT",
-            "multi_value": "true",
+            "multi_value": true,
             "name": "npaCodes",
             "required": false,
             "selected_values": []
@@ -697,7 +697,7 @@
                 "sort_order": 13
             },
             "info2_url": "https://torgi.gov.ru/new/nsi/v1/BIDD_TYPE",
-            "multi_value": "true",
+            "multi_value": true,
             "name": "biddType",
             "required": false,
             "selected_values": []
@@ -741,7 +741,7 @@
                 "sort_order": 14
             },
             "info2_url": "https://torgi.gov.ru/new/nsi/v1/TYPE_TRANSACTION?actual=true",
-            "multi_value": "true",
+            "multi_value": true,
             "name": "typeTransaction",
             "required": false,
             "selected_values": []
@@ -809,7 +809,7 @@
                 "sort_order": 15
             },
             "info2_url": "https://torgi.gov.ru/new/nsi/v1/RELATIONSHIP_BIDD_HINTEXT",
-            "multi_value": "true",
+            "multi_value": true,
             "name": "biddForm",
             "required": false,
             "selected_values": []
@@ -1636,7 +1636,7 @@
                 "sort_order": 18
             },
             "info2_url": "https://torgi.gov.ru/new/nsi/v1/CATEGORIES?actual=false",
-            "multi_value": "true",
+            "multi_value": true,
             "name": "catCode",
             "required": false,
             "selected_values": []
@@ -1684,7 +1684,7 @@
                 "sort_order": 0
             },
             "info2_url": "",
-            "multi_value": "true",
+            "multi_value": true,
             "name": "lotStatus",
             "required": false,
             "selected_values": []
@@ -2577,9 +2577,9 @@
                 "type": "dict",
                 "fields": {
                     "id": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Ссылка на лот",
                         "value_scrap_type": {"type": "ref", "ref": ""},
                         "key": "",
@@ -2590,9 +2590,9 @@
                         }
                     },
                     "noticeNumber": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Ссылка на извещение",
                         "value_scrap_type": {"type": "ref", "ref": ""},
                         "key": "",
@@ -2603,9 +2603,9 @@
                         }
                     },
                     "lotNumber": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Номер лота",
                         "value_scrap_type": {},
                         "key": "",
@@ -2616,9 +2616,9 @@
                         }
                     },
                     "lotStatus": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Статус лота",
                         "value_scrap_type": {"type": "dict", "dict_likc": []},
                         "key": "",
@@ -2629,9 +2629,9 @@
                         }
                     },
                     "biddType": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Вид торгов",
                         "value_scrap_type": {},
                         "key": "",
@@ -2640,9 +2640,9 @@
                                 "type": "dict",
                                 "fields": {
                                     "code": {
-                                        "visible": "false",
-                                        "feed": "false",
-                                        "feed_human_readable_name": "true",
+                                        "visible": false,
+                                        "feed": false,
+                                        "feed_human_readable_name": true,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
                                         "key": "",
@@ -2653,9 +2653,9 @@
                                         }
                                     },
                                     "name": {
-                                        "visible": "false",
-                                        "feed": "true",
-                                        "feed_human_readable_name": "true",
+                                        "visible": false,
+                                        "feed": true,
+                                        "feed_human_readable_name": true,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
                                         "key": "",
@@ -2670,9 +2670,9 @@
                         }
                     },
                     "biddForm": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Форма проведения",
                         "value_scrap_type": {},
                         "key": "",
@@ -2681,9 +2681,9 @@
                                 "type": "dict",
                                 "fields": {
                                     "code": {
-                                        "visible": "false",
-                                        "feed": "false",
-                                        "feed_human_readable_name": "true",
+                                        "visible": false,
+                                        "feed": false,
+                                        "feed_human_readable_name": true,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
                                         "key": "",
@@ -2694,9 +2694,9 @@
                                         }
                                     },
                                     "name": {
-                                        "visible": "false",
-                                        "feed": "false",
-                                        "feed_human_readable_name": "false",
+                                        "visible": false,
+                                        "feed": false,
+                                        "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
                                         "key": "",
@@ -2711,9 +2711,9 @@
                         }
                     },
                     "lotName": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Предмет торгов (наименование лота)",
                         "value_scrap_type": {},
                         "key": "",
@@ -2724,9 +2724,9 @@
                         }
                     },
                     "lotDescription": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Описание лота",
                         "value_scrap_type": {},
                         "key": "",
@@ -2737,9 +2737,9 @@
                         }
                     },
                     "priceMin": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Начальная цена",
                         "value_scrap_type": {},
                         "key": "",
@@ -2753,9 +2753,9 @@
                         }
                     },
                     "biddEndTime": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Дата и время окончания подачи заявок",
                         "value_scrap_type": {},
                         "key": "",
@@ -2766,9 +2766,9 @@
                         }
                     },
                     "lotImages": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Изображения лота",
                         "value_scrap_type": {"type": "ref", "ref": ""},
                         "key": "",
@@ -2784,9 +2784,9 @@
                         }
                     },
                     "characteristics": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Характеристики лота",
                         "value_scrap_type": {},
                         "key": "characteristicValue",
@@ -2798,9 +2798,9 @@
                                         "type": "dict",
                                         "fields": {
                                             "characteristicValue": {
-                                                "visible": "false",
-                                                "feed": "true",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": true,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "Значение",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -2814,9 +2814,9 @@
                                                 }
                                             },
                                             "name": {
-                                                "visible": "false",
-                                                "feed": "true",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": true,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "Наименование",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -2827,9 +2827,9 @@
                                                 }
                                             },
                                             "code": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -2840,9 +2840,9 @@
                                                 }
                                             },
                                             "unit": {
-                                                "visible": "false",
-                                                "feed": "true",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": true,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "Ед.изм.",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -2851,9 +2851,9 @@
                                                         "type": "dict",
                                                         "fields": {
                                                             "code": {
-                                                                "visible": "false",
-                                                                "feed": "false",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": false,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -2864,9 +2864,9 @@
                                                                 }
                                                             },
                                                             "name": {
-                                                                "visible": "false",
-                                                                "feed": "false",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": false,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -2877,9 +2877,9 @@
                                                                 }
                                                             },
                                                             "symbol": {
-                                                                "visible": "false",
-                                                                "feed": "true",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": true,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -2894,9 +2894,9 @@
                                                 }
                                             },
                                             "type": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -2907,9 +2907,9 @@
                                                 }
                                             },
                                             "id": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -2926,9 +2926,9 @@
                         }
                     },
                     "etpCode": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "false",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": false,
                         "human_readable_name": "ЭTП",
                         "value_scrap_type": {"type": "dict", "dict_path": []},
                         "key": "",
@@ -2939,9 +2939,9 @@
                         }
                     },
                     "subjectRFCode": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Субьект местонахождения имущества",
                         "value_scrap_type": {"type": "dict", "dict_path": []},
                         "key": "",
@@ -2952,9 +2952,9 @@
                         }
                     },
                     "category": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Категория",
                         "value_scrap_type": {},
                         "key": "",
@@ -2963,9 +2963,9 @@
                                 "type": "dict",
                                 "fields": {
                                     "code": {
-                                        "visible": "false",
-                                        "feed": "false",
-                                        "feed_human_readable_name": "true",
+                                        "visible": false,
+                                        "feed": false,
+                                        "feed_human_readable_name": true,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
                                         "key": "",
@@ -2976,9 +2976,9 @@
                                         }
                                     },
                                     "name": {
-                                        "visible": "false",
-                                        "feed": "true",
-                                        "feed_human_readable_name": "false",
+                                        "visible": false,
+                                        "feed": true,
+                                        "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
                                         "key": "",
@@ -2993,9 +2993,9 @@
                         }
                     },
                     "createDate": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Время создания",
                         "value_scrap_type": {},
                         "key": "",
@@ -3006,9 +3006,9 @@
                         }
                     },
                     "timeZoneName": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Временная зона",
                         "value_scrap_type": {},
                         "key": "",
@@ -3019,9 +3019,9 @@
                         }
                     },
                     "timezoneOffset": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Смещение временной зоны",
                         "value_scrap_type": {},
                         "key": "",
@@ -3032,9 +3032,9 @@
                         }
                     },
                     "hasAppeals": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Имеютвя аппеляции",
                         "value_scrap_type": {"type": "dict", "dict_path": []},
                         "key": "",
@@ -3045,9 +3045,9 @@
                         }
                     },
                     "isStopped": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Остановлена",
                         "value_scrap_type": {"type": "dict", "dict_path": []},
                         "key": "",
@@ -3058,9 +3058,9 @@
                         }
                     },
                     "attributes": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Атребуты",
                         "value_scrap_type": {},
                         "key": "value",
@@ -3072,9 +3072,9 @@
                                         "type": "dict",
                                         "fields": {
                                             "code": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3085,9 +3085,9 @@
                                                 }
                                             },
                                             "fullName": {
-                                                "visible": "false",
-                                                "feed": "true",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": true,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "Наименование",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3098,9 +3098,9 @@
                                                 }
                                             },
                                             "attributeType": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3111,9 +3111,9 @@
                                                 }
                                             },
                                             "group": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3122,9 +3122,9 @@
                                                         "type": "dict",
                                                         "fields": {
                                                             "code": {
-                                                                "visible": "false",
-                                                                "feed": "false",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": false,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -3135,9 +3135,9 @@
                                                                 }
                                                             },
                                                             "name": {
-                                                                "visible": "false",
-                                                                "feed": "false",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": false,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -3148,9 +3148,9 @@
                                                                 }
                                                             },
                                                             "displayGroupType": {
-                                                                "visible": "false",
-                                                                "feed": "false",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": false,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -3165,9 +3165,9 @@
                                                 }
                                             },
                                             "sortOrder": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3178,9 +3178,9 @@
                                                 }
                                             },
                                             "value": {
-                                                "visible": "false",
-                                                "feed": "true",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": true,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "Значение",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3189,9 +3189,9 @@
                                                         "type": "dict",
                                                         "fields": {
                                                             "code": {
-                                                                "visible": "false",
-                                                                "feed": "false",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": false,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -3202,9 +3202,9 @@
                                                                 }
                                                             },
                                                             "name": {
-                                                                "visible": "false",
-                                                                "feed": "true",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": true,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -3237,9 +3237,9 @@
                         }
                     },
                     "isAnnulled": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Анулирован",
                         "value_scrap_type": {"type": "dict", "dict_path": []},
                         "key": "",
@@ -3250,9 +3250,9 @@
                         }
                     },
                     "noticeFirstVersionPublicationDate": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Дата публикации первой версии",
                         "value_scrap_type": {},
                         "key": "",
@@ -3263,9 +3263,9 @@
                         }
                     },
                     "npaHintCode": {
-                        "visible": "true",
-                        "feed": "false",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": false,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "",
                         "value_scrap_type": {},
                         "key": "",
@@ -3276,9 +3276,9 @@
                         }
                     },
                     "typeTransaction": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Тип транзакции",
                         "value_scrap_type": {},
                         "key": "",
@@ -3289,9 +3289,9 @@
                         }
                     },
                     "currencyCode": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Валюта",
                         "value_scrap_type": {"type": "dict", "dict_path": []},
                         "key": "",
@@ -3302,9 +3302,9 @@
                         }
                     },
                     "noticeAttributes": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "Атребуты извещения",
                         "value_scrap_type": {},
                         "key": "value",
@@ -3316,9 +3316,9 @@
                                         "type": "dict",
                                         "fields": {
                                             "code": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3329,9 +3329,9 @@
                                                 }
                                             },
                                             "fullName": {
-                                                "visible": "false",
-                                                "feed": "true",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": true,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "Наименование",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3342,9 +3342,9 @@
                                                 }
                                             },
                                             "value": {
-                                                "visible": "false",
-                                                "feed": "true",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": true,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "Значение",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3353,9 +3353,9 @@
                                                         "type": "dict",
                                                         "fields": {
                                                             "code": {
-                                                                "visible": "false",
-                                                                "feed": "false",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": false,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -3366,9 +3366,9 @@
                                                                 }
                                                             },
                                                             "name": {
-                                                                "visible": "false",
-                                                                "feed": "true",
-                                                                "feed_human_readable_name": "false",
+                                                                "visible": false,
+                                                                "feed": true,
+                                                                "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -3386,9 +3386,9 @@
                                                 }
                                             },
                                             "attributeType": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3399,9 +3399,9 @@
                                                 }
                                             },
                                             "group": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3410,9 +3410,9 @@
                                                         "type": "dict",
                                                         "fields": {
                                                             "code": {
-                                                                "visible": "false",
-                                                                "feed": "false",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": false,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -3423,9 +3423,9 @@
                                                                 }
                                                             },
                                                             "name": {
-                                                                "visible": "false",
-                                                                "feed": "false",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": false,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -3436,9 +3436,9 @@
                                                                 }
                                                             },
                                                             "displayGroupType": {
-                                                                "visible": "false",
-                                                                "feed": "false",
-                                                                "feed_human_readable_name": "true",
+                                                                "visible": false,
+                                                                "feed": false,
+                                                                "feed_human_readable_name": true,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
                                                                 "key": "",
@@ -3453,9 +3453,9 @@
                                                 }
                                             },
                                             "sortOrder": {
-                                                "visible": "false",
-                                                "feed": "false",
-                                                "feed_human_readable_name": "true",
+                                                "visible": false,
+                                                "feed": false,
+                                                "feed_human_readable_name": true,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
                                                 "key": "",
@@ -3472,9 +3472,9 @@
                         }
                     },
                     "lotVat": {
-                        "visible": "true",
-                        "feed": "true",
-                        "feed_human_readable_name": "true",
+                        "visible": true,
+                        "feed": true,
+                        "feed_human_readable_name": true,
                         "human_readable_name": "НДС",
                         "value_scrap_type": {},
                         "key": "",
@@ -3483,9 +3483,9 @@
                                 "type": "dict",
                                 "fields": {
                                     "code": {
-                                        "visible": "false",
-                                        "feed": "false",
-                                        "feed_human_readable_name": "true",
+                                        "visible": false,
+                                        "feed": false,
+                                        "feed_human_readable_name": true,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
                                         "key": "",
@@ -3496,9 +3496,9 @@
                                         }
                                     },
                                     "name": {
-                                        "visible": "false",
-                                        "feed": "false",
-                                        "feed_human_readable_name": "false",
+                                        "visible": false,
+                                        "feed": false,
+                                        "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
                                         "key": "",
@@ -3738,16 +3738,15 @@
                 "parent_path": "undefined",
                 "parent_value": "undefined",
                 "value_path": "response_json",
-                "value_value": "hintText",
+                "value_value": "hintText"
                 
             },
             "comment": "",
             "info2_url": "https://torgi.gov.ru/new/nsi/v1/RELATIONSHIP_BIDD_HINTEXT",
-            "multi_value": "true",
+            "multi_value": true,
             "name": "npaCodes",
-            "required": false,
+            "required": false
         }
-=======
->>>>>>> a525b1c0d5351d6549ac3cc3c0a1da529d014ec9
+
     }
 }

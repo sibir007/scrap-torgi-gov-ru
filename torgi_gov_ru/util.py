@@ -1,6 +1,7 @@
 
 # from tkinter.messagebox import NO
 from attr import field
+from networkx import difference
 from playwright.sync_api import sync_playwright, Browser, Page, Request, Response
 from typing import Iterable, Dict, Generator, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 import typing
@@ -1595,9 +1596,9 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
 
     def get_value_dict_type():
         field_attr = {
-                    "visible": "false",
-                    "feed": "false",
-                    "feed_human_readable_name": "true",
+                    "visible": False,
+                    "feed": False,
+                    "feed_human_readable_name": True,
                     "human_readable_name": "",
             # {"type": "direct"}, {"type": "dict", "dict_path": []}, {"type": "ref", "ref": ""} 
             # direct - значение берётся то которое вычисляетс
@@ -1689,17 +1690,17 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
             'type': "dict",
             'field': {
                 'some_field': {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
+                            "visible": False,
+                            "feed": False,
+                            "feed_human_readable_name": True,
                             "human_readable_name": "",
                             "types": {
                                 'dict': {
                                         'type': "dict",
                                         'field': {
                                             'some_field': {
-                                                        "visible": "false",
-                                                        "feed": "false",
+                                                        "visible": False,
+                                                        "feed": False,
                                                         "feed_human_readable_name": "true",
                                                         "human_readable_name": "",
                                                         "types": {
@@ -1863,6 +1864,67 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
      feed_items_model_v_1
     """ 
     feed_model = search_form_v3['feed']['types']['dict']['fields']
+
+    
+    def _get_to_feeded_fields(dict_model: Dict) -> List[str]:
+        to_feeded_fields = [
+                            field 
+                            for field 
+                            in dict_model
+                            if field['feed']
+                            ]
+        return to_feeded_fields
+
+    def _get_field_name(model, 
+                        field_name: str, 
+                        data: Dict) -> str:
+
+        return field_value['human_readable_name'] if (field_value:=data.get(field_name, None)) and field_value['feed_human_readable_name'] else  field_name
+    
+    def _get_field_value(model: Union[List, Dict], 
+                         field_name: str, 
+                         data: Union[List, Dict]):
+        # проверяем есть ли поле в данных
+        if (field_value:=data.get(field_name, None)):
+            # поле есть в данных, проеряем тип
+            # проверяем что тип поля присутсвует в типах модели
+            if field_type:=type(field_value).__name__
+            if isinstance(field_value, dict):
+                pass
+            elif isinstance(field_value,list):
+                pass
+            else:
+                # простой тип, присваиваем сразу
+                pass
+                
+                
+            # поле есть в данных
+            field_value
+        else:
+            field_value = ""
+            # поля в данных нет
+        return field_value
+    
+    def parse_dict(model: Dict, data: Dict) -> Dict:
+        dif_field_name = set(data.keys()) - set(model.keys())
+        for field_name in dif_field_name:
+            logger.warning(f'field_name: {field_name} not in model')
+        to_feeded_fields_name: List[str] = _get_to_feeded_fields(model)
+        # мы отправляем в получение значения все поля не проверяя
+        # есть ли они в полученных данных
+        res_dict = {
+                _get_field_name(model, field_name, data): 
+                _get_field_value(model, field_name, data)
+                for field_name in to_feeded_fields_name 
+                }
+        
+            
+        return res_dict
+
+
+
+
+    res = parse_dict(raw_data)
     res_dict = {}
     for k, v in feed_model.items():
         if v['feed'] == 'true':
@@ -1909,9 +1971,9 @@ if __name__ == '__main__':
     # req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('spiders/search_form.v3 copy.json')
     # url_str = get_query_url(req_url_str, query_dikt, False) 
     # print(url_str)
-    list_dict = get_feed_model_v2_from_feed_items_file('feed/feed_items_v0.json', ['response_data', 'content'])
+    list_dict = get_feed_model_v2_from_feed_items_file('feed/27.05.24_09-10-05.items.json', ['content'])
     # list_dict = get_feed_model_v1_from_feed_items_file('feed/feed_items_v0.json',['response_data', 'content'])
-    write_dict_or_list_to_json_file('feed/feed_items_lot_card_modelv2.json', list_dict)
+    write_dict_or_list_to_json_file('feed/feed_items_lot_card_modelv2_1.json', list_dict)
     # res_data = load_dict_or_list_from_json_file('feed/feed_items.v1.json')
     # list_dict = res_data[0]['response_data']
     
