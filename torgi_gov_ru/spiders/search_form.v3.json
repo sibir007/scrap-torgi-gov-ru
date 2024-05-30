@@ -2571,782 +2571,943 @@
         }
     },
     "feed": {
-        "id": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Ссылка на лот",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "noticeNumber": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Ссылка на извещение",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "lotNumber": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Номер лота",
-            "types": {
-                "int": {
-                    "type": "int"
-                }
-            }
-        },
-        "lotStatus": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Статус лота",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "biddType": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Вид торгов",
-            "types": {
-                "dict": {
-                    "type": "dict",
-                    "fields": {
-                        "code": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "false",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
+        "type": "list",
+        "types": {
+            "dict": {
+                "type": "dict",
+                "fields": {
+                    "id": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Ссылка на лот",
+                        "value_scrap_type": {"type": "ref", "ref": ""},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
                             }
-                        },
-                        "name": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "false",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
+                        }
+                    },
+                    "noticeNumber": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Ссылка на извещение",
+                        "value_scrap_type": {"type": "ref", "ref": ""},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
+                            }
+                        }
+                    },
+                    "lotNumber": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Номер лота",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "int": {
+                                "type": "int"
+                            }
+                        }
+                    },
+                    "lotStatus": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Статус лота",
+                        "value_scrap_type": {"type": "dict", "dict_likc": []},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
+                            }
+                        }
+                    },
+                    "biddType": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Вид торгов",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "dict": {
+                                "type": "dict",
+                                "fields": {
+                                    "code": {
+                                        "visible": "false",
+                                        "feed": "false",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "value_scrap_type": {},
+                                        "key": "",
+                                        "types": {
+                                            "str": {
+                                                "type": "str"
+                                            }
+                                        }
+                                    },
+                                    "name": {
+                                        "visible": "false",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "value_scrap_type": {},
+                                        "key": "",
+                                        "types": {
+                                            "str": {
+                                                "type": "str"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                }
-            }
-        },
-        "biddForm": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Форма проведения",
-            "types": {
-                "dict": {
-                    "type": "dict",
-                    "fields": {
-                        "code": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
-                            }
-                        },
-                        "name": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "Форма проведения",
-                            "types": {
-                                "str": {
-                                    "type": "str"
+                    },
+                    "biddForm": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Форма проведения",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "dict": {
+                                "type": "dict",
+                                "fields": {
+                                    "code": {
+                                        "visible": "false",
+                                        "feed": "false",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "value_scrap_type": {},
+                                        "key": "",
+                                        "types": {
+                                            "str": {
+                                                "type": "str"
+                                            }
+                                        }
+                                    },
+                                    "name": {
+                                        "visible": "false",
+                                        "feed": "false",
+                                        "feed_human_readable_name": "false",
+                                        "human_readable_name": "",
+                                        "value_scrap_type": {},
+                                        "key": "",
+                                        "types": {
+                                            "str": {
+                                                "type": "str"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                }
-            }
-        },
-        "lotName": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Предмет торгов (наименование лота)",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "lotDescription": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Описание лота",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "priceMin": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Начальная цена",
-            "types": {
-                "float": {
-                    "type": "float"
-                },
-                "int": {
-                    "type": "int"
-                }
-            }
-        },
-        "biddEndTime": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Дата и время окончания подачи заявок",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "lotImages": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Изображения лота",
-            "types": {
-                "list": {
-                    "type": "list",
-                    "fields": {}
-                }
-            }
-        },
-        "characteristics": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Характеристики лота",
-            "types": {
-                "list": {
-                    "type": "list",
-                    "fields": {
-                        "characteristicValue": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "Значение",
-                            "types": {
-                                "float": {
-                                    "type": "float"
-                                },
-                                "str": {
-                                    "type": "str"
+                    },
+                    "lotName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Предмет торгов (наименование лота)",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
+                            }
+                        }
+                    },
+                    "lotDescription": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Описание лота",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
+                            }
+                        }
+                    },
+                    "priceMin": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Начальная цена",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "float": {
+                                "type": "float"
+                            },
+                            "int": {
+                                "type": "int"
+                            }
+                        }
+                    },
+                    "biddEndTime": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Дата и время окончания подачи заявок",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
+                            }
+                        }
+                    },
+                    "lotImages": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Изображения лота",
+                        "value_scrap_type": {"type": "ref", "ref": ""},
+                        "key": "",
+                        "types": {
+                            "list": {
+                                "type": "list",
+                                "types": {
+                                    "str": {
+                                        "type": "str"
+                                    }
                                 }
                             }
-                        },
-                        "name": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "Наименование",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
-                            }
-                        },
-                        "code": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
-                            }
-                        },
-                        "unit": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "Ед.изм.",
-                            "types": {
-                                "dict": {
-                                    "type": "dict",
-                                    "fields": {
-                                        "code": {
-                                            "visible": "false",
-                                            "feed": "false",
-                                            "feed_human_readable_name": "true",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
+                        }
+                    },
+                    "characteristics": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Характеристики лота",
+                        "value_scrap_type": {},
+                        "key": "characteristicValue",
+                        "types": {
+                            "list": {
+                                "type": "list",
+                                "types": {
+                                    "dict": {
+                                        "type": "dict",
+                                        "fields": {
+                                            "characteristicValue": {
+                                                "visible": "false",
+                                                "feed": "true",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "Значение",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "float": {
+                                                        "type": "float"
+                                                    },
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
                                                 }
-                                            }
-                                        },
-                                        "name": {
-                                            "visible": "false",
-                                            "feed": "false",
-                                            "feed_human_readable_name": "true",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
+                                            },
+                                            "name": {
+                                                "visible": "false",
+                                                "feed": "true",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "Наименование",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
                                                 }
-                                            }
-                                        },
-                                        "symbol": {
-                                            "visible": "false",
-                                            "feed": "true",
-                                            "feed_human_readable_name": "false",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
+                                            },
+                                            "code": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
+                                                }
+                                            },
+                                            "unit": {
+                                                "visible": "false",
+                                                "feed": "true",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "Ед.изм.",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "dict": {
+                                                        "type": "dict",
+                                                        "fields": {
+                                                            "code": {
+                                                                "visible": "false",
+                                                                "feed": "false",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "name": {
+                                                                "visible": "false",
+                                                                "feed": "false",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "symbol": {
+                                                                "visible": "false",
+                                                                "feed": "true",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "type": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
+                                                }
+                                            },
+                                            "id": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 }
                             }
-                        },
-                        "type": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
+                        }
+                    },
+                    "etpCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "false",
+                        "human_readable_name": "ЭTП",
+                        "value_scrap_type": {"type": "dict", "dict_path": []},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
                             }
-                        },
-                        "id": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
+                        }
+                    },
+                    "subjectRFCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Субьект местонахождения имущества",
+                        "value_scrap_type": {"type": "dict", "dict_path": []},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
+                            }
+                        }
+                    },
+                    "category": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Категория",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "dict": {
+                                "type": "dict",
+                                "fields": {
+                                    "code": {
+                                        "visible": "false",
+                                        "feed": "false",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "value_scrap_type": {},
+                                        "key": "",
+                                        "types": {
+                                            "str": {
+                                                "type": "str"
+                                            }
+                                        }
+                                    },
+                                    "name": {
+                                        "visible": "false",
+                                        "feed": "true",
+                                        "feed_human_readable_name": "false",
+                                        "human_readable_name": "",
+                                        "value_scrap_type": {},
+                                        "key": "",
+                                        "types": {
+                                            "str": {
+                                                "type": "str"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                }
-            }
-        },
-        "etpCode": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "false",
-            "human_readable_name": "ЭTP",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "subjectRFCode": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "false",
-            "human_readable_name": "Субьект местонахождения имущества",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "category": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Категория",
-            "types": {
-                "dict": {
-                    "type": "dict",
-                    "fields": {
-                        "code": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
-                            }
-                        },
-                        "name": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "false",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
+                    },
+                    "createDate": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Время создания",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
                             }
                         }
-                    }
-                }
-            }
-        },
-        "createDate": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Время создания",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "timeZoneName": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Временная зона",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "timezoneOffset": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Смещение временной зоны",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "hasAppeals": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Имеютвя аппеляции",
-            "types": {
-                "bool": {
-                    "type": "bool"
-                }
-            }
-        },
-        "isStopped": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Остановлена",
-            "types": {
-                "bool": {
-                    "type": "bool"
-                }
-            }
-        },
-        "attributes": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Атребуты",
-            "types": {
-                "list": {
-                    "type": "list",
-                    "fields": {
-                        "code": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
+                    },
+                    "timeZoneName": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Временная зона",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
                             }
-                        },
-                        "fullName": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "Наименование",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
+                        }
+                    },
+                    "timezoneOffset": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Смещение временной зоны",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
                             }
-                        },
-                        "attributeType": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
+                        }
+                    },
+                    "hasAppeals": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Имеютвя аппеляции",
+                        "value_scrap_type": {"type": "dict", "dict_path": []},
+                        "key": "",
+                        "types": {
+                            "bool": {
+                                "type": "bool"
                             }
-                        },
-                        "group": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "dict": {
-                                    "type": "dict",
-                                    "fields": {
-                                        "code": {
-                                            "visible": "true",
-                                            "feed": "true",
-                                            "feed_human_readable_name": "true",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
+                        }
+                    },
+                    "isStopped": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Остановлена",
+                        "value_scrap_type": {"type": "dict", "dict_path": []},
+                        "key": "",
+                        "types": {
+                            "bool": {
+                                "type": "bool"
+                            }
+                        }
+                    },
+                    "attributes": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Атребуты",
+                        "value_scrap_type": {},
+                        "key": "value",
+                        "types": {
+                            "list": {
+                                "type": "list",
+                                "types": {
+                                    "dict": {
+                                        "type": "dict",
+                                        "fields": {
+                                            "code": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
                                                 }
-                                            }
-                                        },
-                                        "name": {
-                                            "visible": "true",
-                                            "feed": "true",
-                                            "feed_human_readable_name": "true",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
+                                            },
+                                            "fullName": {
+                                                "visible": "false",
+                                                "feed": "true",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "Наименование",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
                                                 }
-                                            }
-                                        },
-                                        "displayGroupType": {
-                                            "visible": "true",
-                                            "feed": "true",
-                                            "feed_human_readable_name": "true",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
+                                            },
+                                            "attributeType": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
+                                                }
+                                            },
+                                            "group": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "dict": {
+                                                        "type": "dict",
+                                                        "fields": {
+                                                            "code": {
+                                                                "visible": "false",
+                                                                "feed": "false",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "name": {
+                                                                "visible": "false",
+                                                                "feed": "false",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "displayGroupType": {
+                                                                "visible": "false",
+                                                                "feed": "false",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "sortOrder": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "int": {
+                                                        "type": "int"
+                                                    }
+                                                }
+                                            },
+                                            "value": {
+                                                "visible": "false",
+                                                "feed": "true",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "Значение",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "dict": {
+                                                        "type": "dict",
+                                                        "fields": {
+                                                            "code": {
+                                                                "visible": "false",
+                                                                "feed": "false",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "name": {
+                                                                "visible": "false",
+                                                                "feed": "true",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "float": {
+                                                        "type": "float"
+                                                    },
+                                                    "int": {
+                                                        "type": "int"
+                                                    },
+                                                    "str": {
+                                                        "type": "str"
+                                                    },
+                                                    "bool": {
+                                                        "type": "bool"
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 }
                             }
-                        },
-                        "sortOrder": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "false",
-                            "human_readable_name": "",
-                            "types": {
-                                "int": {
-                                    "type": "int"
-                                }
+                        }
+                    },
+                    "isAnnulled": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Анулирован",
+                        "value_scrap_type": {"type": "dict", "dict_path": []},
+                        "key": "",
+                        "types": {
+                            "bool": {
+                                "type": "bool"
                             }
-                        },
-                        "value": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "Значение",
-                            "types": {
-                                "dict": {
-                                    "type": "dict",
-                                    "fields": {
-                                        "code": {
-                                            "visible": "false",
-                                            "feed": "false",
-                                            "feed_human_readable_name": "true",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
+                        }
+                    },
+                    "noticeFirstVersionPublicationDate": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Дата публикации первой версии",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
+                            }
+                        }
+                    },
+                    "npaHintCode": {
+                        "visible": "true",
+                        "feed": "false",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
+                            }
+                        }
+                    },
+                    "typeTransaction": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Тип транзакции",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
+                            }
+                        }
+                    },
+                    "currencyCode": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Валюта",
+                        "value_scrap_type": {"type": "dict", "dict_path": []},
+                        "key": "",
+                        "types": {
+                            "str": {
+                                "type": "str"
+                            }
+                        }
+                    },
+                    "noticeAttributes": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "Атребуты извещения",
+                        "value_scrap_type": {},
+                        "key": "value",
+                        "types": {
+                            "list": {
+                                "type": "list",
+                                "types": {
+                                    "dict": {
+                                        "type": "dict",
+                                        "fields": {
+                                            "code": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
                                                 }
-                                            }
-                                        },
-                                        "name": {
-                                            "visible": "false",
-                                            "feed": "true",
-                                            "feed_human_readable_name": "false",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
+                                            },
+                                            "fullName": {
+                                                "visible": "false",
+                                                "feed": "true",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "Наименование",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
+                                                }
+                                            },
+                                            "value": {
+                                                "visible": "false",
+                                                "feed": "true",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "Значение",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "dict": {
+                                                        "type": "dict",
+                                                        "fields": {
+                                                            "code": {
+                                                                "visible": "false",
+                                                                "feed": "false",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "name": {
+                                                                "visible": "false",
+                                                                "feed": "true",
+                                                                "feed_human_readable_name": "false",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "bool": {
+                                                        "type": "bool"
+                                                    }
+                                                }
+                                            },
+                                            "attributeType": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "str": {
+                                                        "type": "str"
+                                                    }
+                                                }
+                                            },
+                                            "group": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "dict": {
+                                                        "type": "dict",
+                                                        "fields": {
+                                                            "code": {
+                                                                "visible": "false",
+                                                                "feed": "false",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "name": {
+                                                                "visible": "false",
+                                                                "feed": "false",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "displayGroupType": {
+                                                                "visible": "false",
+                                                                "feed": "false",
+                                                                "feed_human_readable_name": "true",
+                                                                "human_readable_name": "",
+                                                                "value_scrap_type": {},
+                                                                "key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "sortOrder": {
+                                                "visible": "false",
+                                                "feed": "false",
+                                                "feed_human_readable_name": "true",
+                                                "human_readable_name": "",
+                                                "value_scrap_type": {},
+                                                "key": "",
+                                                "types": {
+                                                    "int": {
+                                                        "type": "int"
+                                                    }
                                                 }
                                             }
                                         }
                                     }
-                                },
-                                "float": {
-                                    "type": "float"
-                                },
-                                "int": {
-                                    "type": "int"
-                                },
-                                "str": {
-                                    "type": "str"
-                                },
-                                "bool": {
-                                    "type": "bool"
                                 }
                             }
                         }
-                    }
-                }
-            }
-        },
-        "isAnnulled": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Анулирован",
-            "types": {
-                "bool": {
-                    "type": "bool"
-                }
-            }
-        },
-        "noticeFirstVersionPublicationDate": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Дата публикации первой версии",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "npaHintCode": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "false",
-            "human_readable_name": "",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "typeTransaction": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Тип транзакции",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "currencyCode": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Валюта",
-            "types": {
-                "str": {
-                    "type": "str"
-                }
-            }
-        },
-        "noticeAttributes": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "Атребуты извещения",
-            "types": {
-                "list": {
-                    "type": "list",
-                    "fields": {
-                        "code": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
-                            }
-                        },
-                        "fullName": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "Наименование",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
-                            }
-                        },
-                        "value": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "Значение",
-                            "types": {
-                                "dict": {
-                                    "type": "dict",
-                                    "fields": {
-                                        "code": {
-                                            "visible": "false",
-                                            "feed": "false",
-                                            "feed_human_readable_name": "true",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
+                    },
+                    "lotVat": {
+                        "visible": "true",
+                        "feed": "true",
+                        "feed_human_readable_name": "true",
+                        "human_readable_name": "НДС",
+                        "value_scrap_type": {},
+                        "key": "",
+                        "types": {
+                            "dict": {
+                                "type": "dict",
+                                "fields": {
+                                    "code": {
+                                        "visible": "false",
+                                        "feed": "false",
+                                        "feed_human_readable_name": "true",
+                                        "human_readable_name": "",
+                                        "value_scrap_type": {},
+                                        "key": "",
+                                        "types": {
+                                            "str": {
+                                                "type": "str"
                                             }
-                                        },
-                                        "name": {
-                                            "visible": "false",
-                                            "feed": "true",
-                                            "feed_human_readable_name": "false",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
+                                        }
+                                    },
+                                    "name": {
+                                        "visible": "false",
+                                        "feed": "false",
+                                        "feed_human_readable_name": "false",
+                                        "human_readable_name": "",
+                                        "value_scrap_type": {},
+                                        "key": "",
+                                        "types": {
+                                            "str": {
+                                                "type": "str"
                                             }
                                         }
                                     }
-                                },
-                                "bool": {
-                                    "type": "bool"
-                                }
-                            }
-                        },
-                        "attributeType": {
-                            "visible": "true",
-                            "feed": "true",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
-                            }
-                        },
-                        "group": {
-                            "visible": "true",
-                            "feed": "true",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "dict": {
-                                    "type": "dict",
-                                    "fields": {
-                                        "code": {
-                                            "visible": "true",
-                                            "feed": "true",
-                                            "feed_human_readable_name": "true",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
-                                            }
-                                        },
-                                        "name": {
-                                            "visible": "true",
-                                            "feed": "true",
-                                            "feed_human_readable_name": "true",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
-                                            }
-                                        },
-                                        "displayGroupType": {
-                                            "visible": "true",
-                                            "feed": "true",
-                                            "feed_human_readable_name": "true",
-                                            "human_readable_name": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "sortOrder": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "false",
-                            "human_readable_name": "",
-                            "types": {
-                                "int": {
-                                    "type": "int"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "lotVat": {
-            "visible": "true",
-            "feed": "true",
-            "feed_human_readable_name": "true",
-            "human_readable_name": "НДС",
-            "types": {
-                "dict": {
-                    "type": "dict",
-                    "fields": {
-                        "code": {
-                            "visible": "false",
-                            "feed": "false",
-                            "feed_human_readable_name": "true",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
-                                }
-                            }
-                        },
-                        "name": {
-                            "visible": "false",
-                            "feed": "true",
-                            "feed_human_readable_name": "false",
-                            "human_readable_name": "",
-                            "types": {
-                                "str": {
-                                    "type": "str"
                                 }
                             }
                         }
@@ -3354,7 +3515,6 @@
                 }
             }
         }
-<<<<<<< HEAD
     },
     "references": {
         "Нормативный правовой акт": {
