@@ -1,5 +1,6 @@
 
-from tkinter.messagebox import NO
+# from tkinter.messagebox import NO
+from attr import field
 from playwright.sync_api import sync_playwright, Browser, Page, Request, Response
 from typing import Iterable, Dict, Generator, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 import typing
@@ -1578,126 +1579,7 @@ def get_difference_keys_from_feed_items_list(feed_items_v1_list: List[Dict], pat
     res_set = union_set - intersep_set
     return res_set
 
-# def collect_feed_items_v1_data_keys_type_from_feed_items_v1_file(feed_items_v1_file: str) -> Dict[str, List[str]]:
-#     """принимает feed_items_v1_file - вычисляет union keys set из ключей"""
-
-#     feed_items_v1_list: List = typing.cast(List, load_dict_or_list_from_json_file(feed_items_v1_file))
-#     return collect_feed_items_v1_data_keys_type_from_feed_items_v1_list(feed_items_v1_list)
-
-# def collect_feed_items_v1_data_keys_type_from_feed_items_v1_list(feed_items_v1_list: List[Dict[str, Any]]) -> Dict[str, List[str]]:
-#     """принимает feed_items_v1_list - вычисляет union keys set из ключей"""
-
-#     response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
-#     union_keys_set = get_union_keys_set_from_feed_items_list(feed_items_v1_list)
-#     res_dict: Dict[str, Set[str]] = defaultdict(set)
-#     for data_dict in response_data_gen:
-#         for key in union_keys_set:
-#             if key in data_dict:
-#                 res_dict[key].add(str(type(data_dict[key])))
                 
-#     res_dict_l: Dict[str, List[str]] = {k:list(v) for k,v in res_dict.items()}
-#     return res_dict_l
-
-# def typing_feed_items_v1_format(feed_items_v1_list: List) -> Dict:
-#     """принимает feed_items_v1_format list, возвращает dict описывающий
-#     типы полей feed_items_v1_format"""
-#     res_dict = {}
-#     response_data_gen = _get_response_data_generator_from_feed_items_v1_list(feed_items_v1_list)
-#     # union_keys_set = get_feed_items_v1_union_keys_set_from_feed_items_v1_list(feed_items_v1_list)
-#     for item in response_data_gen:
-#         for key, value in item.items():
-#             if not key in res_dict:
-#                 res_dict[key] = []
-#             value_type: type = type(value)
-#             if not value_type in res_dict[key]:
-                
-#                 res_dict[key].add({'type': value_type.__name__})
-
-# def _fill_dict_item()            
-# def _get_mapping_type_dict(item_generator: Generator) -> Any:
-#     res_dict_list: Dict[str, List[Dict]] = {}
-#     for t_dict in response_data_generator:
-#         # print('t_dict')
-#         for k, v in t_dict.items():
-#             # print(f'in for 1: {k}')
-#             if not k in res_dict_list:
-#                 # print(f'in for 2: {k}')
-#                 # print('in for 2')
-#                 res_dict_list[k] = []
-#             v_dict = {'type': type(v).__name__}
-#             if not v_dict in res_dict_list[k]:
-#                 res_dict_list[k].append(v_dict)
-#                 # print('in append')
-#     return res_dict_list    
-                
-
-def get_feed_model_v1_from_feed_items_file(feed_items_file: str, path: List[str]) -> Dict:
-    """принимает feed_items_file и path до target elements list, возвращает feed_model dict"""
-
-    feed_items_v1_list = typing.cast(List[Dict], load_dict_or_list_from_json_file(feed_items_file))
-    return get_feed_model_v1_from_feed_items_list(feed_items_v1_list, path)
-    # feed_items_v1_list = load_dict_or_list_from_json_file('feed/feed_items.v1.json')
-    # feed_item_v3_list = load_dict_or_list_from_json_file('')
-    # path = ['response_data']
-    
-
-def get_feed_model_v1_from_feed_items_list(data_list: List[Dict], init_path: List[str] = []) -> Dict:
-    """принимае дата структуру List[Dict], возвращает модель этой структуры"""
-
-    def get_mapping_type_dict(item_generator: Generator) -> Any:
-    
-        res_dict_list: Dict[str, Dict] = {}
-        for t_dict in item_generator:
-            if not isinstance(t_dict, dict):
-                continue
-            
-            for k, v in t_dict.items():
-                # print(f'in for 1: {k}')
-                if not k in res_dict_list:
-                    # print(f'in for 2: {k}')
-                    # print('in for 2')
-                    res_dict_list[k] = {
-                        'visible': 'true',
-                        'feed': 'true',
-                        'feed_human_readable_name': 'true',
-                        'human_readable_name': '',
-                        'types': {},
-                        } 
-                v_dict = {'type': type(v).__name__}
-                if not type(v).__name__ in res_dict_list[k]['types']:
-                    res_dict_list[k]['types'][type(v).__name__] = v_dict
-            
-        return res_dict_list
-                    # print('in append')
- 
-        # print(res_dict_list)
-
-
-    def collect_heed_items_v1_hierarchy(mapping_type_dict: Dict, path: List[str], feed_items_v1_list: List):
-        for k, v in mapping_type_dict.items():
-            for k_t, v in v['types'].items():
-                if not k_t == 'dict':
-                    if not k_t == 'list':
-                        continue
-                # if item['type'] == 'dict' or 'list':
-                c_path = path.copy()
-                c_path.append(k)
-                # print(f'in main{c_path}')
-                item_gen = get_data_generator_from_dict_iterable(feed_items_v1_list, path=c_path)
-                # for item in item_gen:
-                #     res_collected_list.append(item)
-                res_mapping_type_dict = get_mapping_type_dict(item_gen)
-                collect_heed_items_v1_hierarchy(res_mapping_type_dict, c_path, feed_items_v1_list)
-                v['fields'] = res_mapping_type_dict
-
-    response_data_generator = get_data_generator_from_dict_iterable(data_list, init_path)
-
-    initial_mapping_type_dict = get_mapping_type_dict(response_data_generator)
-    
-    collect_heed_items_v1_hierarchy(initial_mapping_type_dict, init_path, data_list)
-
-   
-    return initial_mapping_type_dict
 
 
 def get_feed_model_v2_from_feed_items_file(feed_items_file: str, path: List[str]) -> Dict:
@@ -1705,179 +1587,36 @@ def get_feed_model_v2_from_feed_items_file(feed_items_file: str, path: List[str]
 
     feed_items_v1_list = typing.cast(List[Dict], load_dict_or_list_from_json_file(feed_items_file))
     return get_feed_model_v2_from_feed_items_list(feed_items_v1_list, path)
-    # feed_items_v1_list = load_dict_or_list_from_json_file('feed/feed_items.v1.json')
-    # feed_item_v3_list = load_dict_or_list_from_json_file('')
-    # path = ['response_data']
-    
-
-
-
-# def get_dict_type(dict_item: Dict):
-#     res_dict_type = {'type': 'dict', 'fields': {}}
-#     for item_key, item_value in dict_item.items():
-#         value_dict_type = {
-#                             "visible": "false",
-#                             "feed": "false",
-#                             "feed_human_readable_name": "true",
-#                             "human_readable_name": "",
-#                             "types": {
-#                                 }
-#                             }
-#         item_value_type = type(item_value).__name__
-#         if item_value_type == 'dict':
-#             value_dict_type['types'][item_value_type] = get_dict_type(item_value)
-#         elif item_value_type == 'list':
-#             value_dict_type['types'][item_value_type] = get_list_type(item_value)
-#         else:
-#             value_dict_type['types'][item_value_type] = get_simple_type(item_value_type)
-#         # value_dict_type['types'][item_value_type] = value_dict_type
-#         res_dict_type['fields'][item_key] = value_dict_type
-#     return res_dict_type         
-                 
-# def get_simple_type(field_type: str) -> Dict:
-#     return {'type': field_type}
-
-
-# def get_list_type(item_iterable: Iterable) -> Any:
-#         # logger.debug('in get_list_type(item_iterable: Iterable)')
-#     res_list_type: Dict = {'type': 'list', 'types': {}}
-#     for item in item_iterable:
-#         if (target_type:=type(item).__name__) == 'dict':
-#             # logger.debug(f'in if (target_type:=type(item).__name__) == "dict": target_type: {target_type}')
-#             item_dict_type: Dict = get_dict_type(item)
-#             # print(item_dict_type)
-#             # logger.debug(f'item_dict_type: {item_dict_type}')
-#             if (saved_item_dict_type:=res_list_type['types'].get('dict', None)) != None:
-#                 # logger.debug(f'if (saved_item_dict_type:=res_list_type[types].get(dict, None)) != None:')
-#                 merge_dict_type_in_saved_item_dict_type(saved_item_dict_type, item_dict_type)
-#             else:
-#                 res_list_type['types']['dict'] = item_dict_type
-#         elif target_type == 'list':
-#             item_list_type = get_list_type(item)
-#             if (saved_item_list_type:=res_list_type['types'].get('list', None)) != None:
-#                 merge_list_type_in_saved_item_list_type(saved_item_list_type, item_list_type)
-#             else:
-#                 res_list_type['types']['list'] = item_list_type
-#         else:
-#             res_list_type['types'][target_type] = get_simple_type(target_type)
-#     return res_list_type   
-
-               
-# def merge_list_type_in_saved_item_list_type(saved_item_list_type: Dict, item_list_type: Dict) -> Dict:
-#     item_list_type_types: Dict = item_list_type['types']
-#     saved_item_list_type_types: Dict = saved_item_list_type['types']
-#     for type_key, type_value in item_list_type_types.items():
-#         # провеяем есть ли сливаемый тип в сохранённых типах
-#         if (saved_type:=saved_item_list_type_types.get(type_key, None)) == None:
-#             # сливаемый тип в сохранённых типах отсутствует - просто добавляем сливаемый тип в сохранённые
-#             saved_item_list_type_types[type_key] = type_value
-#         else:
-#             # сливаемый тип в сохранённых типах есть
-#             # действуем в зависимости от типа сливаемого типа
-
-#             if type_key == 'dict':
-#                 # если тип dict закускаем слияние dict типов
-#                 merge_dict_type_in_saved_item_dict_type(saved_type, type_value)
-#             elif type_key == 'list':
-#                 # если тип list закускаем слияние list типов
-#                 merge_list_type_in_saved_item_list_type(saved_type, type_value)
-#             else:
-#                 # если тип простой ничего не делаем
-#                 pass
-                
-            
-#     return saved_item_list_type
-    
-    
-# def merge_dict_type_in_saved_item_dict_type(saved_item_dict_type: Dict, item_dict_type: Dict) -> Dict:
-#     # print(f'saved_item_dict_type {saved_item_dict_type}')
-#     dict_type = {
-#         'type': "dict",
-#         'field': {
-#             'some_field': {
-#                         "visible": "false",
-#                         "feed": "false",
-#                         "feed_human_readable_name": "true",
-#                         "human_readable_name": "",
-#                         "types": {
-#                             'dict': {
-#                                     'type': "dict",
-#                                     'field': {
-#                                         'some_field': {
-#                                                     "visible": "false",
-#                                                     "feed": "false",
-#                                                     "feed_human_readable_name": "true",
-#                                                     "human_readable_name": "",
-#                                                     "types": {
-#                                                         'dict': {
-                                                            
-#                                                         }
-#                                                         }
-#                                         }
-#                                     }
-#                                 }
-#                             }
-#             }
-#         }
-#     }
-#     print(f'item_dict_type.keys() {item_dict_type.keys()}')
-#     print(f'saved_item_dict_type.keys() {saved_item_dict_type.keys()}')
-    
-#     item_dict_type_fields: Dict = item_dict_type['fields']
-#     saved_item_dict_type_fields: Dict = saved_item_dict_type['fields']
-#     for fields_name, field_value in item_dict_type_fields.items():
-#         if (dict_type:=field_value['types'].get('dict', None)) != None:
-#             print(f'item: {item_dict_type}')
-#             print(f'{fields_name}: {dict_type}')
-#             # print(f'dict type: {dict_type['types']}')
-#         # сначала проверяем есть ли в сохранённом dict_type поле с именем из сливаемого типа
-#         if (saved_field_value:=saved_item_dict_type_fields.get(fields_name, None)) == None:
-            
-#             # в сохранённом dict_type поле с именем из сливаемого типа отсутствуем -добаляем поле в сохранённый dict_type
-#             saved_item_dict_type_fields[fields_name] = field_value
-#         else:
-#             # print(f'saved_field_value {saved_field_value}')
-#             # в сохранённом dict_type поле с таким именем есть
-#             # проверяем есть ли в сохранённом поле тип сливаемого поля
-#             field_value_type=list(field_value['types'].keys())[0]
-#             if (saved_field_value_type:=saved_field_value['types'].get(field_value_type, None)) == None:
-
-#                 # тип сливаемого поля в типах сохранённого поля отсутствует - добавляем новый тип в типы сохранённого поля    
-#                 saved_field_value['types'][field_value_type] = field_value['types'][field_value_type]
-#             else:
-#                 # print(f'saved_field_value_type {saved_field_value_type}')
-#                 # тип сливаемого поля в типах сохранённого поля есть - действуем в зависимости от типа поля
-#                 if field_value_type == 'dict':
-#                     print('merging dict')
-#                     print(saved_field_value_type.keys())
-#                     # если тип dict то закускаем сливание типов сохранённого и сливаемого поля     
-#                     merge_dict_type_in_saved_item_dict_type(saved_field_value_type, field_value['types'][field_value_type])
-#                 elif field_value_type == 'list':
-#                     # если тип list то закускаем сливание типов сохранённого и сливаемого поля
-#                     merge_list_type_in_saved_item_list_type(saved_field_value_type, field_value['types'][field_value_type])     
-#                 else:
-#                     # если тип простой то ничего не делаем, он уже присутствует
-#                     pass
-                
-#     return saved_item_dict_type
-    
 
 
 def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[str] = []) -> Dict:
     """принимае дата структуру List[Dict], возвращает модель этой структуры"""
 
 
+    def get_value_dict_type():
+        field_attr = {
+                    "visible": "false",
+                    "feed": "false",
+                    "feed_human_readable_name": "true",
+                    "human_readable_name": "",
+            # {"type": "direct"}, {"type": "dict", "dict_path": []}, {"type": "ref", "ref": ""} 
+            # direct - значение берётся то которое вычисляетс
+            # dict - вычисленное значение подставляется в словарь по ссылке dict_linc, полученное заначение записывается в поле
+            # ref - из вычисленного значения делается ссылка путём подставления его в заданное место в ref и уже оно записывается в поле
+                    "value_scrap_type": {}, 
+            # если поле представляет лист словарей с несколькими значениями то по key 
+            # определяется ключивое поле в словаре, в случае нулевого значение которого весь словарь
+            # игнорируется для записи в поле
+                    "key": "",
+                    "types": {
+                        }
+                    }
+        return field_attr
+
     def get_dict_type(dict_item: Dict):
         res_dict_type = {'type': 'dict', 'fields': {}}
         for item_key, item_value in dict_item.items():
-            value_dict_type = {
-                                "visible": "false",
-                                "feed": "false",
-                                "feed_human_readable_name": "true",
-                                "human_readable_name": "",
-                                "types": {
-                                    }
-                                }
+            value_dict_type = get_value_dict_type()
             item_value_type = type(item_value).__name__
             if item_value_type == 'dict':
                 value_dict_type['types'][item_value_type] = get_dict_type(item_value)
@@ -1975,23 +1714,15 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
                 }
             }
         }
-        print(f'item_dict_type.keys() {item_dict_type.keys()}')
-        print(f'saved_item_dict_type.keys() {saved_item_dict_type.keys()}')
-        
         item_dict_type_fields: Dict = item_dict_type['fields']
         saved_item_dict_type_fields: Dict = saved_item_dict_type['fields']
         for fields_name, field_value in item_dict_type_fields.items():
-            if (dict_type:=field_value['types'].get('dict', None)) != None:
-                print(f'item: {item_dict_type}')
-                print(f'{fields_name}: {dict_type}')
-                # print(f'dict type: {dict_type['types']}')
             # сначала проверяем есть ли в сохранённом dict_type поле с именем из сливаемого типа
             if (saved_field_value:=saved_item_dict_type_fields.get(fields_name, None)) == None:
                 
                 # в сохранённом dict_type поле с именем из сливаемого типа отсутствуем -добаляем поле в сохранённый dict_type
                 saved_item_dict_type_fields[fields_name] = field_value
             else:
-                # print(f'saved_field_value {saved_field_value}')
                 # в сохранённом dict_type поле с таким именем есть
                 # проверяем есть ли в сохранённом поле тип сливаемого поля
                 field_value_type=list(field_value['types'].keys())[0]
@@ -2000,11 +1731,8 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
                     # тип сливаемого поля в типах сохранённого поля отсутствует - добавляем новый тип в типы сохранённого поля    
                     saved_field_value['types'][field_value_type] = field_value['types'][field_value_type]
                 else:
-                    # print(f'saved_field_value_type {saved_field_value_type}')
                     # тип сливаемого поля в типах сохранённого поля есть - действуем в зависимости от типа поля
                     if field_value_type == 'dict':
-                        print('merging dict')
-                        print(saved_field_value_type.keys())
                         # если тип dict то закускаем сливание типов сохранённого и сливаемого поля     
                         merge_dict_type_in_saved_item_dict_type(saved_field_value_type, field_value['types'][field_value_type])
                     elif field_value_type == 'list':
@@ -2022,13 +1750,12 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
 
     res_model = get_list_type(response_data_generator)
     
-    # collect_heed_items_v1_hierarchy(initial_mapping_type_dict, init_path, data_list)
 
    
     return res_model
 
         
-
+# TODO переделывать под моель 2
 def feed_model_traversing(model: Dict, travers_fun: Callable,  init_path: List[str] = []):
     """принимает feed_model dict, и travers_fun коорая применяется к каждому 
     элементу модели, совершает обход всех модел элементов, производит действиве указанное в travers_fun_
@@ -2080,6 +1807,9 @@ def get_union_intersection_difference_from_items_file(items_list_file: str, path
     
     return targ_dict
     # write_dict_or_list_to_json_file('feed/un_in_dif.json', targ_dict)
+
+
+
 def parsing_raw_data_relative_to_data_model(feed_model: Dict, raw_data: Dict)-> Dict: 
     """принимпет data model feed_items_model_v_1 и прогоняет по ней
      lot_card,  возвращает dict являющийсчся отрожением lot_card относительно
@@ -2126,6 +1856,52 @@ def parsing_raw_data_relative_to_data_model(feed_model: Dict, raw_data: Dict)-> 
     
     return res_dict
         
+# TODO: переделывать под модель 2
+def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: Dict)-> Dict: 
+    """принимпет search_form.v3 и прогоняет по ней
+     lot_card,  возвращает dict являющийсчся отрожением lot_card относительно
+     feed_items_model_v_1
+    """ 
+    feed_model = search_form_v3['feed']['types']['dict']['fields']
+    res_dict = {}
+    for k, v in feed_model.items():
+        if v['feed'] == 'true':
+            key = v['human_readable_name'] if v['feed_human_readable_name'] == 'true' else k
+            if (data_value:= raw_data.get(k, None)) == None:
+                res_dict[key] = ''
+                continue
+            if type(data_value).__name__ == 'dict':
+                if (dict_type:=v['types'].get('dict', None)) == None:
+                    res_dict[key] = 'data type dict undefined in model'
+                    continue
+                value = parsing_raw_data_relative_to_data_model(v['types']['dict']['fields'], data_value)
+                if len(keys:=value.keys()) == 1:
+                    value = value[list(keys)[0]]
+                res_dict[key] = value
+                continue
+            if type(data_value).__name__ == 'list':
+                if (list_type:=v['types'].get('list', None)) == None:
+                    res_dict[key] = 'data type list undefined in model'
+                    continue
+                if not list_type['fields']:
+                    res_dict[key] = data_value
+                    continue
+                value = [
+                    parsing_raw_data_relative_to_data_model(
+                        v['types']['list']['fields'], 
+                        data_item
+                        )
+                    for data_item in data_value]
+                for item in value:
+                    if len(keys:=item.keys()) == 1:
+                        new_item = list(keys)[0]
+                        value.remove(item)
+                        value.append(new_item)
+                res_dict[key] = value
+                continue
+            res_dict[key] = data_value
+    
+    return res_dict
     
 
 if __name__ == '__main__':
@@ -2133,9 +1909,9 @@ if __name__ == '__main__':
     # req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('spiders/search_form.v3 copy.json')
     # url_str = get_query_url(req_url_str, query_dikt, False) 
     # print(url_str)
-    list_dict = get_feed_model_v2_from_feed_items_file('feed/feed_items.v1.json', ['response_data'])
+    list_dict = get_feed_model_v2_from_feed_items_file('feed/feed_items_v0.json', ['response_data', 'content'])
     # list_dict = get_feed_model_v1_from_feed_items_file('feed/feed_items_v0.json',['response_data', 'content'])
-    write_dict_or_list_to_json_file('feed/feed_items_modelv1.json', list_dict)
+    write_dict_or_list_to_json_file('feed/feed_items_lot_card_modelv2.json', list_dict)
     # res_data = load_dict_or_list_from_json_file('feed/feed_items.v1.json')
     # list_dict = res_data[0]['response_data']
     
