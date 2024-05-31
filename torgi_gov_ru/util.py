@@ -26,6 +26,17 @@ from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
+def logging_configure():
+    logger.setLevel(logging.DEBUG)
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+    fm = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    ch.setFormatter(fm)
+    logger.addHandler(ch)
+
+
+
+
 """data time example
 now = datetime.datetime.now()  # Get the current datetime object
 formatted_date = now.strftime("%d.%m.%y_%H-%M-%S")
@@ -1857,20 +1868,22 @@ def parsing_raw_data_relative_to_data_model(feed_model: Dict, raw_data: Dict)-> 
     
     return res_dict
         
-# TODO: переделывать под модель 2
+# TODO: переделывать под модель 2.
+# TODO: добавить в модель тип приведения, осуществлять проверку на 
+# соответствие, ставить дефаулт валуе в случае несоответствия
 def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: Dict)-> Dict: 
     """принимпет search_form.v3 и прогоняет по ней
      lot_card,  возвращает dict являющийсчся отрожением lot_card относительно
      feed_items_model_v_1
     """ 
-    feed_model = search_form_v3['feed']['types']['dict']['fields']
+    feed_model = search_form_v3['feed']['types']['dict']
 
     
-    def _get_to_feeded_fields(dict_model: Dict) -> List[str]:
+    def _get_to_feeded_fields(data_model: Dict) -> List[str]:
         to_feeded_fields = [
                             field 
                             for field 
-                            in dict_model
+                            in data_model
                             if field['feed']
                             ]
         return to_feeded_fields
@@ -1881,50 +1894,113 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
 
         return field_value['human_readable_name'] if (field_value:=data.get(field_name, None)) and field_value['feed_human_readable_name'] else  field_name
     
-    def _get_field_value(model: Union[List, Dict], 
-                         field_name: str, 
-                         data: Union[List, Dict]):
-        # проверяем есть ли поле в данных
-        if (field_value:=data.get(field_name, None)):
-            # поле есть в данных, проеряем тип
-            # проверяем что тип поля присутсвует в типах модели
-            if field_type:=type(field_value).__name__
-            if isinstance(field_value, dict):
-                pass
-            elif isinstance(field_value,list):
-                pass
-            else:
-                # простой тип, присваиваем сразу
-                pass
-                
-                
-            # поле есть в данных
-            field_value
-        else:
-            field_value = ""
-            # поля в данных нет
-        return field_value
+    def _adjusting_field_values(field_value: str, field_model: Dict):
+        # сначала проверяем можем ли мы применить к значению 
+        # поля атребут "key", для этого нужно, что бы значение поля 
+        # было либо dict, либо list[dict]
+        pass
     
-    def parse_dict(model: Dict, data: Dict) -> Dict:
-        dif_field_name = set(data.keys()) - set(model.keys())
+    # TODO: сделать дефолтное значение в зависисоти 
+    # от типа определённого в поле 
+    def _get_default_value():
+        return ""
+    
+    def _get_field_value(data_model_fields: Dict, 
+                         field_name: str, 
+                         data: Dict): 
+        # проверяем есть ли поле в данных
+        if (field_value:=data.get(field_name, None)) != None:
+            # поле есть в данных
+            # проверяем что тип поля присутсвует 
+            # в зарегистрированных типах модели
+            field_type = type(field_value).__name__
+            if model_dict:=data_model_fields[field_name]['types'].get(field_type, None):
+                # тип поля зарегистрирован в типах модели
+                # действуем в зависимости от типа поля
+                if field_type == 'dict':
+                    # если поле типа dict вызываем parse_dict_model()
+                    res_value = parse_dict_model(model_dict, field_value)
+                elif field_type == 'list':
+                    # если поле типа list вызываем parse_list_model()
+                    res_value = parse_list_model(model_dict, field_value)
+                else:
+                    # если поле обычного типа - берём его значение
+                    res_value = field_value                    
+                # корректируем полученное значение по 
+                # значениям "единнсвенное значение в dict",
+                # "key" и "value_scrap_type" модели поля
+                res_value = _adjusting_field_values(field_value, data_model_fields[field_name])
+                
+            
+            else:
+                # тип поля не зарегистрирован в типах модели
+                # пишеь log, присваеваем результату 'type not definet in model'
+                logger.warning(f'тип {field_type} поля {field_name} не зарегистрирован в типах модели')
+                res_value = _get_undefined_type_value(field_type)
+        else:
+            # поля нет в данных
+            # присваиваем результату значение по умолчанию для типа
+            res_value = _get_default_value()
+        return res_value
+
+    def _get_undefined_type_value(value_type:str)-> str:
+        return f'type {value_type} not definet in model'
+    
+    def parse_list_model(list_model: Dict, data: List) -> List:
+        res_list = []
+        for item in data:
+            # определяем тип элемента списка
+            item_type = type(item).__name__
+            # проверяем зарегистриван ли тип в типах лист модели
+            if (model:=list_model['types'].get(item_type, None)):
+                # тип элемента списка зарегистрирован 
+                # в типах модели списка
+                # действуем в зависимости от типа элемента
+                if item_type == 'dict':
+                    # тип элемента dict 
+                    # вызываем parse_dict_model(), 
+                    # результат аппендим в res_list
+                    res_list.append(parse_dict_model(model, item)) 
+                elif item_type == 'list':
+                    # тип элемента list 
+                    # вызываем parse_list_model(), 
+                    # результат аппендим в res_list
+                    res_list.append(parse_list_model(model, item)) 
+                else:
+                    # простой тип
+                    # аппендим в res_list как есть
+                    res_list.append(item) 
+            else:
+                # тип элемента списка не зарегистрирован 
+                # в типах модели списка
+                # пишеь log, аппендим 'type not definet in model'
+                logger.warning(f'тип {item_type} не зарегистрирован в типах модели листа')
+                res_list.append(_get_undefined_type_value(item_type))
+        # возвращаем результирующий список
+        return res_list
+
+
+    def parse_dict_model(dict_model: Dict, data: Dict) -> Dict:
+        
+        dict_model_fields = dict_model['fields']
+        dif_field_name = set(data.keys()) - set(dict_model_fields.keys())
         for field_name in dif_field_name:
             logger.warning(f'field_name: {field_name} not in model')
-        to_feeded_fields_name: List[str] = _get_to_feeded_fields(model)
+        to_feeded_fields_name: List[str] = _get_to_feeded_fields(dict_model_fields)
         # мы отправляем в получение значения все поля не проверяя
         # есть ли они в полученных данных
         res_dict = {
-                _get_field_name(model, field_name, data): 
-                _get_field_value(model, field_name, data)
+                _get_field_name(dict_model_fields, field_name, data): 
+                _get_field_value(dict_model_fields, field_name, data)
                 for field_name in to_feeded_fields_name 
                 }
         
-            
         return res_dict
 
+    return parse_dict_model(feed_model, raw_data)
 
 
-
-    res = parse_dict(raw_data)
+    res = parse_dict_model(raw_data)
     res_dict = {}
     for k, v in feed_model.items():
         if v['feed'] == 'true':
@@ -1967,6 +2043,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
     
 
 if __name__ == '__main__':
+    logging_configure()
     # pass
     # req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('spiders/search_form.v3 copy.json')
     # url_str = get_query_url(req_url_str, query_dikt, False) 
