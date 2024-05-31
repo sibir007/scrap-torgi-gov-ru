@@ -1902,8 +1902,9 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
     
     # TODO: сделать дефолтное значение в зависисоти 
     # от типа определённого в поле 
-    def _get_default_value():
-        return ""
+    def _get_default_value(field_type_dict:Dict):
+        
+        return field_type_dict['field_type']['defaule_value']
     
     def _get_field_value(data_model_fields: Dict, 
                          field_name: str, 
@@ -1926,12 +1927,6 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
                 else:
                     # если поле обычного типа - берём его значение
                     res_value = field_value                    
-                # корректируем полученное значение по 
-                # значениям "единнсвенное значение в dict",
-                # "key" и "value_scrap_type" модели поля
-                res_value = _adjusting_field_values(field_value, data_model_fields[field_name])
-                
-            
             else:
                 # тип поля не зарегистрирован в типах модели
                 # пишеь log, присваеваем результату 'type not definet in model'
@@ -1940,7 +1935,12 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         else:
             # поля нет в данных
             # присваиваем результату значение по умолчанию для типа
-            res_value = _get_default_value()
+            res_value = _get_default_value(data_model_fields[field_name])
+        # корректируем полученное значение по 
+        # значениям "единнсвенное значение в dict",
+        # "key" и "value_scrap_type" модели поля
+        res_value = _adjusting_field_values(field_value, data_model_fields[field_name])
+                
         return res_value
 
     def _get_undefined_type_value(value_type:str)-> str:
