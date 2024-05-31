@@ -2969,6 +2969,7 @@
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
                                         "key": "",
+                                        "field_type": {"type": "str", "default_value": ""},
                                         "types": {
                                             "str": {
                                                 "type": "str"
