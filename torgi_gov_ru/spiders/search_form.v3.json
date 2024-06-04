@@ -2667,7 +2667,7 @@
                                     "name": {
                                         "visible": false,
                                         "feed": true,
-                                        "feed_human_readable_name": true,
+                                        "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
                                         "field_types": {"types": ["str"], "default_value": ""},
@@ -2702,7 +2702,9 @@
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "key": "",
+                                        "field_types": {"types": ["str"], "default_value": ""},
+                                        "casting_key": "",
+                                        "exclusion_key": "",
                                         "types": {
                                             "str": {
                                                 "type": "str"
@@ -2711,11 +2713,13 @@
                                     },
                                     "name": {
                                         "visible": false,
-                                        "feed": false,
+                                        "feed": true,
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "key": "",
+                                        "field_types": {"types": ["str"], "default_value": ""},
+                                        "casting_key": "",
+                                        "exclusion_key": "",
                                         "types": {
                                             "str": {
                                                 "type": "str"
@@ -2817,7 +2821,7 @@
                         "value_scrap_type": {},
                         "field_types": {"types": ["list"], "default_value": {}},
                         "casting_key": "",
-                        "exclusion_key": "",
+                        "exclusion_key": "Значение",
                         "types": {
                             "list": {
                                 "type": "list",
@@ -3131,7 +3135,7 @@
                         "value_scrap_type": {},
                         "field_types": {"types": ["list"], "default_value": []},
                         "casting_key": "",
-                        "exclusion_key": "",
+                        "exclusion_key": "Значение",
                         "types": {
                             "list": {
                                 "type": "list",
@@ -3261,7 +3265,7 @@
                                                 "feed_human_readable_name": true,
                                                 "human_readable_name": "Значение",
                                                 "value_scrap_type": {},
-                                                "field_types": {"types": ["float", "int", "str", "bool"], "default_value": null},
+                                                "field_types": {"types": ["float", "int", "str", "bool"], "default_value": ""},
                                                 "casting_key": "name",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -3401,9 +3405,9 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Атребуты извещения",
                         "value_scrap_type": {},
-                        "field_types": {"types": ["list"], "default_value": ""},
+                        "field_types": {"types": ["list"], "default_value": []},
                         "casting_key": "",
-                        "exclusion_key": "value",
+                        "exclusion_key": "Значение",
                         "types": {
                             "list": {
                                 "type": "list",
@@ -3602,7 +3606,9 @@
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "key": "",
+                                        "field_types": {"types": ["str"], "default_value": ""},
+                                        "casting_key": "",
+                                        "exclusion_key": "",
                                         "types": {
                                             "str": {
                                                 "type": "str"
@@ -3611,11 +3617,13 @@
                                     },
                                     "name": {
                                         "visible": false,
-                                        "feed": false,
+                                        "feed": true,
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "key": "",
+                                        "field_types": {"types": ["str"], "default_value": ""},
+                                        "casting_key": "",
+                                        "exclusion_key": "",
                                         "types": {
                                             "str": {
                                                 "type": "str"
@@ -3631,6 +3639,50 @@
         }
     },
     "references": {
+        "Вид сделки": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "name",
+                "values": {
+                    "freeUse": {
+                        "name": "Безвозмездное пользование",
+                        "parent": null
+                    },
+                    "other": {
+                        "name": "Иное",
+                        "parent": null
+                    },
+                    "rent": {
+                        "name": "Аренда",
+                        "parent": null
+                    },
+                    "sale": {
+                        "name": "Продажа",
+                        "parent": null
+                    },
+                    "trustManagement": {
+                        "name": "Доверительное управление",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 14
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/TYPE_TRANSACTION?actual=true",
+            "multi_value": true,
+            "name": "typeTransaction",
+            "required": false,
+            "selected_values": []
+        },
         "Нормативный правовой акт": {
             "values": {
                 "hint1_1113PP": {

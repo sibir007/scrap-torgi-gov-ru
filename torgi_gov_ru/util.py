@@ -3,6 +3,7 @@
 # from re import X
 # from attr import field
 # from networkx import difference
+from tkinter import NO
 from playwright.sync_api import sync_playwright, Browser, Page, Request, Response
 from typing import Iterable, Dict, Generator, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 import typing
@@ -1837,52 +1838,6 @@ def get_union_intersection_difference_from_items_file(items_list_file: str, path
 
 
 
-def parsing_raw_data_relative_to_data_model(feed_model: Dict, raw_data: Dict)-> Dict: 
-    """принимпет data model feed_items_model_v_1 и прогоняет по ней
-     lot_card,  возвращает dict являющийсчся отрожением lot_card относительно
-     feed_items_model_v_1
-    """ 
-    
-    res_dict = {}
-    for k, v in feed_model.items():
-        if v['feed'] == 'true':
-            key = v['human_readable_name'] if v['feed_human_readable_name'] == 'true' else k
-            if (data_value:= raw_data.get(k, None)) == None:
-                res_dict[key] = ''
-                continue
-            if type(data_value).__name__ == 'dict':
-                if (dict_type:=v['types'].get('dict', None)) == None:
-                    res_dict[key] = 'data type dict undefined in model'
-                    continue
-                value = parsing_raw_data_relative_to_data_model(v['types']['dict']['fields'], data_value)
-                if len(keys:=value.keys()) == 1:
-                    value = value[list(keys)[0]]
-                res_dict[key] = value
-                continue
-            if type(data_value).__name__ == 'list':
-                if (list_type:=v['types'].get('list', None)) == None:
-                    res_dict[key] = 'data type list undefined in model'
-                    continue
-                if not list_type['fields']:
-                    res_dict[key] = data_value
-                    continue
-                value = [
-                    parsing_raw_data_relative_to_data_model(
-                        v['types']['list']['fields'], 
-                        data_item
-                        )
-                    for data_item in data_value]
-                for item in value:
-                    if len(keys:=item.keys()) == 1:
-                        new_item = list(keys)[0]
-                        value.remove(item)
-                        value.append(new_item)
-                res_dict[key] = value
-                continue
-            res_dict[key] = data_value
-    
-    return res_dict
-
 def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: Dict)-> Dict: 
     """принимпет search_form.v3 и прогоняет по ней
      lot_card,  возвращает dict являющийсчся отрожением lot_card относительно
@@ -1936,7 +1891,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
             # атребут casting_key отсутствует в модели или его значение равно пустому значению, 
             # пишем log
             # присваеваем res_value значение по умолчанию
-            logger.warning(f'ошибка приведение тип поля {".".join(parent_fields_names)}, атребут casting_key отсутствует в модели или его значение равно пустому значению')
+            logger.warning(f'ошибка приведение типа поля {".".join(parent_fields_names)}, атребут casting_key отсутствует в модели или его значение равно пустому значению')
             res_value = _get_field_model_default_value(field_model)
         return res_value
     
@@ -1966,7 +1921,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
     
     
            
-    def _casting_field_values(field_value: Any, field_model: Dict, field_name: str, parent_field_names: List[str]):
+    def field_values_type_conversion(field_value: Any, field_model: Dict, field_name: str, parent_field_names: List[str]):
         # проверяем соответствие типа field_value типу определённому 
         # в field_model field_type поле
         # определяем тип field_value
@@ -2006,7 +1961,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         for item in data:
             # определяем тип элемента списка
             item_type = type(item).__name__
-            logger.debug(f'in parse_list_model(): item type {item_type}')
+            # logger.debug(f'in parse_list_model(): item type {item_type}')
             # проверяем зарегистриван ли тип в типах лист модели
             if (model:=list_model['types'].get(item_type, None)):
                 # тип элемента списка зарегистрирован 
@@ -2015,8 +1970,11 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
                 if model['type'] == 'dict':
                     # тип элемента dict 
                     # вызываем parse_dict_model(), 
-                    # результат аппендим в res_list
-                    res_list.append(parse_dict_model(model, item, parent_field_names)) 
+                    dict_value = parse_dict_model(model, item, parent_field_names)
+                    # исключаем словари с пустыми exclusion key 
+                    if dict_value:=exclusion_of_empty_values(dict_value, parent_field_model, field_name, parent_field_names):
+                        # результат аппендим в res_list
+                        res_list.append(dict_value) 
                 elif model['type'] == 'list':
                     # тип элемента list 
                     # вызываем parse_list_model(), 
@@ -2034,8 +1992,80 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
                 res_list.append(_get_field_model_default_value(parent_field_model))
         # возвращаем результирующий список
         return res_list
-
-    def _get_field_value(field_model: Dict, 
+    
+    
+    def field_values_shape_reduction(field_value: Any, field_model: Dict, field_name: str, parent_field_names: List[str]):
+        """изменение формы field_value в зависимости от значения
+        поля модели value_scrap_type
+        {"type": "direct"}, {"type": "dict", "dict_path": []}, {"type": "ref", "ref": ""} 
+        direct - значение берётся то которое вычисляется по умолчению None
+        dict - вычисленное значение подставляется в словарь по ссылке dict_path, полученное заначение записывается в поле
+        ref - из вычисленного значения делается ссылка путём подставления его в заданное место в ref и уже оно записывается в поле
+        """
+        return field_value
+    
+    def exclusion_of_empty_values(field_value: Any, field_model: Dict, field_name: str, parent_field_names: List[str]):
+        """проверка field_value на значение поля exclusion_key модели,
+        поле может иметь значение только если проверяемое field_value 
+        словарь (dict) и только в том случае если данный словарь 
+        являествя элементом некого списка (list[dict]), в данном контексте 
+        проверяемы exclusion_key это имя ключа словаря, ключевого атребута
+        в котором содержится значение определяющее саму сущьность словаря,
+        без которого сам dict теряет смысл. Например в списке покупок может быть
+        запись
+        {'наименование товара': 'картофель', 'кол-во': ''}
+        в данном примере ''кол-во' некий атребут без которого веся сущьность
+        покупи 'картофель' теряет смысл - поэтому её нужно исключить из
+        списка вообще.
+        Функция проверяет наличие exclusion_key - если его нет или его значение 
+        в field_value не пустое то возвращиет field_value, 
+        в противнос случае проверяет значение
+        exclusion_key в field_value и если там содержится пустое значение ("")
+        то возвращает None, который должен проверяться в parse_list_model()
+        при добавлении значения в список
+        """
+        # проверяем что field_value есть dict
+        if type(field_value).__name__ == 'dict':
+            # field_value есть dict
+            # проверяем что поле exclusion_key есть в модели
+            if exc_key:=field_model.get('exclusion_key', None):
+                # поле exclusion_key есть в модели
+                # проверяем что проверяемый dict содержит ключ с именеи 
+                # значения exclusion_key
+                if (exc_key_val:=field_value.get(exc_key, None)) != None:
+                    # field_value содержит ключ с именем значения exclusion_key
+                    # проверяем значение exclusion_key в field_value
+                    if exc_key_val:
+                        logger.debug(f'exclusion_of_empty_values(): {exc_key_val}')
+                        
+                        #  exclusion_key в field_value содержит не пустое
+                        # значение, возвращаем field_value
+                        return field_value
+                    else:
+                        logger.debug(f'exclusion_of_empty_values(): {exc_key_val}')
+                         #  exclusion_key в field_value содержит пустое
+                        # значение, возвращаем None
+                        return None
+                else:
+                    # field_value не содержит ключ с именем 
+                    # значения exclusion_key. Пишем предупреждение в log
+                    # возвращаем field_value
+                    logger.warning(f'ошибка exclusion_of_empty_values(): field_value с именем: [{", ".join(parent_field_names)}] не содержил ключа exclusion_key: {exc_key} модели')
+                    return field_value
+            else:
+                # поле exclusion_key отутствует в модели, значит проверка
+                # не нужно, возвращаем field_value
+                return field_value
+        else:
+            # field_value не dict
+            # возвращаем field_value
+            return field_value
+            
+                
+                    
+        
+        
+    def get_field_value(field_model: Dict, 
                          field_name: str, 
                          data: Dict,
                          parent_field_names: List[str]): 
@@ -2066,16 +2096,27 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         else:
             # поля нет в данных
             # присваиваем результату значение по умолчанию для типа
-            logger.debug(f'field name: {".".join(parent_field_names)} нет в данных')
+            # logger.debug(f'field name: {".".join(parent_field_names)} нет в данных')
             res_value = _get_field_model_default_value(field_model)
         # корректируем полученное значение по 
         # значениям "field_type", "casting_key" модели поля
-        res_value = _casting_field_values(res_value, field_model, field_name, parent_field_names)
-                
+        res_value = field_values_type_conversion(res_value, field_model, field_name, parent_field_names)
+        # корректируем полученное значени по полю модели value_scrap_type
+        # {"type": "direct"}, {"type": "dict", "dict_path": []}, {"type": "ref", "ref": ""} 
+        # direct - значение берётся то которое вычисляется по умолчению None
+        # dict - вычисленное значение подставляется в словарь по ссылке dict_path, полученное заначение записывается в поле
+        # ref - из вычисленного значения делается ссылка путём подставления его в заданное место в ref и уже оно записывается в поле
+             
+        # res_value = field_values_shape_reduction(res_value, field_model, field_name, parent_field_names)
+
+        # проверяем на путое значение для списка словарей
+        # res_value = exclusion_of_empty_values(res_value, field_model, field_name, parent_field_names)
+
         return res_value
 
 
     def _get_field_to_feeded_name(field_model, field_name: str) -> str:
+        # return field_name
         return field_model['human_readable_name'] if field_model['feed_human_readable_name'] else  field_name
     
     def parse_dict_model(dict_model: Dict, data: Dict, parent_field_names: List[str] = []) -> Dict:
@@ -2089,7 +2130,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         # есть ли они в полученных данных
         res_dict = {
                 _get_field_to_feeded_name(dict_model_fields[field_name], field_name): 
-                _get_field_value(dict_model_fields[field_name], field_name, data, parent_field_names.copy())
+                get_field_value(dict_model_fields[field_name], field_name, data, parent_field_names.copy())
                 for field_name in to_feeded_fields_name 
                 }
         
@@ -2097,7 +2138,6 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
 
     return parse_dict_model(feed_model, raw_data)
 
-    
 
 if __name__ == '__main__':
     logging_configure()
@@ -2124,7 +2164,7 @@ if __name__ == '__main__':
     
     # parsed_content =  parsing_raw_data_relative_to_data_model_v2(search_form_dict, raw_data_dict)
     # print(parsed_content)
-    write_dict_or_list_to_json_file('feed/parsed_content_6.json', res_list)
-    # write_dict_or_list_to_json_file('feed/parsed_content_5.json', parsed_content)
+    write_dict_or_list_to_json_file('feed/parsed_content_8.json', res_list)
+    # write_dict_or_list_to_json_file('feed/parsed_content_7.json', parsed_content)
     # res_data = get_dict_type(list_dict)
     # print(res_data)
