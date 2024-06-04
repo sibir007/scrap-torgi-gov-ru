@@ -2062,7 +2062,113 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
             return field_value
             
                 
-                    
+    def boolen_type_value_conversion(field_value: Any, field_model: Dict, field_name: str, parent_field_names: List[str]):
+        """
+        преобразование bool занчение в str эквивалент для возможности 
+        обращения к справочнику и замены true на "Да", false на "Нет
+        """
+
+        field_value_type = type(field_value).__name__
+        logger.debug(f'field_value_type: {field_value_type}')
+        if field_value_type == 'bool':
+            res_value = 'true' if field_value else 'false'
+        else:
+            res_value = field_value
+        return res_value                
+    
+    def _get_dict_from_search_form_v3(target_dict: Dict, path: List[str]) -> Any:
+        """поучает на вход словарь (в данном контексте search_form_v3 dict)
+        и путь до требуемого значения - возвращает данное значение или None
+        если указанный путь не существует
+        """
+        target = target_dict
+        try:
+            for item in path:
+                if (target:=target.get(item, None)) == None:
+                    break
+        except RuntimeError as e:
+            target = None
+        return target
+    
+    def _dict_scrap_type_conversion(field_value: Any, field_model: Dict, field_name: str, parent_field_names: List[str]):
+        """ конвертация  field_value по значению 'dict' поля value_scrap_type модели """
+
+        t_path: List = field_model['value_scrap_type']['dict_path']
+        t_path.append(['available_values', 'values', field_value])
+        target = search_form_v3
+        try:
+            for item in t_path:
+                target = target.get(item)
+
+                if (target:=target.get(item, None)) == None:
+                    break
+        except RuntimeError as e:
+            target = None
+        return target
+        
+        # проверяем наличие path
+        if (t_path:=field_model['value_scrap_type']['dict_path']) != None:
+            if t_dict:=_get_dict_from_search_form_v3(search_form_v3)
+               
+        else:
+            # ключ path не существует - не правильный формат value_scrap_type 
+            
+        if _get_value_from_dict_along_path(search_form_v3)
+        res_value = search_form_v3
+    
+    def _check_dict_scrap_type(dict_scrap_type: Dict):
+        """проверка на корректность типа dict_scrap_type"""
+        # это должно быть словарь типа {'type': 'dict', 'dict_path': []}
+        if ['type', 'dict_path'] != list(dict_scrap_type.keys()):
+            return False
+        if dict_scrap_type['type'] != 'dict':
+            return False
+        if not isinstance(dict_scrap_type['dict_path'], list):
+            return False
+        for item in dict_scrap_type['dict_path']:
+            if not isinstance(item, str):
+                return False
+        return True
+
+        
+        
+        
+    def value_scrap_type_conversion(field_value: Any, field_model: Dict, field_name: str, parent_field_names: List[str]):
+        """конвертация  field_value по значению поля value_scrap_type модели
+        возможные значения value_scrap_type
+        {"type": "direct"}, {"type": "dict", "dict_path": []}, {"type": "ref", "ref": ""} 
+        direct - нет преобразования. Данное тип не указываем в модели
+        dict - field_value подставляется в словарь по ссылке dict_path, 
+        полученное заначение записывается в поле
+        ref - из field_value делается ссылка путём подставления 
+        его в заданное место в ref и уже оно записывается в поле"""
+        
+        # сначала проверяем наличие и значение поля value_scrap_type в моделе
+        # данное поле может отсутствовать в моделе или быть пустое - 
+        # direct вариант 
+        if value_scrap_type_value:=field_model.get('value_scrap_type', None):
+            # value_scrap_type ключ есть в модели
+            # действуем в зависимости от типа
+            if scrap_type:=value_scrap_type_value.get('type', None):
+                # есть ключь "type" и он не пустой
+                if scrap_type == 'dict':
+                    # проверяем правильность форрмата dict scrap_type
+                    if _check_dict_scrap_type(value_scrap_type_value):
+                        # value_scrap_type_value правильного формата
+                        res_value = _dict_scrap_type_conversion(field_value, field_model, field_name, parent_field_names)
+                    else:
+                        # value_scrap_type_value не правильного формата
+                        
+                elif scrap_type == 'ref':
+                else:
+            else:
+                # ключь "type" отсутствует или он пустой - ошибка
+                
+        else:
+            # value_scrap_type ключ отсутствует в моделе
+            
+        
+        
         
         
     def get_field_value(field_model: Dict, 
@@ -2109,6 +2215,10 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
              
         # res_value = field_values_shape_reduction(res_value, field_model, field_name, parent_field_names)
 
+        # преобразуем bool значение в строку, нужно для обращения к справочнику
+        res_value = boolen_type_value_conversion(res_value, field_model, field_name, parent_field_names)
+
+        res_value = 
         # проверяем на путое значение для списка словарей
         # res_value = exclusion_of_empty_values(res_value, field_model, field_name, parent_field_names)
 
@@ -2151,20 +2261,22 @@ if __name__ == '__main__':
     # res_data = load_dict_or_list_from_json_file('feed/feed_items.v1.json')
     # list_dict = res_data[0]['response_data']
     search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
-    raw_data_dict_list = load_dict_or_list_from_json_file('feed/feed_items_v0.json')
+    raw_data_dict_list = load_dict_or_list_from_json_file('feed/27.05.24_09-10-05.items.json')
+    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/feed_items_v0.json')
     # raw_data_dict = load_dict_or_list_from_json_file('feed/raw_content.json')
     
-    raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, ['response_data', 'content'])
+    raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, ['content'])
 
     res_list = []
-    for data in raw_data_gen:
-        res_list.append(parsing_raw_data_relative_to_data_model_v2(search_form_dict, data))
+    data = next(raw_data_gen)
+    # for data in raw_data_gen:
+    res_list.append(parsing_raw_data_relative_to_data_model_v2(search_form_dict, data))
 
     
     
     # parsed_content =  parsing_raw_data_relative_to_data_model_v2(search_form_dict, raw_data_dict)
     # print(parsed_content)
-    write_dict_or_list_to_json_file('feed/parsed_content_8.json', res_list)
+    write_dict_or_list_to_json_file('feed/parsed_content_11.json', res_list)
     # write_dict_or_list_to_json_file('feed/parsed_content_7.json', parsed_content)
     # res_data = get_dict_type(list_dict)
     # print(res_data)
