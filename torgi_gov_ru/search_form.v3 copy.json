@@ -2980,7 +2980,7 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "ЭTП",
-                        "value_scrap_type": {"types": "dict", "dict_path": ["form", "Электронная площадка"]},
+                        "value_scrap_type": {"type": "dict", "dict_path": ["form", "Электронная площадка"]},
                         "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
@@ -2995,7 +2995,7 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Субьект местонахождения имущества",
-                        "value_scrap_type": {"type": "dict", "dict_path": ["form", "Субъект местонахождения имущества"]},
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "Субъект местонахождения имущества"]},
                         "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
@@ -3639,6 +3639,386 @@
         }
     },
     "references": {
+        "Субъект местонахождения имущества": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "baseAttrValue`name",
+                "values": {
+                    "1": {
+                        "name": "Республика Адыгея",
+                        "parent": null
+                    },
+                    "85": {
+                        "name": "Ямало-Ненецкий автономный округ",
+                        "parent": null
+                    },
+                    "2": {
+                        "name": "Республика Алтай",
+                        "parent": null
+                    },
+                    "84": {
+                        "name": "Чукотский автономный округ",
+                        "parent": null
+                    },
+                    "3": {
+                        "name": "Республика Башкортостан",
+                        "parent": null
+                    },
+                    "83": {
+                        "name": "Ханты-Мансийский автономный округ",
+                        "parent": null
+                    },
+                    "4": {
+                        "name": "Республика Бурятия",
+                        "parent": null
+                    },
+                    "5": {
+                        "name": "Республика Дагестан",
+                        "parent": null
+                    },
+                    "6": {
+                        "name": "Республика Ингушетия",
+                        "parent": null
+                    },
+                    "7": {
+                        "name": "Кабардино-Балкарская Республика",
+                        "parent": null
+                    },
+                    "8": {
+                        "name": "Республика Калмыкия",
+                        "parent": null
+                    },
+                    "9": {
+                        "name": "Карачаево-Черкесская Республика",
+                        "parent": null
+                    },
+                    "82": {
+                        "name": "Ненецкий автономный округ",
+                        "parent": null
+                    },
+                    "10": {
+                        "name": "Республика Карелия",
+                        "parent": null
+                    },
+                    "81": {
+                        "name": "Еврейская автономная область",
+                        "parent": null
+                    },
+                    "11": {
+                        "name": "Республика Коми",
+                        "parent": null
+                    },
+                    "12": {
+                        "name": "Республика Крым",
+                        "parent": null
+                    },
+                    "80": {
+                        "name": "г. Севастополь",
+                        "parent": null
+                    },
+                    "13": {
+                        "name": "Республика Марий Эл",
+                        "parent": null
+                    },
+                    "14": {
+                        "name": "Республика Мордовия",
+                        "parent": null
+                    },
+                    "79": {
+                        "name": "г. Санкт-Петербург",
+                        "parent": null
+                    },
+                    "15": {
+                        "name": "Республика Саха (Якутия)",
+                        "parent": null
+                    },
+                    "16": {
+                        "name": "Республика Северная Осетия-Алания",
+                        "parent": null
+                    },
+                    "17": {
+                        "name": "Республика Татарстан",
+                        "parent": null
+                    },
+                    "78": {
+                        "name": "г. Москва",
+                        "parent": null
+                    },
+                    "18": {
+                        "name": "Республика Тыва",
+                        "parent": null
+                    },
+                    "19": {
+                        "name": "Удмуртская Республика",
+                        "parent": null
+                    },
+                    "77": {
+                        "name": "Ярославская область",
+                        "parent": null
+                    },
+                    "20": {
+                        "name": "Республика Хакасия",
+                        "parent": null
+                    },
+                    "76": {
+                        "name": "Челябинская область",
+                        "parent": null
+                    },
+                    "21": {
+                        "name": "Чеченская Республика",
+                        "parent": null
+                    },
+                    "75": {
+                        "name": "Ульяновская область",
+                        "parent": null
+                    },
+                    "22": {
+                        "name": "Чувашская Республика",
+                        "parent": null
+                    },
+                    "74": {
+                        "name": "Тюменская область",
+                        "parent": null
+                    },
+                    "23": {
+                        "name": "Алтайский край",
+                        "parent": null
+                    },
+                    "73": {
+                        "name": "Тульская область",
+                        "parent": null
+                    },
+                    "24": {
+                        "name": "Забайкальский край",
+                        "parent": null
+                    },
+                    "72": {
+                        "name": "Томская область",
+                        "parent": null
+                    },
+                    "25": {
+                        "name": "Камчатский край",
+                        "parent": null
+                    },
+                    "26": {
+                        "name": "Краснодарский край",
+                        "parent": null
+                    },
+                    "71": {
+                        "name": "Тверская область",
+                        "parent": null
+                    },
+                    "27": {
+                        "name": "Красноярский край",
+                        "parent": null
+                    },
+                    "70": {
+                        "name": "Тамбовская область",
+                        "parent": null
+                    },
+                    "28": {
+                        "name": "Пермский край",
+                        "parent": null
+                    },
+                    "29": {
+                        "name": "Приморский край",
+                        "parent": null
+                    },
+                    "69": {
+                        "name": "Смоленская область",
+                        "parent": null
+                    },
+                    "68": {
+                        "name": "Свердловская область",
+                        "parent": null
+                    },
+                    "67": {
+                        "name": "Сахалинская область",
+                        "parent": null
+                    },
+                    "30": {
+                        "name": "Ставропольский край",
+                        "parent": null
+                    },
+                    "66": {
+                        "name": "Саратовская область",
+                        "parent": null
+                    },
+                    "65": {
+                        "name": "Самарская область",
+                        "parent": null
+                    },
+                    "64": {
+                        "name": "Рязанская область",
+                        "parent": null
+                    },
+                    "63": {
+                        "name": "Ростовская область",
+                        "parent": null
+                    },
+                    "62": {
+                        "name": "Псковская область",
+                        "parent": null
+                    },
+                    "61": {
+                        "name": "Пензенская область",
+                        "parent": null
+                    },
+                    "60": {
+                        "name": "Орловская область",
+                        "parent": null
+                    },
+                    "59": {
+                        "name": "Оренбургская область",
+                        "parent": null
+                    },
+                    "58": {
+                        "name": "Омская область",
+                        "parent": null
+                    },
+                    "57": {
+                        "name": "Новосибирская область",
+                        "parent": null
+                    },
+                    "56": {
+                        "name": "Новгородская область",
+                        "parent": null
+                    },
+                    "55": {
+                        "name": "Нижегородская область",
+                        "parent": null
+                    },
+                    "54": {
+                        "name": "Мурманская область",
+                        "parent": null
+                    },
+                    "53": {
+                        "name": "Московская область",
+                        "parent": null
+                    },
+                    "52": {
+                        "name": "Магаданская область",
+                        "parent": null
+                    },
+                    "51": {
+                        "name": "Липецкая область",
+                        "parent": null
+                    },
+                    "50": {
+                        "name": "Ленинградская область",
+                        "parent": null
+                    },
+                    "49": {
+                        "name": "Курская область",
+                        "parent": null
+                    },
+                    "48": {
+                        "name": "Курганская область",
+                        "parent": null
+                    },
+                    "47": {
+                        "name": "Костромская область",
+                        "parent": null
+                    },
+                    "46": {
+                        "name": "Кировская область",
+                        "parent": null
+                    },
+                    "45": {
+                        "name": "Кемеровская область",
+                        "parent": null
+                    },
+                    "44": {
+                        "name": "Калужская область",
+                        "parent": null
+                    },
+                    "43": {
+                        "name": "Калининградская область",
+                        "parent": null
+                    },
+                    "42": {
+                        "name": "Иркутская область",
+                        "parent": null
+                    },
+                    "41": {
+                        "name": "Ивановская область",
+                        "parent": null
+                    },
+                    "40": {
+                        "name": "Воронежская область",
+                        "parent": null
+                    },
+                    "39": {
+                        "name": "Вологодская область",
+                        "parent": null
+                    },
+                    "38": {
+                        "name": "Волгоградская область",
+                        "parent": null
+                    },
+                    "37": {
+                        "name": "Владимирская область",
+                        "parent": null
+                    },
+                    "36": {
+                        "name": "Брянская область",
+                        "parent": null
+                    },
+                    "35": {
+                        "name": "Белгородская область",
+                        "parent": null
+                    },
+                    "34": {
+                        "name": "Астраханская область",
+                        "parent": null
+                    },
+                    "33": {
+                        "name": "Архангельская область",
+                        "parent": null
+                    },
+                    "32": {
+                        "name": "Амурская область",
+                        "parent": null
+                    },
+                    "31": {
+                        "name": "Хабаровский край",
+                        "parent": null
+                    },
+                    "107": {
+                        "name": "Херсонская область",
+                        "parent": null
+                    },
+                    "108": {
+                        "name": "Запорожская область",
+                        "parent": null
+                    },
+                    "105": {
+                        "name": "Луганская народная Республика",
+                        "parent": null
+                    },
+                    "106": {
+                        "name": "Донецкая Народная Республика",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "для автоматического обналения через form_field_v3() разархивироать в get_relationship_v3() dict_list = dict_list[0]['mappingTable']",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 16
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/DYNAMIC_ATTR_SEARCH_OPTION",
+            "multi_value": false,
+            "name": "dynSubjRF",
+            "required": false,
+            "selected_values": []
+        },
         "bool": {
             "available_values": {
                 "values": {
@@ -3659,6 +4039,10 @@
                 "values": {
                     "643": {
                         "name": "Рубль",
+                        "parent": null
+                    },
+                    "": {
+                        "name": "",
                         "parent": null
                     }
                 }
