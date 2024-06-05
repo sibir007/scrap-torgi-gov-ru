@@ -23,6 +23,7 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
 
     def get_value_dict_type():
         field_attr = {
+            
             # для отобразения поля на сайте, для его выбора
                     "visible": False,
             # False - поле не попадает в feedv
@@ -279,7 +280,8 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
                     # пишем log, добавляем в res_list дефолтное значение
                     logger.warning(f'ошибка приведение тип поля {field_name}, простой тип отсутствует в модели')
                     res_list.append(_get_field_model_default_value(field_model))
-        return res_list
+        res_value = ','.join(res_list)
+        return res_value
     
     
            
@@ -301,9 +303,9 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
             if field_value_type == 'dict':
                 # производим приведение типа field_value типу модели 
                 res_value = _make_dict_type_cast(field_value, field_model, field_name, parent_field_names)
-            # elif field_value_type == 'list':
-            #     # производим приведение типа field_value типу модели 
-            #     res_value = _make_list_type_cast(field_value, field_model, field_name)
+            elif field_value_type == 'list':
+                # производим приведение типа field_value типу модели 
+                res_value = _make_list_type_cast(field_value, field_model, field_name, parent_field_names)
             else:
                 # если тип поля простой или list и он не соответствует 
                 # field_type модели то пишем log b присваеваем res_value 
@@ -461,7 +463,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
             # пишем log, возвращаем field_value без конвертации
             logger.error(f'ошибка dict_scrap_type_conversion: тип field_value не str, field_value path: {".".join(parent_field_names)}') 
             return field_value
-        t_path: List = field_model['value_scrap_type']['dict_path']
+        t_path: List = field_model['value_scrap_type']['dict_path'].copy()
         t_path.extend(['available_values', 'values', field_value, 'name'])
         try:            
             res_value = _get_dict_from_search_form_v3(t_path)
@@ -586,7 +588,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
 
         res_value = value_scrap_type_conversion(res_value, field_model, field_name, parent_field_names)
         # проверяем на путое значение для списка словарей
-        # res_value = exclusion_of_empty_values(res_value, field_model, field_name, parent_field_names)
+        res_value = exclusion_of_empty_values(res_value, field_model, field_name, parent_field_names)
 
         return res_value
 
@@ -599,8 +601,14 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         
         dict_model_fields = dict_model['fields']
         dif_field_names = set(data.keys()) - set(dict_model_fields.keys())
-        for field_name in dif_field_names:
-            logger.warning(f'field_name: {field_name} not in model')
+        if dif_field_names:
+            # for key in dict_model_fields.keys():
+            #     logger.warning(f'model_key: {key}')
+            # logger.error(f"model['type'] == 'dict': model_field: [{','.join(dict_model['fields'].keys())}]")
+            # logger.error(f"data['type'] == 'dict': data_field: [{','.join(data.keys())}]")
+
+            for field_name in dif_field_names:
+                logger.warning(f'field_name: {field_name} not in model, parent_field_names: {parent_field_names}')
         to_feeded_fields_name: List[str] = _get_to_feeded_fields(dict_model_fields)
         # мы отправляем в получение значения все поля не проверяя
         # есть ли они в полученных данных
@@ -615,35 +623,34 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
     return parse_dict_model(feed_model, raw_data)
 
 
+def test_model_parsing_v_1():
+        
+    search_form_dict = load_dict_or_list_from_json_file('search_form.v3.json')
+
+    raw_data_dict_list = load_dict_or_list_from_json_file('27.05.24_09-10-05.items.json')
+    raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, ['content'])
+
+    res_list = []
+    for data in raw_data_gen:
+        res_list.append(parsing_raw_data_relative_to_data_model_v2(search_form_dict, data))
+
+
+
+    write_dict_or_list_to_json_file('feed/parsed_content_17.json', res_list)
+        
+def test_model_parsing_v_2():
+    search_form_dict = load_dict_or_list_from_json_file('search_form.v3.json')
+    
+    raw_data_dict = load_dict_or_list_from_json_file('feed/raw_content.json')
+
+
+    parsed_content =  parsing_raw_data_relative_to_data_model_v2(search_form_dict, raw_data_dict)
+    write_dict_or_list_to_json_file('feed/parsed_content_14.json', parsed_content)
+
+
 if __name__ == '__main__':
     logging_configure()
     
-    # req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('spiders/search_form.v3 copy.json')
-    # url_str = get_query_url(req_url_str, query_dikt, False) 
-    # print(url_str)
-    # list_dict = get_feed_model_v2_from_feed_items_file('raw_data_dict_list', ['response_data','content'])
-    # list_dict = get_feed_model_v1_from_feed_items_file('feed/feed_items_v0.json',['response_data', 'content'])
-    # write_dict_or_list_to_json_file('feed/feed_items_lot_card_modelv2_2.json', list_dict)
-    # res_data = load_dict_or_list_from_json_file('feed/feed_items.v1.json')
-    # list_dict = res_data[0]['response_data']
-    search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
-    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/raw_content.json')
-    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/27.05.24_09-10-05.items.json')
-    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/feed_items_v0.json')
-    raw_data_dict = load_dict_or_list_from_json_file('feed/raw_content.json')
-    
-    # raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, ['content'])
-
-    # res_list = []
-    # data = next(raw_data_gen)
-    # for data in raw_data_gen:
-    # res_list.append(parsing_raw_data_relative_to_data_model_v2(search_form_dict, data))
-
-    
-    
-    parsed_content =  parsing_raw_data_relative_to_data_model_v2(search_form_dict, raw_data_dict)
-    # print(parsed_content)
-    write_dict_or_list_to_json_file('feed/parsed_content_12.json', parsed_content)
-    # write_dict_or_list_to_json_file('feed/parsed_content_7.json', parsed_content)
-    # res_data = get_dict_type(list_dict)
-    # print(res_data)
+    # model = get_feed_model_v2_from_feed_items_file('feed/27.05.24_09-10-05.items.json', ['content'])
+    # write_dict_or_list_to_json_file('27.05.24_09-10-05.items_model.json', model)
+    test_model_parsing_v_1()
