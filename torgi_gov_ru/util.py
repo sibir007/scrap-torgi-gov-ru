@@ -29,7 +29,7 @@ from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
-def logging_configure():
+def logging_configure(logger):
     logger.setLevel(logging.DEBUG)
     ch = logging.StreamHandler()
     ch.setLevel(logging.DEBUG)
@@ -740,7 +740,8 @@ def write_value_to_dict(target_dict: Dict, path: List[str], value: Any):
     target_key = path[-1:]
     target_path = path[:len(path)-1]
     for path_item in target_path:
-        if not (target_dict:=target_dict.get(path_item, None))
+        if not (target_dict:=target_dict.get(path_item, None)):
+            pass
 
 
 def write_value_to_dict_in_json_file_v3(fname: str, path: List[str], value: Any):

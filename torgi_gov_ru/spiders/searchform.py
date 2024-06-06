@@ -8,11 +8,7 @@ import json
 from typing import Optional, Any, List, Dict, Generator
 from urllib import parse
 from torgi_gov_ru import util 
-<<<<<<< HEAD
 # import items
-=======
-import items
->>>>>>> a525b1c0d5351d6549ac3cc3c0a1da529d014ec9
 
 
 class SearchformSpider(scrapy.Spider):
@@ -70,13 +66,8 @@ class SearchformSpider(scrapy.Spider):
         # self.notices_cache = {}
     
     def start_requests(self):
-<<<<<<< HEAD
         # yield Request(self.start_url, self.parse, headers=self.base_filename_headers)
         yield Request('https://torgi.gov.ru/new/api/public/lotcards/search?lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc', self.parse, headers=self.base_filename_headers)
-=======
-        yield Request(self.start_url, self.parse, headers=self.base_filename_headers)
-        # yield Request('https://torgi.gov.ru/new/api/public/lotcards/search?lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc', self.parse_single_response, headers=self.base_filename_headers)
->>>>>>> a525b1c0d5351d6549ac3cc3c0a1da529d014ec9
     
     def parse(self, response: TextResponse) -> Generator:
         resp_str: str = response.text
@@ -101,23 +92,19 @@ class SearchformSpider(scrapy.Spider):
         
         
                 
-<<<<<<< HEAD
     def parse_lotcards_page2(self, response: TextResponse) -> Generator:
-=======
-    def parse_lotcards_page(self, response: TextResponse) -> Generator:
->>>>>>> a525b1c0d5351d6549ac3cc3c0a1da529d014ec9
         resp_str: str = response.text
         resp_dict: Dict = json.loads(resp_str)
         resp_dict_content: List[Dict[str, Any]] = resp_dict['content']
         for v in resp_dict_content:
-            yield self.parsing_raw_data_relative_to_data_model(self.feed_model, v)
+            # yield self.parsing_raw_data_relative_to_data_model(self.feed_model, v)
+            pass
     
-<<<<<<< HEAD
                 
     def parse_lotcards_page(self, response: TextResponse) -> Generator:
         resp_str: str = response.text
         resp_dict: Dict = json.loads(resp_str)
-        yield resp_dict
+        yield from resp_dict['content']
         # resp_dict_content: List[Dict[str, Any]] = resp_dict['content']
         # for v in resp_dict_content:
         #     yield self.parsing_raw_data_relative_to_data_model(self.feed_model, v)
@@ -135,20 +122,6 @@ class SearchformSpider(scrapy.Spider):
     #                     value
     #             value = lot_card[k] if (not type(lot_card[k]) == 'dict') 
     #     return {}
-=======
-    
-    def parsing_raw_data_relative_to_data_model(self, feed_model: Dict, lot_card: dict) -> Any:
-
-        for k, v in feed_model.items():
-            if v['feed'] == 'true':
-                key = v['human_readable_name'] if v['feed_human_readable_name'] == 'true' else 
-                if type(lot_card[k]) == 'dict':
-                    value = self.parsing_raw_data_relative_to_data_model(v['dict']['fields'], lot_card[k])
-                    if len(value.keys()) == 1:
-                        value
-                value = lot_card[k] if (not type(lot_card[k]) == 'dict') 
-        return {}
->>>>>>> a525b1c0d5351d6549ac3cc3c0a1da529d014ec9
             
             
             

@@ -9,7 +9,6 @@ import typing
 logger = logging.getLogger(__name__)
 
 
-
 def get_feed_model_v2_from_feed_items_file(feed_items_file: str, path: List[str]) -> Dict:
     """принимает feed_items_file и path до target elements list, возвращает feed_model dict"""
 
@@ -355,7 +354,8 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
                 # тип элемента списка не зарегистрирован 
                 # в типах модели списка
                 # пишеь log, аппендим 'type not definet in model'
-                logger.warning(f'тип {item_type} элемента списка поля {".".join(parent_field_names)} не зарегистрирован в типах модели листа')
+                logger.warning(f'тип {item_type} элемента list поля [{".".join(parent_field_names)}] не зарегистрирован в типах модели list')
+                logger.warning(f'имя поля: {field_name}, элемент: {item}')
                 res_list.append(_get_field_model_default_value(parent_field_model))
         # возвращаем результирующий список
         return res_list
@@ -403,13 +403,13 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
                     # field_value содержит ключ с именем значения exclusion_key
                     # проверяем значение exclusion_key в field_value
                     if exc_key_val:
-                        logger.debug(f'exclusion_of_empty_values(): {exc_key_val}')
+                        # logger.debug(f'exclusion_of_empty_values() exc_key_val: {exc_key_val}')
                         
                         #  exclusion_key в field_value содержит не пустое
                         # значение, возвращаем field_value
                         return field_value
                     else:
-                        logger.debug(f'exclusion_of_empty_values(): {exc_key_val}')
+                        # logger.debug(f'exclusion_of_empty_values() exc_key_val: {exc_key_val}')
                          #  exclusion_key в field_value содержит пустое
                         # значение, возвращаем None
                         return None
@@ -436,7 +436,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         """
 
         field_value_type = type(field_value).__name__
-        logger.debug(f'field_value_type: {field_value_type}')
+        # logger.debug(f'in boolen_type_value_conversion(): field_value_type: {field_value_type}')
         if field_value_type == 'bool':
             res_value = 'true' if field_value else 'false'
         else:
@@ -625,10 +625,10 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
 
 def test_model_parsing_v_1():
         
-    search_form_dict = load_dict_or_list_from_json_file('search_form.v3.json')
+    search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
 
-    raw_data_dict_list = load_dict_or_list_from_json_file('27.05.24_09-10-05.items.json')
-    raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, ['content'])
+    raw_data_dict_list = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
+    raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
 
     res_list = []
     for data in raw_data_gen:
@@ -636,7 +636,7 @@ def test_model_parsing_v_1():
 
 
 
-    write_dict_or_list_to_json_file('feed/parsed_content_17.json', res_list)
+    write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
         
 def test_model_parsing_v_2():
     search_form_dict = load_dict_or_list_from_json_file('search_form.v3.json')
@@ -648,9 +648,12 @@ def test_model_parsing_v_2():
     write_dict_or_list_to_json_file('feed/parsed_content_14.json', parsed_content)
 
 
-if __name__ == '__main__':
-    logging_configure()
+def test_get_model():
+    model = get_feed_model_v2_from_feed_items_file('feed/05.06.24_20-05-18.items.json', [])
+    write_dict_or_list_to_json_file('05.06.24_20-05-18.items_model.json', model)
     
-    # model = get_feed_model_v2_from_feed_items_file('feed/27.05.24_09-10-05.items.json', ['content'])
-    # write_dict_or_list_to_json_file('27.05.24_09-10-05.items_model.json', model)
+
+if __name__ == '__main__':
+    logging_configure(logger)
     test_model_parsing_v_1()
+    
