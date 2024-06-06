@@ -1,0 +1,18 @@
+GET /new/api/public/lotcards/22000035830000000104_1 HTTP/1.1
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Connection: keep-alive
+Cookie: SESSION=YjA5MjYxZjItNzQxYy00ZjU1LWJjNGEtZDkwNDAwNjZjZGYx; _ym_uid=1717672564149281115; _ym_d=1717672564; _ym_isad=1; _ym_visorc=w
+Host: torgi.gov.ru
+Referer: https://torgi.gov.ru/new/public/lots/lot/22000035830000000104_1/(lotInfo:info)?fromRec=false
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+branchId: null
+organizationId: null
+sec-ch-ua: "Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+traceparent: 00-2dad7db11727c3d2df94f949f7c7b9e3-10ba629ecd67451c-01

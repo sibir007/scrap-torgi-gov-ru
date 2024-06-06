@@ -22,7 +22,14 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
 
     def get_value_dict_type():
         field_attr = {
-            
+            # # модель будет иметь два типа полей:
+            # # 1. поля созданные на основании парсинга данных
+            # # 2. поля добавленные в модель, т.е. не содержащиеся в данных
+            # # поля второго типа должны быть производными от полей 1-го типа и 
+            # # должны формироваться после парсинго данных, для разделения полей
+            # # вводим аттребут "field_type": {"type": "data"} - введённые в модель на основании данных и 
+            # # "field_type": {"type": "custom"} - введённые произвольно
+            #         "field_type": {"type": "data"},
             # для отобразения поля на сайте, для его выбора
                     "visible": False,
             # False - поле не попадает в feedv
@@ -623,6 +630,9 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         return res_dict
 
     return parse_dict_model(feed_model, raw_data)
+
+def customization_feed(search_form_v3: Dict, parsed_feed_item: Dict):
+    
 
 
 def test_model_parsing_v_1():
