@@ -827,6 +827,7 @@
                         "name": "Республика Адыгея",
                         "parent": null
                     },
+                    
                     "85": {
                         "name": "Ямало-Ненецкий автономный округ",
                         "parent": null
@@ -2626,7 +2627,7 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Статус лота",
-                        "value_scrap_type": {"type": "dict", "dict_path": ["form", "Статус лота"]},
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "Статус лота"]},
                         "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
@@ -3398,7 +3399,7 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "ЭTП",
-                        "value_scrap_type": {"type": "dict", "dict_path": ["form", "Электронная площадка"]},
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "Электронная площадка"]},
                         "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
@@ -3736,7 +3737,53 @@
                                                     },
                                                     "list": {
                                                         "type": "list",
-                                                        "types": {}
+                                                        "types": {
+                                                            "dict": {
+                                                                "type": "dict",
+                                                                "fields": {
+                                                                    "code": {
+                                                                        "visible": false,
+                                                                        "feed": false,
+                                                                        "feed_human_readable_name": true,
+                                                                        "human_readable_name": "",
+                                                                        "value_scrap_type": {},
+                                                                        "field_types": {
+                                                                            "types": [
+                                                                                "str"
+                                                                            ],
+                                                                            "default_value": ""
+                                                                        },
+                                                                        "casting_key": "",
+                                                                        "exclusion_key": "",
+                                                                        "types": {
+                                                                            "str": {
+                                                                                "type": "str"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "name": {
+                                                                        "visible": false,
+                                                                        "feed": true,
+                                                                        "feed_human_readable_name": false,
+                                                                        "human_readable_name": "",
+                                                                        "value_scrap_type": {},
+                                                                        "field_types": {
+                                                                            "types": [
+                                                                                "str"
+                                                                            ],
+                                                                            "default_value": ""
+                                                                        },
+                                                                        "casting_key": "",
+                                                                        "exclusion_key": "",
+                                                                        "types": {
+                                                                            "str": {
+                                                                                "type": "str"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -3796,7 +3843,7 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Тип транзакции",
-                        "value_scrap_type": {"type": "dict", "dict_path": ["form", "Вид сделки"]},
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "Вид сделки"]},
                         "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
@@ -3914,7 +3961,11 @@
                                                     },
                                                     "bool": {
                                                         "type": "bool"
+                                                    },
+                                                    "str": {
+                                                        "type": "str"
                                                     }
+                                                    
                                                 }
                                             },
                                             "attributeType": {
@@ -4106,6 +4157,162 @@
         }
     },
     "references": {
+        "Статус лота": {
+            "available_values": {
+                "key_path": "",
+                "key_value": "",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "",
+                "value_value": "",
+                "values": {
+                    "SUCCEED": {
+                        "name": "Состоялся",
+                        "parent": null
+                    },
+                    "PUBLISHED": {
+                        "name": "Опубликован",
+                        "parent": null
+                    },
+                    "APPLICATIONS_SUBMISSION": {
+                        "name": "Приём заявок",
+                        "parent": null
+                    },
+                    "DETERMINING_WINNER": {
+                        "name": "Определение победителя",
+                        "parent": null
+                    },
+                    "FAILED": {
+                        "name": "Не состоялся",
+                        "parent": null
+                    },
+                    "CANCELED": {
+                        "name": "Отменёт",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Параметры лота",
+                "parent": "form",
+                "sort_order": 0
+            },
+            "info2_url": "",
+            "multi_value": true,
+            "name": "lotStatus",
+            "required": false,
+            "selected_values": []
+        },
+        "Вид сделки": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "name",
+                "values": {
+                    "": {
+                        "name": "",
+                        "parent": null
+                    },
+                    "freeUse": {
+                        "name": "Безвозмездное пользование",
+                        "parent": null
+                    },
+                    "other": {
+                        "name": "Иное",
+                        "parent": null
+                    },
+                    "rent": {
+                        "name": "Аренда",
+                        "parent": null
+                    },
+                    "sale": {
+                        "name": "Продажа",
+                        "parent": null
+                    },
+                    "trustManagement": {
+                        "name": "Доверительное управление",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "form",
+                "parent": "",
+                "sort_order": 14
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/TYPE_TRANSACTION?actual=true",
+            "multi_value": true,
+            "name": "typeTransaction",
+            "required": false,
+            "selected_values": []
+        },
+        "Электронная площадка": {
+            "available_values": {
+                "key_path": "response_json",
+                "key_value": "code",
+                "parent_path": "undefined",
+                "parent_value": "undefined",
+                "value_path": "response_json",
+                "value_value": "shortName",
+                "values": {
+                    "ETP_AVK": {
+                        "name": "АГЗ РТ",
+                        "parent": null
+                    },
+                    "ETP_EETP": {
+                        "name": "АО «ЕЭТП»",
+                        "parent": null
+                    },
+                    "ETP_RAD": {
+                        "name": "АО «РАД»",
+                        "parent": null
+                    },
+                    "ETP_MMVB": {
+                        "name": "ЭТП «Фабрикант» ",
+                        "parent": null
+                    },
+                    "ETP_SBAST": {
+                        "name": "АО «Сбербанк-АСТ» ",
+                        "parent": null
+                    },
+                    "ETP_TEKTORG": {
+                        "name": "ЭТП ТЭК-Торг ",
+                        "parent": null
+                    },
+                    "ETP_RTS": {
+                        "name": "РТС-тендер ",
+                        "parent": null
+                    },
+                    "ETP_GPB": {
+                        "name": "ЭТП Газпромбанк ",
+                        "parent": null
+                    },
+                    "": {
+                        "name": "",
+                        "parent": null
+                    }
+                }
+            },
+            "comment": "",
+            "default": [],
+            "group": {
+                "name": "Извещение",
+                "parent": "form",
+                "sort_order": 8
+            },
+            "info2_url": "https://torgi.gov.ru/new/nsi/v1/ELECTRONIC_PLATFORM",
+            "multi_value": true,
+            "name": "etpCode",
+            "required": false,
+            "selected_values": []
+        },
         "Субъект местонахождения имущества": {
             "available_values": {
                 "key_path": "response_json",
@@ -4115,8 +4322,16 @@
                 "value_path": "response_json",
                 "value_value": "baseAttrValue`name",
                 "values": {
+                    "": {
+                        "name": "",
+                        "parent": null
+                    },
                     "1": {
                         "name": "Республика Адыгея",
+                        "parent": null
+                    },
+                    "89": {
+                        "name": "Ямало-Ненецкий автономный округ",
                         "parent": null
                     },
                     "85": {
@@ -4127,12 +4342,20 @@
                         "name": "Республика Алтай",
                         "parent": null
                     },
+                    "87": {
+                        "name": "Чукотский автономный округ",
+                        "parent": null
+                    },
                     "84": {
                         "name": "Чукотский автономный округ",
                         "parent": null
                     },
                     "3": {
                         "name": "Республика Башкортостан",
+                        "parent": null
+                    },
+                    "86": {
+                        "name": "Ханты-Мансийский автономный округ",
                         "parent": null
                     },
                     "83": {
@@ -4179,8 +4402,16 @@
                         "name": "Республика Коми",
                         "parent": null
                     },
+                    "91": {
+                        "name": "Республика Крым",
+                        "parent": null
+                    },
                     "12": {
                         "name": "Республика Крым",
+                        "parent": null
+                    },
+                    "92": {
+                        "name": "г. Севастополь",
                         "parent": null
                     },
                     "80": {

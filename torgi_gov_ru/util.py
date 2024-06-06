@@ -29,10 +29,10 @@ from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
-def logging_configure(logger):
-    logger.setLevel(logging.DEBUG)
+def logging_configure(logger, log_level: int):
+    logger.setLevel(log_level)
     ch = logging.StreamHandler()
-    ch.setLevel(logging.DEBUG)
+    ch.setLevel(log_level)
     fm = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     ch.setFormatter(fm)
     logger.addHandler(ch)

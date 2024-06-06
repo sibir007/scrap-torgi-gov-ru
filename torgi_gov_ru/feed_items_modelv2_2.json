@@ -337,66 +337,6 @@
                                 "dict": {
                                     "type": "dict",
                                     "fields": {
-                                        "name": {
-                                            "visible": false,
-                                            "feed": false,
-                                            "feed_human_readable_name": true,
-                                            "human_readable_name": "",
-                                            "value_scrap_type": {},
-                                            "field_types": {
-                                                "types": [
-                                                    "str"
-                                                ],
-                                                "default_value": ""
-                                            },
-                                            "casting_key": "",
-                                            "exclusion_key": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
-                                            }
-                                        },
-                                        "code": {
-                                            "visible": false,
-                                            "feed": false,
-                                            "feed_human_readable_name": true,
-                                            "human_readable_name": "",
-                                            "value_scrap_type": {},
-                                            "field_types": {
-                                                "types": [
-                                                    "str"
-                                                ],
-                                                "default_value": ""
-                                            },
-                                            "casting_key": "",
-                                            "exclusion_key": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
-                                            }
-                                        },
-                                        "type": {
-                                            "visible": false,
-                                            "feed": false,
-                                            "feed_human_readable_name": true,
-                                            "human_readable_name": "",
-                                            "value_scrap_type": {},
-                                            "field_types": {
-                                                "types": [
-                                                    "str"
-                                                ],
-                                                "default_value": ""
-                                            },
-                                            "casting_key": "",
-                                            "exclusion_key": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
-                                            }
-                                        },
                                         "characteristicValue": {
                                             "visible": false,
                                             "feed": false,
@@ -417,6 +357,219 @@
                                                 },
                                                 "str": {
                                                     "type": "str"
+                                                },
+                                                "list": {
+                                                    "type": "list",
+                                                    "types": {
+                                                        "dict": {
+                                                            "type": "dict",
+                                                            "fields": {
+                                                                "value": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "str": {
+                                                                            "type": "str"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "selectNsi": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "str": {
+                                                                            "type": "str"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "id": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "str": {
+                                                                            "type": "str"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "createDate": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "str": {
+                                                                            "type": "str"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "updateDate": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "str": {
+                                                                            "type": "str"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "code": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "str": {
+                                                                            "type": "str"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "pimId": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "str": {
+                                                                            "type": "str"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "name": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "str": {
+                                                                            "type": "str"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "actual": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "bool": {
+                                                                            "type": "bool"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "pimUpdateDateTime": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "int": {
+                                                                            "type": "int"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "int": {
+                                                    "type": "int"
                                                 },
                                                 "dict": {
                                                     "type": "dict",
@@ -622,219 +775,46 @@
                                                             }
                                                         }
                                                     }
-                                                },
-                                                "list": {
-                                                    "type": "list",
-                                                    "types": {
-                                                        "dict": {
-                                                            "type": "dict",
-                                                            "fields": {
-                                                                "value": {
-                                                                    "visible": false,
-                                                                    "feed": false,
-                                                                    "feed_human_readable_name": true,
-                                                                    "human_readable_name": "",
-                                                                    "value_scrap_type": {},
-                                                                    "field_types": {
-                                                                        "types": [
-                                                                            "str"
-                                                                        ],
-                                                                        "default_value": ""
-                                                                    },
-                                                                    "casting_key": "",
-                                                                    "exclusion_key": "",
-                                                                    "types": {
-                                                                        "str": {
-                                                                            "type": "str"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "selectNsi": {
-                                                                    "visible": false,
-                                                                    "feed": false,
-                                                                    "feed_human_readable_name": true,
-                                                                    "human_readable_name": "",
-                                                                    "value_scrap_type": {},
-                                                                    "field_types": {
-                                                                        "types": [
-                                                                            "str"
-                                                                        ],
-                                                                        "default_value": ""
-                                                                    },
-                                                                    "casting_key": "",
-                                                                    "exclusion_key": "",
-                                                                    "types": {
-                                                                        "str": {
-                                                                            "type": "str"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "code": {
-                                                                    "visible": false,
-                                                                    "feed": false,
-                                                                    "feed_human_readable_name": true,
-                                                                    "human_readable_name": "",
-                                                                    "value_scrap_type": {},
-                                                                    "field_types": {
-                                                                        "types": [
-                                                                            "str"
-                                                                        ],
-                                                                        "default_value": ""
-                                                                    },
-                                                                    "casting_key": "",
-                                                                    "exclusion_key": "",
-                                                                    "types": {
-                                                                        "str": {
-                                                                            "type": "str"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "name": {
-                                                                    "visible": false,
-                                                                    "feed": false,
-                                                                    "feed_human_readable_name": true,
-                                                                    "human_readable_name": "",
-                                                                    "value_scrap_type": {},
-                                                                    "field_types": {
-                                                                        "types": [
-                                                                            "str"
-                                                                        ],
-                                                                        "default_value": ""
-                                                                    },
-                                                                    "casting_key": "",
-                                                                    "exclusion_key": "",
-                                                                    "types": {
-                                                                        "str": {
-                                                                            "type": "str"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "actual": {
-                                                                    "visible": false,
-                                                                    "feed": false,
-                                                                    "feed_human_readable_name": true,
-                                                                    "human_readable_name": "",
-                                                                    "value_scrap_type": {},
-                                                                    "field_types": {
-                                                                        "types": [
-                                                                            "str"
-                                                                        ],
-                                                                        "default_value": ""
-                                                                    },
-                                                                    "casting_key": "",
-                                                                    "exclusion_key": "",
-                                                                    "types": {
-                                                                        "bool": {
-                                                                            "type": "bool"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "id": {
-                                                                    "visible": false,
-                                                                    "feed": false,
-                                                                    "feed_human_readable_name": true,
-                                                                    "human_readable_name": "",
-                                                                    "value_scrap_type": {},
-                                                                    "field_types": {
-                                                                        "types": [
-                                                                            "str"
-                                                                        ],
-                                                                        "default_value": ""
-                                                                    },
-                                                                    "casting_key": "",
-                                                                    "exclusion_key": "",
-                                                                    "types": {
-                                                                        "str": {
-                                                                            "type": "str"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "createDate": {
-                                                                    "visible": false,
-                                                                    "feed": false,
-                                                                    "feed_human_readable_name": true,
-                                                                    "human_readable_name": "",
-                                                                    "value_scrap_type": {},
-                                                                    "field_types": {
-                                                                        "types": [
-                                                                            "str"
-                                                                        ],
-                                                                        "default_value": ""
-                                                                    },
-                                                                    "casting_key": "",
-                                                                    "exclusion_key": "",
-                                                                    "types": {
-                                                                        "str": {
-                                                                            "type": "str"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "updateDate": {
-                                                                    "visible": false,
-                                                                    "feed": false,
-                                                                    "feed_human_readable_name": true,
-                                                                    "human_readable_name": "",
-                                                                    "value_scrap_type": {},
-                                                                    "field_types": {
-                                                                        "types": [
-                                                                            "str"
-                                                                        ],
-                                                                        "default_value": ""
-                                                                    },
-                                                                    "casting_key": "",
-                                                                    "exclusion_key": "",
-                                                                    "types": {
-                                                                        "str": {
-                                                                            "type": "str"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "pimId": {
-                                                                    "visible": false,
-                                                                    "feed": false,
-                                                                    "feed_human_readable_name": true,
-                                                                    "human_readable_name": "",
-                                                                    "value_scrap_type": {},
-                                                                    "field_types": {
-                                                                        "types": [
-                                                                            "str"
-                                                                        ],
-                                                                        "default_value": ""
-                                                                    },
-                                                                    "casting_key": "",
-                                                                    "exclusion_key": "",
-                                                                    "types": {
-                                                                        "str": {
-                                                                            "type": "str"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "pimUpdateDateTime": {
-                                                                    "visible": false,
-                                                                    "feed": false,
-                                                                    "feed_human_readable_name": true,
-                                                                    "human_readable_name": "",
-                                                                    "value_scrap_type": {},
-                                                                    "field_types": {
-                                                                        "types": [
-                                                                            "str"
-                                                                        ],
-                                                                        "default_value": ""
-                                                                    },
-                                                                    "casting_key": "",
-                                                                    "exclusion_key": "",
-                                                                    "types": {
-                                                                        "int": {
-                                                                            "type": "int"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "int": {
-                                                    "type": "int"
+                                                }
+                                            }
+                                        },
+                                        "name": {
+                                            "visible": false,
+                                            "feed": false,
+                                            "feed_human_readable_name": true,
+                                            "human_readable_name": "",
+                                            "value_scrap_type": {},
+                                            "field_types": {
+                                                "types": [
+                                                    "str"
+                                                ],
+                                                "default_value": ""
+                                            },
+                                            "casting_key": "",
+                                            "exclusion_key": "",
+                                            "types": {
+                                                "str": {
+                                                    "type": "str"
+                                                }
+                                            }
+                                        },
+                                        "code": {
+                                            "visible": false,
+                                            "feed": false,
+                                            "feed_human_readable_name": true,
+                                            "human_readable_name": "",
+                                            "value_scrap_type": {},
+                                            "field_types": {
+                                                "types": [
+                                                    "str"
+                                                ],
+                                                "default_value": ""
+                                            },
+                                            "casting_key": "",
+                                            "exclusion_key": "",
+                                            "types": {
+                                                "str": {
+                                                    "type": "str"
                                                 }
                                             }
                                         },
@@ -920,6 +900,26 @@
                                                 }
                                             }
                                         },
+                                        "type": {
+                                            "visible": false,
+                                            "feed": false,
+                                            "feed_human_readable_name": true,
+                                            "human_readable_name": "",
+                                            "value_scrap_type": {},
+                                            "field_types": {
+                                                "types": [
+                                                    "str"
+                                                ],
+                                                "default_value": ""
+                                            },
+                                            "casting_key": "",
+                                            "exclusion_key": "",
+                                            "types": {
+                                                "str": {
+                                                    "type": "str"
+                                                }
+                                            }
+                                        },
                                         "id": {
                                             "visible": false,
                                             "feed": false,
@@ -947,6 +947,26 @@
                     }
                 },
                 "currencyCode": {
+                    "visible": false,
+                    "feed": false,
+                    "feed_human_readable_name": true,
+                    "human_readable_name": "",
+                    "value_scrap_type": {},
+                    "field_types": {
+                        "types": [
+                            "str"
+                        ],
+                        "default_value": ""
+                    },
+                    "casting_key": "",
+                    "exclusion_key": "",
+                    "types": {
+                        "str": {
+                            "type": "str"
+                        }
+                    }
+                },
+                "etpCode": {
                     "visible": false,
                     "feed": false,
                     "feed_human_readable_name": true,
@@ -1272,272 +1292,64 @@
                                                         }
                                                     }
                                                 },
-                                                "bool": {
-                                                    "type": "bool"
+                                                "int": {
+                                                    "type": "int"
                                                 },
                                                 "float": {
                                                     "type": "float"
                                                 },
-                                                "int": {
-                                                    "type": "int"
+                                                "bool": {
+                                                    "type": "bool"
                                                 },
                                                 "list": {
                                                     "type": "list",
-                                                    "types": {}
-                                                }
-                                            }
-                                        },
-                                        "attributeType": {
-                                            "visible": false,
-                                            "feed": false,
-                                            "feed_human_readable_name": true,
-                                            "human_readable_name": "",
-                                            "value_scrap_type": {},
-                                            "field_types": {
-                                                "types": [
-                                                    "str"
-                                                ],
-                                                "default_value": ""
-                                            },
-                                            "casting_key": "",
-                                            "exclusion_key": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
-                                            }
-                                        },
-                                        "group": {
-                                            "visible": false,
-                                            "feed": false,
-                                            "feed_human_readable_name": true,
-                                            "human_readable_name": "",
-                                            "value_scrap_type": {},
-                                            "field_types": {
-                                                "types": [
-                                                    "str"
-                                                ],
-                                                "default_value": ""
-                                            },
-                                            "casting_key": "",
-                                            "exclusion_key": "",
-                                            "types": {
-                                                "dict": {
-                                                    "type": "dict",
-                                                    "fields": {
-                                                        "code": {
-                                                            "visible": false,
-                                                            "feed": false,
-                                                            "feed_human_readable_name": true,
-                                                            "human_readable_name": "",
-                                                            "value_scrap_type": {},
-                                                            "field_types": {
-                                                                "types": [
-                                                                    "str"
-                                                                ],
-                                                                "default_value": ""
-                                                            },
-                                                            "casting_key": "",
-                                                            "exclusion_key": "",
-                                                            "types": {
-                                                                "str": {
-                                                                    "type": "str"
-                                                                }
-                                                            }
-                                                        },
-                                                        "name": {
-                                                            "visible": false,
-                                                            "feed": false,
-                                                            "feed_human_readable_name": true,
-                                                            "human_readable_name": "",
-                                                            "value_scrap_type": {},
-                                                            "field_types": {
-                                                                "types": [
-                                                                    "str"
-                                                                ],
-                                                                "default_value": ""
-                                                            },
-                                                            "casting_key": "",
-                                                            "exclusion_key": "",
-                                                            "types": {
-                                                                "str": {
-                                                                    "type": "str"
-                                                                }
-                                                            }
-                                                        },
-                                                        "displayGroupType": {
-                                                            "visible": false,
-                                                            "feed": false,
-                                                            "feed_human_readable_name": true,
-                                                            "human_readable_name": "",
-                                                            "value_scrap_type": {},
-                                                            "field_types": {
-                                                                "types": [
-                                                                    "str"
-                                                                ],
-                                                                "default_value": ""
-                                                            },
-                                                            "casting_key": "",
-                                                            "exclusion_key": "",
-                                                            "types": {
-                                                                "str": {
-                                                                    "type": "str"
+                                                    "types": {
+                                                        "dict": {
+                                                            "type": "dict",
+                                                            "fields": {
+                                                                "code": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "str": {
+                                                                            "type": "str"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "name": {
+                                                                    "visible": false,
+                                                                    "feed": false,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "",
+                                                                    "value_scrap_type": {},
+                                                                    "field_types": {
+                                                                        "types": [
+                                                                            "str"
+                                                                        ],
+                                                                        "default_value": ""
+                                                                    },
+                                                                    "casting_key": "",
+                                                                    "exclusion_key": "",
+                                                                    "types": {
+                                                                        "str": {
+                                                                            "type": "str"
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         }
                                                     }
-                                                }
-                                            }
-                                        },
-                                        "sortOrder": {
-                                            "visible": false,
-                                            "feed": false,
-                                            "feed_human_readable_name": true,
-                                            "human_readable_name": "",
-                                            "value_scrap_type": {},
-                                            "field_types": {
-                                                "types": [
-                                                    "str"
-                                                ],
-                                                "default_value": ""
-                                            },
-                                            "casting_key": "",
-                                            "exclusion_key": "",
-                                            "types": {
-                                                "int": {
-                                                    "type": "int"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "noticeAttributes": {
-                    "visible": false,
-                    "feed": false,
-                    "feed_human_readable_name": true,
-                    "human_readable_name": "",
-                    "value_scrap_type": {},
-                    "field_types": {
-                        "types": [
-                            "str"
-                        ],
-                        "default_value": ""
-                    },
-                    "casting_key": "",
-                    "exclusion_key": "",
-                    "types": {
-                        "list": {
-                            "type": "list",
-                            "types": {
-                                "dict": {
-                                    "type": "dict",
-                                    "fields": {
-                                        "code": {
-                                            "visible": false,
-                                            "feed": false,
-                                            "feed_human_readable_name": true,
-                                            "human_readable_name": "",
-                                            "value_scrap_type": {},
-                                            "field_types": {
-                                                "types": [
-                                                    "str"
-                                                ],
-                                                "default_value": ""
-                                            },
-                                            "casting_key": "",
-                                            "exclusion_key": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
-                                            }
-                                        },
-                                        "fullName": {
-                                            "visible": false,
-                                            "feed": false,
-                                            "feed_human_readable_name": true,
-                                            "human_readable_name": "",
-                                            "value_scrap_type": {},
-                                            "field_types": {
-                                                "types": [
-                                                    "str"
-                                                ],
-                                                "default_value": ""
-                                            },
-                                            "casting_key": "",
-                                            "exclusion_key": "",
-                                            "types": {
-                                                "str": {
-                                                    "type": "str"
-                                                }
-                                            }
-                                        },
-                                        "value": {
-                                            "visible": false,
-                                            "feed": false,
-                                            "feed_human_readable_name": true,
-                                            "human_readable_name": "",
-                                            "value_scrap_type": {},
-                                            "field_types": {
-                                                "types": [
-                                                    "str"
-                                                ],
-                                                "default_value": ""
-                                            },
-                                            "casting_key": "",
-                                            "exclusion_key": "",
-                                            "types": {
-                                                "dict": {
-                                                    "type": "dict",
-                                                    "fields": {
-                                                        "code": {
-                                                            "visible": false,
-                                                            "feed": false,
-                                                            "feed_human_readable_name": true,
-                                                            "human_readable_name": "",
-                                                            "value_scrap_type": {},
-                                                            "field_types": {
-                                                                "types": [
-                                                                    "str"
-                                                                ],
-                                                                "default_value": ""
-                                                            },
-                                                            "casting_key": "",
-                                                            "exclusion_key": "",
-                                                            "types": {
-                                                                "str": {
-                                                                    "type": "str"
-                                                                }
-                                                            }
-                                                        },
-                                                        "name": {
-                                                            "visible": false,
-                                                            "feed": false,
-                                                            "feed_human_readable_name": true,
-                                                            "human_readable_name": "",
-                                                            "value_scrap_type": {},
-                                                            "field_types": {
-                                                                "types": [
-                                                                    "str"
-                                                                ],
-                                                                "default_value": ""
-                                                            },
-                                                            "casting_key": "",
-                                                            "exclusion_key": "",
-                                                            "types": {
-                                                                "str": {
-                                                                    "type": "str"
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "bool": {
-                                                    "type": "bool"
                                                 }
                                             }
                                         },
@@ -1811,7 +1623,7 @@
                         }
                     }
                 },
-                "etpCode": {
+                "noticeAttributes": {
                     "visible": false,
                     "feed": false,
                     "feed_human_readable_name": true,
@@ -1826,28 +1638,245 @@
                     "casting_key": "",
                     "exclusion_key": "",
                     "types": {
-                        "str": {
-                            "type": "str"
-                        }
-                    }
-                },
-                "cancelDate": {
-                    "visible": false,
-                    "feed": false,
-                    "feed_human_readable_name": true,
-                    "human_readable_name": "",
-                    "value_scrap_type": {},
-                    "field_types": {
-                        "types": [
-                            "str"
-                        ],
-                        "default_value": ""
-                    },
-                    "casting_key": "",
-                    "exclusion_key": "",
-                    "types": {
-                        "str": {
-                            "type": "str"
+                        "list": {
+                            "type": "list",
+                            "types": {
+                                "dict": {
+                                    "type": "dict",
+                                    "fields": {
+                                        "code": {
+                                            "visible": false,
+                                            "feed": false,
+                                            "feed_human_readable_name": true,
+                                            "human_readable_name": "",
+                                            "value_scrap_type": {},
+                                            "field_types": {
+                                                "types": [
+                                                    "str"
+                                                ],
+                                                "default_value": ""
+                                            },
+                                            "casting_key": "",
+                                            "exclusion_key": "",
+                                            "types": {
+                                                "str": {
+                                                    "type": "str"
+                                                }
+                                            }
+                                        },
+                                        "fullName": {
+                                            "visible": false,
+                                            "feed": false,
+                                            "feed_human_readable_name": true,
+                                            "human_readable_name": "",
+                                            "value_scrap_type": {},
+                                            "field_types": {
+                                                "types": [
+                                                    "str"
+                                                ],
+                                                "default_value": ""
+                                            },
+                                            "casting_key": "",
+                                            "exclusion_key": "",
+                                            "types": {
+                                                "str": {
+                                                    "type": "str"
+                                                }
+                                            }
+                                        },
+                                        "value": {
+                                            "visible": false,
+                                            "feed": false,
+                                            "feed_human_readable_name": true,
+                                            "human_readable_name": "",
+                                            "value_scrap_type": {},
+                                            "field_types": {
+                                                "types": [
+                                                    "str"
+                                                ],
+                                                "default_value": ""
+                                            },
+                                            "casting_key": "",
+                                            "exclusion_key": "",
+                                            "types": {
+                                                "bool": {
+                                                    "type": "bool"
+                                                },
+                                                "dict": {
+                                                    "type": "dict",
+                                                    "fields": {
+                                                        "code": {
+                                                            "visible": false,
+                                                            "feed": false,
+                                                            "feed_human_readable_name": true,
+                                                            "human_readable_name": "",
+                                                            "value_scrap_type": {},
+                                                            "field_types": {
+                                                                "types": [
+                                                                    "str"
+                                                                ],
+                                                                "default_value": ""
+                                                            },
+                                                            "casting_key": "",
+                                                            "exclusion_key": "",
+                                                            "types": {
+                                                                "str": {
+                                                                    "type": "str"
+                                                                }
+                                                            }
+                                                        },
+                                                        "name": {
+                                                            "visible": false,
+                                                            "feed": false,
+                                                            "feed_human_readable_name": true,
+                                                            "human_readable_name": "",
+                                                            "value_scrap_type": {},
+                                                            "field_types": {
+                                                                "types": [
+                                                                    "str"
+                                                                ],
+                                                                "default_value": ""
+                                                            },
+                                                            "casting_key": "",
+                                                            "exclusion_key": "",
+                                                            "types": {
+                                                                "str": {
+                                                                    "type": "str"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "str": {
+                                                    "type": "str"
+                                                }
+                                            }
+                                        },
+                                        "attributeType": {
+                                            "visible": false,
+                                            "feed": false,
+                                            "feed_human_readable_name": true,
+                                            "human_readable_name": "",
+                                            "value_scrap_type": {},
+                                            "field_types": {
+                                                "types": [
+                                                    "str"
+                                                ],
+                                                "default_value": ""
+                                            },
+                                            "casting_key": "",
+                                            "exclusion_key": "",
+                                            "types": {
+                                                "str": {
+                                                    "type": "str"
+                                                }
+                                            }
+                                        },
+                                        "group": {
+                                            "visible": false,
+                                            "feed": false,
+                                            "feed_human_readable_name": true,
+                                            "human_readable_name": "",
+                                            "value_scrap_type": {},
+                                            "field_types": {
+                                                "types": [
+                                                    "str"
+                                                ],
+                                                "default_value": ""
+                                            },
+                                            "casting_key": "",
+                                            "exclusion_key": "",
+                                            "types": {
+                                                "dict": {
+                                                    "type": "dict",
+                                                    "fields": {
+                                                        "code": {
+                                                            "visible": false,
+                                                            "feed": false,
+                                                            "feed_human_readable_name": true,
+                                                            "human_readable_name": "",
+                                                            "value_scrap_type": {},
+                                                            "field_types": {
+                                                                "types": [
+                                                                    "str"
+                                                                ],
+                                                                "default_value": ""
+                                                            },
+                                                            "casting_key": "",
+                                                            "exclusion_key": "",
+                                                            "types": {
+                                                                "str": {
+                                                                    "type": "str"
+                                                                }
+                                                            }
+                                                        },
+                                                        "name": {
+                                                            "visible": false,
+                                                            "feed": false,
+                                                            "feed_human_readable_name": true,
+                                                            "human_readable_name": "",
+                                                            "value_scrap_type": {},
+                                                            "field_types": {
+                                                                "types": [
+                                                                    "str"
+                                                                ],
+                                                                "default_value": ""
+                                                            },
+                                                            "casting_key": "",
+                                                            "exclusion_key": "",
+                                                            "types": {
+                                                                "str": {
+                                                                    "type": "str"
+                                                                }
+                                                            }
+                                                        },
+                                                        "displayGroupType": {
+                                                            "visible": false,
+                                                            "feed": false,
+                                                            "feed_human_readable_name": true,
+                                                            "human_readable_name": "",
+                                                            "value_scrap_type": {},
+                                                            "field_types": {
+                                                                "types": [
+                                                                    "str"
+                                                                ],
+                                                                "default_value": ""
+                                                            },
+                                                            "casting_key": "",
+                                                            "exclusion_key": "",
+                                                            "types": {
+                                                                "str": {
+                                                                    "type": "str"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "sortOrder": {
+                                            "visible": false,
+                                            "feed": false,
+                                            "feed_human_readable_name": true,
+                                            "human_readable_name": "",
+                                            "value_scrap_type": {},
+                                            "field_types": {
+                                                "types": [
+                                                    "str"
+                                                ],
+                                                "default_value": ""
+                                            },
+                                            "casting_key": "",
+                                            "exclusion_key": "",
+                                            "types": {
+                                                "int": {
+                                                    "type": "int"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -1871,6 +1900,26 @@
                         },
                         "int": {
                             "type": "int"
+                        }
+                    }
+                },
+                "cancelDate": {
+                    "visible": false,
+                    "feed": false,
+                    "feed_human_readable_name": true,
+                    "human_readable_name": "",
+                    "value_scrap_type": {},
+                    "field_types": {
+                        "types": [
+                            "str"
+                        ],
+                        "default_value": ""
+                    },
+                    "casting_key": "",
+                    "exclusion_key": "",
+                    "types": {
+                        "str": {
+                            "type": "str"
                         }
                     }
                 }

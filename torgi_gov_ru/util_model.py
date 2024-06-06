@@ -167,23 +167,25 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
             else:
                 # в сохранённом dict_type поле с таким именем есть
                 # проверяем есть ли в сохранённом поле тип сливаемого поля
-                field_value_type=list(field_value['types'].keys())[0]
-                if (saved_field_value_type:=saved_field_value['types'].get(field_value_type, None)) == None:
-
-                    # тип сливаемого поля в типах сохранённого поля отсутствует - добавляем новый тип в типы сохранённого поля    
-                    saved_field_value['types'][field_value_type] = field_value['types'][field_value_type]
-                else:
-                    # тип сливаемого поля в типах сохранённого поля есть - действуем в зависимости от типа поля
-                    if field_value_type == 'dict':
-                        # если тип dict то закускаем сливание типов сохранённого и сливаемого поля     
-                        merge_dict_type_in_saved_item_dict_type(saved_field_value_type, field_value['types'][field_value_type])
-                    elif field_value_type == 'list':
-                        # если тип list то закускаем сливание типов сохранённого и сливаемого поля
-                        merge_list_type_in_saved_item_list_type(saved_field_value_type, field_value['types'][field_value_type])     
-                    else:
-                        # если тип простой то ничего не делаем, он уже присутствует
-                        pass
+                field_value_types=list(field_value['types'].keys())
+                for field_value_type in field_value_types:
                     
+                    if (saved_field_value_type:=saved_field_value['types'].get(field_value_type, None)) == None:
+
+                        # тип сливаемого поля в типах сохранённого поля отсутствует - добавляем новый тип в типы сохранённого поля    
+                        saved_field_value['types'][field_value_type] = field_value['types'][field_value_type]
+                    else:
+                        # тип сливаемого поля в типах сохранённого поля есть - действуем в зависимости от типа поля
+                        if field_value_type == 'dict':
+                            # если тип dict то закускаем сливание типов сохранённого и сливаемого поля     
+                            merge_dict_type_in_saved_item_dict_type(saved_field_value_type, field_value['types'][field_value_type])
+                        elif field_value_type == 'list':
+                            # если тип list то закускаем сливание типов сохранённого и сливаемого поля
+                            merge_list_type_in_saved_item_list_type(saved_field_value_type, field_value['types'][field_value_type])     
+                        else:
+                            # если тип простой то ничего не делаем, он уже присутствует
+                            pass
+                        
         return saved_item_dict_type
     
 
@@ -221,7 +223,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         """проверки что тип field_value есть field_types модели"""
 
         field_value_type = type(field_value).__name__
-        # logger.debug(f'in _check_compliance_model_field_type(): {parent_fields_names}')
+        logger.debug(f'in _check_compliance_model_field_type(): {parent_fields_names}')
         return field_value_type in field_model['field_types']['types']
         
     def _make_dict_type_cast(field_value: Dict, field_model: Dict, field_name: str, parent_fields_names: List[str]):
@@ -327,7 +329,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         for item in data:
             # определяем тип элемента списка
             item_type = type(item).__name__
-            # logger.debug(f'in parse_list_model(): item type {item_type}')
+            logger.debug(f'in parse_list_model(): item type {item_type}')
             # проверяем зарегистриван ли тип в типах лист модели
             if (model:=list_model['types'].get(item_type, None)):
                 # тип элемента списка зарегистрирован 
@@ -355,7 +357,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
                 # в типах модели списка
                 # пишеь log, аппендим 'type not definet in model'
                 logger.warning(f'тип {item_type} элемента list поля [{".".join(parent_field_names)}] не зарегистрирован в типах модели list')
-                logger.warning(f'имя поля: {field_name}, элемент: {item}')
+                # logger.warning(f'имя поля: {field_name}, элемент: {item}')
                 res_list.append(_get_field_model_default_value(parent_field_model))
         # возвращаем результирующий список
         return res_list
@@ -403,13 +405,13 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
                     # field_value содержит ключ с именем значения exclusion_key
                     # проверяем значение exclusion_key в field_value
                     if exc_key_val:
-                        # logger.debug(f'exclusion_of_empty_values() exc_key_val: {exc_key_val}')
+                        logger.debug(f'exclusion_of_empty_values() exc_key_val: {exc_key_val}')
                         
                         #  exclusion_key в field_value содержит не пустое
                         # значение, возвращаем field_value
                         return field_value
                     else:
-                        # logger.debug(f'exclusion_of_empty_values() exc_key_val: {exc_key_val}')
+                        logger.debug(f'exclusion_of_empty_values() exc_key_val: {exc_key_val}')
                          #  exclusion_key в field_value содержит пустое
                         # значение, возвращаем None
                         return None
@@ -436,7 +438,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         """
 
         field_value_type = type(field_value).__name__
-        # logger.debug(f'in boolen_type_value_conversion(): field_value_type: {field_value_type}')
+        logger.debug(f'in boolen_type_value_conversion(): field_value_type: {field_value_type}')
         if field_value_type == 'bool':
             res_value = 'true' if field_value else 'false'
         else:
@@ -565,12 +567,12 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
             else:
                 # тип поля не зарегистрирован в типах модели
                 # пишеь log, присваиваем результату значение по умолчанию для типа
-                logger.warning(f'тип {field_type} поля {".".join(parent_field_names)} не зарегистрирован в типах модели')
+                logger.warning(f'get_field_value(): тип {field_type} поля {".".join(parent_field_names)} не зарегистрирован в типах модели')
                 res_value = _get_field_model_default_value(field_model)
         else:
             # поля нет в данных
             # присваиваем результату значение по умолчанию для типа
-            # logger.debug(f'field name: {".".join(parent_field_names)} нет в данных')
+            logger.debug(f'get_field_value(): field name: {".".join(parent_field_names)} нет в данных')
             res_value = _get_field_model_default_value(field_model)
         # корректируем полученное значение по 
         # значениям "field_type", "casting_key" модели поля
@@ -608,7 +610,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
             # logger.error(f"data['type'] == 'dict': data_field: [{','.join(data.keys())}]")
 
             for field_name in dif_field_names:
-                logger.warning(f'field_name: {field_name} not in model, parent_field_names: {parent_field_names}')
+                logger.warning(f'parse_dict_model(): field_name: {field_name} not in model, parent_field_names: {parent_field_names}')
         to_feeded_fields_name: List[str] = _get_to_feeded_fields(dict_model_fields)
         # мы отправляем в получение значения все поля не проверяя
         # есть ли они в полученных данных
@@ -627,8 +629,10 @@ def test_model_parsing_v_1():
         
     search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
 
-    raw_data_dict_list = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
+    raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
+    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
     raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
+    # raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
 
     res_list = []
     for data in raw_data_gen:
@@ -636,7 +640,8 @@ def test_model_parsing_v_1():
 
 
 
-    write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
+    write_dict_or_list_to_json_file('feed/test_parsed_1.json', res_list)
+    # write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
         
 def test_model_parsing_v_2():
     search_form_dict = load_dict_or_list_from_json_file('search_form.v3.json')
@@ -649,11 +654,12 @@ def test_model_parsing_v_2():
 
 
 def test_get_model():
-    model = get_feed_model_v2_from_feed_items_file('feed/05.06.24_20-05-18.items.json', [])
-    write_dict_or_list_to_json_file('05.06.24_20-05-18.items_model.json', model)
+    model = get_feed_model_v2_from_feed_items_file('feed/06.06.24_08-07-52.items.json', [])
+    write_dict_or_list_to_json_file('feed_items_modelv2_2.json', model)
     
 
 if __name__ == '__main__':
-    logging_configure(logger)
+    logging_configure(logger, logging.INFO)
     test_model_parsing_v_1()
+    # test_get_model()
     
