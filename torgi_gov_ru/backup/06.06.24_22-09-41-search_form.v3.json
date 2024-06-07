@@ -216,7 +216,7 @@
             "Sec-Fetch-User": "?1",
             "Priority": "u=1"
         },
-        "response_headers": {
+        "response_headers":{
             "Server": "nginx",
             "Date": "Thu, 23 May 2024 12:58:59 GMT",
             "Content-Type": "image/jpeg",
@@ -234,6 +234,7 @@
     "local_file_store_rel_path": {
         "full_url": "files/"
     },
+
     "form": {
         "Версии": {
             "available_values": {
@@ -887,6 +888,7 @@
                         "name": "Республика Адыгея",
                         "parent": null
                     },
+                    
                     "85": {
                         "name": "Ямало-Ненецкий автономный округ",
                         "parent": null
@@ -2633,35 +2635,23 @@
     "custom_feed_model": {
         "fields": {
             "lot_ref": {
-                "field_type": {
-                    "type": "custom",
-                    "destination_path": []
-                },
+                "field_type": {"type": "custom"},
                 "visible": true,
                 "feed": true,
                 "feed_human_readable_name": true,
                 "human_readable_name": "Ссылка на лот",
                 "value_scrap_type": {
                     "type": "layout_formatting",
-                    "layout_path": [
-                        "lotcard_request",
-                        "full_url_layout"
-                    ],
+                    "layout_path": ["lotcard_request", "full_url_layout"],
                     "layout_format_feed_items_paths": {
+                        "feed": {},
                         "raw_feed": {
-                            "lot_id": [
-                                "id"
-                            ]
+                            "lot_id": ["id"]
                         },
                         "search_form": {}
                     }
                 },
-                "field_types": {
-                    "types": [
-                        "str"
-                    ],
-                    "default_value": ""
-                },
+                "field_types": {"types": ["str"], "default_value": ""},
                 "casting_key": "",
                 "exclusion_key": "",
                 "types": {
@@ -2671,35 +2661,24 @@
                 }
             },
             "notice_ref": {
-                "field_type": {
-                    "type": "custom",
-                    "destination_path": []
-                },
+                "field_type": {"type": "custom"},
                 "visible": true,
                 "feed": true,
                 "feed_human_readable_name": true,
                 "human_readable_name": "Ссылка на извещение",
                 "value_scrap_type": {
-                    "type": "layout_formatting",
-                    "layout_path": [
-                        "notices_filename",
-                        "full_url_layout"
-                    ],
+                    "type": "layout_formatting", 
+                    "layout_path": ["notices_filename", "full_url_layout"],
                     "layout_format_feed_items_paths": {
+                        "feed": {},
                         "raw_feed": {
-                            "notice_num": [
-                                "noticeNumber"
-                            ]
+                            "notice_num": ["noticeNumber"]
                         },
                         "search_form": {}
                     }
+                    
                 },
-                "field_types": {
-                    "types": [
-                        "str"
-                    ],
-                    "default_value": ""
-                },
+                "field_types": {"types": ["str"], "default_value": ""},
                 "casting_key": "",
                 "exclusion_key": "",
                 "types": {
@@ -2709,28 +2688,19 @@
                 }
             },
             "etp_ref": {
-                "field_type": {
-                    "type": "custom",
-                    "destination_path": []
-
-                },
+                "field_type": {"type": "custom"},
                 "visible": true,
                 "feed": true,
                 "feed_human_readable_name": true,
                 "human_readable_name": "Ссылка на ЭТП",
                 "value_scrap_type": {
-                    "type": "dict",
-                    "dict_path": [
-                        "references",
-                        "Электронная площадка сайт"
-                    ]
+                    "type": "layout_formatting", 
+                    "layout_path": ["notices_filename", "full_url_layout"],
+                    "layout_format_items_paths": {
+                        "notice_num": ["ID лота"]
+                    }
                 },
-                "field_types": {
-                    "types": [
-                        "str"
-                    ],
-                    "default_value": ""
-                },
+                "field_types": {"types": ["str"], "default_value": ""},
                 "casting_key": "",
                 "exclusion_key": "",
                 "types": {
@@ -2752,16 +2722,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "ID лота",
-                        "value_scrap_type": {
-                            "type": "ref",
-                            "ref": ""
-                        },
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "value_scrap_type": {"type": "ref", "ref": ""},
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -2775,16 +2737,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Номер извещения",
-                        "value_scrap_type": {
-                            "type": "ref",
-                            "ref": ""
-                        },
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "value_scrap_type": {"type": "ref", "ref": ""},
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -2799,12 +2753,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Номер лота",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "int"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["int"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -2818,19 +2767,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Статус лота",
-                        "value_scrap_type": {
-                            "type": "dict",
-                            "dict_path": [
-                                "references",
-                                "Статус лота"
-                            ]
-                        },
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "Статус лота"]},
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -2845,12 +2783,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Вид торгов",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "name",
                         "exclusion_key": "",
                         "types": {
@@ -2863,12 +2796,7 @@
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "field_types": {
-                                            "types": [
-                                                "str"
-                                            ],
-                                            "default_value": ""
-                                        },
+                                        "field_types": {"types": ["str"], "default_value": ""},
                                         "casting_key": "",
                                         "exclusion_key": "",
                                         "types": {
@@ -2883,12 +2811,7 @@
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "field_types": {
-                                            "types": [
-                                                "str"
-                                            ],
-                                            "default_value": ""
-                                        },
+                                        "field_types": {"types": ["str"], "default_value": ""},
                                         "casting_key": "",
                                         "exclusion_key": "",
                                         "types": {
@@ -2907,12 +2830,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Форма проведения",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "name",
                         "exclusion_key": "",
                         "types": {
@@ -2925,12 +2843,7 @@
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "field_types": {
-                                            "types": [
-                                                "str"
-                                            ],
-                                            "default_value": ""
-                                        },
+                                        "field_types": {"types": ["str"], "default_value": ""},
                                         "casting_key": "",
                                         "exclusion_key": "",
                                         "types": {
@@ -2945,12 +2858,7 @@
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "field_types": {
-                                            "types": [
-                                                "str"
-                                            ],
-                                            "default_value": ""
-                                        },
+                                        "field_types": {"types": ["str"], "default_value": ""},
                                         "casting_key": "",
                                         "exclusion_key": "",
                                         "types": {
@@ -2969,12 +2877,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Предмет торгов (наименование лота)",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -2989,12 +2892,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Описание лота",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3009,14 +2907,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Начальная цена",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "int",
-                                "float",
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["int", "float", "str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3034,12 +2925,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Дата и время окончания подачи заявок",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3053,16 +2939,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Изображения лота",
-                        "value_scrap_type": {
-                            "type": "ref",
-                            "ref": ""
-                        },
-                        "field_types": {
-                            "types": [
-                                "list"
-                            ],
-                            "default_value": ""
-                        },
+                        "value_scrap_type": {"type": "ref", "ref": ""},
+                        "field_types": {"types": ["list"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3082,12 +2960,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Характеристики лота",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "list"
-                            ],
-                            "default_value": {}
-                        },
+                        "field_types": {"types": ["list"], "default_value": {}},
                         "casting_key": "",
                         "exclusion_key": "Значение",
                         "types": {
@@ -3103,14 +2976,7 @@
                                                 "feed_human_readable_name": true,
                                                 "human_readable_name": "Значение",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "float",
-                                                        "str",
-                                                        "int"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["float", "str", "int"], "default_value": ""},
                                                 "casting_key": "value",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -3546,12 +3412,7 @@
                                                 "feed_human_readable_name": true,
                                                 "human_readable_name": "Наименование",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": ""},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -3566,12 +3427,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": ""},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -3586,12 +3442,7 @@
                                                 "feed_human_readable_name": true,
                                                 "human_readable_name": "Ед.изм.",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": ""},
                                                 "casting_key": "symbol",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -3604,12 +3455,7 @@
                                                                 "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
-                                                                "field_types": {
-                                                                    "types": [
-                                                                        "str"
-                                                                    ],
-                                                                    "default_value": ""
-                                                                },
+                                                                "field_types": {"types": ["str"], "default_value": ""},
                                                                 "casting_key": "",
                                                                 "exclusion_key": "",
                                                                 "types": {
@@ -3624,12 +3470,7 @@
                                                                 "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
-                                                                "field_types": {
-                                                                    "types": [
-                                                                        "str"
-                                                                    ],
-                                                                    "default_value": ""
-                                                                },
+                                                                "field_types": {"types": ["str"], "default_value": ""},
                                                                 "casting_key": "",
                                                                 "exclusion_key": "",
                                                                 "types": {
@@ -3644,12 +3485,7 @@
                                                                 "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
-                                                                "field_types": {
-                                                                    "types": [
-                                                                        "str"
-                                                                    ],
-                                                                    "default_value": ""
-                                                                },
+                                                                "field_types": {"types": ["str"], "default_value": ""},
                                                                 "casting_key": "",
                                                                 "exclusion_key": "",
                                                                 "types": {
@@ -3668,12 +3504,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": ""},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -3688,12 +3519,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": ""},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -3713,19 +3539,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "ЭTП",
-                        "value_scrap_type": {
-                            "type": "dict",
-                            "dict_path": [
-                                "references",
-                                "Электронная площадка"
-                            ]
-                        },
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "Электронная площадка"]},
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3739,19 +3554,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Субьект местонахождения имущества",
-                        "value_scrap_type": {
-                            "type": "dict",
-                            "dict_path": [
-                                "references",
-                                "Субъект местонахождения имущества"
-                            ]
-                        },
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "Субъект местонахождения имущества"]},
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3766,12 +3570,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Категория",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "name",
                         "exclusion_key": "",
                         "types": {
@@ -3784,12 +3583,7 @@
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "field_types": {
-                                            "types": [
-                                                "str"
-                                            ],
-                                            "default_value": ""
-                                        },
+                                        "field_types": {"types": ["str"], "default_value": ""},
                                         "casting_key": "",
                                         "exclusion_key": "",
                                         "types": {
@@ -3804,12 +3598,7 @@
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "field_types": {
-                                            "types": [
-                                                "str"
-                                            ],
-                                            "default_value": ""
-                                        },
+                                        "field_types": {"types": ["str"], "default_value": ""},
                                         "casting_key": "",
                                         "exclusion_key": "",
                                         "types": {
@@ -3828,12 +3617,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Время создания",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3848,12 +3632,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Временная зона",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3868,12 +3647,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Смещение временной зоны",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3887,19 +3661,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Имеются аппеляции",
-                        "value_scrap_type": {
-                            "type": "dict",
-                            "dict_path": [
-                                "references",
-                                "bool"
-                            ]
-                        },
-                        "field_types": {
-                            "types": [
-                                "bool"
-                            ],
-                            "default_value": null
-                        },
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "bool"]},
+                        "field_types": {"types": ["bool"], "default_value": null},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3913,19 +3676,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Остановлена",
-                        "value_scrap_type": {
-                            "type": "dict",
-                            "dict_path": [
-                                "references",
-                                "bool"
-                            ]
-                        },
-                        "field_types": {
-                            "types": [
-                                "bool"
-                            ],
-                            "default_value": null
-                        },
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "bool"]},
+                        "field_types": {"types": ["bool"], "default_value": null},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -3940,12 +3692,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Атребуты",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "list"
-                            ],
-                            "default_value": []
-                        },
+                        "field_types": {"types": ["list"], "default_value": []},
                         "casting_key": "",
                         "exclusion_key": "Значение",
                         "types": {
@@ -3961,12 +3708,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": null
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": null},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -3981,12 +3723,7 @@
                                                 "feed_human_readable_name": true,
                                                 "human_readable_name": "Наименование",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": null
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": null},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4001,12 +3738,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": null
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": null},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4021,12 +3753,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": null
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": null},
                                                 "casting_key": "name",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4082,12 +3809,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "int"
-                                                    ],
-                                                    "default_value": null
-                                                },
+                                                "field_types": {"types": ["int"], "default_value": null},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4102,15 +3824,7 @@
                                                 "feed_human_readable_name": true,
                                                 "human_readable_name": "Значение",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "float",
-                                                        "int",
-                                                        "str",
-                                                        "bool"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["float", "int", "str", "bool"], "default_value": ""},
                                                 "casting_key": "name",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4123,12 +3837,7 @@
                                                                 "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
-                                                                "field_types": {
-                                                                    "types": [
-                                                                        "str"
-                                                                    ],
-                                                                    "default_value": null
-                                                                },
+                                                                "field_types": {"types": ["str"], "default_value": null},
                                                                 "casting_key": "",
                                                                 "exclusion_key": "",
                                                                 "types": {
@@ -4143,12 +3852,7 @@
                                                                 "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
-                                                                "field_types": {
-                                                                    "types": [
-                                                                        "str"
-                                                                    ],
-                                                                    "default_value": null
-                                                                },
+                                                                "field_types": {"types": ["str"], "default_value": null},
                                                                 "casting_key": "",
                                                                 "exclusion_key": "",
                                                                 "types": {
@@ -4234,19 +3938,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Анулирован",
-                        "value_scrap_type": {
-                            "type": "dict",
-                            "dict_path": [
-                                "references",
-                                "bool"
-                            ]
-                        },
-                        "field_types": {
-                            "types": [
-                                "bool"
-                            ],
-                            "default_value": null
-                        },
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "bool"]},
+                        "field_types": {"types": ["bool"], "default_value": null},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -4261,12 +3954,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Дата публикации первой версии",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -4281,12 +3969,7 @@
                         "feed_human_readable_name": false,
                         "human_readable_name": "",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -4300,19 +3983,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Тип транзакции",
-                        "value_scrap_type": {
-                            "type": "dict",
-                            "dict_path": [
-                                "references",
-                                "Вид сделки"
-                            ]
-                        },
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "Вид сделки"]},
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -4326,19 +3998,8 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Валюта",
-                        "value_scrap_type": {
-                            "type": "dict",
-                            "dict_path": [
-                                "references",
-                                "Валюта"
-                            ]
-                        },
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "value_scrap_type": {"type": "dict", "dict_path": ["references", "Валюта"]},
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "",
                         "exclusion_key": "",
                         "types": {
@@ -4353,12 +4014,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "Атребуты извещения",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "list"
-                            ],
-                            "default_value": []
-                        },
+                        "field_types": {"types": ["list"], "default_value": []},
                         "casting_key": "",
                         "exclusion_key": "Значение",
                         "types": {
@@ -4374,12 +4030,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": ""},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4394,12 +4045,7 @@
                                                 "feed_human_readable_name": true,
                                                 "human_readable_name": "Наименование",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": ""},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4414,13 +4060,7 @@
                                                 "feed_human_readable_name": true,
                                                 "human_readable_name": "Значение",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str",
-                                                        "bool"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["str", "bool"], "default_value": ""},
                                                 "casting_key": "name",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4433,12 +4073,7 @@
                                                                 "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
-                                                                "field_types": {
-                                                                    "types": [
-                                                                        "str"
-                                                                    ],
-                                                                    "default_value": ""
-                                                                },
+                                                                "field_types": {"types": ["str"], "default_value": ""},
                                                                 "casting_key": "",
                                                                 "exclusion_key": "value",
                                                                 "types": {
@@ -4453,12 +4088,7 @@
                                                                 "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
-                                                                "field_types": {
-                                                                    "types": [
-                                                                        "str"
-                                                                    ],
-                                                                    "default_value": ""
-                                                                },
+                                                                "field_types": {"types": ["str"], "default_value": ""},
                                                                 "casting_key": "",
                                                                 "exclusion_key": "value",
                                                                 "types": {
@@ -4475,6 +4105,7 @@
                                                     "str": {
                                                         "type": "str"
                                                     }
+                                                    
                                                 }
                                             },
                                             "attributeType": {
@@ -4483,12 +4114,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": ""},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4503,12 +4129,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "str"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["str"], "default_value": ""},
                                                 "casting_key": "name",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4564,12 +4185,7 @@
                                                 "feed_human_readable_name": false,
                                                 "human_readable_name": "",
                                                 "value_scrap_type": {},
-                                                "field_types": {
-                                                    "types": [
-                                                        "int"
-                                                    ],
-                                                    "default_value": ""
-                                                },
+                                                "field_types": {"types": ["int"], "default_value": ""},
                                                 "casting_key": "",
                                                 "exclusion_key": "",
                                                 "types": {
@@ -4590,12 +4206,7 @@
                         "feed_human_readable_name": true,
                         "human_readable_name": "НДС",
                         "value_scrap_type": {},
-                        "field_types": {
-                            "types": [
-                                "str"
-                            ],
-                            "default_value": ""
-                        },
+                        "field_types": {"types": ["str"], "default_value": ""},
                         "casting_key": "name",
                         "exclusion_key": "",
                         "types": {
@@ -4608,12 +4219,7 @@
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "field_types": {
-                                            "types": [
-                                                "str"
-                                            ],
-                                            "default_value": ""
-                                        },
+                                        "field_types": {"types": ["str"], "default_value": ""},
                                         "casting_key": "",
                                         "exclusion_key": "",
                                         "types": {
@@ -4628,12 +4234,7 @@
                                         "feed_human_readable_name": false,
                                         "human_readable_name": "",
                                         "value_scrap_type": {},
-                                        "field_types": {
-                                            "types": [
-                                                "str"
-                                            ],
-                                            "default_value": ""
-                                        },
+                                        "field_types": {"types": ["str"], "default_value": ""},
                                         "casting_key": "",
                                         "exclusion_key": "",
                                         "types": {
@@ -4793,6 +4394,7 @@
             "selected_values": []
         },
         "Электронная площадка сайт": {
+
             "available_values": {
                 "key_path": "response_json",
                 "key_value": "code",
@@ -4801,38 +4403,6 @@
                 "value_path": "response_json",
                 "value_value": "site",
                 "values": {
-                    "ETP_AVK": {
-                        "name": "https://etp.zakazrf.ru",
-                        "parent": null
-                    },
-                    "ETP_EETP": {
-                        "name": "https://roseltorg.ru",
-                        "parent": null
-                    },
-                    "ETP_RAD": {
-                        "name": "https://catalog.lot-online.ru",
-                        "parent": null
-                    },
-                    "ETP_MMVB": {
-                        "name": "https://www.fabrikant.ru/",
-                        "parent": null
-                    },
-                    "ETP_SBAST": {
-                        "name": "https://utp.sberbank-ast.ru",
-                        "parent": null
-                    },
-                    "ETP_TEKTORG": {
-                        "name": "https://www.tektorg.ru",
-                        "parent": null
-                    },
-                    "ETP_RTS": {
-                        "name": "https://www.rts-tender.ru/",
-                        "parent": null
-                    },
-                    "ETP_GPB": {
-                        "name": "https://etpgpb.ru",
-                        "parent": null
-                    }
                 }
             },
             "comment": "",
@@ -4847,6 +4417,7 @@
             "name": "etpCode",
             "required": false,
             "selected_values": []
+        
         },
         "Электронная площадка": {
             "available_values": {
@@ -5324,6 +4895,7 @@
                         "parent": null
                     }
                 }
+
             }
         },
         "Валюта": {
@@ -5338,7 +4910,9 @@
                         "parent": null
                     }
                 }
+
             }
-        }
+        }        
+
     }
 }

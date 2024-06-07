@@ -22,21 +22,21 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
 
     def get_value_dict_type():
         field_attr = {
-            # # модель будет иметь два типа полей:
-            # # 1. поля созданные на основании парсинга данных
-            # # 2. поля добавленные в модель, т.е. не содержащиеся в данных
-            # # поля второго типа должны быть производными от полей 1-го типа и 
-            # # должны формироваться после парсинго данных, для разделения полей
-            # # вводим аттребут "field_type": {"type": "data"} - введённые в модель на основании данных и 
-            # # "field_type": {"type": "custom"} - введённые произвольно
-            #         "field_type": {"type": "data"},
+            # модель будет иметь два типа полей:
+            # 1. поля созданные на основании парсинга данных
+            # 2. поля добавленные в модель, т.е. не содержащиеся в данных
+            # поля второго типа должны быть производными от полей 1-го типа и 
+            # должны формироваться после парсинго данных, для разделения полей
+            # вводим аттребут "field_type": {"type": "data"} - введённые в модель на основании данных и 
+            # "field_type": {"type": "custom"} - введённые произвольно
+                    "field_type": {"type": "data"},
             # для отобразения поля на сайте, для его выбора
                     "visible": False,
             # False - поле не попадает в feedv
                     "feed": False,
             # True - качестве ключа для поля будет использоваться значение 
             # из human_readable_name, в противном случае key value 
-                    "feed_human_readable_name": True,
+                    "feed_human_readable_name": False,
                     "human_readable_name": "",
             # {"type": "direct"}, {"type": "dict", "dict_path": []}, {"type": "ref", "ref": ""} 
             # direct - значение берётся то которое вычисляетс
@@ -207,6 +207,60 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
 
 
 
+def feed_customizing(search_form_v3: Dict, feed_item: Dict) -> Dict:
+    """получает search_form_v3 dict и парсед через модель feed_item,
+    производит customizing feed_item по custom_feed_model search_form_v3 
+
+    Args:
+        search_form_v3 (Dict): search_form_v3
+        feed_item (Dict): парсед через дата модель feed_item 
+
+    Returns:
+        Dict: customized feed_item 
+    """
+    
+    def _process_feed_customizing():
+        pass
+    custom_feed_model: Dict = search_form_v3['custom_feed_model']
+    # field_names_to_customizing = _get_to_feeded_fields(custom_feed_model)
+    for field_name, field_model in custom_feed_model.items():
+         if field_model['feed']:
+            field_to_feeded_name = _get_field_to_feeded_name(field_model, field_name)
+            value_scrap_type = field_model['value_scrap_type']['type']
+            # проверяем что value_scrap_type определн
+            if value_scrap_type:=field_model['value_scrap_type'].get('type', None)
+                # value_scrap_type определён - действуем в зависимости от типа
+                if value_scrap_type == 'layout_formatting':
+                    
+            else:
+                # value_scrap_type не определён - ничего не делаем
+                pass
+        
+        pass
+
+def _get_to_feeded_fields(dict_model_fields: Dict) -> List[str]:
+    """получает model поля dict и возвращает список имён полей,
+    модели которых помечены "feed": True
+    """
+    to_feeded_fields = [
+                        field 
+                        for field, value
+                        in dict_model_fields.items()
+                        if value['feed']
+                        ]
+    return to_feeded_fields
+
+def _get_field_to_feeded_name(field_model, field_name: str) -> str:
+    """получает модель поля и его имя - возвращает human_readable_name 
+    поля если 'feed_human_readable_name': True
+    """
+
+    # return field_name
+    return field_model['human_readable_name'] if field_model['feed_human_readable_name'] else  field_name
+
+
+
+
 def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: Dict)-> Dict: 
     """принимпет search_form.v3 и прогоняет по ней
      lot_card,  возвращает dict являющийсчся отрожением lot_card относительно
@@ -215,17 +269,6 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
     feed_model = search_form_v3['feed']['types']['dict']
     references = search_form_v3['references']
 
-    
-    def _get_to_feeded_fields(dict_model_fields: Dict) -> List[str]:
-        to_feeded_fields = [
-                            field 
-                            for field, value
-                            in dict_model_fields.items()
-                            if value['feed']
-                            ]
-        return to_feeded_fields
-
-    
     def _check_compliance_model_field_type(field_value, field_model: Dict, parent_fields_names: List[str]):
         """проверки что тип field_value есть field_types модели"""
 
@@ -454,11 +497,12 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
     
     def _get_dict_from_search_form_v3(path: List[str]) -> Any:
         """получает путь до требуемого значения - возвращает значение из
-        search_form_v3 по указанному путю
+        search_form_v3 по указанному пути
         если указанный путь не существует выбрасвыет исключение,
         которое должно обрабатываться в вызывающей функции
         """
         target: Dict = search_form_v3
+        # кидает исключение, обрабатывать вызывающей функцией
         for item in path:
             target = target[item]
         return target
@@ -602,9 +646,6 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         return res_value
 
 
-    def _get_field_to_feeded_name(field_model, field_name: str) -> str:
-        # return field_name
-        return field_model['human_readable_name'] if field_model['feed_human_readable_name'] else  field_name
     
     def parse_dict_model(dict_model: Dict, data: Dict, parent_field_names: List[str] = []) -> Dict:
         
@@ -631,7 +672,7 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
 
     return parse_dict_model(feed_model, raw_data)
 
-def customization_feed(search_form_v3: Dict, parsed_feed_item: Dict):
+# def customization_feed(search_form_v3: Dict, parsed_feed_item: Dict):
     
 
 
@@ -639,8 +680,8 @@ def test_model_parsing_v_1():
         
     search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
 
-    raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
-    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
+    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
+    raw_data_dict_list = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
     raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
     # raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
 
@@ -650,7 +691,7 @@ def test_model_parsing_v_1():
 
 
 
-    write_dict_or_list_to_json_file('feed/test_parsed_1.json', res_list)
+    write_dict_or_list_to_json_file('feed/05.06.24_20-05-18.items_parsed.json', res_list)
     # write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
         
 def test_model_parsing_v_2():

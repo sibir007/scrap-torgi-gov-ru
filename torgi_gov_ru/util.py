@@ -29,10 +29,10 @@ from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
-def logging_configure(logger, log_level: int):
-    logger.setLevel(log_level)
+def logging_configure(logge, logging_level: int):
+    logger.setLevel(logging_level)
     ch = logging.StreamHandler()
-    ch.setLevel(log_level)
+    ch.setLevel(logging_level)
     fm = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     ch.setFormatter(fm)
     logger.addHandler(ch)
@@ -909,6 +909,39 @@ def form_field_v3(searsh_form_v3_file: str, form_field_name: str, info2_file_nam
     form_dict['form'][form_field_name]['available_values']['values'] = res
     write_dict_or_list_to_json_file(searsh_form_v3_file, form_dict)
     
+def search_form_v3_references_insert_v_1(search_form_v3_file: str, references_field_name: str, info2_file_name:str):
+    """получает пути до searсh_form_v3_file, info2_file и название поля (references_field_name)
+    в разделе "справочник" (references) в search_form_v3 
+    - создаёт справочник по указанному в поле алгаритму 
+    """
+    # резервная копия
+    create_a_backup(search_form_v3_file)
+    
+    form_dict: Dict = typing.cast(Dict, load_dict_or_list_from_json_file(search_form_v3_file))
+    url_key = dl.get(form_dict, f'references`{references_field_name}`info2_url', sep='`')
+    aviavailable_values_key_path = dl.get(form_dict, f'references`{references_field_name}`available_values`key_path', sep='`')
+    full_a_v_k_path = f'{url_key}`{aviavailable_values_key_path}'
+    aviavailable_values_key_value = typing.cast(str, dl.get(form_dict, f'references`{references_field_name}`available_values`key_value', sep='`'))
+
+    # aviavailable_values_value_path = dl.get(form_dict, f'form`{form_field_name}`available_values`value_path', sep='`')
+    # full_a_v_v_path = f'{url_key}`{aviavailable_values_value_path}'
+    aviavailable_values_value_value = typing.cast(str, dl.get(form_dict, f'references`{references_field_name}`available_values`value_value', sep='`')) 
+
+    # aviavailable_values_parent_path = dl.get(form_dict, f'form`{form_field_name}`available_values`parent_path', sep='`')
+    # full_a_v_p_path = f'{url_key}`{aviavailable_values_value_path}'
+    aviavailable_values_parent_value = typing.cast(str, dl.get(form_dict, f'references`{references_field_name}`available_values`parent_value', sep='`'))
+
+
+    res: Dict[str, Dict[str, str]] = get_relationship_v3(info2_file_name, 
+                                  path=full_a_v_k_path, 
+                                  code_key=aviavailable_values_key_value,
+                                  value_key=aviavailable_values_value_value,
+                                  parent_key=aviavailable_values_parent_value
+                                  )
+
+    form_dict['references'][references_field_name]['available_values']['values'] = res
+    write_dict_or_list_to_json_file(search_form_v3_file, form_dict)
+    
     
     
 def form_field_v2_субьект_местонаходения():
@@ -1237,10 +1270,11 @@ FORM_V3_FEED_FIELD_STRUCT = {
 
 
 
-def create_a_backup(fname: str):
+def create_a_backup(file_path: str):
     """принимает file name - создаёт резурвную копию"""
     date_time = get_formated_curent_date_time()
-    shutil.copy(fname, f'{BACKUP_DIR}{date_time}-{fname}')
+    file_name = file_path.split('/')[-1]
+    shutil.copy(file_path, f'{BACKUP_DIR}{date_time}-{file_name}')
 
 
 def check_form_v2_fields_structure(form_v2_fname: str):
@@ -1731,35 +1765,6 @@ def get_union_intersection_difference_from_items_file(items_list_file: str, path
 
 
 if __name__ == '__main__':
-    logging_configure()
-    form_field_v3_субьект_местонаходения_for_response_refernce()
-    # pass
-    # req_url_str, query_dikt = get_request_url_base_str_and_request_query_dict_from_search_forv_v3_file('spiders/search_form.v3 copy.json')
-    # url_str = get_query_url(req_url_str, query_dikt, False) 
-    # print(url_str)
-    # list_dict = get_feed_model_v2_from_feed_items_file('raw_data_dict_list', ['response_data','content'])
-    # list_dict = get_feed_model_v1_from_feed_items_file('feed/feed_items_v0.json',['response_data', 'content'])
-    # write_dict_or_list_to_json_file('feed/feed_items_lot_card_modelv2_2.json', list_dict)
-    # res_data = load_dict_or_list_from_json_file('feed/feed_items.v1.json')
-    # list_dict = res_data[0]['response_data']
-    # search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
-    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/raw_content.json')
-    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/27.05.24_09-10-05.items.json')
-    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/feed_items_v0.json')
-    # raw_data_dict = load_dict_or_list_from_json_file('feed/raw_content.json')
-    
-    # raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, ['content'])
+    logging_configure(logger, logging.DEBUG)
 
-    # res_list = []
-    # data = next(raw_data_gen)
-    # for data in raw_data_gen:
-    # res_list.append(parsing_raw_data_relative_to_data_model_v2(search_form_dict, data))
-
-    
-    
-    # parsed_content =  parsing_raw_data_relative_to_data_model_v2(search_form_dict, raw_data_dict)
-    # print(parsed_content)
-    # write_dict_or_list_to_json_file('feed/parsed_content_12.json', parsed_content)
-    # write_dict_or_list_to_json_file('feed/parsed_content_7.json', parsed_content)
-    # res_data = get_dict_type(list_dict)
-    # print(res_data)
+    search_form_v3_references_insert_v_1('spiders/search_form.v3.json', 'Электронная площадка сайт', 'request_info2.json')
