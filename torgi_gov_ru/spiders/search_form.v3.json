@@ -133,7 +133,7 @@
     "lotcard_request": {
         "filename": "/new/api/public/lotcards/",
         "full_url": "https://torgi.gov.ru/new/api/public/lotcards/",
-        "full_url_layout": "https://torgi.gov.ru/new/api/public/lotcards/{lot_id}",
+        "full_url_layout": "https://torgi.gov.ru/new/public/lots/lot/{lot_id}/(lotInfo:info)?fromRec=false",
         "request_headers": {},
         "request_headers_for_send": {},
         "response_headers": {}
@@ -141,7 +141,7 @@
     "notices_filename": {
         "filename": "/new/api/public/notices/noticeNumber",
         "full_url": "https://torgi.gov.ru/new/api/public/notices/noticeNumber/",
-        "full_url_layout": "https://torgi.gov.ru/new/api/public/notices/noticeNumber/{notice_num}",
+        "full_url_layout": "https://torgi.gov.ru/new/public/notices/view/{notice_num}",
         "request_headers": {
             "Host": "torgi.gov.ru",
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0",
@@ -2723,7 +2723,8 @@
                     "dict_path": [
                         "references",
                         "Электронная площадка сайт"
-                    ]
+                    ],
+                    "dict_key_path": ["etpCode"]
                 },
                 "field_types": {
                     "types": [

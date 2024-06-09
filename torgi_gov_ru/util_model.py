@@ -27,21 +27,40 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
             # 2. поля добавленные в модель, т.е. не содержащиеся в данных
             # поля второго типа должны быть производными от полей 1-го типа и 
             # должны формироваться после парсинго данных, для разделения полей
-            # вводим аттребут "field_type": {"type": "data"} - введённые в модель на основании данных и 
-            # "field_type": {"type": "custom"} - введённые произвольно
-                    "field_type": {"type": "data"},
+            # вводим аттребут "field_type": {"type": "data"} - введённые в 
+            # модель на основании данных и 
+            # "field_type": {"type": "custom", 
+            #               "destination_path": []}
+            # введённые произвольно
+            # поле "field_type": {"type": "data"}, по умолчанию None
+            # "field_type": {"type": "custom"} вводится вручную при
+            # описании custom модели
             # для отобразения поля на сайте, для его выбора
                     "visible": False,
-            # False - поле не попадает в feedv
+            # False - поле не попадает в feed
                     "feed": False,
             # True - качестве ключа для поля будет использоваться значение 
             # из human_readable_name, в противном случае key value 
                     "feed_human_readable_name": False,
                     "human_readable_name": "",
-            # {"type": "direct"}, {"type": "dict", "dict_path": []}, {"type": "ref", "ref": ""} 
-            # direct - значение берётся то которое вычисляетс
-            # dict - вычисленное значение подставляется в словарь по ссылке dict_linc, полученное заначение записывается в поле
-            # ref - из вычисленного значения делается ссылка путём подставления его в заданное место в ref и уже оно записывается в поле
+            # {"type": "direct"}, {"type": "dict", "dict_path": []}, 
+            # {"type": "layout_formatting", 
+            #  "layout_path": [],
+            #  "layout_format_feed_items_paths": {
+            #                      "raw_feed": {'name1': [path]},
+            #                      "search_form": {}
+            #                   }
+            #               } - 
+            # }
+            # direct - значение берётся то которое вычисляется
+            # dict - вычисленное значение подставляется в словарь по ссылке 
+            # dict_path, полученное заначение записывается в поле
+            # layout_formatting - значение поля подставляется в layout,
+            # находимый по пути "layout_path" и полученное значение 
+            # записывается в поле,
+            # "layout_format_feed_items_paths" поле применимо только в 
+            # контексте  "field_type": {"type": "custom"}, по данному полю
+            # ищутся элементы для встаки в layout
                     "value_scrap_type": {},
             # определяет какие типы могут данных могут присваиваться полю и значение 
             # по умолчанию в случае если фактический тип данных не соответствует установленному 
@@ -207,37 +226,313 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
 
 
 
-def feed_customizing(search_form_v3: Dict, feed_item: Dict) -> Dict:
-    """получает search_form_v3 dict и парсед через модель feed_item,
-    производит customizing feed_item по custom_feed_model search_form_v3 
+def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item: Dict) -> Dict:
+    """получает search_form_v3 dict, сырой feed_item и парсед через модель feed_item,
+    производит customizing parsed_feed_item по custom_feed_model search_form_v3 
 
     Args:
         search_form_v3 (Dict): search_form_v3
-        feed_item (Dict): парсед через дата модель feed_item 
+        raw_feed_item (Dict): сырой feed_item 
+        parsed_feed_item (Dict): парсед через дата модель feed_item 
 
     Returns:
-        Dict: customized feed_item 
+        Dict: customized parsed_feed_item 
     """
     
-    def _process_feed_customizing():
-        pass
-    custom_feed_model: Dict = search_form_v3['custom_feed_model']
-    # field_names_to_customizing = _get_to_feeded_fields(custom_feed_model)
-    for field_name, field_model in custom_feed_model.items():
-         if field_model['feed']:
-            field_to_feeded_name = _get_field_to_feeded_name(field_model, field_name)
-            value_scrap_type = field_model['value_scrap_type']['type']
-            # проверяем что value_scrap_type определн
-            if value_scrap_type:=field_model['value_scrap_type'].get('type', None)
-                # value_scrap_type определён - действуем в зависимости от типа
-                if value_scrap_type == 'layout_formatting':
-                    
-            else:
-                # value_scrap_type не определён - ничего не делаем
-                pass
+    
+    
         
-        pass
+    def process_dict_customizing(model_field_name: str, 
+                                  model_field_model: Dict, 
+                                  value_scrap_type: Dict, 
+                                  search_form_v3: Dict, 
+                                  raw_feed_item: Dict,
+                                  parsed_feed_item: Dict):
+        
+        
+        
+        
+        # сразу получаем destination  dict куда будет добавляться 
+        # custom значение
+        if (destination:=_get_destination(model_field_name, model_field_model)) == None:
+            # ошибка получения destination
+            # логи прописаны в _get_destination(), выходим
+            return
+        # проверяем dict_path
+        if (dict_path:= value_scrap_type.get('dict_path', None)) == None:
+            # dict_path не определён
+            # пишем лог, выходим 
+            logger.error(f'process_dict_customizing(): dict_path не определён, имя поля модели: {field_name}')
+            return
+        
+        # проверяем, что dict_path типа "list"
+        if not isinstance(dict_path, list):
+            # dict_path не правильного типа
+            # пишем лог, выходим 
+            logger.error(f'process_dict_customizing(): dict_path не правильного типа: {type(dict_path).__name__}, должен быть "list", имя поля модели: {field_name}')
+            return
+        
+        # получаем dect_key_path
+        if (dict_key_path:=value_scrap_type.get('dict_key_path', None)) == None:
+            # dict_key_path не определён
+            # пишем лог, выходим 
+            logger.error(f'process_dict_customizing(): dict_key_path не определён, имя поля модели: {field_name}')
+            return
+        
+        # проверяем, что dict_key_path типа "list"
+        if not isinstance(dict_key_path, list):
+            # dict_key_path не правильного типа
+            # пишем лог, выходим 
+            logger.error(f'process_dict_customizing(): dict_key_path не правильного типа: {type(dict_path).__name__}, должен быть "list", имя поля модели: {field_name}')
+            return
+        
+        
+        # получаем dict_key
+        try:
+            dict_key = get_value_from_dict_based_on_path_except_if_absent(raw_feed_item, dict_key_path)
+        except:
+            # ошибка получения занчения из dict
+            # пишем лог, выходим
+            logger.error(f'process_dict_customizing(): ошибка получения занчения из словаря, dict_key_path: [{", ".join(dict_key_path)}], имя поля модели: {field_name}')
+            return
+        
+        # проверяем тип dict_key
+        if not isinstance(dict_key, str):
+            # ошибка типа dict_key
+            # пишем лог, выходим
+            logger.error(f'process_dict_customizing(): ошибка типа dict_key: {type(dict_key).__name__}, должен быть "str", имя поля модели: {field_name}')
+            return
+        # объединяем dict_path dict_key
+        dict_path.extend(['available_values', 'values', dict_key, 'name'])
+        # получаем custom значение из словаря
+        
+        try:
+            dict_value = get_value_from_dict_based_on_path_except_if_absent(search_form_v3, dict_path)
+        except:
+            # ошибка получения занчения из dict
+            # пишем лог, выходим
+            logger.error(f'process_dict_customizing(): ошибка получения занчения из словаря, dict_path: [{", ".join(dict_path)}], имя поля модели: {field_name}')
+            return
+        # пгулчаем 
+        custom_name = _get_field_to_feeded_name(model_field_model, model_field_name)
+        # пишем в destination custom значение 
+        destination[custom_name] = dict_value
+        return parsed_feed_item
+ 
+ 
+ 
+    def _get_destination(model_field_name: str, model_field_model: Dict) -> Union[Dict,None]:
 
+        if (destination_path:=model_field_model['field_type'].get('destination_path', None)) == None:
+            # destination_path отсутствует - ошибка
+            # пишем лог, выходим
+            logger.error(f'_get_destination(): "destination_path" отсутствует, имя поля модели: {model_field_name}')
+            return None
+        # проверяем тип - должен быть list
+        if not isinstance(destination_path, list):
+            # тип не правильный
+            # пишем error log и выходим
+            logger.error(f'_get_destination(): не правильный тип destination_path: {type(destination_path).__name__}, должен быть "list", имя поля модели: {model_field_name}')
+            return None
+        # TODO: переделать на get_value_from_dict_based_on_path_create_if_absent() 
+        # получаем destination
+        try:
+            destination = get_value_from_dict_based_on_path_except_if_absent(parsed_feed_item, destination_path)
+        except:
+            # ошибка при получении destination из  parsed_feed_item
+            # по destination_path, пишем лог, выходим
+            logger.error(f'_get_destination(): ошибка при получении destination из parsed_feed_item по destination_path: [{", ".join(destination_path)}], имя поля модели: {model_field_name}')
+            return None
+        # проверяем тип destination - должен быть dict
+        if not isinstance(destination, dict):
+            #  не правильный тип destination
+            # пишем лог, выходим  
+            logger.error(f'_get_destination(): ошибка типа destination: {type(destination).__name__}, должен быть "dict", destination_path: [{", ".join(destination_path)}], имя поля модели: {model_field_name}')
+            return None
+        return destination
+    
+    
+    def process_layout_formatting_customizing(model_field_name: str, 
+                                            model_field_model: Dict,
+                                            value_scrap_type: Dict, 
+                                            search_form_v3: Dict, 
+                                            raw_feed_item: Dict,
+                                            parsed_feed_item: Dict):
+        
+        def _get_layout(field_name: str, 
+                    value_scrap_type: Dict, 
+                    search_form_v3: Dict, 
+                    feed_item: Dict) -> Union[str, None]:
+            """возвращает layout строку из dict, по данному пути, при ошибке возвращает None"""
+            
+            if layout_path:=value_scrap_type.get('layout_path', None):
+                # layout_path существует и он не пустой
+                if isinstance(layout_path, list):
+                    # layout_path правильного типа
+                    # пытаемся получить layout из search_form_v3 по указанному layout_path
+                    try:
+                        layout = get_value_from_dict_based_on_path_except_if_absent(search_form_v3, layout_path) 
+                    except Exception as e:
+                        # ошибка при звлечении значения из search_form_v3 
+                        #  пишем лог, возвращаем None
+                        logger.error(f'_get_layout(): ошибка при извлечении значения из search_form_v3, путь [{", ".join(layout_path)}] не существует, имя поля модели: {field_name}')
+                        return None    
+                    # проверяем тип layout - должен быть "str" 
+                    if isinstance(layout, str):
+                        # значение layout правильного типа 
+                        return layout
+                    else:
+                        # значение layout не правильного типа
+                        #  пишем лог, возвращаем None
+                        logger.error(f'_get_layout(): значение layout не правильного типа: {type(layout).__name__}, должен быть str')
+                        return None
+                else:
+                    # layout_path не правильного типа
+                    # пишем лог, возвращаем None
+                    logger.error(f'_get_layout(): layout_path не правильного типа: {type(layout_path.__name__)}, должен быть "list"')
+                    return None
+            else:
+                # layout_path не существует или он пустой - ошибка
+                # пишем лог, возвращаем None
+                logger.error(f'_get_layout(): layout_path не существует или он пустой, имя поля модели: {field_name}')
+                return None
+            
+        def _set_format_items(field_name: str, 
+                        format_items_sours: Dict, 
+                        format_feed_items: Dict, 
+                        feed_item: Dict) -> None:
+            """получает из format_items_sours (либо "raw_feed", либо "search_form")
+            format items элементы, записывает их в format_feed_items dict, 
+            в случае ошибок 
+            пишет логи
+            """
+            for format_feed_item_name, format_feed_item_value_path in format_items_sours.items():
+                # проверяем формат format_feed_item_value_path - должет быть list
+                if isinstance(format_feed_item_value_path, list):
+                    # тип правильный 
+                    # пробуем получить значение из feed_item dict по format_feed_item_value_path
+                    try:
+                        format_feed_item_value = get_value_from_dict_based_on_path_except_if_absent(feed_item, format_feed_item_value_path)
+                    except Exception as e:
+                        # ошибка получения занчения из dict по path
+                        # пишем лог, пропускаем данный format items
+                        logger.error(f'_set_format_items_from_raw_feed(): ошибка: "{e}" получения занчения из feed_item по pathlayout_format_feed_items_paths: [{", ".join}]  не существует или он не пустой, имя поля модели: {field_name}')
+                    else:
+                        # получение значения из feed_item dict по path
+                        # прошло без ошибок, создам format item  
+                        # в format_feed_items dict
+                        format_feed_items[format_feed_item_name] = format_feed_item_value
+                        # запишем дебаг лог
+                        logger.debug(f'_set_format_items_from_raw_feed(): получено занчения из feed_item по pathlayout_format_feed_items_paths: [{", ".join}], создали format item: {format_feed_item_name}:{format_feed_item_value}, имя поля модели {field_name}')
+                        
+                else:
+                    # формат не правильный
+                    # пишем лог, пропускаем данный format items
+                    logger.error(f'_set_format_items_from_raw_feed(): не верный тип format_feed_item_value_path: {type(format_feed_item_value_path).__name__}, должен быть "lict", имя поля модели: {field_name}, имя поля raw_feed: {format_feed_item_name}')
+            
+        def _get_layout_format_items(field_name: str, 
+                        value_scrap_type: Dict, 
+                        search_form_v3: Dict, 
+                        feed_item: Dict) -> Dict:
+            """возвращает dict из name=value элементы форматирования layout,
+            в случае ошибок при получении возвращает None, который должен проверяться
+            вызывающей функцией
+            """
+            class safesub(dict):
+                def __missing__(self, key):
+
+                    return '{' + key + '}'
+            # создаём экзумпляр safesub который будет подставляться 
+            # в format_map()
+            format_feed_items = safesub()
+            # получаем layout_format_feed_items_paths
+            if layout_format_feed_items_paths:=value_scrap_type.get('layout_format_feed_items_paths', None):
+                # layout_format_feed_items_paths существует и он не пустой
+                # получаем значения "name:value" из raw_feed
+                if raw_feed:=layout_format_feed_items_paths.get('raw_feed', None):
+                    # raw_feed существует и он не пустой, получаем format_feed_items
+                    # из raw_feed
+                    _set_format_items(field_name,
+                                        raw_feed,
+                                        format_feed_items,
+                                        feed_item)
+                else:
+                    # raw_feed не существует или он пустой
+                    # пишем инфо лог
+                    logger.info(f'_get_layout_format_items(): raw_feed format_items отсутствуюе, имя поля модели: {field_name}')
+                    
+                # получаем значения "name:value" из "search_form" элемента "layout_format_feed_items_paths" 
+                if search_form:=layout_format_feed_items_paths.get('search_form', None):
+                    # "search_form" существует и он не пустой, получаем format_feed_items
+                    # из "search_form"
+                    _set_format_items(field_name,
+                                        search_form,
+                                        format_feed_items,
+                                        feed_item)
+                else:
+                    # raw_feed не существует или он пустой
+                    # пишем инфо лог
+                    logger.info(f'_get_layout_format_items(): "search_form" format_items отсутствуют, имя поля модели: {field_name}')
+                
+                return format_feed_items
+            else:
+                # layout_format_feed_items_paths не существует или он пустой
+                # считаем данную ситуацию возможной, например если нам не нужно 
+                # форматировано layout
+                # пишем инфо лог, возвращаем пустой format_feed_items
+                logger.info(f'_get_layout_format_items(): layout_format_feed_items_paths не существует или он не пустой, имя поля модели: {field_name}')
+                return format_feed_items    
+        
+        
+        # сразу получаем destination  dict куда будет добавляться 
+        # custom значение
+        if (destination:=_get_destination(model_field_name, model_field_model)) == None:
+            # ошибка получения destination
+            # логи прописаны в _get_destination(), выходим
+            return
+        # получаем layout, если в роцессе получение возникли ошибки 
+        # то вернётся None
+        if (layout:=_get_layout(model_field_name, value_scrap_type, search_form_v3, raw_feed_item)) == None:
+            # None, ошибка получения layout
+            # логи прописаны в  _get_layout()
+            # выходим, ничего не делая
+            return
+        # layout есть, получаем layout_format_items
+        # мы всегда получаем экземпляр layout_format_items dict
+        # даже если в процессе получения  format_items произошли ошибки
+        # поэтому проверку на None не делаем 
+        layout_format_items = _get_layout_format_items(model_field_name, value_scrap_type, search_form_v3, raw_feed_item)
+        formated_layout = layout.format_map(layout_format_items)
+        custom_name = _get_field_to_feeded_name(model_field_model, model_field_name)
+        # пишем в destination custom значение 
+        destination[custom_name] = formated_layout
+        return parsed_feed_item
+    
+    
+    
+    custom_feed_model_fields: Dict = search_form_v3['custom_feed_model']['fields']
+    # field_names_to_customizing = _get_to_feeded_fields(custom_feed_model)
+    for field_name, field_model in custom_feed_model_fields.items():
+        if not field_model['feed']:
+            continue
+        # проверяем что value_scrap_type определн
+        if (value_scrap_type_type:=(value_scrap_type:=field_model['value_scrap_type']).get('type', None)) == None:
+            # value_scrap_type не определён - 
+            # пишем лог - ничего не делаем
+            logger.warning(f'feed_customizing(): value_scrap_type не определён, имя поля модели: {field_name}')
+            continue
+        
+        # value_scrap_type определён - действуем в зависимости от типа
+        if value_scrap_type_type == 'layout_formatting':
+            process_layout_formatting_customizing(field_name, field_model, value_scrap_type, search_form_v3, raw_feed_item, parsed_feed_item)
+        elif value_scrap_type_type == 'dict':
+            process_dict_customizing(field_name, field_model, value_scrap_type, search_form_v3, raw_feed_item, parsed_feed_item)        
+        else:
+            # не известный value_scrap_type тип 
+            # пишем лог, ничего не делаем
+            logger.warning(f'feed_customizing(): не известный value_scrap_type тип: {value_scrap_type_type}, имя поля модели: {field_name}')
+    
+    
 def _get_to_feeded_fields(dict_model_fields: Dict) -> List[str]:
     """получает model поля dict и возвращает список имён полей,
     модели которых помечены "feed": True
@@ -250,13 +545,40 @@ def _get_to_feeded_fields(dict_model_fields: Dict) -> List[str]:
                         ]
     return to_feeded_fields
 
-def _get_field_to_feeded_name(field_model, field_name: str) -> str:
+def _get_field_to_feeded_name(field_model: Dict, field_name: str) -> str:
     """получает модель поля и его имя - возвращает human_readable_name 
     поля если 'feed_human_readable_name': True
     """
 
     # return field_name
     return field_model['human_readable_name'] if field_model['feed_human_readable_name'] else  field_name
+
+def get_value_from_dict_based_on_path_except_if_absent(target_dict:Dict, path: List[str]) -> Any:
+    """получает dict и путь до требуемого значения - возвращает значение из
+    по указанному пути если указанный путь не существует выбрасвыет исключение,
+    которое должно обрабатываться в вызывающей функции
+    """
+    target: Dict = target_dict
+    # кидает исключение, обрабатывать вызывающей функцией
+    for item in path:
+        target = target[item]
+    return target
+
+# TODO: доработать
+def get_value_from_dict_based_on_path_create_if_absent(target_dict:Dict, path: List[str], value_if_absent: Any, raise_if_exist: bool = True) -> Any:
+    """получает dict и путь до требуемого значения - возвращает значение
+    по указанному пути, если указанный путь не существует создаёт его
+    при необходимости переопределяет значение на dict если на пути попадается 
+    другой тип. Если raise_if_exist=True то всесто переопределения
+    выбрасвыет исключение, которое должно обрабатываться в вызывающей функции
+    """
+    
+    # это всё не работает
+    target: Dict = target_dict
+    # кидает исключение, обрабатывать вызывающей функцией
+    for item in path:
+        target = target[item]
+    return target
 
 
 
@@ -333,8 +655,6 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
                     res_list.append(_get_field_model_default_value(field_model))
         res_value = ','.join(res_list)
         return res_value
-    
-    
            
     def field_values_type_conversion(field_value: Any, field_model: Dict, field_name: str, parent_field_names: List[str]):
         """конверктация типа field_value в тип указанный в field_type модели,
@@ -364,16 +684,11 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
                 logger.warning(f'тип {field_value_type} поля {".".join(parent_field_names)} не соответствует field_types {", ".join(field_model["field_types"]["types"])} модели')
                 res_value = _get_field_model_default_value(field_model)
         return res_value
-    
 
     def _get_field_model_default_value(field_model:Dict):
         
         return field_model['field_types']['default_value']
-    
- 
-    def _get_undefined_type_value(value_type:str)-> str:
-        return f'type {value_type} not definet in model'
-    
+        
     def parse_list_model(parent_field_model: Dict, field_name: str, list_model: Dict, data: List, parent_field_names: List[str]) -> List:
         res_list = []
         for item in data:
@@ -495,18 +810,6 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
             res_value = field_value
         return res_value                
     
-    def _get_dict_from_search_form_v3(path: List[str]) -> Any:
-        """получает путь до требуемого значения - возвращает значение из
-        search_form_v3 по указанному пути
-        если указанный путь не существует выбрасвыет исключение,
-        которое должно обрабатываться в вызывающей функции
-        """
-        target: Dict = search_form_v3
-        # кидает исключение, обрабатывать вызывающей функцией
-        for item in path:
-            target = target[item]
-        return target
-    
     def dict_scrap_type_conversion(field_value: Any, field_model: Dict, field_name: str, parent_field_names: List[str]):
         """ конвертация  field_value по значению 'dict' поля value_scrap_type модели """
 
@@ -519,12 +822,12 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         t_path: List = field_model['value_scrap_type']['dict_path'].copy()
         t_path.extend(['available_values', 'values', field_value, 'name'])
         try:            
-            res_value = _get_dict_from_search_form_v3(t_path)
+            res_value = get_value_from_dict_based_on_path_except_if_absent(search_form_v3, t_path)
         except Exception as e:
             # ошибка получения заначения из словаря по t_path
             #  пишем log, возвращаем field_value без конвертации
             logger.error(f'ошибка: {e}, dict_scrap_type_conversion: ошибка получения заначения из словаря по t_path: [{".".join(t_path)}] , field_value path: {".".join(parent_field_names)}') 
-            res_value = field_value
+            return field_value
         return res_value
         
     
@@ -628,17 +931,17 @@ def parsing_raw_data_relative_to_data_model_v2(search_form_v3: Dict, raw_data: D
         # корректируем полученное значение по 
         # значениям "field_type", "casting_key" модели поля
         res_value = field_values_type_conversion(res_value, field_model, field_name, parent_field_names)
+        # res_value = field_values_shape_reduction(res_value, field_model, field_name, parent_field_names)
+
+        # преобразуем bool значение в строку, нужно для обращения к справочнику
+        res_value = boolen_type_value_conversion(res_value, field_model, field_name, parent_field_names)
+
         # корректируем полученное значени по полю модели value_scrap_type
         # {"type": "direct"}, {"type": "dict", "dict_path": []}, {"type": "ref", "ref": ""} 
         # direct - значение берётся то которое вычисляется по умолчению None
         # dict - вычисленное значение подставляется в словарь по ссылке dict_path, полученное заначение записывается в поле
         # ref - из вычисленного значения делается ссылка путём подставления его в заданное место в ref и уже оно записывается в поле
              
-        # res_value = field_values_shape_reduction(res_value, field_model, field_name, parent_field_names)
-
-        # преобразуем bool значение в строку, нужно для обращения к справочнику
-        res_value = boolen_type_value_conversion(res_value, field_model, field_name, parent_field_names)
-
         res_value = value_scrap_type_conversion(res_value, field_model, field_name, parent_field_names)
         # проверяем на путое значение для списка словарей
         res_value = exclusion_of_empty_values(res_value, field_model, field_name, parent_field_names)
@@ -695,13 +998,15 @@ def test_model_parsing_v_1():
     # write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
         
 def test_model_parsing_v_2():
-    search_form_dict = load_dict_or_list_from_json_file('search_form.v3.json')
+    search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
     
-    raw_data_dict = load_dict_or_list_from_json_file('feed/raw_content.json')
+    raw_data_dict = load_dict_or_list_from_json_file('feed/raw_feed_item.json')
 
 
     parsed_content =  parsing_raw_data_relative_to_data_model_v2(search_form_dict, raw_data_dict)
-    write_dict_or_list_to_json_file('feed/parsed_content_14.json', parsed_content)
+    write_dict_or_list_to_json_file('feed/parsed_content_1.json', parsed_content)
+    feed_customizing(search_form_dict, raw_data_dict, parsed_content)
+    write_dict_or_list_to_json_file('feed/parsed_content_1_custom.json', parsed_content)
 
 
 def test_get_model():
@@ -710,7 +1015,7 @@ def test_get_model():
     
 
 if __name__ == '__main__':
-    logging_configure(logger, logging.INFO)
-    test_model_parsing_v_1()
+    logging_configure(logger, logging.DEBUG)
+    test_model_parsing_v_2()
     # test_get_model()
     
