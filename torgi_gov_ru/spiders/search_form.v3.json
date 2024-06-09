@@ -188,6 +188,7 @@
     "file_store_filename": {
         "filename": "/new/file-store/v1/",
         "full_url": "https://torgi.gov.ru/new/file-store/v1/",
+        "full_url_layout": "https://torgi.gov.ru/new/file-store/v1/{item}",
         "request_headers": {
             "Host": "torgi.gov.ru",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0",
@@ -232,7 +233,9 @@
         }
     },
     "local_file_store_rel_path": {
-        "full_url": "files/"
+        "full_url": "files/",
+        "full_url_layout": "files/{notice}/{lot}/"
+
     },
     "form": {
         "Версии": {
@@ -2632,10 +2635,76 @@
     },
     "custom_feed_model": {
         "fields": {
+            "lot_images_folder": {
+                "field_type": {
+                    "type": "custom",
+                    "destinations_paths": [[]]
+                },
+                "visible": true,
+                "feed": true,
+                "feed_human_readable_name": true,
+                "human_readable_name": "Изображения лота папка",
+                "value_scrap_type": {
+                    "type": "layout_formatting",
+                    "layout_path": [
+                        "local_file_store_rel_path",
+                        "full_url_layout"
+                    ],
+                    "layout_format_feed_items_paths": {
+                        "raw_feed": {
+                            "lot": [
+                                "lotNumber"
+                            ],
+                            "notice": [
+                                "noticeNumber"
+                            ]
+                        },
+                        "search_form": {}
+                    }
+                },
+                "field_types": {
+                    "types": [
+                        "str"
+                    ],
+                    "default_value": ""
+                },
+                "casting_key": "",
+                "exclusion_key": "",
+                "types": {
+                    "str": {
+                        "type": "str"
+                    }
+                }
+            },
+            "lot_info": {
+                "field_type": {
+                    "type": "custom",
+                    "destinations_paths": [[]]
+                },
+                "visible": true,
+                "feed": true,
+                "feed_human_readable_name": true,
+                "human_readable_name": "Лот",
+                "value_scrap_type": {},
+                "field_types": {
+                    "types": [
+                        "dict"
+                    ],
+                    "default_value": {}
+                },
+                "casting_key": "",
+                "exclusion_key": "",
+                "types": {
+                    "dict": {
+                        "type": "dict",
+                        "fields": {}
+                    }
+                }
+            },
             "lot_ref": {
                 "field_type": {
                     "type": "custom",
-                    "destination_path": []
+                    "destinations_paths": [["Лот"]]
                 },
                 "visible": true,
                 "feed": true,
@@ -2670,10 +2739,95 @@
                     }
                 }
             },
+            "lot_num": {
+                "field_type": {
+                    "type": "custom",
+                    "destinations_paths": [["Лот"]]
+                },
+                "visible": true,
+                "feed": true,
+                "feed_human_readable_name": true,
+                "human_readable_name": "Номер лота",
+                "value_scrap_type": {
+                    "type": "direct",
+                    "value_path": {
+                        "type": "raw_feed",
+                        "path": ["lotNumber"]
+                    }
+                },
+                "field_types": {
+                    "types": [
+                        "str"
+                    ],
+                    "default_value": ""
+                },
+                "casting_key": "",
+                "exclusion_key": "",
+                "types": {
+                    "str": {
+                        "type": "str"
+                    }
+                }
+            },
+            "lot_id": {
+                "field_type": {
+                    "type": "custom",
+                    "destinations_paths": [["Лот"]]
+                },
+                "visible": true,
+                "feed": true,
+                "feed_human_readable_name": true,
+                "human_readable_name": "ID лота",
+                "value_scrap_type": {
+                    "type": "direct",
+                    "value_path": {
+                        "type": "raw_feed",
+                        "path": ["id"]
+                    }
+                },
+                "field_types": {
+                    "types": [
+                        "str"
+                    ],
+                    "default_value": ""
+                },
+                "casting_key": "",
+                "exclusion_key": "",
+                "types": {
+                    "str": {
+                        "type": "str"
+                    }
+                }
+            },
+            "notice": {
+                "field_type": {
+                    "type": "custom",
+                    "destinations_paths": [[]]
+                },
+                "visible": true,
+                "feed": true,
+                "feed_human_readable_name": true,
+                "human_readable_name": "Извещение",
+                "value_scrap_type": {},
+                "field_types": {
+                    "types": [
+                        "dict"
+                    ],
+                    "default_value": {}
+                },
+                "casting_key": "",
+                "exclusion_key": "",
+                "types": {
+                    "dict": {
+                        "type": "dict",
+                        "fields": {}
+                    }
+                }
+            },
             "notice_ref": {
                 "field_type": {
                     "type": "custom",
-                    "destination_path": []
+                    "destinations_paths": [["Извещение"]]
                 },
                 "visible": true,
                 "feed": true,
@@ -2708,10 +2862,40 @@
                     }
                 }
             },
+            "notice_num": {
+                "field_type": {
+                    "type": "custom",
+                    "destinations_paths": [["Извещение"], ["Лот"]]
+                },
+                "visible": true,
+                "feed": true,
+                "feed_human_readable_name": true,
+                "human_readable_name": "Номер извещения",
+                "value_scrap_type": {
+                    "type": "direct",
+                    "value_path": {
+                        "type": "raw_feed",
+                        "path": ["noticeNumber"]
+                    }
+                },
+                "field_types": {
+                    "types": [
+                        "str"
+                    ],
+                    "default_value": ""
+                },
+                "casting_key": "",
+                "exclusion_key": "",
+                "types": {
+                    "str": {
+                        "type": "str"
+                    }
+                }
+            },
             "etp_ref": {
                 "field_type": {
                     "type": "custom",
-                    "destination_path": []
+                    "destinations_paths": [[]]
 
                 },
                 "visible": true,
@@ -2750,7 +2934,7 @@
                 "fields": {
                     "id": {
                         "visible": true,
-                        "feed": true,
+                        "feed": false,
                         "feed_human_readable_name": true,
                         "human_readable_name": "ID лота",
                         "value_scrap_type": {
@@ -2776,10 +2960,7 @@
                         "feed": true,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Номер извещения",
-                        "value_scrap_type": {
-                            "type": "ref",
-                            "ref": ""
-                        },
+                        "value_scrap_type": {},
                         "field_types": {
                             "types": [
                                 "str"
@@ -3051,12 +3232,15 @@
                     },
                     "lotImages": {
                         "visible": true,
-                        "feed": true,
+                        "feed": false,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Изображения лота",
                         "value_scrap_type": {
-                            "type": "ref",
-                            "ref": ""
+                            "type": "layout_formatting",
+                            "layout_path": [
+                                "file_store_filename",
+                                "full_url_layout"
+                            ]
                         },
                         "field_types": {
                             "types": [
@@ -3966,7 +4150,7 @@
                                                     "types": [
                                                         "str"
                                                     ],
-                                                    "default_value": null
+                                                    "default_value": ""
                                                 },
                                                 "casting_key": "",
                                                 "exclusion_key": "",
@@ -3986,7 +4170,7 @@
                                                     "types": [
                                                         "str"
                                                     ],
-                                                    "default_value": null
+                                                    "default_value": ""
                                                 },
                                                 "casting_key": "",
                                                 "exclusion_key": "",
@@ -4006,7 +4190,7 @@
                                                     "types": [
                                                         "str"
                                                     ],
-                                                    "default_value": null
+                                                    "default_value": ""
                                                 },
                                                 "casting_key": "",
                                                 "exclusion_key": "",
@@ -4026,7 +4210,7 @@
                                                     "types": [
                                                         "str"
                                                     ],
-                                                    "default_value": null
+                                                    "default_value": ""
                                                 },
                                                 "casting_key": "name",
                                                 "exclusion_key": "",
@@ -4040,6 +4224,12 @@
                                                                 "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
+                                                                "field_types": {
+                                                                    "types": [
+                                                                        "str"
+                                                                    ],
+                                                                    "default_value": ""
+                                                                },
                                                                 "key": "",
                                                                 "types": {
                                                                     "str": {
@@ -4053,6 +4243,12 @@
                                                                 "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
+                                                                "field_types": {
+                                                                    "types": [
+                                                                        "str"
+                                                                    ],
+                                                                    "default_value": ""
+                                                                },
                                                                 "key": "",
                                                                 "types": {
                                                                     "str": {
@@ -4066,6 +4262,12 @@
                                                                 "feed_human_readable_name": false,
                                                                 "human_readable_name": "",
                                                                 "value_scrap_type": {},
+                                                                "field_types": {
+                                                                    "types": [
+                                                                        "str"
+                                                                    ],
+                                                                    "default_value": ""
+                                                                },
                                                                 "key": "",
                                                                 "types": {
                                                                     "str": {
@@ -4128,7 +4330,7 @@
                                                                     "types": [
                                                                         "str"
                                                                     ],
-                                                                    "default_value": null
+                                                                    "default_value": ""
                                                                 },
                                                                 "casting_key": "",
                                                                 "exclusion_key": "",
@@ -4148,7 +4350,7 @@
                                                                     "types": [
                                                                         "str"
                                                                     ],
-                                                                    "default_value": null
+                                                                    "default_value": ""
                                                                 },
                                                                 "casting_key": "",
                                                                 "exclusion_key": "",
