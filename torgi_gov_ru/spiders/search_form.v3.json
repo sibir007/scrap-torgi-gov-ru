@@ -4908,6 +4908,10 @@
                 "value_path": "",
                 "value_value": "",
                 "values": {
+                    "": {
+                        "name": "",
+                        "parent": null
+                    },
                     "SUCCEED": {
                         "name": "Состоялся",
                         "parent": null
@@ -5004,6 +5008,10 @@
                 "value_path": "response_json",
                 "value_value": "site",
                 "values": {
+                    "": {
+                        "name": "",
+                        "parent": null
+                    },
                     "ETP_AVK": {
                         "name": "https://etp.zakazrf.ru",
                         "parent": null
@@ -5518,6 +5526,10 @@
         "bool": {
             "available_values": {
                 "values": {
+                    "": {
+                        "name": "",
+                        "parent": null
+                    },
                     "true": {
                         "name": "Да",
                         "parent": null

@@ -29,7 +29,7 @@ from collections import defaultdict
 
 logger = logging.getLogger(__name__)
 
-def logging_configure(logge, logging_level: int):
+def logging_configure(logger, logging_level: int):
     logger.setLevel(logging_level)
     ch = logging.StreamHandler()
     ch.setLevel(logging_level)
