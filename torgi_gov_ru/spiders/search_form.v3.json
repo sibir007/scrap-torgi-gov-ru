@@ -2643,7 +2643,7 @@
                 "visible": true,
                 "feed": true,
                 "feed_human_readable_name": true,
-                "human_readable_name": "Изображения лота папка",
+                "human_readable_name": "Изображения_лота_папка",
                 "value_scrap_type": {
                     "type": "layout_formatting",
                     "layout_path": [
@@ -2682,7 +2682,7 @@
                     "destinations_paths": [[]]
                 },
                 "visible": true,
-                "feed": true,
+                "feed": false,
                 "feed_human_readable_name": true,
                 "human_readable_name": "Лот",
                 "value_scrap_type": {},
@@ -2704,12 +2704,12 @@
             "lot_ref": {
                 "field_type": {
                     "type": "custom",
-                    "destinations_paths": [["Лот"]]
+                    "destinations_paths": [[]]
                 },
                 "visible": true,
                 "feed": true,
                 "feed_human_readable_name": true,
-                "human_readable_name": "Ссылка на лот",
+                "human_readable_name": "Ссылка_на_лот",
                 "value_scrap_type": {
                     "type": "layout_formatting",
                     "layout_path": [
@@ -2742,10 +2742,10 @@
             "lot_num": {
                 "field_type": {
                     "type": "custom",
-                    "destinations_paths": [["Лот"]]
+                    "destinations_paths": [[]]
                 },
                 "visible": true,
-                "feed": true,
+                "feed": false,
                 "feed_human_readable_name": true,
                 "human_readable_name": "Номер лота",
                 "value_scrap_type": {
@@ -2772,10 +2772,10 @@
             "lot_id": {
                 "field_type": {
                     "type": "custom",
-                    "destinations_paths": [["Лот"]]
+                    "destinations_paths": []
                 },
                 "visible": true,
-                "feed": true,
+                "feed": false,
                 "feed_human_readable_name": true,
                 "human_readable_name": "ID лота",
                 "value_scrap_type": {
@@ -2805,7 +2805,7 @@
                     "destinations_paths": [[]]
                 },
                 "visible": true,
-                "feed": true,
+                "feed": false,
                 "feed_human_readable_name": true,
                 "human_readable_name": "Извещение",
                 "value_scrap_type": {},
@@ -2827,12 +2827,12 @@
             "notice_ref": {
                 "field_type": {
                     "type": "custom",
-                    "destinations_paths": [["Извещение"]]
+                    "destinations_paths": [[]]
                 },
                 "visible": true,
                 "feed": true,
                 "feed_human_readable_name": true,
-                "human_readable_name": "Ссылка на извещение",
+                "human_readable_name": "Ссылка_на_извещение",
                 "value_scrap_type": {
                     "type": "layout_formatting",
                     "layout_path": [
@@ -2868,7 +2868,7 @@
                     "destinations_paths": [["Извещение"], ["Лот"]]
                 },
                 "visible": true,
-                "feed": true,
+                "feed": false,
                 "feed_human_readable_name": true,
                 "human_readable_name": "Номер извещения",
                 "value_scrap_type": {
@@ -2901,7 +2901,7 @@
                 "visible": true,
                 "feed": true,
                 "feed_human_readable_name": true,
-                "human_readable_name": "Ссылка на ЭТП",
+                "human_readable_name": "Ссылка_на_ЭТП",
                 "value_scrap_type": {
                     "type": "dict",
                     "dict_path": [
@@ -2934,13 +2934,10 @@
                 "fields": {
                     "id": {
                         "visible": true,
-                        "feed": false,
+                        "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "ID лота",
-                        "value_scrap_type": {
-                            "type": "ref",
-                            "ref": ""
-                        },
+                        "human_readable_name": "ID_лота",
+                        "value_scrap_type": {},
                         "field_types": {
                             "types": [
                                 "str"
@@ -2959,7 +2956,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Номер извещения",
+                        "human_readable_name": "Номер_извещения",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -2979,7 +2976,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Номер лота",
+                        "human_readable_name": "Номер_лота",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -2999,7 +2996,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Статус лота",
+                        "human_readable_name": "Статус_лота",
                         "value_scrap_type": {
                             "type": "dict",
                             "dict_path": [
@@ -3025,7 +3022,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Вид торгов",
+                        "human_readable_name": "Вид_торгов",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -3087,7 +3084,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Форма проведения",
+                        "human_readable_name": "Форма_проведения",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -3149,7 +3146,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Предмет торгов (наименование лота)",
+                        "human_readable_name": "Предмет_торгов",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -3169,7 +3166,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Описание лота",
+                        "human_readable_name": "Описание_лота",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -3189,7 +3186,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Начальная цена",
+                        "human_readable_name": "Начальная_цена",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -3214,7 +3211,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Дата и время окончания подачи заявок",
+                        "human_readable_name": "Окончаниу_подачи_заявок",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -3234,7 +3231,7 @@
                         "visible": true,
                         "feed": false,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Изображения лота",
+                        "human_readable_name": "Изображения_лота",
                         "value_scrap_type": {
                             "type": "layout_formatting",
                             "layout_path": [
@@ -3265,7 +3262,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Характеристики лота",
+                        "human_readable_name": "Характеристики_лота",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -3923,7 +3920,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Субьект местонахождения имущества",
+                        "human_readable_name": "Субьект_местонахождения_имущества",
                         "value_scrap_type": {
                             "type": "dict",
                             "dict_path": [
@@ -4011,7 +4008,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Время создания",
+                        "human_readable_name": "Дата_и_время_создания",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -4031,7 +4028,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Временная зона",
+                        "human_readable_name": "Временная_зона",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -4049,7 +4046,7 @@
                     },
                     "timezoneOffset": {
                         "visible": true,
-                        "feed": true,
+                        "feed": false,
                         "feed_human_readable_name": true,
                         "human_readable_name": "Смещение временной зоны",
                         "value_scrap_type": {},
@@ -4071,7 +4068,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Имеются аппеляции",
+                        "human_readable_name": "Имеются_аппеляции",
                         "value_scrap_type": {
                             "type": "dict",
                             "dict_path": [
@@ -4462,7 +4459,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Дата публикации первой версии",
+                        "human_readable_name": "Дата_первой_публикации",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -4502,7 +4499,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Тип транзакции",
+                        "human_readable_name": "Тип_транзакции",
                         "value_scrap_type": {
                             "type": "dict",
                             "dict_path": [
@@ -4554,7 +4551,7 @@
                         "visible": true,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Атребуты извещения",
+                        "human_readable_name": "Атребуты_извещения",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -4853,7 +4850,7 @@
                         "visible": false,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Дата отмены",
+                        "human_readable_name": "Дата_отмены",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [
@@ -4873,7 +4870,7 @@
                         "visible": false,
                         "feed": true,
                         "feed_human_readable_name": true,
-                        "human_readable_name": "Итоговая цена",
+                        "human_readable_name": "Итоговая_цена",
                         "value_scrap_type": {},
                         "field_types": {
                             "types": [

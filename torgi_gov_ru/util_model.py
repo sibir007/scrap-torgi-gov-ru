@@ -1213,8 +1213,8 @@ def test_model_parsing_v_1_1():
 
     # raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
     # raw_data_dict_list = load_dict_or_list_from_json_file('feed/test_items.json')
-    raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
-    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
+    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
+    raw_data_dict_list = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
     raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
     # raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
 
@@ -1226,7 +1226,7 @@ def test_model_parsing_v_1_1():
 
 
 
-    write_dict_or_list_to_json_file('feed/05.06.24_20-05-18.items_parsed_v2.json', res_list)
+    write_dict_or_list_to_json_file('feed/05.06.24_20-05-18.items_parsed_v3.json', res_list)
     # write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
         
         

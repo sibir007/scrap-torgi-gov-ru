@@ -484,6 +484,34 @@ FEEDS = {
     # 'stdout': None,
 }
 
+FEED_STORAGES_BASE_for_see = {
+    "": "scrapy.extensions.feedexport.FileFeedStorage",
+    "file": "scrapy.extensions.feedexport.FileFeedStorage",
+    "stdout": "scrapy.extensions.feedexport.StdoutFeedStorage",
+    "s3": "scrapy.extensions.feedexport.S3FeedStorage",
+    "ftp": "scrapy.extensions.feedexport.FTPFeedStorage",
+}
+
+FEED_STORAGES = {
+    "ftp": None,
+    "stdout": None
+}
+
+FEED_EXPORTERS_BASE_for_see = {
+    "json": "scrapy.exporters.JsonItemExporter",
+    "jsonlines": "scrapy.exporters.JsonLinesItemExporter",
+    "jsonl": "scrapy.exporters.JsonLinesItemExporter",
+    "jl": "scrapy.exporters.JsonLinesItemExporter",
+    "csv": "scrapy.exporters.CsvItemExporter",
+    "xml": "scrapy.exporters.XmlItemExporter",
+    "marshal": "scrapy.exporters.MarshalItemExporter",
+    "pickle": "scrapy.exporters.PickleItemExporter",
+}
+# to disable the built-in exporter (without replacement)
+FEED_EXPORTERS = {
+    "pickle": None,
+}
+
 "================ Logging ==================="
 # logging.CRITICAL - for critical errors (highest severity)
 # logging.ERROR - for regular errors
