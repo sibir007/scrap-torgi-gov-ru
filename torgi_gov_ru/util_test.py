@@ -28,21 +28,52 @@ classes = {
     "lot": {
         "type": "dict",
         "path": [],
-        "fields": ["ID_лота", "Номер_извещения", "Номер_лота"],
+        "fields": {
+            "ID_лота": {
+                "name": "ID_лота",
+                "type": "str"
+            }, 
+            "Номер_извещения": {
+                "name": "Номер_извещения",
+                "type": "str"
+            }, 
+            "Номер_лота": {
+                "name": "Номер_лота",
+                "type": "int"
+            }
+        },
         "extra_fields": {}
     },
     "lot_characteristics": {
         "type":'dict_list',
         "path": ["Характеристики_лота"],
-        "fields": ["Значение", "Наименование", "Ед.изм."],
+        "fields": {
+            "Значение": {
+                "name": "Значение",
+                "type": "str"
+            },
+            "Наименование": {
+                "name": "Наименование",
+                "type": "str"
+            },
+            "Ед.изм.": {
+                "name": "Ед.изм.",
+                "type": "str"
+            },
+        },
         "extra_fields": {
-            "ID_лота": []
+            "ID_лота": {
+                "name": "ID_лота",
+                "type": "str",
+                "path": []
+            }
         }
     },
     "lot_lotImages": {
         "type":'simple_list',
         "path": ["Изображениея_лота"],
         "fields": ["Изображениея_лота"],
+        # "fields": ["Изображениея_лота"],
         "extra_fields": {
             "ID_лота": []
         }
@@ -53,7 +84,7 @@ classes = {
 
 def logger_wrap(fun):
     fun_name = fun.__name__
-    logger_name = 
+    logger_name = logger.name
 
 # print(str(True))
 # print(str(100))
