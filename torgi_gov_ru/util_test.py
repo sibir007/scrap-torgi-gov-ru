@@ -45,7 +45,7 @@ classes = {
         "extra_fields": {}
     },
     "lot_characteristics": {
-        "type":'dict_list',
+        "type":'list_dict',
         "path": ["Характеристики_лота"],
         "fields": {
             "Значение": {

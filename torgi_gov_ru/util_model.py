@@ -1998,7 +1998,9 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
         return res_list
     
     def make_simple_type_items_list_type_field_cast(list_parsed_values: List, field_model: Dict, field_name: str, parent_fields_names: List[str]) -> List:
-        """приведение типа элемента листа к типу листа"""
+        """приведение типа элемента листа к типу листа, в целях дальнйшего упрощения приведения 
+        типов простых элементов листа, на данном этапе все элементы приводим к типу "str", т.е. 
+        итоговый лисп простых типов может быть только типа "str" """
         
         res_list = []
         if (list_type:=get_list_model_list_item_type(field_model, field_name, parent_fields_names)) == 'NoneType':
@@ -2012,11 +2014,11 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
             if list_item_type in SIMPLE_TYPES_LIST:
                 cast_list_item = make_simple_type_cast(list_item, field_model, field_name, parent_fields_names, 'list')
                 if cast_list_item:
-                    res_list.append(cast_list_item)
+                    res_list.append(str(cast_list_item))
             elif list_item_type == 'dict':
                 cast_list_item = make_dict_type_cast(list_item, field_model, field_name, parent_fields_names, 'list')
                 if cast_list_item:
-                    res_list.append(cast_list_item)
+                    res_list.append(str(cast_list_item))
             else:
                 # item_type == 'list'
                 # на данном этапе считаем данное состояние ошибкой
@@ -2668,15 +2670,7 @@ def get_item_class_mapping(search_form_v3: Dict):
         }
         return class_layout
     
-    # def calculate_class_type(field_model: Dict, field_name: str, parrent_path: List):
-    #     """на основании данных field_model вычисляет тип класса,
-    #     если при получении типа модели произсходит ошибка"""
-
-    #     if not (model_type:=get_model_type_none_if_error(feed_model, field_name, parrent_path)):
-            
-    
-    
-    def check_class_type(field_model: Dict, field_name: str, name: str, parrent_path: List, class_type: Literal['dict', 'list_dict', 'list_simple']) -> bool:
+    def check_class_type(field_model: Dict, field_name: str, parrent_path: List, class_type: Literal['dict', 'list_dict', 'list_simple']) -> bool:
         """осуществляем проверку переданного в class_type литерала
         и вычисленного на основании field_model
         ошибочные ситуации:
@@ -2711,11 +2705,11 @@ def get_item_class_mapping(search_form_v3: Dict):
             # ошибочная ситуация, переданный class_type не
             # соответствует вычисленному по field_model
             # пишем лог, возвращаем False
-            logger.error(f"{check_class_type.__name__}(): переданный class_type: '{class_type}', не соотверствует вычисленному {model_type}, field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+            logger.error(f"{check_class_type.__name__}(): переданный class_type: '{class_type}', не соотверствует вычисленному '{model_type}', field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
             return False
         if model_type != 'list':
             # ошибка не поддерживаемы тип подели класса
-            logger.error(f"{check_class_type.__name__}(): не поддерживаемы тип подели класса: {model_type}, допустимые типы: 'dict', 'list_dict', 'list_simple'; field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+            logger.error(f"{check_class_type.__name__}(): не поддерживаемы тип модели класса: {model_type}, допустимые типы: 'dict', 'list_dict', 'list_simple'; field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
             return False
         # вычисленный тип 'list', получаем тип листа
         if not (list_model_type:=get_list_model_list_item_type_none_if_error(field_model, field_name, parrent_path)):
@@ -2743,26 +2737,52 @@ def get_item_class_mapping(search_form_v3: Dict):
         return False
         # calculated_class_type = calculate_class_type(field_model, field_name, parrent_path)
     
-    def get_filled_class_layout(field_model: Dict, field_name: str, name: str, parrent_path: List, class_type: Literal['dict', 'list_dict', 'list_simple'], random_name: str = '') -> Dict:
+    def get_filled_class_layout(field_model: Dict, field_name: str, calass_name: str, parrent_path: List, class_type: Literal['dict', 'list_dict', 'list_simple'], random_name: str = '') -> Union[Dict, None]:
         """отдаёт заполненный макет класса, тип класса вычисляется 
         внутри функции, "class_type" параметр передающийся извне 
         используется для проверки правильности задания типа
         """
-        hr_name = field_model['human_readable_name']
         
+        # проверяем соответствие class_type типу field_model
+        if not check_class_type(field_model, field_name, parrent_path, class_type):
+            # ошибка - несоответствие class_type типу модели
+            logger.error(f"{get_filled_class_layout.__name__}(): несоответствие class_type: '{class_type}' типу модели, field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+            return None
+        class_layout = get_class_layout()        
+        class_layout['name'] = calass_name
+        class_layout['hr_name'] = field_model['human_readable_name']
+        class_layout['r_name'] = field_name
+        class_layout['type'] = class_type
+        # class_name = get_class_name(feed_model, field_model, field_name, parrent_path,)
+        return class_layout
     
     def get_class_name(feed_model: Dict, field_dict_type_model: Dict, field_name: str, parrent_path: List[str], class_mapping: Dict) -> str:
         """функция для определения имени класса, на данный момент будет
-        реализовывать самый простой алгоритм - конкатенация parent_path 
+        реализовывать самый простой алгоритм - на сновании parent_path и field_name 
         в дальнейшем, с увеличением глубины инзначального dict,
         возможно усложнение"""
-        
-        return '_'.join(parent_path)
+        parrent_path_copy = parrent_path.copy()
+        parrent_path.append(field_name)
+        return '_'.join(parrent_path_copy)
 
     def make_dict_class(feed_model: Dict, field_dict_type_model: Dict, field_name: str, parrent_path: List[str], class_mapping: Dict):
-        root_dict = feed_model['fields']
+        root_fields = feed_model['fields']
+        dict_model_fields = field_dict_type_model['types']['dict']['fields']
         class_name = get_class_name(feed_model, field_dict_type_model, field_name, parrent_path, class_mapping)
-        class_layout = get_filled_class_layout(field_dict_type_model, field_name, class_name, parrent_path, 'dict')
+        # получаем class_layout, выполняем проверку 
+        if not (class_layout:= get_filled_class_layout(field_dict_type_model, field_name, class_name, parrent_path, 'dict')):
+            # ошибка при созднаии class_layout, пишем лог, выходим без модификации  class_mapping
+            logger.error(f"{make_dict_class.__name__}(): ошибка при созднаии class_layout, класс типа 'dict' для field_name: {field_name}, parrent_path: {', '.join(parrent_path)} не создан")
+            return
+        # class_layout создан, заполняем поля
+        # поля получаем поутём обхода полей dict и проверки их типов
+        # могут быть 2-а типа полей:
+        # 1. обычные, доступные через 'key' словоря
+        #   1.1. обычные поля класса, модели полей простых типов
+        #   1.2. сложные поля - классы, модели полей с типами 'dict' и 'list'
+        # 2. экстар поля - доступные через ["item_class_binding"]["extra_fields"] 
+        #  field_model объекта, могут быть только у класса
+            
     
 
 
@@ -2792,10 +2812,10 @@ def test_model_parsing_v_1_1():
         
     search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
 
-    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
+    raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
     # raw_data_dict_list = load_dict_or_list_from_json_file('feed/test_items.json')
     # raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
-    raw_data_dict_list = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
+    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
     raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
     # raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
 
@@ -2807,8 +2827,8 @@ def test_model_parsing_v_1_1():
 
 
 
-    write_dict_or_list_to_json_file('feed/05.06.24_20-05-18.items_parsed_v4.json', res_list)
-    # write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
+    # write_dict_or_list_to_json_file('feed/05.06.24_20-05-18.items_parsed_v4.json', res_list)
+    write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
 def test_model_parsing_v_2_1():
         
     search_form_dict = load_dict_or_list_from_json_file('spiders/test_model.json')
