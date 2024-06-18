@@ -1,3 +1,4 @@
+from ast import If
 from email.policy import default
 from lib2to3.pytree import convert
 from math import lgamma
@@ -16,6 +17,16 @@ import logging
 import typing
 
 SIMPLE_TYPES_LIST = ['int', 'float', 'bool', 'str']
+
+DEFAULT_VALUES_FOR_TYPES = {
+    'str': lambda : '',
+    'int': lambda : None,
+    'float': lambda : None,
+    'bool': lambda : None,
+    'list': lambda : [],
+    'dict': lambda : {},
+    'NoneType': lambda : None
+}
 
 logger = logging.getLogger(__name__)
 
@@ -885,17 +896,15 @@ def get_value_from_dict_based_on_path_create_if_absent(target_dict:Dict, path: L
     return target
 
 
-DEFAULT_VALUES_FOR_TYPES = {
-    'str': lambda : '',
-    'int': lambda : None,
-    'float': lambda : None,
-    'bool': lambda : None,
-    'list': lambda : [],
-    'dict': lambda : {},
-    'NoneType': lambda : None
-}
 
 def get_model_type(field_model:Dict, field_name: str, parent_fields_names: List[str]):
+    """определяем тип моделе, на основании поля ['field_types']['types'] 
+    ошибочные ситуации:
+    1. (len(model_types) > 2) or (len(model_types) == 0) 
+    2. (len(model_types) == 2) and (not ("NoneType" in model_types))
+    3.  оба элемента model_types == "NoneType"
+    возвращается "NoneType"
+    """
     # определяем таргет тип
     logger.debug(f"enter -> {get_model_type.__name__}(): field_name: {field_name}, parent_fields_names: {', '.join(parent_fields_names)}")
     model_types = field_model['field_types']['types']
@@ -927,6 +936,13 @@ def get_model_type(field_model:Dict, field_name: str, parent_fields_names: List[
     return model_types[0]
     
 def get_model_type_none_if_error(field_model:Dict, field_name: str, parent_fields_names: List[str]):
+    """определяем тип моделе, на основании поля ['field_types']['types'] 
+    ошибочные ситуации:
+    1. (len(model_types) > 2) or (len(model_types) == 0) 
+    2. (len(model_types) == 2) and (not ("NoneType" in model_types))
+    3.  оба элемента model_types == "NoneType"
+    возвращается None
+    """
     # определяем таргет тип
     model_types = field_model['field_types']['types']
     if (len(model_types) > 2) or (len(model_types) == 0):
@@ -965,6 +981,23 @@ def get_list_model_list_item_type(field_model: Dict, field_name: str, parent_fie
         logger.error(f'get_list_model_list_item_type: type_for_list не определён, имя поля:  имя поля: {field_name}, паретс: [{", ".join(parent_fields_names)}]') 
         return 'NoneType'
     return item_type
+
+
+def get_list_model_list_item_type_none_if_error(field_model: Dict, field_name: str, parent_fields_names):
+    """возвращает тип элемента списка,
+    для этого тип модели должне быть 'list'
+    """
+    # проверяем, что модель типа 'list'
+    if not (model_type:=get_model_type(field_model, field_name, parent_fields_names)) == 'list':
+        logger.error(f'get_list_model_list_item_type: модель имеет тип: {model_type}, должен быть "list", имя поля: {field_name}, паретс: [{", ".join(parent_fields_names)}]') 
+        return None
+    # получаем тип элемента списка
+    if (item_type:=field_model['field_types'].get('type_for_list', None)) == None:
+        # ошибка, type_for_list не определён
+        logger.error(f'get_list_model_list_item_type: type_for_list не определён, имя поля:  имя поля: {field_name}, паретс: [{", ".join(parent_fields_names)}]') 
+        return None
+    return item_type
+
 
 def get_model_default_value_for_model_type(field_model:Dict, field_name: str, parent_fields_names: List[str]):
     model_type =  get_model_type(field_model, field_name, parent_fields_names)
@@ -2601,6 +2634,137 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
 
     return parse_dict_data(feed_model, raw_data)
     
+
+def get_item_class_mapping(search_form_v3: Dict):
+    class_mappping = {}
+    feed_model: Dict = search_form_v3['feed']['types']['dict']
+    custom_feed_model = search_form_v3['custom_feed_model']
+
+    
+    def get_field_layout():
+        field_layout = {
+            # human readable name из модели поля
+            'hr_name': '',
+            # raw name из dict модели 
+            'r_name': '',
+            'type': '',
+            'path': [],
+        }
+        return field_layout
+    
+    def get_class_layout():
+        class_layout = {
+            # имя вычисляемое get_class_name(), являющеесе ключём класса 
+            'name': '',
+            # human readable name из модели поля
+            'hr_name': '',
+            # raw name из dict модели
+            'r_name': '',
+            # на всякий случай, в будущем может понадобиться
+            'random_name': '',
+            'type': '',
+            'path': [],
+            'fields': {}
+        }
+        return class_layout
+    
+    # def calculate_class_type(field_model: Dict, field_name: str, parrent_path: List):
+    #     """на основании данных field_model вычисляет тип класса,
+    #     если при получении типа модели произсходит ошибка"""
+
+    #     if not (model_type:=get_model_type_none_if_error(feed_model, field_name, parrent_path)):
+            
+    
+    
+    def check_class_type(field_model: Dict, field_name: str, name: str, parrent_path: List, class_type: Literal['dict', 'list_dict', 'list_simple']) -> bool:
+        """осуществляем проверку переданного в class_type литерала
+        и вычисленного на основании field_model
+        ошибочные ситуации:
+        1. ошибка при получении типа модели
+        2. тип модели относится к простому типу
+        3. тип переданного в class_type литерале не соответствует вычисленному
+        допустимые литералы для class_type:
+        1. 'dict'
+        2. 'list_dict'
+        3. 'list_simple'
+        на данный момент не допустимые литералы для class_type:
+        1. 'list_list' и производные от него
+        """
+        logger.debug(f"-----> {check_class_type.__name__}(): field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+        # получаем тип моди
+        if not (model_type:=get_model_type_none_if_error(feed_model, field_name, parrent_path)):
+            # при получении типа модели возникли ошибки
+            # логи прописаны в get_model_type_none_if_error()
+            # возвращаем False
+            logger.error(f"{check_class_type.__name__}(): ошибка при получении типа модели, field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+            return False
+        # проверяем что тип модели вростой тип
+        if model_type in SIMPLE_TYPES_LIST:
+            # ошибка - тип модели простой тип
+            # пишем лог, возвращаем False
+            logger.error(f"{check_class_type.__name__}(): ошибка - тип модели простой тип: {model_type}, field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+            return False
+        # проверяем условие для 'dict' типа
+        if model_type == 'dict':
+            if model_type == class_type:
+                return True
+            # ошибочная ситуация, переданный class_type не
+            # соответствует вычисленному по field_model
+            # пишем лог, возвращаем False
+            logger.error(f"{check_class_type.__name__}(): переданный class_type: '{class_type}', не соотверствует вычисленному {model_type}, field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+            return False
+        if model_type != 'list':
+            # ошибка не поддерживаемы тип подели класса
+            logger.error(f"{check_class_type.__name__}(): не поддерживаемы тип подели класса: {model_type}, допустимые типы: 'dict', 'list_dict', 'list_simple'; field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+            return False
+        # вычисленный тип 'list', получаем тип листа
+        if not (list_model_type:=get_list_model_list_item_type_none_if_error(field_model, field_name, parrent_path)):
+            # ошибка при получении типа лист модели
+            logger.error(f"{check_class_type.__name__}(): ошибка при получении типа '{model_type}' модели, field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+            return False
+        if list_model_type in SIMPLE_TYPES_LIST:
+            if class_type == 'list_simple':
+                return True
+            # ошибочная ситуация, переданный class_type не
+            # соответствует вычисленному по field_model
+            # пишем лог, возвращаем False
+            logger.error(f"{check_class_type.__name__}(): переданный class_type: '{class_type}', не соотверствует вычисленному 'list_simple', field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+            return False
+        if list_model_type == 'dict':
+            if class_type == 'list_dict':
+                return True
+            # ошибочная ситуация, переданный class_type не
+            # соответствует вычисленному по field_model
+            # пишем лог, возвращаем False
+            logger.error(f"{check_class_type.__name__}(): переданный class_type: '{class_type}', не соотверствует вычисленному 'list_dict', field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+            return False
+        # ошибочная ситуация, не поддерживаемый тип list модели
+        logger.error(f"{check_class_type.__name__}(): не поддерживаемый тип '{list_model_type}' list модели, поддерживаемые типы 'dict', 'simple'; field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+        return False
+        # calculated_class_type = calculate_class_type(field_model, field_name, parrent_path)
+    
+    def get_filled_class_layout(field_model: Dict, field_name: str, name: str, parrent_path: List, class_type: Literal['dict', 'list_dict', 'list_simple'], random_name: str = '') -> Dict:
+        """отдаёт заполненный макет класса, тип класса вычисляется 
+        внутри функции, "class_type" параметр передающийся извне 
+        используется для проверки правильности задания типа
+        """
+        hr_name = field_model['human_readable_name']
+        
+    
+    def get_class_name(feed_model: Dict, field_dict_type_model: Dict, field_name: str, parrent_path: List[str], class_mapping: Dict) -> str:
+        """функция для определения имени класса, на данный момент будет
+        реализовывать самый простой алгоритм - конкатенация parent_path 
+        в дальнейшем, с увеличением глубины инзначального dict,
+        возможно усложнение"""
+        
+        return '_'.join(parent_path)
+
+    def make_dict_class(feed_model: Dict, field_dict_type_model: Dict, field_name: str, parrent_path: List[str], class_mapping: Dict):
+        root_dict = feed_model['fields']
+        class_name = get_class_name(feed_model, field_dict_type_model, field_name, parrent_path, class_mapping)
+        class_layout = get_filled_class_layout(field_dict_type_model, field_name, class_name, parrent_path, 'dict')
+    
+
 
 
 def test_model_parsing_v_1():
