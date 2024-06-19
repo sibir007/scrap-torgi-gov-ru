@@ -204,75 +204,76 @@ def get_feed_model_v2_from_feed_items_file(feed_items_file: str, path: List[str]
     return get_feed_model_v2_from_feed_items_list(feed_items_v1_list, path)
 
 
+def get_field_model():
+    field_model = {
+        # модель будет иметь два типа полей:
+        # 1. поля созданные на основании парсинга данных
+        # 2. поля добавленные в модель, т.е. не содержащиеся в данных
+        # поля второго типа должны быть производными от полей 1-го типа и 
+        # должны формироваться после парсинго данных, для разделения полей
+        # вводим аттребут "field_type": {"type": "data"} - введённые в 
+        # модель на основании данных и 
+        # "field_type": {"type": "custom", 
+        #               "destinations_paths": [[]]}
+        # введённые произвольно
+        # поле "field_type": {"type": "data"}, по умолчанию None
+        # "field_type": {"type": "custom"} вводится вручную при
+        # описании custom модели
+        # для отобразения поля на сайте, для его выбора
+                "visible": False,
+        # False - поле не попадает в feed
+                "feed": False,
+        # True - качестве ключа для поля будет использоваться значение 
+        # из human_readable_name, в противном случае key value 
+                "feed_human_readable_name": False,
+                "human_readable_name": "",
+        # {"type": "direct"}, {"type": "dict", "dict_path": []}, 
+        # {"type": "layout_formatting", 
+        #  "layout_path": [],
+        #  "layout_format_feed_items_paths": {
+        #                      "raw_feed": {'name1': [path]},
+        #                      "search_form": {}
+        #                   }
+        #               } - 
+        # }
+        # direct - значение берётся то которое вычисляется
+        # dict - вычисленное значение подставляется в словарь по ссылке 
+        # dict_path, полученное заначение записывается в поле
+        # layout_formatting - значение поля подставляется в layout,
+        # находимый по пути "layout_path" и полученное значение 
+        # записывается в поле,
+        # "layout_format_feed_items_paths" поле применимо только в 
+        # контексте  "field_type": {"type": "custom"}, по данному полю
+        # ищутся элементы для встаки в layout
+                "value_scrap_type": {},
+        # определяет какие типы могут данных могут присваиваться полю и значение 
+        # по умолчанию в случае если фактический тип данных не соответствует установленному 
+        # или если данное поле отсутсвует в данных
+                "field_types": {"types": ["str"], "default_value": ""}, 
+        # если тип данных dict, а field_types просой тип, то сюда записываестя
+        # кей в ктором записаны данные для присваиванюя полю
+                "casting_key": "",
+        # если данные list[dict], то exclusion_key это кей в словаре который нужно 
+        # проверять на пустое значение. Если exclusion_key пустой или None весь 
+        # dict исключаестя из итогового list  
+                "exclusion_key": "",
+        # типы которые бывают у данного поля в исходных данных, данные типы 
+        # не обязательно попадают в итоговое значение и могут быть каститься 
+        # до другого типа при парсинге через модель
+                "types": {
+                    }
+                }
+    return field_model
+
+
+
 def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[str] = []) -> Dict:
     """принимае дата структуру List[Dict], возвращает модель этой структуры"""
-
-
-    def get_value_dict_type():
-        field_attr = {
-            # модель будет иметь два типа полей:
-            # 1. поля созданные на основании парсинга данных
-            # 2. поля добавленные в модель, т.е. не содержащиеся в данных
-            # поля второго типа должны быть производными от полей 1-го типа и 
-            # должны формироваться после парсинго данных, для разделения полей
-            # вводим аттребут "field_type": {"type": "data"} - введённые в 
-            # модель на основании данных и 
-            # "field_type": {"type": "custom", 
-            #               "destinations_paths": [[]]}
-            # введённые произвольно
-            # поле "field_type": {"type": "data"}, по умолчанию None
-            # "field_type": {"type": "custom"} вводится вручную при
-            # описании custom модели
-            # для отобразения поля на сайте, для его выбора
-                    "visible": False,
-            # False - поле не попадает в feed
-                    "feed": False,
-            # True - качестве ключа для поля будет использоваться значение 
-            # из human_readable_name, в противном случае key value 
-                    "feed_human_readable_name": False,
-                    "human_readable_name": "",
-            # {"type": "direct"}, {"type": "dict", "dict_path": []}, 
-            # {"type": "layout_formatting", 
-            #  "layout_path": [],
-            #  "layout_format_feed_items_paths": {
-            #                      "raw_feed": {'name1': [path]},
-            #                      "search_form": {}
-            #                   }
-            #               } - 
-            # }
-            # direct - значение берётся то которое вычисляется
-            # dict - вычисленное значение подставляется в словарь по ссылке 
-            # dict_path, полученное заначение записывается в поле
-            # layout_formatting - значение поля подставляется в layout,
-            # находимый по пути "layout_path" и полученное значение 
-            # записывается в поле,
-            # "layout_format_feed_items_paths" поле применимо только в 
-            # контексте  "field_type": {"type": "custom"}, по данному полю
-            # ищутся элементы для встаки в layout
-                    "value_scrap_type": {},
-            # определяет какие типы могут данных могут присваиваться полю и значение 
-            # по умолчанию в случае если фактический тип данных не соответствует установленному 
-            # или если данное поле отсутсвует в данных
-                    "field_types": {"types": ["str"], "default_value": ""}, 
-            # если тип данных dict, а field_types просой тип, то сюда записываестя
-            # кей в ктором записаны данные для присваиванюя полю
-                    "casting_key": "",
-            # если данные list[dict], то exclusion_key это кей в словаре который нужно 
-            # проверять на пустое значение. Если exclusion_key пустой или None весь 
-            # dict исключаестя из итогового list  
-                    "exclusion_key": "",
-            # типы которые бывают у данного поля в исходных данных, данные типы 
-            # не обязательно попадают в итоговое значение и могут быть каститься 
-            # до другого типа при парсинге через модель
-                    "types": {
-                        }
-                    }
-        return field_attr
 
     def get_dict_type(dict_item: Dict):
         res_dict_type = {'type': 'dict', 'fields': {}}
         for item_key, item_value in dict_item.items():
-            value_dict_type = get_value_dict_type()
+            value_dict_type = get_field_model()
             item_value_type = type(item_value).__name__
             if item_value_type == 'dict':
                 value_dict_type['types'][item_value_type] = get_dict_type(item_value)
@@ -2637,13 +2638,10 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
     return parse_dict_data(feed_model, raw_data)
     
 
-def get_item_class_mapping(search_form_v3: Dict):
-    class_mappping = {}
-    feed_model: Dict = search_form_v3['feed']['types']['dict']
-    custom_feed_model = search_form_v3['custom_feed_model']
-
+def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
     
-    def get_field_layout():
+    
+    def get_class_field_layout():
         field_layout = {
             # human readable name из модели поля
             'hr_name': '',
@@ -2653,6 +2651,21 @@ def get_item_class_mapping(search_form_v3: Dict):
             'path': [],
         }
         return field_layout
+
+    
+    def get_filed_class_field_layout(field_model: Dict, field_name: str, parrent_path: List, field_type: str) -> Union[Dict, None]:
+        """отдаёт заполненный макет поля класса"""
+        
+        filed_layout = get_class_field_layout()        
+        filed_layout['name'] = field_name
+        filed_layout['hr_name'] = field_model['human_readable_name']
+        filed_layout['r_name'] = field_name
+        filed_layout['type'] = field_type
+        filed_layout['path'] = parrent_path[1:]
+        
+        # class_name = get_class_name(feed_model, field_model, field_name, parrent_path,)
+        return filed_layout
+
     
     def get_class_layout():
         class_layout = {
@@ -2686,7 +2699,7 @@ def get_item_class_mapping(search_form_v3: Dict):
         """
         logger.debug(f"-----> {check_class_type.__name__}(): field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
         # получаем тип моди
-        if not (model_type:=get_model_type_none_if_error(feed_model, field_name, parrent_path)):
+        if not (model_type:=get_model_type_none_if_error(root_feed_fields, field_name, parrent_path)):
             # при получении типа модели возникли ошибки
             # логи прописаны в get_model_type_none_if_error()
             # возвращаем False
@@ -2756,7 +2769,7 @@ def get_item_class_mapping(search_form_v3: Dict):
         # class_name = get_class_name(feed_model, field_model, field_name, parrent_path,)
         return class_layout
     
-    def get_class_name(feed_model: Dict, field_dict_type_model: Dict, field_name: str, parrent_path: List[str], class_mapping: Dict) -> str:
+    def get_class_name(root_feed_fields: Dict, field_dict_type_model: Dict, field_name: str, parrent_path: List[str], class_mapping: Dict) -> str:
         """функция для определения имени класса, на данный момент будет
         реализовывать самый простой алгоритм - на сновании parent_path и field_name 
         в дальнейшем, с увеличением глубины инзначального dict,
@@ -2765,17 +2778,65 @@ def get_item_class_mapping(search_form_v3: Dict):
         parrent_path.append(field_name)
         return '_'.join(parrent_path_copy)
 
-    def make_dict_class(feed_model: Dict, field_dict_type_model: Dict, field_name: str, parrent_path: List[str], class_mapping: Dict):
-        root_fields = feed_model['fields']
-        dict_model_fields = field_dict_type_model['types']['dict']['fields']
-        class_name = get_class_name(feed_model, field_dict_type_model, field_name, parrent_path, class_mapping)
+    def make_dict_class(root_feed_fields: Dict, field_dict_type_model: Dict, field_name: str, class_mapping: Dict, parrent_path: List[str]):
+        """создаёт сласс типа 'dict', добавляет его в class_mapping dict
+        root_feed_fields: Dict = search_form_v3['feed']['types']['dict']['fields']
+        """
+        
+        
+        dict_model_fields: Dict = field_dict_type_model['types']['dict']['fields']
+        class_name = get_class_name(root_feed_fields, field_dict_type_model, field_name, parrent_path, class_mapping)
         # получаем class_layout, выполняем проверку 
         if not (class_layout:= get_filled_class_layout(field_dict_type_model, field_name, class_name, parrent_path, 'dict')):
             # ошибка при созднаии class_layout, пишем лог, выходим без модификации  class_mapping
             logger.error(f"{make_dict_class.__name__}(): ошибка при созднаии class_layout, класс типа 'dict' для field_name: {field_name}, parrent_path: {', '.join(parrent_path)} не создан")
             return
-        # class_layout создан, заполняем поля
-        # поля получаем поутём обхода полей dict и проверки их типов
+        # записываем класс в class_mapping
+        class_mapping[class_name] = class_layout
+        # class_layout создан, заполняем его поля
+        # полями класса являются:
+        # 1. поля простого типа подлежащего dict feed_model
+        # 2. экстра поля - поля доступные через ["item_class_binding"]["extra_fields"]
+        #  это-й же feed_model
+        # сначала выполняем проход по полям dict  feed_model
+        # определяем их тип и действуем в зависимости от типа
+        parrent_path_copy = parrent_path.copy()
+        parrent_path_copy.append(field_name)
+            
+        for field_mame, field_model in dict_model_fields.items():
+            # определяем тип поля, действуем в зависимости от типа
+            if not (field_model_type:=get_model_type_none_if_error(field_model, field_mame, parrent_path_copy)):
+                # ошибка при определении типа модели
+                # пишем лог, пропускаем поле
+                logger.error(f"{make_dict_class.__name__}(): ошибка при определении типа модели поля: {field_mame}, parrent_path: {', '.join(parrent_path_copy)}, поле пропущено для добавлеие в класс")
+                continue
+            # далее действуем в заисимости от типа модели
+            if field_model_type in SIMPLE_TYPES_LIST:
+                # тип поля - простой тип
+                # получаем  поле класса
+                class_field = get_filed_class_field_layout(field_model, field_mame, parrent_path_copy, field_model_type)
+                # получаем имя поля в зависимости от статуса "feed_human_readable_name"
+                class_field_name = _get_field_to_feeded_name(field_model, field_mame)
+                # записываем поле в class_layout
+                class_layout['fields'][class_field_name] = class_field
+                continue
+            if field_model_type == 'dict':
+                # запускаем создание класса типа dict
+                make_dict_class(root_feed_fields, field_model, field_mame, class_mapping, parrent_path_copy)
+                continue
+            if field_model_type == 'list':
+                # определяем тип листа и действуем в зависимости от него
+                if not (list_model_type:=get_list_model_list_item_type_none_if_error(field_model, field_mame, parrent_path_copy)):
+                    # ошибка при определении типа модели лица
+                    # пишем лог, пропускаем поле
+                    logger.error(f"{make_dict_class.__name__}(): ошибка при определении list_model_type поля: {field_mame}, parrent_path: {', '.join(parrent_path_copy)}, поле пропущено для добавлеие в class_mapping")
+                    continue
+                
+                    
+                # поле простого типа вкючаем его в класс
+        # соответственно для каждого поля производим группировку простых полей
+        # и полей классов подлежащей дикт модели
+        # поля получаем поутём обхода полей dict feed_model
         # могут быть 2-а типа полей:
         # 1. обычные, доступные через 'key' словоря
         #   1.1. обычные поля класса, модели полей простых типов
@@ -2783,9 +2844,30 @@ def get_item_class_mapping(search_form_v3: Dict):
         # 2. экстар поля - доступные через ["item_class_binding"]["extra_fields"] 
         #  field_model объекта, могут быть только у класса
             
+    # root_fields: Dict = feed_model['fields']
+    # root_dict_fields: Dict = feed_model['fields']
+    # создадим field_model обёртку root класса
     
+    class_mappping = {}
+    root_feed_fields: Dict = search_form_v3['feed']['types']['dict']['fields']
+    custom_feed_fields = search_form_v3['custom_feed_model']['fields']
 
-
+    root_field_model = get_field_model()
+    # на всякий случай
+    root_field_model['visible'] = True
+    root_field_model['feed'] = True
+    root_field_model['feed_human_readable_name'] = True
+    root_field_model['human_readable_name'] = root_class_name
+    # зададим правильный тип для модели
+    root_field_model['field_types']['types'] = ['dict']
+    # положим 'types' root_field_model 'types' search_form_v3['feed'], 
+    # т.е. dict c root полями
+    root_field_model['types'] = search_form_v3['feed']['types']
+    # запустим получение root dict класса и трансформации class_mappping
+    make_dict_class(root_feed_fields, root_field_model, root_class_name, class_mappping) 
+    
+    
+    return class_mappping
 
 def test_model_parsing_v_1():
         
