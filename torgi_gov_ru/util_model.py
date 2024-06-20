@@ -6,10 +6,12 @@ import re
 from tabnanny import check
 from tkinter import N
 from turtle import st
+from types import new_class
 from typing import Iterable, Dict, Generator, Literal, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 from unittest.mock import DEFAULT
 
 import scrapy
+from importlib import simple
 from util import logging_configure, load_dict_or_list_from_json_file, write_dict_or_list_to_json_file
 from util import get_data_generator_from_dict_iterable
 
@@ -17,6 +19,7 @@ import logging
 import typing
 
 SIMPLE_TYPES_LIST = ['int', 'float', 'bool', 'str']
+CLASS_TYPES_LIST = ['list', 'dict']
 
 DEFAULT_VALUES_FOR_TYPES = {
     'str': lambda : '',
@@ -2831,7 +2834,7 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
                     # пишем лог, пропускаем поле
                     logger.error(f"{make_dict_class.__name__}(): ошибка при определении list_model_type поля: {field_mame}, parrent_path: {', '.join(parrent_path_copy)}, поле пропущено для добавлеие в class_mapping")
                     continue
-                
+
                     
                 # поле простого типа вкючаем его в класс
         # соответственно для каждого поля производим группировку простых полей
@@ -2868,6 +2871,144 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
     
     
     return class_mappping
+
+def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class_mapping: Dict):
+    
+
+    def make_field_grupping(class_name: str, parsed_data: Dict, parent_class_path: List['str']):
+
+        simple_field_dict = {}
+        class_field_list = []
+        
+        for field_name, field_value in parsed_data:
+            # определяем тип данных
+            field_value_type = type_str(field_value)
+            if field_value_type in SIMPLE_TYPES_LIST
+            # добавляем данные в dict
+                simple_field_dict[field_name] = field_value
+                continue
+            if field_value_type in CLASS_TYPES_LIST:
+                class_field_list.append((field_name, field_value))
+                continue
+            # не поддерживаемый тип данных
+            # пишем лог, пропускаем
+            logger.error(f"{make_field_grupping.__name__}(): не поддерживаемый тип данных: {field_value_type}, class_name: {class_name}, parent_class_path: {'.'.join(parent_class_path)}")
+        return simple_field_dict, class_field_list
+
+    def get_foreign_key_fields_dict(class_name: str, parsed_feed_item: Dict,  parent_class_path: List['str'], class_mapping: Dict) -> Dict:
+        return {}
+    
+    def get_item_class_implementation(class_mapping: Dict, class_name: str) -> type:
+        return str
+    
+    
+    def prepare_new_feed_item_and_call_convert_parsed_feed_item_to_class_item(
+        field_name: str, 
+        class_name: str, 
+        parsed_feed_item: Dict, 
+        parent_class_path: List['str'],
+        descendant_field_name: str,
+        descendant_class: Dict, 
+        item_class_mapping: Dict,
+        foreign_key_fields: Dict
+        ) -> Generator[Dict]:
+        parent_class_path_copy = parent_class_path.copy()
+        parent_class_path_copy.append(field_name)
+        new_class_name = class_name + '_' + descendant_field_name
+        foreign_key_fields_copy = foreign_key_fields.copy()
+        yield from convert_parsed_feed_item_to_class_item(
+            descendant_field_name, 
+            new_class_name, 
+            descendant_class, 
+            parent_class_path_copy,
+            item_class_mapping,
+            foreign_key_fields_copy
+            )
+    
+    def convert_parsed_feed_item_to_class_item(
+        field_name: str, 
+        class_name: str, 
+        parsed_feed_item: Dict, 
+        parent_class_path: List['str'],
+        item_class_mapping: Dict,
+        foreign_key_fields: Dict
+        ) -> Generator[Dict]:
+        # получаем dict: поля со значениями для класса и лист (имя, dict) типов сласса
+        simple_field_dict, class_field_list = make_field_grupping(class_name, parsed_feed_item, parent_class_path)
+        # добавляем поля внешних ключей foreign_key_fields  
+        simple_field_dict.update(foreign_key_fields)
+        # получаем имплементацию Item класса, создам экземпляр, возворащаем
+        yield get_item_class_implementation(item_class_mapping, class_name)(simple_field_dict)
+        # получаем поля внешних ключей текущего класса
+        current_class_foreign_key_fields = get_foreign_key_fields_dict(class_name, parsed_feed_item, parent_class_path, item_class_mapping)
+        # обновляем foreign_key_fields для передаче потомкам
+        foreign_key_fields.update(current_class_foreign_key_fields)
+        # конвертируем остальные классы
+        for descendant_field_name, descendant_class in class_field_list:
+            # определяем тип
+            descendant_class_value_type = type_str(descendant_class)
+            # действуем в зависимости от типа
+            if descendant_class_value_type == 'dict':
+                yield from prepare_new_feed_item_and_call_convert_parsed_feed_item_to_class_item(
+                    field_name,
+                    class_name,
+                    parsed_feed_item,
+                    parent_class_path,
+                    descendant_field_name,
+                    descendant_class,
+                    item_class_mapping,
+                    foreign_key_fields
+                )
+                continue
+            if descendant_class_value_type == 'list':
+                for item in descendant_class:
+                    # по заданным условиям все элементы листа должны быть
+                    # одного типа, проверка этого осуществляется на предидущих
+                    # этапах, поэтому здесь мы полагаем что это условие 
+                    # выполнено и не проверяем здесь.
+                    # определение типа выполеняем для запуска соответствующего 
+                    # обработчика
+                    item_type = type_str(item)
+                    if item_type in SIMPLE_TYPES_LIST:
+                        pass
+                        continue
+                    if item_type == 'dict':
+                        yield from prepare_new_feed_item_and_call_convert_parsed_feed_item_to_class_item(
+                            field_name,
+                            class_name,
+                            item,
+                            parent_class_path,
+                            descendant_field_name,
+                            descendant_class,
+                            item_class_mapping,
+                            foreign_key_fields
+                        )
+                        continue
+                    # ошибочное состояние - 'list' не может быть типом листа
+                    logger.error(f"{convert_parsed_feed_item_to_class_item.__name__}(): ошибочное состояние - типЖ '{item_type}' не может быть типом листа")
+                    
+
+
+
+
+
+    yield from convert_parsed_feed_item_to_class_item(class_name, class_name, parsed_feed , [], class_mapping, {})
+    
+    
+    # делаем группировку простых и слассовых типов
+    simple_field_list, class_field_list = 
+    # из первых формируем dict для item класса
+    # со вторыми выполняем парсинр
+    # проходимся оп отпарсеным данным
+    for field_name, field_value in parsed_data:
+        # опрееляем тип данных
+        field_value_type = type_str(field_value)
+        # дуйствуем в зависимости от типа
+        if fi
+        
+    
+
+
 
 def test_model_parsing_v_1():
         
