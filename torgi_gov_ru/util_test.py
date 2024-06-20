@@ -42,7 +42,7 @@ classes = {
                 "type": "int"
             }
         },
-        "extra_fields": {}
+        "foreign_key_fields": {}
     },
     "lot_characteristics": {
         "type":'list_dict',
@@ -82,9 +82,9 @@ classes = {
 }
 
 
-def logger_wrap(fun):
-    fun_name = fun.__name__
-    logger_name = logger.name
+# def logger_wrap(fun):
+#     fun_name = fun.__name__
+#     logger_name = logger.name
 
 # print(str(True))
 # print(str(100))
@@ -96,8 +96,16 @@ def test_function():
     logger.debug(f'in test function __name__: {test_function.__name__}')
 
 
+
+
+
 if __name__ == '__main__':
-    util.logging_configure(logger, logging.DEBUG)
-    # tes\
+    # util.logging_configure(logger, logging.DEBUG)
+    # # tes\
         
-    test_function()
+    # test_function()
+    
+    test_dict = {'key1': 'value1', 'key2': 'value2'}
+
+    print(dict(test_dict))
+    

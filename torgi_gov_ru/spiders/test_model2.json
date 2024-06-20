@@ -7,7 +7,6 @@
                 "fields": {
                     "id": {
                         "item_class_binding": {
-                            "type": "member",
                             "foreign_key_field": true
                         },
                         "visible": true,
@@ -389,7 +388,7 @@
                                         "type": "dict",
                                         "fields": {
                                             "characteristicValue": {
-                                                "visible": false,
+                                                "visible": true,
                                                 "feed": true,
                                                 "feed_human_readable_name": true,
                                                 "human_readable_name": "Значение",
@@ -988,6 +987,281 @@
                                                 "types": {
                                                     "str": {
                                                         "type": "str"
+                                                    }
+                                                }
+                                            },
+                                            "test_simple_list_field": {
+                                                "visible": true,
+                                                "feed": true,
+                                                "feed_human_readable_name": true,
+                                                "human_readable_name": "поле_простого_лист_типа",
+                                                "value_scrap_type": {},
+                                                "field_types": {
+                                                    "types": [
+                                                        "list"
+                                                    ],
+                                                "type_for_list": "int",
+                                                "default_value": ""
+                                                },
+                                                "casting_key": "",
+                                                "exclusion_key": "",
+                                                "types": {
+                                                    "list": {
+                                                        "type": "list",
+                                                        "types": {
+                                                            "int": {
+                                                                "type": "int"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "test_dict_field": {
+                                                "visible": true,
+                                                "feed": true,
+                                                "feed_human_readable_name": true,
+                                                "human_readable_name": "поле_dict_типа",
+                                                "value_scrap_type": {},
+                                                "field_types": {
+                                                    "types": [
+                                                        "dict"
+                                                    ],
+                                                    "default_value": ""
+                                                },
+                                                "casting_key": "",
+                                                "exclusion_key": "",
+                                                "types": {
+                                                    "dict": {
+                                                        "type": "dict",
+                                                        "fields": {
+                                                            "key1": {
+                                                                "visible": true,
+                                                                "feed": true,
+                                                                "feed_human_readable_name": true,
+                                                                "human_readable_name": "ключ1",
+                                                                "value_scrap_type": {},
+                                                                "field_types": {
+                                                                    "types": [
+                                                                        "str"
+                                                                    ],
+                                                                    "default_value": ""
+                                                                },
+                                                                "casting_key": "",
+                                                                "exclusion_key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "key2": {
+                                                                "visible": true,
+                                                                "feed": true,
+                                                                "feed_human_readable_name": true,
+                                                                "human_readable_name": "ключ2",
+                                                                "value_scrap_type": {},
+                                                                "field_types": {
+                                                                    "types": [
+                                                                        "str"
+                                                                    ],
+                                                                    "default_value": ""
+                                                                },
+                                                                "casting_key": "",
+                                                                "exclusion_key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "key3": {
+                                                                "visible": true,
+                                                                "feed": true,
+                                                                "feed_human_readable_name": true,
+                                                                "human_readable_name": "ключ3",
+                                                                "value_scrap_type": {},
+                                                                "field_types": {
+                                                                    "types": [
+                                                                        "str"
+                                                                    ],
+                                                                    "default_value": ""
+                                                                },
+                                                                "casting_key": "",
+                                                                "exclusion_key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "key4": {
+                                                                "visible": true,
+                                                                "feed": true,
+                                                                "feed_human_readable_name": true,
+                                                                "human_readable_name": "ключ4",
+                                                                "value_scrap_type": {},
+                                                                "field_types": {
+                                                                    "types": [
+                                                                        "str"
+                                                                    ],
+                                                                    "default_value": ""
+                                                                },
+                                                                "casting_key": "",
+                                                                "exclusion_key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "key5": {
+                                                                "visible": true,
+                                                                "feed": true,
+                                                                "feed_human_readable_name": true,
+                                                                "human_readable_name": "ключ5",
+                                                                "value_scrap_type": {},
+                                                                "field_types": {
+                                                                    "types": [
+                                                                        "str"
+                                                                    ],
+                                                                    "default_value": ""
+                                                                },
+                                                                "casting_key": "",
+                                                                "exclusion_key": "",
+                                                                "types": {
+                                                                    "str": {
+                                                                        "type": "str"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "test_list_dict_field": {
+                                                "visible": true,
+                                                "feed": true,
+                                                "feed_human_readable_name": true,
+                                                "human_readable_name": "поле_dict_list_типа",
+                                                "value_scrap_type": {},
+                                                "field_types": {
+                                                    "types": [
+                                                        "list"
+                                                    ],
+                                                    "default_value": "",
+                                                    "type_for_list": "dict"
+                                            },
+                                                "casting_key": "",
+                                                "exclusion_key": "",
+                                                "types": {
+                                                    "list": {
+                                                        "type": "list",
+                                                        "types": {
+                                                            "dict": {
+                                                                "type": "dict",
+                                                                "fields": {
+                                                                    "visible": true,
+                                                                    "feed": true,
+                                                                    "feed_human_readable_name": true,
+                                                                    "human_readable_name": "ключ1",
+                                                                        "value_scrap_type": {},
+                                                                        "field_types": {
+                                                                            "types": [
+                                                                                "str"
+                                                                            ],
+                                                                            "default_value": ""
+                                                                        },
+                                                                        "casting_key": "",
+                                                                        "exclusion_key": "",
+                                                                        "types": {
+                                                                            "str": {
+                                                                                "type": "str"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "key2": {
+                                                                        "visible": true,
+                                                                        "feed": true,
+                                                                        "feed_human_readable_name": true,
+                                                                        "human_readable_name": "ключ2",
+                                                                        "value_scrap_type": {},
+                                                                        "field_types": {
+                                                                            "types": [
+                                                                                "str"
+                                                                            ],
+                                                                            "default_value": ""
+                                                                        },
+                                                                        "casting_key": "",
+                                                                        "exclusion_key": "",
+                                                                        "types": {
+                                                                            "str": {
+                                                                                "type": "str"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "key3": {
+                                                                        "visible": true,
+                                                                        "feed": true,
+                                                                        "feed_human_readable_name": true,
+                                                                        "human_readable_name": "ключ3",
+                                                                        "value_scrap_type": {},
+                                                                        "field_types": {
+                                                                            "types": [
+                                                                                "str"
+                                                                            ],
+                                                                            "default_value": ""
+                                                                        },
+                                                                        "casting_key": "",
+                                                                        "exclusion_key": "",
+                                                                        "types": {
+                                                                            "str": {
+                                                                                "type": "str"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "key4": {
+                                                                        "visible": true,
+                                                                        "feed": true,
+                                                                        "feed_human_readable_name": true,
+                                                                        "human_readable_name": "ключ4",
+                                                                        "value_scrap_type": {},
+                                                                        "field_types": {
+                                                                            "types": [
+                                                                                "str"
+                                                                            ],
+                                                                            "default_value": ""
+                                                                        },
+                                                                        "casting_key": "",
+                                                                        "exclusion_key": "",
+                                                                        "types": {
+                                                                            "str": {
+                                                                                "type": "str"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "key5": {
+                                                                        "visible": true,
+                                                                        "feed": true,
+                                                                        "feed_human_readable_name": true,
+                                                                        "human_readable_name": "ключ5",
+                                                                        "value_scrap_type": {},
+                                                                        "field_types": {
+                                                                            "types": [
+                                                                                "str"
+                                                                            ],
+                                                                            "default_value": ""
+                                                                        },
+                                                                        "casting_key": "",
+                                                                        "exclusion_key": "",
+                                                                        "types": {
+                                                                            "str": {
+                                                                                "type": "str"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
