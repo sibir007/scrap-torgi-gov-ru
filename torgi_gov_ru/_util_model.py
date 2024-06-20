@@ -2759,11 +2759,11 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
         используется для проверки правильности задания типа
         """
         
-        # проверяем соответствие class_type типу field_model
-        if not check_class_type(field_model, field_name, parrent_path, class_type):
-            # ошибка - несоответствие class_type типу модели
-            logger.error(f"{get_filled_class_layout.__name__}(): несоответствие class_type: '{class_type}' типу модели, field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
-            return None
+        # # проверяем соответствие class_type типу field_model
+        # if not check_class_type(field_model, field_name, parrent_path, class_type):
+        #     # ошибка - несоответствие class_type типу модели
+        #     logger.error(f"{get_filled_class_layout.__name__}(): несоответствие class_type: '{class_type}' типу модели, field_name: {field_name}, parrent_path: {', '.join(parrent_path)}")
+        #     return None
         class_layout = get_class_layout()        
         class_layout['class_name'] = calass_name
         class_layout['hr_name'] = field_model['human_readable_name']
@@ -2783,8 +2783,10 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
         parrent_class_path.append(class_suffix)
         
         return '_'.join(parrent_class_path)
+    
+    def get_dict_model_for_list_simple_class_type()
 
-    def make_dict_class(field_dict_type_model: Dict, model_field_name: str, class_mapping: Dict, parrent_class_path: List[str]):
+    def make_class(field_dict_type_model: Dict, model_field_name: str, class_mapping: Dict, parrent_class_path: List[str], class_type: Literal['dict', 'list_dict', 'list_simple']):
         """создаёт сласс типа 'dict', добавляет его в class_mapping dict
         root_feed_fields: Dict = search_form_v3['feed']['types']['dict']['fields']
         """
@@ -2800,9 +2802,9 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
         
         # class_name = get_class_name(field_dict_type_model, model_field_name, parrent_class_path, class_mapping)
         # получаем class_layout, выполняем проверку 
-        if not (class_layout:= get_filled_class_layout(field_dict_type_model, model_field_name, class_name, parrent_class_path, 'dict')):
+        if not (class_layout:= get_filled_class_layout(field_dict_type_model, model_field_name, class_name, parrent_class_path, class_type)):
             # ошибка при созднаии class_layout, пишем лог, выходим без модификации  class_mapping
-            logger.error(f"{make_dict_class.__name__}(): ошибка при созднаии class_layout, класс типа 'dict' для field_name: {model_field_name}, parrent_path: {', '.join(parrent_class_path)} не создан")
+            logger.error(f"{make_class.__name__}(): ошибка при созднаии class_layout, класс типа 'dict' для field_name: {model_field_name}, parrent_path: {', '.join(parrent_class_path)} не создан")
             return
         # записываем класс в class_mapping
         class_mapping[class_name] = class_layout
@@ -2818,7 +2820,7 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
             if not (field_model_type:=get_model_type_none_if_error(field_model, field_mame, parrent_class_path_copy)):
                 # ошибка при определении типа модели
                 # пишем лог, пропускаем поле
-                logger.error(f"{make_dict_class.__name__}(): ошибка при определении типа модели поля: {field_mame}, parrent_path: {', '.join(parrent_class_path_copy)}, поле пропущено для добавлеие в класс")
+                logger.error(f"{make_class.__name__}(): ошибка при определении типа модели поля: {field_mame}, parrent_path: {', '.join(parrent_class_path_copy)}, поле пропущено для добавлеие в класс")
                 continue
             # далее действуем в заисимости от типа модели
             if field_model_type in SIMPLE_TYPES_LIST:
@@ -2836,16 +2838,17 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
                 continue
             if field_model_type == 'dict':
                 # запускаем создание класса типа dict
-                make_dict_class(field_model, field_mame, class_mapping, parrent_class_path_copy)
+                make_class(field_model, field_mame, class_mapping, parrent_class_path_copy, 'dict')
                 continue
             if field_model_type == 'list':
                 # определяем тип листа и действуем в зависимости от него
                 if not (list_model_type:=get_list_model_list_item_type_none_if_error(field_model, field_mame, parrent_class_path_copy)):
                     # ошибка при определении типа модели лица
                     # пишем лог, пропускаем поле
-                    logger.error(f"{make_dict_class.__name__}(): ошибка при определении list_model_type поля: {field_mame}, parrent_path: {', '.join(parrent_class_path_copy)}, поле пропущено для добавлеие в class_mapping")
+                    logger.error(f"{make_class.__name__}(): ошибка при определении list_model_type поля: {field_mame}, parrent_path: {', '.join(parrent_class_path_copy)}, поле пропущено для добавлеие в class_mapping")
                     continue
                 if list_model_type in SIMPLE_TYPES_LIST:
+                    pass
 
 
                     
@@ -2880,7 +2883,7 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
     # т.е. dict c root полями
     root_field_model['types'] = search_form_v3['feed']['types']
     # запустим получение root dict класса и трансформации class_mappping
-    make_dict_class(root_field_model, root_class_name, class_mappping, []) 
+    make_class(root_field_model, root_class_name, class_mappping, [], 'dict') 
     
     
     return class_mappping
@@ -2889,18 +2892,24 @@ def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class
     
 
     def make_field_grupping(class_name: str, parsed_data: Dict, parent_class_path: List['str']):
-
+        logger.debug(f"-----> {make_field_grupping.__name__}(): class_name: {class_name}, parent_class_path: [{', '.join(parent_class_path)}]")
+        
         simple_field_dict = {}
         class_field_list = []
         
-        for field_name, field_value in parsed_data:
+        
+        logger.debug(f"{make_field_grupping.__name__}(): parsed_data_type: {type_str(parsed_data)}")
+        for field_name, field_value in parsed_data.items():
+            logger.debug(f"{make_field_grupping.__name__}(): for field_name, field_value in parsed_data.items(): field_name: {field_name}, class_name: {class_name}, parent_class_path: [{', '.join(parent_class_path)}]")
             # определяем тип данных
             field_value_type = type_str(field_value)
             if field_value_type in SIMPLE_TYPES_LIST:
+                logger.debug(f"{make_field_grupping.__name__}(): if field_value_type in SIMPLE_TYPES_LIST: field_value_type: {field_value_type}, class_name: {class_name}, parent_class_path: [{', '.join(parent_class_path)}]")
             # добавляем данные в dict
                 simple_field_dict[field_name] = field_value
                 continue
             if field_value_type in CLASS_TYPES_LIST:
+                logger.debug(f"{make_field_grupping.__name__}(): if field_value_type in SIMPLE_TYPES_LIST: field_value_type: {field_value_type}, class_name: {class_name}, parent_class_path: [{', '.join(parent_class_path)}]")
                 class_field_list.append((field_name, field_value))
                 continue
             # не поддерживаемый тип данных
@@ -2912,7 +2921,11 @@ def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class
         return {}
     
     def get_item_class_implementation(class_mapping: Dict, class_name: str) -> type:
-        return dict
+        class custom_dict(dict):
+            def __init__(self, item):
+                item['class_name'] = class_name
+                super().__init__(item)
+        return custom_dict
     
     
     def prepare_new_feed_item_and_call_convert_parsed_feed_item_to_class_item(
@@ -2923,7 +2936,7 @@ def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class
         feed_item_to_prepare: Dict, 
         item_class_mapping: Dict,
         foreign_key_fields: Dict
-        ) -> Generator[Dict]:
+        ) -> Generator[Dict, None, None]:
         parent_class_path_copy = parent_class_path.copy()
         parent_class_path_copy.append(field_name)
         new_class_name = class_name + '_' + feed_item_to_prepare_field_name
@@ -2949,7 +2962,7 @@ def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class
         parent_class_path: List['str'],
         item_class_mapping: Dict,
         foreign_key_fields: Dict
-        ) -> Generator[Dict]:
+        ) -> Generator[Dict, None, None]:
         # получаем dict: поля со значениями для класса и лист (имя, dict) типов сласса
         simple_field_dict, class_field_list = make_field_grupping(class_name, parsed_feed_item, parent_class_path)
         # добавляем поля внешних ключей foreign_key_fields  
@@ -3004,7 +3017,7 @@ def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class
                             class_name,
                             parent_class_path,
                             descendant_field_name,
-                            descendant_class,
+                            item,
                             item_class_mapping,
                             foreign_key_fields
                         )
@@ -3109,11 +3122,18 @@ def test_get_model():
     # model = get_feed_model_v2_from_feed_items_file('feed/06.06.24_08-07-52.items.json', [])
     write_dict_or_list_to_json_file('test_feed_1_items_model.json', model)
     
+    
+def convert_parsed_feed_to_class_items_test():
+    parsed_item = load_dict_or_list_from_json_file('custom_raw_feed_item.json')
+    for item in convert_parsed_feed_to_class_items("lot", parsed_item, {}):
+        print(item)
+
 
 if __name__ == '__main__':
-    logging_configure(logger, logging.DEBUG)
+    logging_configure(logger, logging.WARNING)
     # test_model_parsing_v_2()
     # test_model_parsing_v_1_1()
     # test_model_parsing_v_1()
-    test_get_model()
+    # test_get_model()
     # test_model_parsing_v_1_1()
+    convert_parsed_feed_to_class_items_test()

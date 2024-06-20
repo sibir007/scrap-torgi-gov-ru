@@ -44,7 +44,7 @@ classes = {
         },
         "foreign_key_fields": {}
     },
-    "lot_characteristics": {
+    "lot_Характеристики_лота": {
         "type":'list_dict',
         "path": ["Характеристики_лота"],
         "fields": {
@@ -61,22 +61,18 @@ classes = {
                 "type": "str"
             },
         },
-        "extra_fields": {
-            "ID_лота": {
-                "name": "ID_лота",
-                "type": "str",
-                "path": []
-            }
-        }
+        "foreign_key_fields": {}
     },
-    "lot_lotImages": {
+    "lot_Изображениея_лота": {
         "type":'simple_list',
         "path": ["Изображениея_лота"],
-        "fields": ["Изображениея_лота"],
-        # "fields": ["Изображениея_лота"],
-        "extra_fields": {
-            "ID_лота": []
-        }
+        "fields": {
+            "Изображениея_лота": {
+                "name": "Изображениея_лота",
+                "type": "str"
+            }
+        },
+        "foreign_key_fields": {}
     },
     
 }

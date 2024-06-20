@@ -1,0 +1,184 @@
+{
+    "id": "21000026550000000641_1",
+    "noticeNumber": "21000026550000000641",
+    "lotNumber": 1,
+    "lotStatus": "FAILED",
+    "biddType": {
+        "code": "178FZ",
+        "name": "Продажа (приватизация) государственного и муниципального имущества"
+    },
+    "biddForm": {
+        "code": "EA",
+        "name": "Электронный аукцион"
+    },
+    "lotName": "Продажа имущества, находящегося в хозяйственном ведении ГУП \"ЦУГИ\", расположенного по адресу: г. Москва, улица Красного Маяка, дом 22А, нежилое помещение Этаж №6, пом VIII м/м №505, площадь 15.3 кв.м. (кадастровый номер 77:05:0007007:2624)",
+    "lotDescription": "Продажа имущества, находящегося в хозяйственном ведении ГУП \"ЦУГИ\", расположенного по адресу: г. Москва, улица Красного Маяка, дом 22А, нежилое помещение Этаж №6, пом VIII м/м №505, площадь 15.3 кв.м. (кадастровый номер 77:05:0007007:2624)",
+    "priceMin": 498152.7,
+    "biddEndTime": "2022-06-24T12:00:00.000+00:00",
+    "lotImages": [
+        "628755372dfad95f5f7f47d0",
+        "62875537b47c29724b84c244",
+        "628755382dfad95f5f7f47d5",
+        "628755382dfad95f5f7f47d9",
+        "628755382dfad95f5f7f47de",
+        "628755382dfad95f5f7f47e2",
+        "628755382dfad95f5f7f47e6",
+        "628755382dfad95f5f7f47ea",
+        "62875539b47c29724b84c249",
+        "62875539b47c29724b84c24e",
+        "628755392dfad95f5f7f47ef"
+    ],
+    "characteristics": [
+        {
+            "characteristicValue": 15.3,
+            "name": "Общая площадь",
+            "code": "totalAreaRealty",
+            "unit": {
+                "code": "081",
+                "name": "Квадратный метр общей площади",
+                "symbol": "м^2 общ. пл"
+            },
+            "type": "Decimal",
+            "dict_class": {
+                "key1": "value1",
+                "key2": "value12",
+                "key3": "value12",
+                "key4": "value13",
+                "key5": "value14",
+                "key6": "value14",
+                "key7": "value16"
+            },
+            "list_dict_class": [
+                {
+                    "key1": "value11",
+                    "key2": "value121",
+                    "key3": "value121",
+                    "key4": "value131",
+                    "key5": "value114",
+                    "key6": "value141",
+                    "key7": "value116"
+                },
+                {
+                    "key1": "value21",
+                    "key2": "value122",
+                    "key3": "value122",
+                    "key4": "value123",
+                    "key5": "value142",
+                    "key6": "value142",
+                    "key7": "value162"
+                },
+                {
+                    "key1": "value13",
+                    "key2": "value132",
+                    "key3": "value132",
+                    "key4": "value133",
+                    "key5": "value143",
+                    "key6": "value134",
+                    "key7": "value136"
+                }  
+            ],
+            "list_simple_class": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ]
+        },
+        {
+            "characteristicValue": "77:05:0007007:2624",
+            "name": "Кадастровый номер",
+            "code": "cadastralNumberRealty",
+            "type": "Text(20)",
+            "dict_class": {
+                "key1": "value14",
+                "key2": "value124",
+                "key3": "value124",
+                "key4": "value135",
+                "key5": "value146",
+                "key6": "value14",
+                "key7": "value16"
+            },
+            "list_dict_class": [
+                {
+                    "key1": "value11",
+                    "key2": "value121",
+                    "key3": "value121",
+                    "key4": "value131",
+                    "key5": "value114",
+                    "key6": "value141",
+                    "key7": "value116"
+                },
+                {
+                    "key1": "value21",
+                    "key2": "value122",
+                    "key3": "value122",
+                    "key4": "value123",
+                    "key5": "value142",
+                    "key6": "value142",
+                    "key7": "value162"
+                },
+                {
+                    "key1": "value13",
+                    "key2": "value132",
+                    "key3": "value132",
+                    "key4": "value133",
+                    "key5": "value143",
+                    "key6": "value134",
+                    "key7": "value136"
+                }  
+            ],
+            "list_simple_class": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ]
+        }
+    ],
+    "currencyCode": "643",
+    "etpCode": "ETP_EETP",
+    "subjectRFCode": "77",
+    "category": {
+        "code": "10",
+        "name": "Гаражи и машиноместа "
+    },
+    "createDate": "2022-05-20T08:45:46.789+00:00",
+    "timeZoneName": "МСК",
+    "timezoneOffset": "180",
+    "hasAppeals": false,
+    "isStopped": false,
+    "attributes": [
+        {
+            "code": "DA_contractSignPeriod_EA(178)",
+            "fullName": "Срок заключения договора",
+            "value": "согласно п. 12 документации об аукционе",
+            "attributeType": "Text(100)",
+            "group": {
+                "code": "NL250",
+                "name": "5.3 Лот_основная_информация",
+                "displayGroupType": "LOT"
+            },
+            "sortOrder": 3
+        },
+        {
+            "code": "DA_depositTimeAndRules_EA(178)",
+            "fullName": "Срок и порядок внесения задатка",
+            "value": "Задаток должен быть перечислен на счет оператора торговой площадки",
+            "attributeType": "Text(500)",
+            "group": {
+                "code": "NL255",
+                "name": "5.4.2 Лот_информация_о_задатке_дин",
+                "displayGroupType": "LOT"
+            },
+            "sortOrder": 1
+        }
+    ],
+    "isAnnulled": false,
+    "noticeFirstVersionPublicationDate": "2022-05-20T11:07:35.469Z",
+    "npaHintCode": "hint1_178FZ",
+    "typeTransaction": "sale"
+}

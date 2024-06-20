@@ -45,6 +45,11 @@ now = datetime.datetime.now()  # Get the current datetime object
 formatted_date = now.strftime("%d.%m.%y_%H-%M-%S")
 """
 
+
+def type_str(value: Any) -> str:
+    return type(value).__name__
+
+
 def get_curent_date_time() -> str:
     now = datetime.now()  # Get the current datetime object
     formatted_date = now.strftime("%d.%m.%y_%H-%M-%S")
