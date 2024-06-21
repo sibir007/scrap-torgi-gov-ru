@@ -40,7 +40,7 @@ DEFAULT_VALUES_FOR_TYPES = {
 logger = logging.getLogger(__name__)
 
 
-def get_feed_model_from_search_file(search_file: Dict):
+def get_feed_model_from_search_file(search_file: Dict) -> Dict:
     """получение полей feed модели"""
 
     return search_file['feed']['types']['dict']['field']
@@ -186,8 +186,10 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
             destination[custom_name]  = dict_value
         # return parsed_feed_item
     
-    def _check_field_dict_or_list_dict(field_name: str, field_model: Dict):
-        """проверяет, что поле является dict или list dict"""
+    def _check_field_dict_or_list_dict(field_name: str, field_model: Dict) -> Union[None, Literal['list', 'dict']]:
+        """проверяет, что поле является dict или list dict, None если False,
+        'list' или 'dict' если True 
+        """
         
         if (fiel_type:=get_model_type_none_if_error(field_model, field_name, [])) == None:
 
@@ -210,6 +212,25 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
                 # пишем лог, возвращаем None
                 logger.error(f"{feed_customizing.__name__}():{_convert_destination_path.__name__}(): поля '{field_name}' в feed модели, model_field_name: {model_field_name}")
                 return None
+            # выполняем проверку, что модель типа dict или list dict
+            if (model_type:=get_model_type_none_if_error(field_model, field_name, [])) == None:
+                # ошибка типа модели поля
+                logger.error(f"{feed_customizing.__name__}():{_convert_destination_path.__name__}(): ошибка типа модели поля '{field_name}'")
+                return None
+            if model_type != 'dict':
+                if model_type == 'list':
+                    if (model_type:=get_list_model_list_item_type_none_if_error(field_model, field_name, [])) == None:
+                        # ошибка типа модели поля
+                        logger.error(f"{feed_customizing.__name__}():{_convert_destination_path.__name__}(): ошибка типа лист модели поля '{field_name}'")
+                        return None
+                    if model_type != 'dict':
+                        # ошибка типа модели поля
+                        logger.error(f"{feed_customizing.__name__}():{_convert_destination_path.__name__}(): ошибка типа лист модели поля '{field_name}'")
+                        return None
+                # ошибка типа модели поля
+                logger.error(f"{feed_customizing.__name__}():{_convert_destination_path.__name__}(): ошибка типа лист модели поля '{field_name}'")
+                return None
+            
             field_model_fields = _get_dict_fields_from_field_model(field_name, field_model)
             name_for_path = _get_field_to_feeded_name(field_model_fields, field_name)
             res_path.append(name_for_path)
