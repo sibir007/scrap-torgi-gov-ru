@@ -2638,7 +2638,7 @@
             "lot_images_folder": {
                 "field_type": {
                     "type": "custom",
-                    "destinations_paths": [[]]
+                    "destinations_paths": [[], ["Характеристики_лота"]]
                 },
                 "visible": true,
                 "feed": true,
@@ -2704,7 +2704,7 @@
             "lot_ref": {
                 "field_type": {
                     "type": "custom",
-                    "destinations_paths": [[]]
+                    "destinations_paths": [[], ["Атребуты_извещения"]]
                 },
                 "visible": true,
                 "feed": true,

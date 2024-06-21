@@ -1,0 +1,238 @@
+{
+    "root": {
+        "item_class_implementation": "",
+        "class_name": "root",
+        "hr_name": "root",
+        "r_name": "root",
+        "random_name": "",
+        "type": "dict",
+        "path": [
+            "root"
+        ],
+        "fields": {
+            "ID_лота": {
+                "hr_name": "ID_лота",
+                "r_name": "id",
+                "type": "str"
+            },
+            "Номер_извещения": {
+                "hr_name": "Номер_извещения",
+                "r_name": "noticeNumber",
+                "type": "str"
+            },
+            "Номер_лота": {
+                "hr_name": "Номер_лота",
+                "r_name": "lotNumber",
+                "type": "int"
+            },
+            "Статус_лота": {
+                "hr_name": "Статус_лота",
+                "r_name": "lotStatus",
+                "type": "str"
+            },
+            "Вид_торгов": {
+                "hr_name": "Вид_торгов",
+                "r_name": "biddType",
+                "type": "str"
+            },
+            "Форма_проведения": {
+                "hr_name": "Форма_проведения",
+                "r_name": "biddForm",
+                "type": "str"
+            },
+            "Предмет_торгов": {
+                "hr_name": "Предмет_торгов",
+                "r_name": "lotName",
+                "type": "str"
+            },
+            "Описание_лота": {
+                "hr_name": "Описание_лота",
+                "r_name": "lotDescription",
+                "type": "str"
+            },
+            "Начальная_цена": {
+                "hr_name": "Начальная_цена",
+                "r_name": "priceMin",
+                "type": "float"
+            },
+            "Окончаниу_подачи_заявок": {
+                "hr_name": "Окончаниу_подачи_заявок",
+                "r_name": "biddEndTime",
+                "type": "str"
+            },
+            "ЭTП": {
+                "hr_name": "ЭTП",
+                "r_name": "etpCode",
+                "type": "str"
+            },
+            "Субьект_местонахождения_имущества": {
+                "hr_name": "Субьект_местонахождения_имущества",
+                "r_name": "subjectRFCode",
+                "type": "str"
+            },
+            "Категория": {
+                "hr_name": "Категория",
+                "r_name": "category",
+                "type": "str"
+            },
+            "Дата_и_время_создания": {
+                "hr_name": "Дата_и_время_создания",
+                "r_name": "createDate",
+                "type": "str"
+            },
+            "Временная_зона": {
+                "hr_name": "Временная_зона",
+                "r_name": "timeZoneName",
+                "type": "str"
+            },
+            "Имеются_аппеляции": {
+                "hr_name": "Имеются_аппеляции",
+                "r_name": "hasAppeals",
+                "type": "bool"
+            },
+            "Остановлена": {
+                "hr_name": "Остановлена",
+                "r_name": "isStopped",
+                "type": "bool"
+            },
+            "Анулирован": {
+                "hr_name": "Анулирован",
+                "r_name": "isAnnulled",
+                "type": "bool"
+            },
+            "Дата_первой_публикации": {
+                "hr_name": "Дата_первой_публикации",
+                "r_name": "noticeFirstVersionPublicationDate",
+                "type": "str"
+            },
+            "Тип_транзакции": {
+                "hr_name": "Тип_транзакции",
+                "r_name": "typeTransaction",
+                "type": "str"
+            },
+            "Валюта": {
+                "hr_name": "Валюта",
+                "r_name": "currencyCode",
+                "type": "str"
+            },
+            "НДС": {
+                "hr_name": "НДС",
+                "r_name": "lotVat",
+                "type": "str"
+            },
+            "Дата_отмены": {
+                "hr_name": "Дата_отмены",
+                "r_name": "cancelDate",
+                "type": "str"
+            },
+            "Итоговая_цена": {
+                "hr_name": "Итоговая_цена",
+                "r_name": "priceFin",
+                "type": "float"
+            }
+        },
+        "foreign_key_fields": [
+            "ID_лота"
+        ]
+    },
+    "root_Изображения_лота": {
+        "item_class_implementation": "",
+        "class_name": "root_Изображения_лота",
+        "hr_name": "Изображения_лота",
+        "r_name": "lotImages",
+        "random_name": "",
+        "type": "list_simple",
+        "path": [
+            "root",
+            "Изображения_лота"
+        ],
+        "fields": {
+            "Изображения_лота": {
+                "hr_name": "Изображения_лота",
+                "r_name": "lotImages",
+                "type": "str"
+            }
+        },
+        "foreign_key_fields": []
+    },
+    "root_Характеристики_лота": {
+        "item_class_implementation": "",
+        "class_name": "root_Характеристики_лота",
+        "hr_name": "Характеристики_лота",
+        "r_name": "characteristics",
+        "random_name": "",
+        "type": "list_dict",
+        "path": [
+            "root",
+            "Характеристики_лота"
+        ],
+        "fields": {
+            "Значение": {
+                "hr_name": "Значение",
+                "r_name": "characteristicValue",
+                "type": "str"
+            },
+            "Наименование": {
+                "hr_name": "Наименование",
+                "r_name": "name",
+                "type": "str"
+            },
+            "Ед.изм.": {
+                "hr_name": "Ед.изм.",
+                "r_name": "unit",
+                "type": "str"
+            }
+        },
+        "foreign_key_fields": []
+    },
+    "root_Атребуты": {
+        "item_class_implementation": "",
+        "class_name": "root_Атребуты",
+        "hr_name": "Атребуты",
+        "r_name": "attributes",
+        "random_name": "",
+        "type": "list_dict",
+        "path": [
+            "root",
+            "Атребуты"
+        ],
+        "fields": {
+            "Наименование": {
+                "hr_name": "Наименование",
+                "r_name": "fullName",
+                "type": "str"
+            },
+            "Значение": {
+                "hr_name": "Значение",
+                "r_name": "value",
+                "type": "str"
+            }
+        },
+        "foreign_key_fields": []
+    },
+    "root_Атребуты_извещения": {
+        "item_class_implementation": "",
+        "class_name": "root_Атребуты_извещения",
+        "hr_name": "Атребуты_извещения",
+        "r_name": "noticeAttributes",
+        "random_name": "",
+        "type": "list_dict",
+        "path": [
+            "root",
+            "Атребуты_извещения"
+        ],
+        "fields": {
+            "Наименование": {
+                "hr_name": "Наименование",
+                "r_name": "fullName",
+                "type": "str"
+            },
+            "Значение": {
+                "hr_name": "Значение",
+                "r_name": "value",
+                "type": "str"
+            }
+        },
+        "foreign_key_fields": []
+    }
+}

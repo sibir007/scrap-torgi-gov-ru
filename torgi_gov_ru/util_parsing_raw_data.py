@@ -9,6 +9,7 @@
 # from tkinter import N
 # from turtle import st
 # from types import new_class
+from os import name
 from typing import Iterable, Dict, Generator, Literal, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 # from unittest.mock import DEFAULT
 
@@ -39,7 +40,10 @@ DEFAULT_VALUES_FOR_TYPES = {
 logger = logging.getLogger(__name__)
 
 
+def get_feed_model_from_search_file(search_file: Dict):
+    """получение полей feed модели"""
 
+    return search_file['feed']['types']['dict']['field']
 
 def _get_layout(field_name: str, 
             value_scrap_type: Dict, 
@@ -85,7 +89,7 @@ class safesub(dict):
         return '{' + key + '}'
 
 
-    
+    # TODO: доделать конвертацию  destinations_paths
 def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item: Dict):
     """получает search_form_v3 dict, сырой feed_item и парсед через модель feed_item,
     производит customizing parsed_feed_item по custom_feed_model search_form_v3 
@@ -181,10 +185,39 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
         for destination in destinations_list:
             destination[custom_name]  = dict_value
         # return parsed_feed_item
+    
+    def _check_field_dict_or_list_dict(field_name: str, field_model: Dict):
+        """проверяет, что поле является dict или list dict"""
+        
+        if (fiel_type:=get_model_type_none_if_error(field_model, field_name, [])) == None:
+
+           
+    
+    def _get_dict_fields_from_field_model(field_name: str, field_model: Dict):
+        """поучает модель поля, выдаёт поля словаря поля,
+        поле должно быть типа dict или list типа  dict, в противном случае None
+        """
+        if field_model
+    
+    def _convert_destination_path(model_field_name: str, destinations_path: List[str], search_form_v3: Dict) -> Union[List['str'], None]: 
+        """преобразует destinations_path в ключах модели в destinations_path в ключах parsed_feed_item"""
+        res_path = []
+        field_model_fields = get_feed_model_from_search_file(search_form_v3)
+        for field_name in destinations_path:
+            # проверяем наличие поля в модели
+            if (field_model:=field_model_fields.get(field_name, None)) == None:
+                # нет такого поля в feed модели
+                # пишем лог, возвращаем None
+                logger.error(f"{feed_customizing.__name__}():{_convert_destination_path.__name__}(): поля '{field_name}' в feed модели, model_field_name: {model_field_name}")
+                return None
+            field_model_fields = _get_dict_fields_from_field_model(field_name, field_model)
+            name_for_path = _get_field_to_feeded_name(field_model_fields, field_name)
+            res_path.append(name_for_path)
+        return res_path
+
+
  
- 
- 
-    def _get_destinations(model_field_name: str, model_field_model: Dict, parsed_feed_item: Dict) -> Union[List[Dict],None]:
+    def _get_destinations(model_field_name: str, model_field_model: Dict, parsed_feed_item: Dict, search_form_v3: Dict) -> Union[List[Dict],None]:
 
         if (destinations_paths:=model_field_model['field_type'].get('destinations_paths', None)) == None:
             # destinations_paths отсутствует - ошибка
@@ -205,6 +238,12 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
                 # тип не правильный
                 # пишем error log и пропускаем
                 logger.error(f'_get_destinations(): не правильный тип destination_path: {type(destination_path).__name__}, должен быть "list", имя поля модели: {model_field_name}')
+                continue
+            # конвертируем destination_path по модели в converted_destination_path по parsed_feed_item
+            if (convert_destination_path:=_convert_destination_path(model_field_name, destination_path, search_form_v3)) == None:
+                # ошибка конвертации destination_path
+                # пишем error log и пропускаем
+                logger.error(f'{_get_destinations.__name__}(): ошибка конвертации destination_path, имя поля модели: {model_field_name}')
                 continue
             try:
                 destination = get_value_from_dict_based_on_path_except_if_absent(parsed_feed_item, destination_path)
@@ -1390,9 +1429,6 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
         return res_dict
 
     return parse_dict_data(feed_model, raw_data)
-    
-   
-
 
 def test_model_parsing_v_1():
         
@@ -1412,8 +1448,6 @@ def test_model_parsing_v_1():
 
     write_dict_or_list_to_json_file('feed/05.06.24_20-05-18.items_parsed_v2.json', res_list)
     # write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
-
-
 
 def test_model_parsing_v_1_1():
         
@@ -1436,6 +1470,7 @@ def test_model_parsing_v_1_1():
 
     # write_dict_or_list_to_json_file('feed/05.06.24_20-05-18.items_parsed_v4.json', res_list)
     write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
+
 def test_model_parsing_v_2_1():
         
     search_form_dict = load_dict_or_list_from_json_file('spiders/test_model.json')
@@ -1457,28 +1492,24 @@ def test_model_parsing_v_2_1():
 
     write_dict_or_list_to_json_file('feed/05.06.24_20-05-18.items_parsed_v4.json', res_list)
     # write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
-        
-        
-        
+
 def test_model_parsing_v_2():
-    search_form_dict = load_dict_or_list_from_json_file('spiders/test_model.json')
+    search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
+    # search_form_dict = load_dict_or_list_from_json_file('spiders/test_model.json')
     
-    raw_data_dict = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
+    raw_data_dict = load_dict_or_list_from_json_file('feed/raw_test_item.json')
 
     # print(raw_data_dict)
 
     parsed_content =  parsing_raw_data_relative_to_data_model_v2_var2(search_form_dict, raw_data_dict)
     # write_dict_or_list_to_json_file('feed/parsed_content_3.json', parsed_content)
     feed_customizing(search_form_dict, raw_data_dict, parsed_content)
-    write_dict_or_list_to_json_file('feed/parsed_content_3_custom.json', parsed_content)
-
-
-
+    write_dict_or_list_to_json_file('feed/parsed_content_4_custom.json', parsed_content)
 
 if __name__ == '__main__':
     logging_configure(logger, logging.WARNING)
-    # test_model_parsing_v_2()
-    test_model_parsing_v_1_1()
+    test_model_parsing_v_2()
+    # test_model_parsing_v_1_1()
     # test_model_parsing_v_1()
     # test_get_model()
     # test_model_parsing_v_1_1()

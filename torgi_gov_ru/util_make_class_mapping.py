@@ -61,6 +61,7 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
     
     def get_class_layout():
         class_layout = {
+            'item_class_implementation': "",
             # имя вычисляемое get_class_name(), являющеесе ключём класса 
             'class_name': '',
             # human readable name из модели поля
@@ -159,8 +160,20 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
         class_layout['hr_name'] = field_model['human_readable_name']
         class_layout['r_name'] = field_name
         class_layout['type'] = class_type
+        class_layout['path'] = parrent_path
         # class_name = get_class_name(feed_model, field_model, field_name, parrent_path,)
         return class_layout
+    
+    def get_field_dict_model_for_dict_list_type(list_field_model: Dict, list_field_name: str):
+        """создание из dict list - dict  для запуска через make_class()"""
+        # корректируем list_field model под dict модель
+        list_field_model_copy = list_field_model.copy()
+        list_field_model_copy['field_types']['types'] = ['dict']
+        dict_type = list_field_model['types']['list']['types']['dict'].copy()
+        list_field_model_copy['types']= {'dict': dict_type}
+        
+        
+        return list_field_model_copy
     
 
     def get_field_dict_model_for_simple_list_type(list_field_model: Dict, list_field_name: str):
@@ -226,12 +239,14 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
         # параллельно заполняем 'foreign_key_fields'
         # сначала выполняем проход по полям dict  feed_model
         # определяем их тип и действуем в зависимости от типа
-        parrent_class_path_copy = parrent_class_path.copy()
         # parrent_class_path_copy.append(model_field_name)
             
         for field_mame, field_model in dict_model_fields.items():
+            logger.debug(f"{make_class.__name__}(): field_mame: {field_mame}")
+            if not field_model['feed']:
+                continue
             # определяем тип поля, действуем в зависимости от типа
-            if not (field_model_type:=get_model_type_none_if_error(field_model, field_mame, parrent_class_path_copy)):
+            if not (field_model_type:=get_model_type_none_if_error(field_model, field_mame, parrent_class_path)):
                 # ошибка при определении типа модели
                 # пишем лог, пропускаем поле
                 logger.error(f"{make_class.__name__}(): ошибка при определении типа модели поля: {field_mame}, parrent_path: {', '.join(parrent_class_path_copy)}, поле пропущено для добавлеие в класс")
@@ -240,6 +255,7 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
             if field_model_type in SIMPLE_TYPES_LIST:
                 # тип поля - простой тип
                 # получаем  поле класса
+                parrent_class_path_copy = parrent_class_path.copy()
                 class_field = get_filed_class_field_layout(field_model, field_mame, parrent_class_path_copy, field_model_type)
                 # получаем имя поля в зависимости от статуса "feed_human_readable_name"
                 class_field_name = _get_field_to_feeded_name(field_model, field_mame)
@@ -247,11 +263,12 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
                 class_layout['fields'][class_field_name] = class_field
                 # проверяем на "foreign_key_field": true
                 if (item_class_binding:=field_model.get('item_class_binding', None)):
-                    if (item_class_binding('foreign_key_field', None)):
+                    if (item_class_binding.get('foreign_key_field', None)):
                         class_layout['foreign_key_fields'].append(class_field_name)
                 continue
             if field_model_type == 'dict':
                 # запускаем создание класса типа dict
+                parrent_class_path_copy = parrent_class_path.copy()
                 make_class(field_model, field_mame, class_mapping, parrent_class_path_copy, 'dict')
                 continue
             if field_model_type == 'list':
@@ -262,9 +279,18 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
                     logger.error(f"{make_class.__name__}(): ошибка при определении list_model_type поля: {field_mame}, parrent_path: {', '.join(parrent_class_path_copy)}, поле пропущено для добавлеие в class_mapping")
                     continue
                 if list_model_type in SIMPLE_TYPES_LIST:
+                    parrent_class_path_copy = parrent_class_path.copy()
                     new_dict_model_for_simple_list = get_field_dict_model_for_simple_list_type(field_model, field_mame)
                     make_class(new_dict_model_for_simple_list, field_mame, class_mapping, parrent_class_path_copy, 'list_simple')
                     continue
+                if list_model_type == 'dict':
+                    parrent_class_path_copy = parrent_class_path.copy()
+                    new_dict_model_for_dict_list = get_field_dict_model_for_dict_list_type(field_model, field_mame)
+                    make_class(new_dict_model_for_dict_list, field_mame, class_mapping, parrent_class_path_copy, 'list_dict')
+                    continue
+                # ошибка - не поддерживаемы тип для 'list' модели
+                logger.error(f"{make_class.__name__}(): не поддерживаемы тип '{list_model_type}' для 'list' модели, field_name: {model_field_name}, parrent_path: {', '.join(parrent_class_path)} не создан")
+                
 
 
                     
@@ -304,10 +330,37 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
     
     return class_mappping
 
+
+def test_class_mapping():
+        
+    search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/test_model2.json'))
+    # search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/test_model.json'))
+
+    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
+    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/test_items.json')
+    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
+    # raw_data_dict_list = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
+    # raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
+    # raw_data_gen = get_data_generator_from_dict_iterable(raw_data_dict_list, [])
+
+    # res_list = []
+    # for data in raw_data_gen:
+    #     parsed_data = parsing_raw_data_relative_to_data_model_v2_var2(search_form_dict, data)
+    #     # feed_customizing(search_form_dict, data, parsed_data,)
+    #     res_list.append(parsed_data)
+
+    res = get_item_class_mapping(search_form_dict)
+
+    write_dict_or_list_to_json_file('class_mapp_2.json', res)
+    # write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
+
+
+
 if __name__ == '__main__':
-    logging_configure(logger, logging.WARNING)
+    logging_configure(logger, logging.DEBUG)
     # test_model_parsing_v_2()
     # test_model_parsing_v_1()
     # test_get_model()
     # test_model_parsing_v_1_1()
     # convert_parsed_feed_to_class_items_test()
+    test_class_mapping()

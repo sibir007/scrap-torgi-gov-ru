@@ -1609,16 +1609,16 @@ def get_feed_model_v2_from_feed_items_list(data: Union[Dict, List], path: List[s
    
 
 def test_get_model():
-    model = get_feed_model_v2_from_feed_items_file('feed/05.06.24_20-05-18.items.json', [])
+    model = get_feed_model_v2_from_feed_items_file('spiders/test_feed_1_items.json', [])
     # model = get_feed_model_v2_from_feed_items_file('feed/05.06.24_20-05-18.items.json', [])
     # model = get_feed_model_v2_from_feed_items_file('feed/06.06.24_08-07-52.items.json', [])
-    write_dict_or_list_to_json_file('test_model_past_refactoring.json', model)
+    write_dict_or_list_to_json_file('test_model_past_refactoring_2.json', model)
     
     
 
 
 if __name__ == '__main__':
-    logging_configure(logger, logging.WARNING)
+    logging_configure(logger, logging.DEBUG)
     # test_model_parsing_v_2()
     # test_model_parsing_v_1_1()
     # test_model_parsing_v_1()

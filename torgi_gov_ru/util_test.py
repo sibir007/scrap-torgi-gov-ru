@@ -1,5 +1,5 @@
 # import operator
-
+from inspect import getmembers
 import util
 import logging
 
@@ -26,11 +26,16 @@ logger = logging.getLogger(__name__)
 
 classes = {
     "lot": {
+        "class_name": "",
+        "hr_name": '',
+        "r_name": '',
+        'random_name': '',
         "type": "dict",
         "path": [],
         "fields": {
             "ID_лота": {
-                "name": "ID_лота",
+                'hr_name': 'ID_лота',
+                "r_name": "ID_лота",
                 "type": "str"
             }, 
             "Номер_извещения": {
@@ -92,6 +97,16 @@ def test_function():
     logger.debug(f'in test function __name__: {test_function.__name__}')
 
 
+def test2():
+    a = 5
+    b = 6
+    context = dir()
+    for item in context:
+        print(item)
+
+
+def function_for_test():
+    test2()
 
 
 
@@ -101,7 +116,9 @@ if __name__ == '__main__':
         
     # test_function()
     
-    test_dict = {'key1': 'value1', 'key2': 'value2'}
+    # test_dict = {'key1': 'value1', 'key2': 'value2'}
 
-    print(dict(test_dict))
-    
+    # print(dict(test_dict))
+    function_for_test()
+    # for item in dir():
+    #     print( item)
