@@ -109,6 +109,8 @@ def function_for_test():
     test2()
 
 
+l = ['пурвый', "второй", "третьий", "четвётрый"]
+
 
 if __name__ == '__main__':
     # util.logging_configure(logger, logging.DEBUG)
@@ -119,6 +121,10 @@ if __name__ == '__main__':
     # test_dict = {'key1': 'value1', 'key2': 'value2'}
 
     # print(dict(test_dict))
-    function_for_test()
+    # function_for_test()
     # for item in dir():
     #     print( item)
+    print(f'l[1:]: {l[1:]}')
+    print(f'l[2:]: {l[2:]}')
+    print(f'l[3:]: {l[3:]}')
+    # print(f'l[1:]: {l[1:]}')

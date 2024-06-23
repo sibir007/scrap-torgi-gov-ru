@@ -9,8 +9,12 @@
 # from tkinter import N
 # from turtle import st
 # from types import new_class
+from curses.ascii import SI
 from os import name
+from parser import STType
 from typing import Iterable, Dict, Generator, Literal, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
+
+from requests import head
 # from unittest.mock import DEFAULT
 
 # import scrapy
@@ -19,7 +23,7 @@ from util import logging_configure, load_dict_or_list_from_json_file, write_dict
 from util import get_data_generator_from_dict_iterable, type_str
 
 # from util import SIMPLE_TYPES_LIST, CLASS_TYPES_LIST
-
+from util_get_model import get_field_model
 
 import logging
 import typing
@@ -88,6 +92,118 @@ class safesub(dict):
     def __missing__(self, key):
         return '{' + key + '}'
 
+def wrapp_search_form_v3_feed_in_field_list_dict_model(search_form_v3: Dict, human_readable_name: str = 'root') -> Dict:
+    feed_list_type = search_form_v3['feed']
+    field_model = get_field_model()
+    
+    field_model['visible'] = True
+    field_model['feed'] = True
+    field_model['feed_human_readable_name'] = True
+    field_model['human_readable_name'] = human_readable_name
+    field_model['field_types']['types'] = ['list']
+    field_model['field_types']['types'] = ['list']
+    field_model['field_types']['type_for_list'] = 'dict'
+    field_model['types']['list'] = feed_list_type
+    return field_model
+
+
+
+def convert_destination_path(custom_model_field_name: str, destinations_path: List[str], search_form_v3: Dict) -> Union[List['str'], None]: 
+    """преобразует destinations_path в ключах модели в destinations_path в ключах parsed_feed_item"""
+    logger.debug(f"-----> {convert_destination_path.__name__}(): custom_model_field_name: {custom_model_field_name}, destinations_path: {destinations_path}")
+    res_path = []
+    # завернём search_form feed в field_model типа dict
+    field_model = wrapp_search_form_v3_feed_in_field_list_dict_model(search_form_v3)
+    field_model_name = custom_model_field_name
+    for destianations_path_name in destinations_path:
+        # получаем field_model_fields
+        if (field_model_fields:=get_dict_fields_from_field_model(field_model_name, field_model)) == None:
+            # ошьбка получения field_model_fields 
+            logger.error(f"{feed_customizing.__name__}():{convert_destination_path.__name__}(): ошибка получения field_model_fields по destianations_path_name: '{destianations_path_name}', custom_model_field_name: {custom_model_field_name}, destinations_path: [{', '.join(destinations_path)}]")
+            return None
+        # получаем converted_destianations_path и field_model
+        if (converted_destianations_path_name_and_field_model:=get_converted_destianations_path_name_and_field_model(destianations_path_name, field_model_fields, custom_model_field_name)) == None:
+            logger.error(f"{feed_customizing.__name__}():{convert_destination_path.__name__}(): ошибка конвертации destianations_path_name: '{destianations_path_name}', custom_model_field_name: {custom_model_field_name}, destinations_path: [{', '.join(destinations_path)}]")
+            return None
+        field_model_name = destianations_path_name
+        converted_destianations_path_name, field_model = converted_destianations_path_name_and_field_model
+        res_path.append(converted_destianations_path_name)
+        
+        
+    return res_path
+
+
+def get_dict_fields_from_field_model(field_model_name: str, 
+                                        field_model: Dict) -> Union[Dict, None]:
+    """поучает модель поля и выдаёт поля словаря поля,
+    поле должно быть типа dict или list типа  dict, в противном случае None
+    """
+    logger.debug(f"-----> {get_dict_fields_from_field_model.__name__}(): field_model_name: {field_model_name}")
+    if (model_type:=get_model_type_none_if_error(field_model, field_model_name, [])) == None:
+        # ошибка типа модели поля
+        logger.error(f"{get_dict_fields_from_field_model.__name__}(): ошибка типа модели поля '{field_model_name}'")
+        return None
+    if model_type in SIMPLE_TYPES_LIST:
+        # ошибка типа модели поля
+        logger.error(f"{get_dict_fields_from_field_model.__name__}(): ошибка - модель поля '{field_model_name}' простого типа: {model_type}")
+        return None
+    if not (model_type == 'dict' or model_type == 'list'):
+        # не поддерживаемый тип модели
+        logger.error(f"{get_dict_fields_from_field_model.__name__}(): не поддерживаемый тип модели '{model_type}', модель поля '{field_model_name}'")
+        return None    
+    if model_type == 'dict':
+        dict_path = ['types', 'dict', 'fields']
+        try:
+            dict_fields = get_value_from_dict_based_on_path_except_if_absent(field_model, dict_path)
+        except:
+            # ошибка получения данных из словаря
+            logger.error(f"{get_dict_fields_from_field_model.__name__}(): ошибка получения dict_fields из field_model по пути: {', '.join(dict_path)}, модель поля '{field_model_name}'")
+            return None
+        return dict_fields
+    if model_type == 'list':
+        #  проверям тип листа
+        if (list_model_type:=get_list_model_list_item_type_none_if_error(field_model, field_model_name, [])) == None:
+            # ошибка типа модели поля
+            logger.error(f"{get_dict_fields_from_field_model.__name__}(): ошибка получения пипа list модели поля '{field_model_name}'")
+            return None
+        if list_model_type in SIMPLE_TYPES_LIST:
+            # ошибка типа модели поля
+            logger.error(f"{get_dict_fields_from_field_model.__name__}(): ошибка - list_model_type '{field_model_name}' простого типа: {list_model_type}")
+            return None
+        if list_model_type == 'dict':
+            dict_path = ['types', 'list', 'types', 'dict', 'fields']
+            try:
+                dict_fields = get_value_from_dict_based_on_path_except_if_absent(field_model, dict_path)
+                # dict_fields = field_model['types']['list'][] 'dict', 'fields']
+            except:
+                # ошибка получения данных из словаря
+                logger.error(f"{get_dict_fields_from_field_model.__name__}(): ошибка получения dict_fields из list field_model по пути: {', '.join(dict_path)}, модель поля '{field_model_name}'")
+                return None
+            return dict_fields
+        # не поддерживаемый тип листа
+        logger.error(f"{get_dict_fields_from_field_model.__name__}(): не поддерживаемый тип '{list_model_type}', модель поля '{field_model_name}'")
+        return None
+
+
+def get_converted_destianations_path_name_and_field_model(destianations_path_name:str, 
+                                                            field_model_fields: Dict, 
+                                                            custom_model_field_name: str
+                                                            ) -> Union[Tuple[str, Dict], None]:
+    """получает dicstiantion_field_name field_model_fields и возвращает
+    тупле: converted_destianations_path_name и field_model этого пути или None 
+    в случае ошибки"""
+    
+    # получаем field_model
+    if not (field_model:= field_model_fields.get(destianations_path_name, None)):
+        # нет такого поля в модели, пишем лог, возвращаем None
+        logger.error(f"{get_converted_destianations_path_name_and_field_model.__name__}(): поле с именем:'{destianations_path_name}' отсутствует в модели, custom_model_field_name: {custom_model_field_name}")
+        return None
+    # получаем конвертед converted_destianations_path_name
+    converted_destianations_path_name = _get_field_to_feeded_name(field_model, destianations_path_name)
+    return (converted_destianations_path_name, field_model)
+
+
+
 
     # TODO: доделать конвертацию  destinations_paths
 def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item: Dict):
@@ -106,8 +222,8 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
     
     
         
-    def process_dict_customizing(model_field_name: str, 
-                                  model_field_model: Dict, 
+    def process_dict_customizing(custom_model_field_name: str, 
+                                  custom_model_field_model: Dict, 
                                   value_scrap_type: Dict, 
                                   search_form_v3: Dict, 
                                   raw_feed_item: Dict,
@@ -118,7 +234,7 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
         
         # сразу получаем destination  dict куда будет добавляться 
         # custom значение
-        if (destinations_list:=_get_destinations(model_field_name, model_field_model, parsed_feed_item)) == None:
+        if (destinations_list:=_get_destinations(custom_model_field_name, custom_model_field_model, parsed_feed_item, search_form_v3)) == None:
             # ошибка получения destinations
             # логи прописаны в _get_destination(), выходим
             return
@@ -126,28 +242,28 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
         if (dict_path:= value_scrap_type.get('dict_path', None).copy()) == None:
             # dict_path не определён
             # пишем лог, выходим 
-            logger.error(f'process_dict_customizing(): dict_path не определён, имя поля модели: {model_field_name}')
+            logger.error(f'process_dict_customizing(): dict_path не определён, имя поля модели: {custom_model_field_name}')
             return
         
         # проверяем, что dict_path типа "list"
         if not isinstance(dict_path, list):
             # dict_path не правильного типа
             # пишем лог, выходим 
-            logger.error(f'process_dict_customizing(): dict_path не правильного типа: {type(dict_path).__name__}, должен быть "list", имя поля модели: {model_field_name}')
+            logger.error(f'process_dict_customizing(): dict_path не правильного типа: {type(dict_path).__name__}, должен быть "list", имя поля модели: {custom_model_field_name}')
             return
         
         # получаем dect_key_path
         if (dict_key_path:=value_scrap_type.get('dict_key_path', None)) == None:
             # dict_key_path не определён
             # пишем лог, выходим 
-            logger.error(f'process_dict_customizing(): dict_key_path не определён, имя поля модели: {model_field_name}')
+            logger.error(f'process_dict_customizing(): dict_key_path не определён, имя поля модели: {custom_model_field_name}')
             return
         
         # проверяем, что dict_key_path типа "list"
         if not isinstance(dict_key_path, list):
             # dict_key_path не правильного типа
             # пишем лог, выходим 
-            logger.error(f'process_dict_customizing(): dict_key_path не правильного типа: {type(dict_path).__name__}, должен быть "list", имя поля модели: {model_field_name}')
+            logger.error(f'process_dict_customizing(): dict_key_path не правильного типа: {type(dict_path).__name__}, должен быть "list", имя поля модели: {custom_model_field_name}')
             return
         
         # # объединяеяем dict_path и dict_key_path
@@ -159,14 +275,14 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
             # ошибка получения занчения из dict
             # считаем, что запрашиваемый элемент не существует в raw_feed
             # пишем лог, присваиваем dict_key дефолт значение модеи 
-            logger.info(f'process_dict_customizing(): path: [{", ".join(dict_key_path)}] не существует в raw_feed_item, имя поля модели: {model_field_name}')
-            dict_key = get_model_default_value_for_model_type(model_field_model, model_field_name, [])
+            logger.info(f'process_dict_customizing(): path: [{", ".join(dict_key_path)}] не существует в raw_feed_item, имя поля модели: {custom_model_field_name}')
+            dict_key = get_model_default_value_for_model_type(custom_model_field_model, custom_model_field_name, [])
         
         # проверяем тип dict_key
         if not isinstance(dict_key, str):
             # ошибка типа dict_key
             # пишем лог, выходим
-            logger.error(f'process_dict_customizing(): ошибка типа dict_key: {type(dict_key).__name__}, должен быть "str", имя поля модели: {model_field_name}')
+            logger.error(f'process_dict_customizing(): ошибка типа dict_key: {type(dict_key).__name__}, должен быть "str", имя поля модели: {custom_model_field_name}')
             return
         # объединяем dict_path dict_key
         dict_path.extend(['available_values', 'values', dict_key, 'name'])
@@ -177,75 +293,48 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
         except:
             # ошибка получения занчения из dict
             # пишем лог, выходим
-            logger.error(f'process_dict_customizing(): ошибка получения занчения из словаря, dict_path: [{", ".join(dict_path)}], имя поля модели: {model_field_name}')
+            logger.error(f'process_dict_customizing(): ошибка получения занчения из словаря, dict_path: [{", ".join(dict_path)}], имя поля модели: {custom_model_field_name}')
             return
         # пгулчаем 
-        custom_name = _get_field_to_feeded_name(model_field_model, model_field_name)
+        custom_name = _get_field_to_feeded_name(custom_model_field_model, custom_model_field_name)
         # пишем в destination custom значение 
         for destination in destinations_list:
             destination[custom_name]  = dict_value
         # return parsed_feed_item
     
-    def _check_field_dict_or_list_dict(field_name: str, field_model: Dict) -> Union[None, Literal['list', 'dict']]:
+    def _check_field_dict_or_list_dict_with_return_type(dicstiantion_field_name: str, 
+                                                        field_model_fields: Dict, 
+                                                        custom_model_field_name: str
+                                                        ) -> Union[None, Literal['list', 'dict']]:
         """проверяет, что поле является dict или list dict, None если False,
         'list' или 'dict' если True 
         """
-        if (model_type:=get_model_type_none_if_error(field_model, field_name, [])) == None:
+        if (model_type:=get_model_type_none_if_error(field_model_fields, dicstiantion_field_name, [])) == None:
             # ошибка типа модели поля
-            logger.error(f"{_check_field_dict_or_list_dict.__name__}():{_convert_destination_path.__name__}(): ошибка типа модели поля '{field_name}'")
+            logger.error(f"{_check_field_dict_or_list_dict_with_return_type.__name__}():{convert_destination_path.__name__}(): ошибка типа модели поля '{dicstiantion_field_name}'")
             return None
         if model_type != 'dict':
             if model_type == 'list':
-                if (model_type:=get_list_model_list_item_type_none_if_error(field_model, field_name, [])) == None:
+                if (model_type:=get_list_model_list_item_type_none_if_error(field_model_fields, dicstiantion_field_name, [])) == None:
                     # ошибка типа модели поля
-                    logger.error(f"{feed_customizing.__name__}():{_convert_destination_path.__name__}(): ошибка типа лист модели поля '{field_name}'")
+                    logger.error(f"{feed_customizing.__name__}():{convert_destination_path.__name__}(): ошибка типа лист модели поля '{dicstiantion_field_name}'")
                     return None
                 if model_type != 'dict':
                     # ошибка типа модели поля
-                    logger.error(f"{feed_customizing.__name__}():{_convert_destination_path.__name__}(): ошибка типа лист модели поля '{field_name}'")
+                    logger.error(f"{feed_customizing.__name__}():{convert_destination_path.__name__}(): ошибка типа лист модели поля '{dicstiantion_field_name}'")
                     return None
                 return 'list'
             # ошибка типа модели поля
-            logger.error(f"{feed_customizing.__name__}():{_convert_destination_path.__name__}(): ошибка типа лист модели поля '{field_name}'")
+            logger.error(f"{feed_customizing.__name__}():{convert_destination_path.__name__}(): ошибка типа лист модели поля '{dicstiantion_field_name}'")
             return None
         return 'dict'
 
-           
+          
     
-    def _get_dict_fields_from_field_model(field_name: str, field_model: Dict):
-        """поучает модель поля и её тип dict или list, выдаёт поля словаря поля,
-        поле должно быть типа dict или list типа  dict, в противном случае None
-        """
-        if not (field_type:=_check_field_dict_or_list_dict(field_name, field_model)):
-            logger.error(f"{feed_customizing.__name__}():{_get_dict_fields_from_field_model.__name__}(): ошибка типа лист модели поля '{field_name}'")
-            return None
-        if field_type == 'dict':
-            pass
-        if field_type == 'list':
-            pass
-            
-    
-    def _convert_destination_path(model_field_name: str, destinations_path: List[str], search_form_v3: Dict) -> Union[List['str'], None]: 
-        """преобразует destinations_path в ключах модели в destinations_path в ключах parsed_feed_item"""
-        res_path = []
-        field_model_fields = get_feed_model_from_search_file(search_form_v3)
-        for field_name in destinations_path:
-            # проверяем наличие поля в модели
-            if not (field_type:=_check_field_dict_or_list_dict(field_name, field_model)):
-                logger.error(f"{feed_customizing.__name__}():{_convert_destination_path.__name__}(): ошибка типа лист модели поля '{field_name}'")
-                return None
-            
-            
-            field_model_fields = _get_dict_fields_from_field_model(field_name, field_model)
-            name_for_path = _get_field_to_feeded_name(field_model_fields, field_name)
-            res_path.append(name_for_path)
-        return res_path
-
-
  
-    def _get_destinations(model_field_name: str, model_field_model: Dict, parsed_feed_item: Dict, search_form_v3: Dict) -> Union[List[Dict],None]:
-
-        if (destinations_paths:=model_field_model['field_type'].get('destinations_paths', None)) == None:
+    def _get_destinations(model_field_name: str, custom_model_field_model: Dict, parsed_feed_item: Dict, search_form_v3: Dict) -> Union[List[Dict],None]:
+        logger.debug(f"-----> {_get_destinations.__name__}(): model_field_name: {model_field_name}")
+        if (destinations_paths:=custom_model_field_model['field_type'].get('destinations_paths', None)) == None:
             # destinations_paths отсутствует - ошибка
             # пишем лог, выходим
             logger.error(f'_get_destinations(): "destinations_paths" отсутствует, имя поля модели: {model_field_name}')
@@ -254,7 +343,7 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
         if not isinstance(destinations_paths, list):
             # тип не правильный
             # пишем error log и выходим
-            logger.error(f'_get_destinations(): не правильный тип destinations_paths: {type(destinations_paths).__name__}, должен быть "list", имя поля модели: {model_field_name}')
+            logger.error(f'{_get_destinations.__name__}: не правильный тип destinations_paths: {type(destinations_paths).__name__}, должен быть "list", имя поля модели: {model_field_name}')
             return None
         # TODO: переделать на get_value_from_dict_based_on_path_create_if_absent() 
         # получаем список destination
@@ -263,28 +352,33 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
             if not isinstance(destination_path, list):
                 # тип не правильный
                 # пишем error log и пропускаем
-                logger.error(f'_get_destinations(): не правильный тип destination_path: {type(destination_path).__name__}, должен быть "list", имя поля модели: {model_field_name}')
+                logger.error(f'{_get_destinations.__name__}: не правильный тип destination_path: {type(destination_path).__name__}, должен быть "list", имя поля модели: {model_field_name}')
                 continue
             # конвертируем destination_path по модели в converted_destination_path по parsed_feed_item
-            if (convert_destination_path:=_convert_destination_path(model_field_name, destination_path, search_form_v3)) == None:
+            if (converted_destination_path:=convert_destination_path(model_field_name, destination_path, search_form_v3)) == None:
                 # ошибка конвертации destination_path
                 # пишем error log и пропускаем
                 logger.error(f'{_get_destinations.__name__}(): ошибка конвертации destination_path, имя поля модели: {model_field_name}')
                 continue
-            try:
-                destination = get_value_from_dict_based_on_path_except_if_absent(parsed_feed_item, destination_path)
-            except:
+            logger.debug(f"{_get_destinations.__name__}(): for destination_path in destinations_paths: destination_path: {destination_path}, converted_destination_path: {converted_destination_path}, model_field_name: {model_field_name}")
+            
+            if not (child_destination_list:= get_values_from_dict_based_on_path_empty_list_if_absent(parsed_feed_item, converted_destination_path)):
                 # ошибка при получении destination из  parsed_feed_item
                 # по destination_path, пишем лог, пропускаем
-                logger.error(f'_get_destinations(): ошибка при получении destination из parsed_feed_item по destinations_paths: [{", ".join(destination_path)}], имя поля модели: {model_field_name}')
+                logger.error(f'_get_destinations(): ошибка при получении destination_list из parsed_feed_item по destinations_paths: [{", ".join(destination_path)}], имя поля модели: {model_field_name}')
                 continue
+            logger.debug(f"{_get_destinations.__name__}(): for destination_path in destinations_paths: child_destination_list: {child_destination_list}, model_field_name: {model_field_name}")
+            
             # проверяем тип destination - должен быть dict
-            if not isinstance(destination, dict):
-                #  не правильный тип destination
-                # пишем лог, пропускаем
-                logger.error(f'_get_destinations(): ошибка типа destination: {type(destination).__name__}, должен быть "dict", destinations_paths: [{", ".join(destination_path)}], имя поля модели: {model_field_name}')
-                continue
-            destination_list.append(destination)
+            checked_destination_list = []
+            for dest in child_destination_list:
+                if not isinstance(dest, dict):
+                    #  не правильный тип destination
+                    # пишем лог, пропускаем
+                    logger.error(f'_get_destinations(): ошибка типа destination: {type(dest).__name__}, должен быть "dict", destinations_paths: [{", ".join(destination_path)}], имя поля модели: {model_field_name}')
+                    continue
+                checked_destination_list.append(dest)
+            destination_list.extend(checked_destination_list)
             # проверяем что destination_list не пустой
         if not destination_list:
             # destination_list пустой - ошибка
@@ -294,8 +388,8 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
         return destination_list
         
     
-    def process_layout_formatting_customizing(model_field_name: str, 
-                                            model_field_model: Dict,
+    def process_layout_formatting_customizing(custom_model_field_name: str, 
+                                            custom_model_field_model: Dict,
                                             value_scrap_type: Dict, 
                                             search_form_v3: Dict, 
                                             raw_feed_item: Dict,
@@ -386,13 +480,13 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
         
         # сразу получаем destination  dict куда будет добавляться 
         # custom значение
-        if (destinations_list:=_get_destinations(model_field_name, model_field_model, parsed_feed_item)) == None:
+        if (destinations_list:=_get_destinations(custom_model_field_name, custom_model_field_model, parsed_feed_item, search_form_v3)) == None:
             # ошибка получения destinations
             # логи прописаны в _get_destinations(), выходим
             return
         # получаем layout, если в роцессе получение возникли ошибки 
         # то вернётся None
-        if (layout:=_get_layout(model_field_name, value_scrap_type, search_form_v3)) == None:
+        if (layout:=_get_layout(custom_model_field_name, value_scrap_type, search_form_v3)) == None:
             # None, ошибка получения layout
             # логи прописаны в  _get_layout()
             # выходим, ничего не делая
@@ -401,16 +495,16 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
         # мы всегда получаем экземпляр layout_format_items dict
         # даже если в процессе получения  format_items произошли ошибки
         # поэтому проверку на None не делаем 
-        layout_format_items = _get_layout_format_items(model_field_name, value_scrap_type, search_form_v3, raw_feed_item)
+        layout_format_items = _get_layout_format_items(custom_model_field_name, value_scrap_type, search_form_v3, raw_feed_item)
         formated_layout = layout.format_map(layout_format_items)
-        custom_name = _get_field_to_feeded_name(model_field_model, model_field_name)
+        custom_name = _get_field_to_feeded_name(custom_model_field_model, custom_model_field_name)
         # пишем в destination custom значение 
         for destination in destinations_list:
             destination[custom_name] = formated_layout
         # return parsed_feed_item
     
-    def process_default_value_customizing(model_field_name: str, 
-                                        model_field_model: Dict,
+    def process_default_value_customizing(custom_model_field_name: str, 
+                                        custom_model_field_model: Dict,
                                         value_scrap_type: Dict, 
                                         search_form_v3: Dict, 
                                         raw_feed_item: Dict,
@@ -422,13 +516,13 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
 
         # сразу получаем destination  dict куда будет добавляться 
         # custom значение
-        if (destinations_list:=_get_destinations(model_field_name, model_field_model, parsed_feed_item)) == None:
+        if (destinations_list:=_get_destinations(custom_model_field_name, custom_model_field_model, parsed_feed_item, search_form_v3)) == None:
             # ошибка получения destinations
             # логи прописаны в _get_destination(), выходим
             return
         # получаем layout, если в роцессе получение возникли ошибки 
         # то вернётся None
-        if (default_value:= get_model_default_value_for_model_type(model_field_model, model_field_name, [])) == None:
+        if (default_value:= get_model_default_value_for_model_type(custom_model_field_model, custom_model_field_name, [])) == None:
             # None, ошибка получения default_value
             # пишем логи
             # выходим, ничего не делая
@@ -436,7 +530,7 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
             return
         # default_value есть
         # получаем custom_name
-        custom_name = _get_field_to_feeded_name(model_field_model, model_field_name)
+        custom_name = _get_field_to_feeded_name(custom_model_field_model, custom_model_field_name)
         # пишем в destination custom значение 
         for destination in destinations_list:
             destination[custom_name] = default_value
@@ -479,8 +573,8 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
             
         
         
-    def process_direct_value_customizing(model_field_name: str, 
-                                        model_field_model: Dict,
+    def process_direct_value_customizing(custom_model_field_name: str, 
+                                        custom_model_field_model: Dict,
                                         value_scrap_type: Dict, 
                                         search_form_v3: Dict, 
                                         raw_feed_item: Dict,
@@ -490,14 +584,14 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
         """
         # сразу получаем destination  dict куда будет добавляться 
         # custom значение
-        if (destinations_list:=_get_destinations(model_field_name, model_field_model, parsed_feed_item)) == None:
+        if (destinations_list:=_get_destinations(custom_model_field_name, custom_model_field_model, parsed_feed_item, search_form_v3)) == None:
             # ошибка получения destinations
             # логи прописаны в _get_destination(), выходим
             return
         # получаем т
         # получаем layout, если в роцессе получение возникли ошибки 
         # то вернётся None
-        if (direct_value:= _get_direct_value(model_field_name, model_field_model, value_scrap_type, search_form_v3, raw_feed_item, parsed_feed_item )) == None:
+        if (direct_value:= _get_direct_value(custom_model_field_name, custom_model_field_model, value_scrap_type, search_form_v3, raw_feed_item, parsed_feed_item )) == None:
             # None, ошибка получения direct_value
             # пишем логи
             # выходим, ничего не делая
@@ -505,7 +599,7 @@ def feed_customizing(search_form_v3: Dict, raw_feed_item: Dict, parsed_feed_item
             return
         # direct_value есть
         # получаем custom_name
-        custom_name = _get_field_to_feeded_name(model_field_model, model_field_name)
+        custom_name = _get_field_to_feeded_name(custom_model_field_model, custom_model_field_name)
         # пишем в destination custom значение 
         for destination in destinations_list:
             destination[custom_name] = direct_value
@@ -558,15 +652,50 @@ def _get_field_to_feeded_name(field_model: Dict, field_name: str) -> str:
     # return field_name
     return field_model['human_readable_name'] if field_model['feed_human_readable_name'] else  field_name
 
+
+def get_values_from_dict_based_on_path_empty_list_if_absent(target_dict:Dict, path: List[str]) -> List[Any]:
+    """получает dict и путь до требуемого значения - возвращает все значеня по
+    по указанному пути, т.е. ситуация если путь находистся в листе, если указанный путь не 
+    существует возвращает пустой лист
+    """
+    
+    rez_list =[]
+    target: Dict = target_dict
+    if isinstance(target, list):
+        for list_item in target:
+            rez_list.extend(get_values_from_dict_based_on_path_empty_list_if_absent(list_item, path))
+        return rez_list
+    for item in path:
+        try:
+            res = target[item]
+        except:
+            return []
+        if isinstance(res, list):
+            path_tail = path[1:]
+            for list_target_item in res:
+                rez_list.extend(get_values_from_dict_based_on_path_empty_list_if_absent(list_target_item, path_tail))
+            return rez_list
+        else:
+            target = res
+    rez_list.append(target)
+            
+    return rez_list
+
+
+
+
 def get_value_from_dict_based_on_path_except_if_absent(target_dict:Dict, path: List[str]) -> Any:
     """получает dict и путь до требуемого значения - возвращает значение из
-    по указанному пути если указанный путь не существует выбрасвыет исключение,
+    по указанному пути, если путь находистся в листе возвращает первое соответствущее значение
+    если указанный путь не существует выбрасвыет исключение,
     которое должно обрабатываться в вызывающей функции
     """
     target: Dict = target_dict
     # кидает исключение, обрабатывать вызывающей функцией
     for item in path:
         target = target[item]
+        if isinstance(target, list):
+            target = target[0]
     return target
 
 # TODO: доработать
@@ -1495,7 +1624,7 @@ def test_model_parsing_v_1_1():
 
 
     # write_dict_or_list_to_json_file('feed/05.06.24_20-05-18.items_parsed_v4.json', res_list)
-    write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
+    write_dict_or_list_to_json_file('feed/parsed_content_14.json', res_list)
 
 def test_model_parsing_v_2_1():
         
@@ -1523,18 +1652,26 @@ def test_model_parsing_v_2():
     search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
     # search_form_dict = load_dict_or_list_from_json_file('spiders/test_model.json')
     
-    raw_data_dict = load_dict_or_list_from_json_file('feed/raw_test_item.json')
+    raw_data_dict = load_dict_or_list_from_json_file('feed/raw_feed_item1.json')
 
     # print(raw_data_dict)
 
     parsed_content =  parsing_raw_data_relative_to_data_model_v2_var2(search_form_dict, raw_data_dict)
     # write_dict_or_list_to_json_file('feed/parsed_content_3.json', parsed_content)
     feed_customizing(search_form_dict, raw_data_dict, parsed_content)
-    write_dict_or_list_to_json_file('feed/parsed_content_4_custom.json', parsed_content)
+    write_dict_or_list_to_json_file('feed/parsed_content_5_custom.json', parsed_content)
+
+
+def get_values_from_dict_based_on_path_empty_list_if_absent_test():
+    test_data = load_dict_or_list_from_json_file('feed/05.06.24_20-05-18.items.json')
+    path = ['characteristics', 'unit', 'symbol']
+    res_list = get_values_from_dict_based_on_path_empty_list_if_absent(test_data, path)
+    write_dict_or_list_to_json_file('get_values_from_dict1.json', res_list)
 
 if __name__ == '__main__':
-    logging_configure(logger, logging.WARNING)
+    logging_configure(logger, logging.DEBUG)
     test_model_parsing_v_2()
+    # get_values_from_dict_based_on_path_empty_list_if_absent_test()
     # test_model_parsing_v_1_1()
     # test_model_parsing_v_1()
     # test_get_model()

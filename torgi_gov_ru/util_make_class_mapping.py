@@ -9,17 +9,20 @@
 # from tkinter import N
 # from turtle import st
 # from types import new_class
+from distutils.sysconfig import customize_compiler
 from typing import Iterable, Dict, Generator, Literal, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 # from unittest.mock import DEFAULT
 
 # import scrapy
 # from importlib import simple
+from torgi_gov_ru.util_model import get_model_type
 from util import logging_configure, load_dict_or_list_from_json_file, write_dict_or_list_to_json_file
 from util import get_data_generator_from_dict_iterable, type_str
 
 # from util import SIMPLE_TYPES_LIST, CLASS_TYPES_LIST
 from util_parsing_raw_data import get_model_type_none_if_error, get_list_model_list_item_type_none_if_error  
-from util_parsing_raw_data import SIMPLE_TYPES_LIST, _get_field_to_feeded_name, CLASS_TYPES_LIST
+from util_parsing_raw_data import wrapp_search_form_v3_feed_in_field_list_dict_model, SIMPLE_TYPES_LIST, _get_field_to_feeded_name, CLASS_TYPES_LIST
+from util_parsing_raw_data import _get_field_to_feeded_name, convert_destination_path
 from util_get_model import get_field_model
 
 
@@ -31,51 +34,99 @@ logger = logging.getLogger(__name__)
 
 
 
-
-
-def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
+def customizing_class_mapping(search_form_v3: Dict, class_mappping: Dict, root_class_name: str = 'root') -> Dict:
+    custom_model_field: Dict = search_form_v3['custom_feed_model']
+    # 
     
-    
-    def get_class_field_layout():
-        field_layout = {
-            # human readable name из модели поля
-            'hr_name': '',
-            # raw name из dict модели 
-            'r_name': '',
-            'type': '',
-        }
-        return field_layout
-
-    
-    def get_filed_class_field_layout(field_model: Dict, field_name: str, parrent_class_path: List, field_type: str) -> Union[Dict, None]:
-        """отдаёт заполненный макет поля класса"""
+    def get_mapping_class_names(custom_model_field_name: str, custom_field_model: Dict, search_form_v3: Dict, root_class_name: str) -> Union[List[str], None]:
+        """получает custom_field_model и search_form_v3 - возвращиет mapping_class_names лист
+        вычисленные на основании destinations_paths, преобразуя при необходимости имена полей
+        в человеко читаемые """
         
-        filed_layout = get_class_field_layout()        
-        filed_layout['hr_name'] = field_model['human_readable_name']
-        filed_layout['r_name'] = field_name
-        filed_layout['type'] = field_type
-        
-        # class_name = get_class_name(feed_model, field_model, field_name, parrent_path,)
-        return filed_layout
+        mappin_class_name_list = []
+        try:
+            destinations_paths: List[List[str]] = custom_field_model['field_type']['destinations_paths']
+        except:
+            # ошибка получения destinations_paths, пишем лог, возвращаем None
+            logger.error(f"{get_mapping_class_names.__name__}(): ошибка получения destinations_paths, custom_model_field_nameЖ {custom_model_field_name}")
+            return None
+        for destination_path in destinations_paths:
+            if (converted_destination_path:=convert_destination_path(custom_model_field_name, destination_path, search_form_v3)) == None:
+                # ошибка конвертации destination_path
+                logger.error(f"{get_mapping_class_names.__name__}(): ошибка конвертации destination_path: '[{', '.join(destination_path)}]', custom_model_field_name: {custom_model_field_name}")
+                continue
+            
+            if not convert_destination_path:
+                mappin_class_name_list.append(root_class_name)
+            mappin_class_name_list.append(root_class_name + '_' + '_'.join(converted_destination_path))
+        if not mappin_class_name_list:
+            return None
+        return mappin_class_name_list
+    # TODO: 23.06 остановился здась
+    for custom_model_field_name, custom_field_model in custom_model_field.items():
+        if custom_field_model['feed']:
+            if not (mappinng_class_names_list:= get_mapping_class_names(custom_model_field_name, custom_field_model, search_form_v3, root_class_name)):
+                # ошибка при получении списка class_name
+                logger.error(f"{customizing_class_mapping.__name__}():  ошибка при получении списка class_name, иья поля кустом модели: {custom_model_field_name}")
+                continue
+            
+            mappinng_field_name = _get_field_to_feeded_name(custom_model_field, custom_model_field_name)
+            if  custom_model_field_tupe:=get_model_type()
+            mapping_field_model = 
+            , mappinng_field_name, mapping_field_model = get_data_for_class_mapping(custom_model_field_name, cutom_field_model) 
 
+
+def get_class_field_layout():
+    field_layout = {
+        # human readable name из модели поля
+        'hr_name': '',
+        # raw name из dict модели 
+        'r_name': '',
+        'type': '',
+    }
+    return field_layout
+
+
+def get_class_layout():
+    class_layout = {
+        'item_class_implementation': "",
+        # имя вычисляемое get_class_name(), являющеесе ключём класса 
+        'class_name': '',
+        # human readable name из модели поля
+        'hr_name': '',
+        # raw name из dict модели
+        'r_name': '',
+        # на всякий случай, в будущем может понадобиться
+        'random_name': '',
+        'type': '',
+        'path': [],
+        'fields': {},
+        'foreign_key_fields': []
+    }
+    return class_layout
+
+
+
+def get_filed_class_field_layout(field_model: Dict, field_name: str, parrent_class_path: List, field_type: str) -> Union[Dict, None]:
+    """отдаёт заполненный макет поля класса"""
     
-    def get_class_layout():
-        class_layout = {
-            'item_class_implementation': "",
-            # имя вычисляемое get_class_name(), являющеесе ключём класса 
-            'class_name': '',
-            # human readable name из модели поля
-            'hr_name': '',
-            # raw name из dict модели
-            'r_name': '',
-            # на всякий случай, в будущем может понадобиться
-            'random_name': '',
-            'type': '',
-            'path': [],
-            'fields': {},
-            'foreign_key_fields': []
-        }
-        return class_layout
+    filed_layout = get_class_field_layout()        
+    filed_layout['hr_name'] = field_model['human_readable_name']
+    filed_layout['r_name'] = field_name
+    filed_layout['type'] = field_type
+    
+    # class_name = get_class_name(feed_model, field_model, field_name, parrent_path,)
+    return filed_layout
+
+
+
+def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root') -> Dict:
+    
+    
+    
+    
+    
+    
     
     # def check_class_type(field_model: Dict, field_name: str, parrent_path: List, class_type: Literal['dict', 'list_dict', 'list_simple']) -> bool:
     #     """осуществляем проверку переданного в class_type литерала
@@ -213,6 +264,7 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
         field_dict_model_for_list['types'] = dict_types
         return field_dict_model_for_list
     
+    
     def make_class(field_dict_type_model: Dict, model_field_name: str, class_mapping: Dict, parrent_class_path: List[str], class_type: Literal['dict', 'list_dict', 'list_simple']):
         """создаёт сласс типа 'dict', добавляет его в class_mapping dict
         root_feed_fields: Dict = search_form_v3['feed']['types']['dict']['fields']
@@ -312,20 +364,27 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
     class_mappping = {}
     root_feed_fields: Dict = search_form_v3['feed']['types']['dict']['fields']
     custom_feed_fields = search_form_v3['custom_feed_model']['fields']
+    # завернём search_form_v3 feed в list_dict модель поля
+    wrapped_search_form = wrapp_search_form_v3_feed_in_field_list_dict_model(search_form_v3)
+    # преобразуеь list_dict в dict
+    wrapped_search_form_dict_model = get_field_dict_model_for_dict_list_type(wrapped_search_form, 'root')
 
-    root_field_model = get_field_model()
-    # на всякий случай
-    root_field_model['visible'] = True
-    root_field_model['feed'] = True
-    root_field_model['feed_human_readable_name'] = True
-    root_field_model['human_readable_name'] = root_class_name
-    # зададим правильный тип для модели
-    root_field_model['field_types']['types'] = ['dict']
-    # положим 'types' root_field_model 'types' search_form_v3['feed'], 
-    # т.е. dict c root полями
-    root_field_model['types'] = search_form_v3['feed']['types']
-    # запустим получение root dict класса и трансформации class_mappping
-    make_class(root_field_model, root_class_name, class_mappping, [], 'dict') 
+    # root_field_model = get_field_model()
+    # # на всякий случай
+    # root_field_model['visible'] = True
+    # root_field_model['feed'] = True
+    # root_field_model['feed_human_readable_name'] = True
+    # root_field_model['human_readable_name'] = root_class_name
+    # # зададим правильный тип для модели
+    # root_field_model['field_types']['types'] = ['dict']
+    # # положим 'types' root_field_model 'types' search_form_v3['feed'], 
+    # # т.е. dict c root полями
+    # root_field_model['types'] = search_form_v3['feed']['types']
+    # # запустим получение root dict класса и трансформации class_mappping
+    make_class(wrapped_search_form_dict_model, root_class_name, class_mappping, [], 'dict')
+    
+    # произведём корректировку class_mappping с учётом custom модели
+    customizing_class_mapping(search_form_v3, class_mappping)
     
     
     return class_mappping
