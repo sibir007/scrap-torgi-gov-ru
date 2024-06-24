@@ -9,12 +9,12 @@
 # from tkinter import N
 # from turtle import st
 # from types import new_class
-from curses.ascii import SI
-from os import name
-from parser import STType
+# from curses.ascii import SI
+# from os import name
+# from parser import STType
 from typing import Iterable, Dict, Generator, Literal, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 
-from requests import head
+# from requests import head
 # from unittest.mock import DEFAULT
 
 # import scrapy

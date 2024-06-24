@@ -2934,7 +2934,8 @@
                 "fields": {
                     "id": {
                         "item_class_binding": {
-                            "type": "member"
+                            "type": "member",
+                            "foreign_key_field": true
                         },
                         "visible": true,
                         "feed": true,

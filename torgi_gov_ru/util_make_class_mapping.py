@@ -9,13 +9,13 @@
 # from tkinter import N
 # from turtle import st
 # from types import new_class
-from distutils.sysconfig import customize_compiler
+# from distutils.sysconfig import customize_compiler
 from typing import Iterable, Dict, Generator, Literal, NoReturn, Set, Tuple, List, FrozenSet, Union, Any, Callable
 # from unittest.mock import DEFAULT
 
 # import scrapy
 # from importlib import simple
-from torgi_gov_ru.util_model import get_model_type
+# from torgi_gov_ru.util_model import get_model_type
 from util import logging_configure, load_dict_or_list_from_json_file, write_dict_or_list_to_json_file
 from util import get_data_generator_from_dict_iterable, type_str
 
@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 
 
 def customizing_class_mapping(search_form_v3: Dict, class_mappping: Dict, root_class_name: str = 'root') -> Dict:
-    custom_model_field: Dict = search_form_v3['custom_feed_model']
+    custom_model_fields: Dict = search_form_v3['custom_feed_model']['fields']
     # 
     
     def get_mapping_class_names(custom_model_field_name: str, custom_field_model: Dict, search_form_v3: Dict, root_class_name: str) -> Union[List[str], None]:
@@ -56,25 +56,58 @@ def customizing_class_mapping(search_form_v3: Dict, class_mappping: Dict, root_c
                 logger.error(f"{get_mapping_class_names.__name__}(): ошибка конвертации destination_path: '[{', '.join(destination_path)}]', custom_model_field_name: {custom_model_field_name}")
                 continue
             
-            if not convert_destination_path:
+            if not converted_destination_path:
+                logger.debug(f"{get_mapping_class_names.__name__}(): if not convert_destination_path: root_class_name: {root_class_name} ")
                 mappin_class_name_list.append(root_class_name)
+                continue
             mappin_class_name_list.append(root_class_name + '_' + '_'.join(converted_destination_path))
         if not mappin_class_name_list:
             return None
         return mappin_class_name_list
+    
+    # TODO: сделать проверку на коллизию имен
+    def set_custom_field_in_mapping_class(custom_model_field_name: str, 
+                                          mapping_class_name: str, 
+                                          mapping_class: Dict,
+                                          mappinng_field_name: str, 
+                                          mapping_field_model: Dict):
+        """добавляет поле mapping_field_model, на данном этапе проверка на наличие поля с таким
+        именем не делается, но в дальнейшем предполагается"""
+        
+        mapping_class['fields'][mappinng_field_name] = mapping_field_model
+    
     # TODO: 23.06 остановился здась
-    for custom_model_field_name, custom_field_model in custom_model_field.items():
+    for custom_model_field_name, custom_field_model in custom_model_fields.items():
+        logger.debug(f"{customizing_class_mapping.__name__}(): for custom_model_field_name, custom_field_model in custom_model_field.items(): custom_model_field_name: {custom_model_field_name}")
         if custom_field_model['feed']:
             if not (mappinng_class_names_list:= get_mapping_class_names(custom_model_field_name, custom_field_model, search_form_v3, root_class_name)):
                 # ошибка при получении списка class_name
                 logger.error(f"{customizing_class_mapping.__name__}():  ошибка при получении списка class_name, иья поля кустом модели: {custom_model_field_name}")
                 continue
             
-            mappinng_field_name = _get_field_to_feeded_name(custom_model_field, custom_model_field_name)
-            if  custom_model_field_tupe:=get_model_type()
-            mapping_field_model = 
-            , mappinng_field_name, mapping_field_model = get_data_for_class_mapping(custom_model_field_name, cutom_field_model) 
+            mappinng_field_name = _get_field_to_feeded_name(custom_field_model, custom_model_field_name)
+            if not (custom_model_field_type:=get_model_type_none_if_error(custom_field_model, custom_model_field_name, [])):
+                # ошибка получения типа модели
+                logger.error(f"{customizing_class_mapping.__name__}():  ошибка при получении типа модели, имя поля кустом модели: {custom_model_field_name}")
+                continue
+            try:
+                mapping_field_model = get_filed_class_field_layout(custom_field_model, custom_model_field_name, [], custom_model_field_type)
+            except:
+                # ошибка при получунии filed_class_field_layout
+                logger.error(f"{customizing_class_mapping.__name__}(): ошибка при получунии filed_class_field_layout, имя поля кустом модели: {custom_model_field_name}")
+                continue
+            
+            # обновлсение class_mappping
+            for mapping_class_name in mappinng_class_names_list:
+                # получаем соответствующий класс из class_mappping
+                if (mapping_class:=class_mappping.get(mapping_class_name, None)) == None:
+                    # ошибка - имя класса вычисленное через кастомизацию отсутствует в class_mappping
+                    logger.error(f"{customizing_class_mapping.__name__}(): имя класса '{mapping_class_name}' вычисленное через кастомизацию отсутствует в class_mappping, имя поля кустом модели: {custom_model_field_name}")
+                    continue
+                set_custom_field_in_mapping_class(custom_model_field_name, mapping_class_name, mapping_class, mappinng_field_name, mapping_field_model)
+    return class_mappping    
 
+              
 
 def get_class_field_layout():
     field_layout = {
@@ -107,7 +140,7 @@ def get_class_layout():
 
 
 
-def get_filed_class_field_layout(field_model: Dict, field_name: str, parrent_class_path: List, field_type: str) -> Union[Dict, None]:
+def get_filed_class_field_layout(field_model: Dict, field_name: str, parrent_class_path: List, field_type: str) -> Dict:
     """отдаёт заполненный макет поля класса"""
     
     filed_layout = get_class_field_layout()        
@@ -121,10 +154,6 @@ def get_filed_class_field_layout(field_model: Dict, field_name: str, parrent_cla
 
 
 def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root') -> Dict:
-    
-    
-    
-    
     
     
     
@@ -390,9 +419,18 @@ def get_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root') 
     return class_mappping
 
 
+def get_customazed_item_class_mapping(search_form_v3: Dict, root_class_name: str = 'root'):
+    """конвиент метод, объединяет get_item_class_mapping и customizing_class_mapping"""
+    
+    class_mapping = get_item_class_mapping(search_form_v3, root_class_name)
+    customizing_class_mapping(search_form_v3, class_mapping, root_class_name)
+    return class_mapping
+    
+
 def test_class_mapping():
         
-    search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/test_model2.json'))
+    search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/search_form.v3.json'))
+    # search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/test_model2.json'))
     # search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/test_model.json'))
 
     # raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')
@@ -408,9 +446,10 @@ def test_class_mapping():
     #     # feed_customizing(search_form_dict, data, parsed_data,)
     #     res_list.append(parsed_data)
 
-    res = get_item_class_mapping(search_form_dict)
+    res = get_customazed_item_class_mapping(search_form_dict)
+    # res = get_item_class_mapping(search_form_dict)
 
-    write_dict_or_list_to_json_file('class_mapp_2.json', res)
+    write_dict_or_list_to_json_file('class_mapp_custom1.json', res)
     # write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
 
 
