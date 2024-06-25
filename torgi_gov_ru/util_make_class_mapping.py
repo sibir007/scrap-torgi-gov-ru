@@ -429,8 +429,8 @@ def get_customazed_item_class_mapping(search_form_v3: Dict, root_class_name: str
 
 def test_class_mapping():
         
-    search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/search_form.v3.json'))
-    # search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/test_model2.json'))
+    # search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/search_form.v3.json'))
+    search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/test_model2.json'))
     # search_form_dict = typing.cast(Dict, load_dict_or_list_from_json_file('spiders/test_model.json'))
 
     # raw_data_dict_list = load_dict_or_list_from_json_file('feed/06.06.24_08-07-52.items.json')

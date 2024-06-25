@@ -45,7 +45,7 @@ def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class
             logger.debug(f"{make_field_grupping.__name__}(): for field_name, field_value in parsed_data.items(): field_name: {field_name}, class_name: {class_name}, parent_class_path: [{', '.join(parent_class_path)}]")
             # определяем тип данных
             field_value_type = type_str(field_value)
-            if field_value_type in SIMPLE_TYPES_LIST:
+            if field_value_type in SIMPLE_TYPES_LIST or field_value_type == 'NoneType':
                 logger.debug(f"{make_field_grupping.__name__}(): if field_value_type in SIMPLE_TYPES_LIST: field_value_type: {field_value_type}, class_name: {class_name}, parent_class_path: [{', '.join(parent_class_path)}]")
             # добавляем данные в dict
                 simple_field_dict[field_name] = field_value
@@ -56,7 +56,7 @@ def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class
                 continue
             # не поддерживаемый тип данных
             # пишем лог, пропускаем
-            logger.error(f"{make_field_grupping.__name__}(): не поддерживаемый тип данных: {field_value_type}, class_name: {class_name}, parent_class_path: {'.'.join(parent_class_path)}")
+            logger.error(f"{make_field_grupping.__name__}(): не поддерживаемый тип данных: {field_value_type}, field_name: {field_name}, class_name: {class_name}, parent_class_path: {'.'.join(parent_class_path)}")
         return simple_field_dict, class_field_list
 
     def get_foreign_key_fields_dict(class_name: str, parsed_feed_item: Dict,  parent_class_path: List['str'], class_mapping: Dict) -> Dict:
@@ -172,9 +172,13 @@ def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class
     
 
 def convert_parsed_feed_to_class_items_test():
-    parsed_item = load_dict_or_list_from_json_file('custom_raw_feed_item.json')
+    res_list = []
+    parsed_item = load_dict_or_list_from_json_file('feed/parsed_content_5_custom.json')
     for item in convert_parsed_feed_to_class_items("lot", parsed_item, {}):
-        print(item)
+        # print(item)
+        res_list.append(item)
+    write_dict_or_list_to_json_file('item_classes_1.json', res_list)
+    
 
 
 

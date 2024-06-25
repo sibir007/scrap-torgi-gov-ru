@@ -1,32 +1,32 @@
 {
-    "id": "21000026550000000641_1",
-    "noticeNumber": "21000026550000000641",
+    "id": "21000026550000004853_1",
+    "noticeNumber": "21000026550000004853",
     "lotNumber": 1,
-    "lotStatus": "FAILED",
+    "lotStatus": "PUBLISHED",
     "biddType": {
         "code": "178FZ",
         "name": "Продажа (приватизация) государственного и муниципального имущества"
     },
     "biddForm": {
-        "code": "EA",
-        "name": "Электронный аукцион"
+        "code": "PP",
+        "name": "Публичное предложение"
     },
-    "lotName": "Продажа имущества, находящегося в хозяйственном ведении ГУП \"ЦУГИ\", расположенного по адресу: г. Москва, улица Красного Маяка, дом 22А, нежилое помещение Этаж №6, пом VIII м/м №505, площадь 15.3 кв.м. (кадастровый номер 77:05:0007007:2624)",
-    "lotDescription": "Продажа имущества, находящегося в хозяйственном ведении ГУП \"ЦУГИ\", расположенного по адресу: г. Москва, улица Красного Маяка, дом 22А, нежилое помещение Этаж №6, пом VIII м/м №505, площадь 15.3 кв.м. (кадастровый номер 77:05:0007007:2624)",
-    "priceMin": 498152.7,
-    "biddEndTime": "2022-06-24T12:00:00.000+00:00",
+    "lotName": "Продажа посредством публичного предложения нежилого помещения, находящегося в хозяйственном ведении ГУП \"ЦУГИ\", расположенного по адресу:       город Москва, Измайловский проезд, д. 10, корп. 1, площадь 15,3 кв.м, комната №5/81 (кадастровый номер №77:03:0005004:5120)",
+    "lotDescription": "Продажа посредством публичного предложения нежилого помещения, находящегося в хозяйственном ведении ГУП \"ЦУГИ\", расположенного по адресу:       город Москва, Измайловский проезд, д. 10, корп. 1, площадь 15,3 кв.м, комната №5/81 (кадастровый номер №77:03:0005004:5120)",
+    "priceMin": 1527000.0,
+    "biddEndTime": "2024-06-25T12:00:00.000+00:00",
     "lotImages": [
-        "628755372dfad95f5f7f47d0",
-        "62875537b47c29724b84c244",
-        "628755382dfad95f5f7f47d5",
-        "628755382dfad95f5f7f47d9",
-        "628755382dfad95f5f7f47de",
-        "628755382dfad95f5f7f47e2",
-        "628755382dfad95f5f7f47e6",
-        "628755382dfad95f5f7f47ea",
-        "62875539b47c29724b84c249",
-        "62875539b47c29724b84c24e",
-        "628755392dfad95f5f7f47ef"
+        "6409ae0b842ca5039d58f0bb",
+        "6409ae0b2220276b2edff4b1",
+        "6409ae0c2220276b2edff4b7",
+        "6409ae0c2220276b2edff4be",
+        "6409ae0c2220276b2edff4c5",
+        "6409ae0d842ca5039d58f0c2",
+        "6409ae10842ca5039d58f0e8",
+        "6409ae10f30e7b33ee693e3b",
+        "6409ae11c0816834176a98eb",
+        "6409ae11c0816834176a98f9",
+        "6409ae12f30e7b33ee693e41"
     ],
     "characteristics": [
         {
@@ -39,103 +39,87 @@
                 "symbol": "м^2 общ. пл"
             },
             "type": "Decimal",
-            "dict_class": {
-                "key1": "value1",
-                "key2": "value12",
-                "key3": "value12",
-                "key4": "value13",
-                "key5": "value14",
-                "key6": "value14",
-                "key7": "value16"
-            },
-            "list_dict_class": [
-                {
-                    "key1": "value11",
-                    "key2": "value121",
-                    "key3": "value121",
-                    "key4": "value131",
-                    "key5": "value114",
-                    "key6": "value141",
-                    "key7": "value116"
-                },
-                {
-                    "key1": "value21",
-                    "key2": "value122",
-                    "key3": "value122",
-                    "key4": "value123",
-                    "key5": "value142",
-                    "key6": "value142",
-                    "key7": "value162"
-                },
-                {
-                    "key1": "value13",
-                    "key2": "value132",
-                    "key3": "value132",
-                    "key4": "value133",
-                    "key5": "value143",
-                    "key6": "value134",
-                    "key7": "value136"
-                }  
-            ],
-            "list_simple_class": [
+            "test_simple_list_field": [
                 1,
                 2,
                 3,
                 4,
                 5,
                 6
+            ],
+            "test_dict_field": {
+                "key1": "value1",
+                "key2": "value2",
+                "key3": "value3",
+                "key4": "value4",
+                "key5": "value5"
+            },
+            "test_list_dict_field": [
+                {
+                    "key1": "value1",
+                    "key2": "value2",
+                    "key3": "value3",
+                    "key4": "value4",
+                    "key5": "value5"
+                },
+                {
+                    "key1": "value6",
+                    "key2": "value7",
+                    "key3": "value8",
+                    "key4": "value9",
+                    "key5": "value10"
+                },
+                {
+                    "key1": "value11",
+                    "key2": "value12",
+                    "key3": "value13",
+                    "key4": "value14",
+                    "key5": "value15"
+                }   
             ]
         },
         {
-            "characteristicValue": "77:05:0007007:2624",
+            "characteristicValue": "77:03:0005004:5120",
             "name": "Кадастровый номер",
             "code": "cadastralNumberRealty",
             "type": "Text(20)",
-            "dict_class": {
-                "key1": "value14",
-                "key2": "value124",
-                "key3": "value124",
-                "key4": "value135",
-                "key5": "value146",
-                "key6": "value14",
-                "key7": "value16"
+            "test_simple_list_field": [
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+            ],
+            "test_dict_field": {
+                "key1": "value6",
+                "key2": "value7",
+                "key3": "value8",
+                "key4": "value9",
+                "key5": "value10"
             },
-            "list_dict_class": [
+            "test_list_dict_field": [
                 {
-                    "key1": "value11",
-                    "key2": "value121",
-                    "key3": "value121",
-                    "key4": "value131",
-                    "key5": "value114",
-                    "key6": "value141",
-                    "key7": "value116"
+                    "key1": "value16",
+                    "key2": "value17",
+                    "key3": "value18",
+                    "key4": "value19",
+                    "key5": "value20"
                 },
                 {
                     "key1": "value21",
-                    "key2": "value122",
-                    "key3": "value122",
-                    "key4": "value123",
-                    "key5": "value142",
-                    "key6": "value142",
-                    "key7": "value162"
+                    "key2": "value22",
+                    "key3": "value23",
+                    "key4": "value24",
+                    "key5": "value25"
                 },
                 {
-                    "key1": "value13",
-                    "key2": "value132",
-                    "key3": "value132",
-                    "key4": "value133",
-                    "key5": "value143",
-                    "key6": "value134",
-                    "key7": "value136"
-                }  
-            ],
-            "list_simple_class": [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6
+                    "key1": "value26",
+                    "key2": "value27",
+                    "key3": "value28",
+                    "key4": "value29",
+                    "key5": "value30"
+                }   
             ]
         }
     ],
@@ -146,16 +130,16 @@
         "code": "10",
         "name": "Гаражи и машиноместа "
     },
-    "createDate": "2022-05-20T08:45:46.789+00:00",
+    "createDate": "2024-05-23T06:15:42.345+00:00",
     "timeZoneName": "МСК",
     "timezoneOffset": "180",
     "hasAppeals": false,
     "isStopped": false,
     "attributes": [
         {
-            "code": "DA_contractSignPeriod_EA(178)",
+            "code": "DA_contractSignPeriod_PP(178)",
             "fullName": "Срок заключения договора",
-            "value": "согласно п. 12 документации об аукционе",
+            "value": "Согласно п. 12 документации об аукционе",
             "attributeType": "Text(100)",
             "group": {
                 "code": "NL250",
@@ -165,7 +149,7 @@
             "sortOrder": 3
         },
         {
-            "code": "DA_depositTimeAndRules_EA(178)",
+            "code": "DA_depositTimeAndRules_PP(178)",
             "fullName": "Срок и порядок внесения задатка",
             "value": "Задаток должен быть перечислен на счет оператора торговой площадки",
             "attributeType": "Text(500)",
@@ -178,7 +162,11 @@
         }
     ],
     "isAnnulled": false,
-    "noticeFirstVersionPublicationDate": "2022-05-20T11:07:35.469Z",
+    "noticeFirstVersionPublicationDate": "2024-05-23T07:12:07.927Z",
+    "lotVat": {
+        "code": "includedVAT",
+        "name": "С учетом НДС"
+    },
     "npaHintCode": "hint1_178FZ",
     "typeTransaction": "sale"
 }

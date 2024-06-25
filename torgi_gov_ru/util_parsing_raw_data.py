@@ -682,8 +682,6 @@ def get_values_from_dict_based_on_path_empty_list_if_absent(target_dict:Dict, pa
     return rez_list
 
 
-
-
 def get_value_from_dict_based_on_path_except_if_absent(target_dict:Dict, path: List[str]) -> Any:
     """получает dict и путь до требуемого значения - возвращает значение из
     по указанному пути, если путь находистся в листе возвращает первое соответствущее значение
@@ -801,7 +799,6 @@ def get_list_model_list_item_type(field_model: Dict, field_name: str, parent_fie
         return 'NoneType'
     return item_type
 
-
 def get_list_model_list_item_type_none_if_error(field_model: Dict, field_name: str, parent_fields_names):
     """возвращает тип элемента списка,
     для этого тип модели должне быть 'list'
@@ -816,7 +813,6 @@ def get_list_model_list_item_type_none_if_error(field_model: Dict, field_name: s
         logger.error(f'get_list_model_list_item_type: type_for_list не определён, имя поля:  имя поля: {field_name}, паретс: [{", ".join(parent_fields_names)}]') 
         return None
     return item_type
-
 
 def get_model_default_value_for_model_type(field_model:Dict, field_name: str, parent_fields_names: List[str]):
     model_type =  get_model_type(field_model, field_name, parent_fields_names)
@@ -839,7 +835,6 @@ def get_model_default_value(field_model:Dict, field_name: str, parent_fields_nam
         # ошибка dict_belonging
         logger.error(f'get_model_default_value() ошибка, неизвестное значение dict_belonging: {belonging}, может быть: "field" | "list"')
         return None
-        
         
 def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_data: Dict)-> Dict: 
     """принимпет search_form.v3 и прогоняет по ней
@@ -990,8 +985,6 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
         # ошибка приведения, не известное значение model_type 
         logger.error(f'make_simple_type_cast(): ошибка приведения, не известное значение model_type: ({model_type}), имя поля: {field_name}, path: [{", ".join(parent_fields_names)}]')
         return None
-        
-        
      
     def dict_value_conversion_for_simple_type_model_field(dict_value: Dict, field_model: Dict, field_name: str, parent_fields_names: List[str]):
         """конвиет метод для dict valu при присваивании его полю
@@ -1002,7 +995,6 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
         # осуществляем value_scrap_type конвертацию
         # позвращаем полученное значение
         return value_scrap_type_conversion(res_value, field_model, field_name, parent_fields_names)
-                    
         
     def make_dict_type_cast(dict_value: Dict, field_model: Dict, field_name: str, parent_fields_names: List[str], belonging: Literal['field', 'list']):
         """приведение к типу модели словаря являющегос значением поля
@@ -1060,7 +1052,6 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
                 res_str_list.extend(res_list)
                 # res_str_list.extend(join_list_values_for_simple_type()    
         return res_str_list
-    
     
     def parse_list_data(list_data: List, list_model: Dict, field_name: str, parent_field_names: List[str], nesting_level = 0) -> List:
         logger.debug(f"----->{parse_list_data.__name__}(): field_name: {field_name}, parent_field_names: [{', '.join(parent_field_names)}]")
@@ -1158,7 +1149,6 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
 
         return res_list
     
-    
     def simple_type_items_list_type_field_convertion(list_parsed_values: List, field_model: Dict, field_name: str, parent_fields_names: List[str]) -> List:
         """приведение типа и scrap_type_conversion элементов листа простого типа"""
 
@@ -1237,7 +1227,6 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
             logger.error(f'exclusion_dict_with_empty_values(): тип данных "{data_type}", в данной функции может быть только "dict", path: {", ".join(parent_field_names)}')
             default_value_for_model = get_model_default_value_for_list_item(field_model, field_name, parent_field_names)
             return default_value_for_model
-            
                 
     def boolen_type_value_conversion(data_value: Any, field_model: Dict, field_name: str, parent_field_names: List[str]):
         """
@@ -1271,7 +1260,6 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
             logger.error(f'ошибка: {e}, dict_scrap_type_conversion: ошибка получения заначения из словаря по t_path: [{".".join(t_path)}] , field_value path: {".".join(parent_field_names)}') 
             return field_value
         return res_value
-        
     
     def _check_dict_scrap_type(dict_scrap_type: Dict):
         """проверка на корректность типа dict_scrap_type"""
@@ -1365,7 +1353,6 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
             # конвертация не требуется
             res_value = data_value
         return res_value    
-    
             
     def get_field_value_v_2(field_model: Dict, 
                             field_name: str, 
@@ -1391,7 +1378,7 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
         #   3.3. дата типы list 
         
         model_type: str = get_model_type(field_model, field_name, parent_field_names)
-        model_default_value: Union[int, float, bool, str, list, dict] = DEFAULT_VALUES_FOR_TYPES[model_type]()
+        model_default_value: Union[ None, str, list, dict] = DEFAULT_VALUES_FOR_TYPES[model_type]()
         # для этого определяем тип модули
         logger.debug(f"{get_field_value_v_2.__name__}(): model_type: {model_type}")
         
@@ -1549,7 +1536,6 @@ def parsing_raw_data_relative_to_data_model_v2_var2(search_form_v3: Dict, raw_da
             # поля нет в данных
             # присваиваем результату значение по умолчанию для типа
             return model_default_value
-
     
     def parse_dict_data(dict_model: Dict, data: Dict, parent_field_names: List[str] = []) -> Dict:
         logger.debug(f"----->{parse_dict_data.__name__}(): parent_field_names: [{', '.join(parent_field_names)}]")
@@ -1649,10 +1635,10 @@ def test_model_parsing_v_2_1():
     # write_dict_or_list_to_json_file('feed/parsed_content_13.json', res_list)
 
 def test_model_parsing_v_2():
-    search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
-    # search_form_dict = load_dict_or_list_from_json_file('spiders/test_model.json')
+    # search_form_dict = load_dict_or_list_from_json_file('spiders/search_form.v3.json')
+    search_form_dict = load_dict_or_list_from_json_file('spiders/test_model2.json')
     
-    raw_data_dict = load_dict_or_list_from_json_file('feed/raw_feed_item1.json')
+    raw_data_dict = load_dict_or_list_from_json_file('custom_raw_feed_item.json')
 
     # print(raw_data_dict)
 
@@ -1669,7 +1655,7 @@ def get_values_from_dict_based_on_path_empty_list_if_absent_test():
     write_dict_or_list_to_json_file('get_values_from_dict1.json', res_list)
 
 if __name__ == '__main__':
-    logging_configure(logger, logging.DEBUG)
+    logging_configure(logger, logging.WARNING)
     test_model_parsing_v_2()
     # get_values_from_dict_based_on_path_empty_list_if_absent_test()
     # test_model_parsing_v_1_1()
