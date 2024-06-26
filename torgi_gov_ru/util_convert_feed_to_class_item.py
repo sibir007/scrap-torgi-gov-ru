@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 
 
 
-def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class_mapping: Dict):
+def convert_parsed_feed_to_class_items(parsed_feed: Dict, class_mapping: Dict, class_name: str = 'root'):
     
 
     def make_field_grupping(class_name: str, parsed_data: Dict, parent_class_path: List['str']):
@@ -60,14 +60,20 @@ def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class
         return simple_field_dict, class_field_list
 
     def get_foreign_key_fields_dict(class_name: str, parsed_feed_item: Dict,  parent_class_path: List['str'], class_mapping: Dict) -> Dict:
-        return {}
+        
+        foreign_key_fields_dict = {}
+        foreign_key_fields: List = class_mapping[class_name]['foreign_key_fields']
+        for foreign_key in foreign_key_fields:
+            foreign_key_fields_dict[foreign_key] = parsed_feed_item[foreign_key]
+        
+        return foreign_key_fields_dict
     
     def get_item_class_implementation(class_mapping: Dict, class_name: str) -> type:
         class custom_dict(dict):
             def __init__(self, item):
                 item['class_name'] = class_name
                 super().__init__(item)
-        return custom_dict
+        return dict
     
     
     def prepare_new_feed_item_and_call_convert_parsed_feed_item_to_class_item(
@@ -174,7 +180,8 @@ def convert_parsed_feed_to_class_items(class_name: str, parsed_feed: Dict, class
 def convert_parsed_feed_to_class_items_test():
     res_list = []
     parsed_item = load_dict_or_list_from_json_file('feed/parsed_content_5_custom.json')
-    for item in convert_parsed_feed_to_class_items("lot", parsed_item, {}):
+    class_mapping = load_dict_or_list_from_json_file('class_mapp_custom1.json')
+    for item in convert_parsed_feed_to_class_items(parsed_item, class_mapping):
         # print(item)
         res_list.append(item)
     write_dict_or_list_to_json_file('item_classes_1.json', res_list)
