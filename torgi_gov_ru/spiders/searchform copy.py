@@ -12,9 +12,9 @@ from torgi_gov_ru import util
 
 
 class SearchformSpider(scrapy.Spider):
-    name = "searchform"
-    allowed_domains = ["torgi.gov.ru"]
-    search_form_json_file = 'spiders/search_form.v3.json'
+    # name = "searchform"
+    # allowed_domains = ["torgi.gov.ru"]
+    # search_form_json_file = 'spiders/search_form.v3.json'
     # base url for request https://torgi.gov.ru/new/api/public/lotcards/search? 
     # "scheme" + "host" + "filename" from search_form.v3.json
     # request_url_base_str: str
@@ -23,12 +23,22 @@ class SearchformSpider(scrapy.Spider):
     
     # start_urls = ["https://torgi.gov.ru/new/api/public/lotcards/search?dynSubjRF=12&lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&text=Жилой дом&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc"]
 
-    def __init__(self, name: Optional[str] = None, **kwargs: Any):
+    
+    # в стороке запроста необходимо прописать "name" - это будет имя модели, например "search_form_v3"   
+    def __init__(self, name: Optional[str] = None, **kwargs: Dict):
         self.logger.debug(f'kwargs: {kwargs}')
+        # -------------- super init ---------------- 
         if name is not None:
             self.name = name
         elif not getattr(self, "name", None):
             raise ValueError(f"{type(self).__name__} must have a name")
+        # ------------------------------------------- 
+        # загрузим модель по "name"
+        self.model = util.load_model(self.name)
+        # сконфигурируем модель в соответствии с  **kwargs
+        util.configure_model(self.model, kwargs)
+        
+        
         
         self.search_form_dict: Dict = typing.cast(Dict, util.load_dict_or_list_from_json_file(self.search_form_json_file))
         self.feed_model: Dict = self.search_form_dict['feed']
@@ -54,10 +64,11 @@ class SearchformSpider(scrapy.Spider):
         self.logger.debug(f'updated_request_query_dict_whit_defaul_value: {updated_request_query_dict_whit_defaul_value}')
         
         self.request_query_dict: Dict[str, List[str]] = updated_request_query_dict_whit_defaul_value
-
+        # -------------- super init ---------------- 
         self.__dict__.update(update_self_dict)
         if not hasattr(self, "start_urls"):
             self.start_urls: List[str] = []
+        # ------------------------------------------- 
         self.start_url = util.get_query_url(self.request_url_base_str, self.request_query_dict)
         self.logger.debug(f'statr_url: {self.start_url}')
         # self.notices_url = util.get_notices_url_from_search_form_v3_file(self.search_form_json_file)
@@ -66,8 +77,11 @@ class SearchformSpider(scrapy.Spider):
         # self.notices_cache = {}
     
     def start_requests(self):
+        start_url = util.get_start_url(self.model)
+        
         # yield Request(self.start_url, self.parse, headers=self.base_filename_headers)
-        yield Request('https://torgi.gov.ru/new/api/public/lotcards/search?lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc', self.parse, headers=self.base_filename_headers)
+        yield Request(start_url, self.parse, headers=self.base_filename_headers)
+        # yield Request('https://torgi.gov.ru/new/api/public/lotcards/search?lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc', self.parse, headers=self.base_filename_headers)
     
     def parse(self, response: TextResponse) -> Generator:
         resp_str: str = response.text
