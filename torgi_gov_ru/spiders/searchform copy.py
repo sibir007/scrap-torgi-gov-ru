@@ -77,6 +77,7 @@ class SearchformSpider(scrapy.Spider):
         # self.notices_cache = {}
     
     def start_requests(self):
+        
         start_url = util.get_start_url(self.model)
         
         # yield Request(self.start_url, self.parse, headers=self.base_filename_headers)
