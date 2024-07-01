@@ -37,49 +37,51 @@ class SearchformSpider(scrapy.Spider):
         self.model = util.load_model(self.name)
         # сконфигурируем модель в соответствии с  **kwargs
         util.configure_model(self.model, kwargs)
+        # сконфигурируем item классы
+        self.configure_item_class()
         
         
         
-        self.search_form_dict: Dict = typing.cast(Dict, util.load_dict_or_list_from_json_file(self.search_form_json_file))
-        self.feed_model: Dict = self.search_form_dict['feed']
-        request_query_dict: Dict = util.get_query_dict_from_search_form_v3_dict(self.search_form_dict)
-        self.logger.debug(f'request_query_dict: {request_query_dict}')
+        # self.search_form_dict: Dict = typing.cast(Dict, util.load_dict_or_list_from_json_file(self.search_form_json_file))
+        # self.feed_model: Dict = self.search_form_dict['feed']
+        # request_query_dict: Dict = util.get_query_dict_from_search_form_v3_dict(self.search_form_dict)
+        # self.logger.debug(f'request_query_dict: {request_query_dict}')
         
-        self.request_url_base_str: str =  f"{self.search_form_dict['scheme']}://{self.search_form_dict['host']}{self.search_form_dict['base_filename']['filename']}"
-        self.logger.debug(f'request_url_base_str: {self.request_url_base_str}')
-        update_query_dict, update_self_dict = util.unpack_dict(pattern_dict=request_query_dict, unpacked_dict=kwargs)
+        # self.request_url_base_str: str =  f"{self.search_form_dict['scheme']}://{self.search_form_dict['host']}{self.search_form_dict['base_filename']['filename']}"
+        # self.logger.debug(f'request_url_base_str: {self.request_url_base_str}')
+        # update_query_dict, update_self_dict = util.unpack_dict(pattern_dict=request_query_dict, unpacked_dict=kwargs)
         
-        self.logger.debug(f'update_query_dict: {update_query_dict}')
-        self.logger.debug(f'update_self_dict: {update_self_dict}')
+        # self.logger.debug(f'update_query_dict: {update_query_dict}')
+        # self.logger.debug(f'update_self_dict: {update_self_dict}')
         
-        wraped_update_query_dict = util.wrap_update_query_dict(update_query_dict)
+        # wraped_update_query_dict = util.wrap_update_query_dict(update_query_dict)
         
-        self.logger.debug(f'wraped_update_query_dict: {wraped_update_query_dict}')
+        # self.logger.debug(f'wraped_update_query_dict: {wraped_update_query_dict}')
         
-        updated_request_query_dict = util.update_request_query_dict(request_query_dict, wraped_update_query_dict)
-        self.logger.debug(f'updated_request_query_dict: {updated_request_query_dict}')
+        # updated_request_query_dict = util.update_request_query_dict(request_query_dict, wraped_update_query_dict)
+        # self.logger.debug(f'updated_request_query_dict: {updated_request_query_dict}')
         
-        updated_request_query_dict_whit_defaul_value = util.fill_required_query_dict_keys_default_values_if_they_not_set(updated_request_query_dict, self.search_form_json_file)
+        # updated_request_query_dict_whit_defaul_value = util.fill_required_query_dict_keys_default_values_if_they_not_set(updated_request_query_dict, self.search_form_json_file)
         
-        self.logger.debug(f'updated_request_query_dict_whit_defaul_value: {updated_request_query_dict_whit_defaul_value}')
+        # self.logger.debug(f'updated_request_query_dict_whit_defaul_value: {updated_request_query_dict_whit_defaul_value}')
         
-        self.request_query_dict: Dict[str, List[str]] = updated_request_query_dict_whit_defaul_value
+        # self.request_query_dict: Dict[str, List[str]] = updated_request_query_dict_whit_defaul_value
         # -------------- super init ---------------- 
         self.__dict__.update(update_self_dict)
         if not hasattr(self, "start_urls"):
             self.start_urls: List[str] = []
         # ------------------------------------------- 
-        self.start_url = util.get_query_url(self.request_url_base_str, self.request_query_dict)
-        self.logger.debug(f'statr_url: {self.start_url}')
-        # self.notices_url = util.get_notices_url_from_search_form_v3_file(self.search_form_json_file)
-        self.base_filename_headers = self.search_form_dict['base_filename']['request_headers_for_send']
+        # self.start_url = util.get_query_url(self.request_url_base_str, self.request_query_dict)
+        # self.logger.debug(f'statr_url: {self.start_url}')
+        # # self.notices_url = util.get_notices_url_from_search_form_v3_file(self.search_form_json_file)
+        # self.base_filename_headers = self.search_form_dict['base_filename']['request_headers_for_send']
         # self.notices_filename_headers = util.get_notices_filename_headers_from_search_form_v3_file(self.search_form_json_file)
         # self.notices_cache = {}
     
     def start_requests(self):
         
         start_url = util.get_start_url(self.model)
-        
+        request_headers = util.get_
         # yield Request(self.start_url, self.parse, headers=self.base_filename_headers)
         yield Request(start_url, self.parse, headers=self.base_filename_headers)
         # yield Request('https://torgi.gov.ru/new/api/public/lotcards/search?lotStatus=PUBLISHED,APPLICATIONS_SUBMISSION,DETERMINING_WINNER&byFirstVersion=true&withFacets=true&size=10&sort=firstVersionPublicationDate,desc', self.parse, headers=self.base_filename_headers)
